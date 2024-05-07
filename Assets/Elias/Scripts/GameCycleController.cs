@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,19 +6,25 @@ namespace Elias.Scripts
 {
     public class GameCycleController : MonoBehaviour
     {
-        private int _activeModules; // compte le nombre de module deja actif
-        private int _activeModulesLimit = 3; // limite de brèche en fonction de la difficulté
+        private int _activeModules;
         private float _timer = 0f;
         private List<Module> _modules;
+        
+        public DifficultyParameters difficultyParameters;
 
-        private class Module
+        public GameCycleController(List<Module> modules)
+        {
+            _modules = modules;
+        }
+
+        public class Module
         {
             public bool isActive;
         }
 
         private void Start()
         {
-            _timer = 60f;
+            _timer = difficultyParameters.waveInterval;
         }
 
         private void Update()
@@ -28,10 +33,22 @@ namespace Elias.Scripts
 
             if (_timer <= 0f)
             {
-                _timer = 60f;
+                _timer = difficultyParameters.waveInterval;
 
+                StartCoroutine(ActivateModulesWave());
+            }
+        }
+
+        private IEnumerator<WaitForSeconds> ActivateModulesWave()
+        {
+            float waveTimer = 0f;
+
+            while (waveTimer < difficultyParameters.waveDuration)
+            {
+                yield return new WaitForSeconds(Random.Range(3f,5f));
                 CountActiveModules();
                 ActivateRandomModule();
+                waveTimer += 5f;
             }
         }
 
@@ -46,11 +63,10 @@ namespace Elias.Scripts
                 }
             }
         }
-        
 
         private void ActivateRandomModule()
         {
-            if (_activeModules < _activeModulesLimit)
+            if (_activeModules < difficultyParameters.activeModulesLimit)
             {
                 List<Module> inactiveModules = new List<Module>();
                 foreach (Module module in _modules)
