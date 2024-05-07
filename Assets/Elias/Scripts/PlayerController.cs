@@ -1,4 +1,5 @@
 using UnityEngine;
+using Christopher.Scripts;
 
 namespace Elias.Scripts
 {
@@ -11,6 +12,7 @@ namespace Elias.Scripts
         private Rigidbody _playerRigidbody;
 
         private bool _isInteracting;
+        private bool _isWithinRange;
 
         private void Start()
         {
@@ -27,7 +29,7 @@ namespace Elias.Scripts
 
             if (Input.GetButtonDown("Fire1"))
             {
-                if (!_isInteracting)
+                if (!_isInteracting && _isWithinRange)
                 {
                     Interact();
                 }
@@ -37,6 +39,8 @@ namespace Elias.Scripts
                 }
             }            
         }
+        
+        
 
         private void Interact()
         {
