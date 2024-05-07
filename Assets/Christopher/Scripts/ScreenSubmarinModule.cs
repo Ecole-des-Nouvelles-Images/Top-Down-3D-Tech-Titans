@@ -26,6 +26,9 @@ namespace Christopher.Scripts
 
         private void Update() {
             if (CurrentPhase == 1) {
+                displayPhase1.SetActive(true);
+                displayPhase2.SetActive(false);
+                displayPhase3.SetActive(false);
                 switch (_currentSelectionPhase1) {
                     case 'a':
                         selectionA.GetComponent<UnityEngine.UI.Image>().color = Color.green;
@@ -43,6 +46,12 @@ namespace Christopher.Scripts
                         selectionA.GetComponent<UnityEngine.UI.Image>().color = Color.black;
                         break;
                 }
+            }
+
+            if (CurrentPhase == 2) {
+                displayPhase1.SetActive(false);
+                displayPhase2.SetActive(true);
+                displayPhase3.SetActive(false);
             }
         
         }
@@ -70,6 +79,7 @@ namespace Christopher.Scripts
                         break;
                 }
                 Debug.Log(Phase1Value);
+                CurrentPhase = 2;
             }
         }
         public override void NavigateLeft() {

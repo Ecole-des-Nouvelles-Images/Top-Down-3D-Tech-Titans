@@ -14,14 +14,13 @@ public class TestingModule : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         float xMov = Input.GetAxisRaw("Horizontal");
         float zMov = Input.GetAxisRaw("Vertical");
-        if (xMov > 0.1) ModuleToTest.NavigateRight();
-        if (xMov < -0.1) ModuleToTest.NavigateLeft();
-        if (zMov > 0.1) ModuleToTest.NavigateUp();
-        if (zMov < -0.1) ModuleToTest.NavigateDown();
+        if (xMov > 0.9) ModuleToTest.NavigateRight();
+        if (xMov < -0.9) ModuleToTest.NavigateLeft();
+        if (zMov > 0.9) ModuleToTest.NavigateUp();
+        if (zMov < -0.9) ModuleToTest.NavigateDown();
         if (Input.GetButtonDown("Fire1")) {
             ModuleToTest.Validate();
         }
