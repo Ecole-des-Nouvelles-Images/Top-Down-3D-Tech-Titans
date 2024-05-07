@@ -1,46 +1,46 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace Christopher.Scripts
 {
-    public class ScreenModule : Module
-    {
+    public class ScreenSubmarinModule : SubmarinModule {
         public int Phase1Value;
+        public int CurrentPhase;
         [SerializeField] private GameObject displayPhase1; //préparation
         [SerializeField] private GameObject selectionA;
         [SerializeField] private GameObject selectionB;
         [SerializeField] private GameObject selectionC;
         [SerializeField] private GameObject displayPhase2; //minage
         [SerializeField] private GameObject displayPhase3; //remonté
-        private int _currentPhase;
         private Char _currentSelectionPhase1;
 
         private void Start() {
         displayPhase1.SetActive(true);
         displayPhase2.SetActive(false);
         displayPhase3.SetActive(false);
-        _currentPhase = 1;
+        CurrentPhase = 1;
         _currentSelectionPhase1 = 'a';
         }
 
         private void Update() {
-            if (_currentPhase == 1) {
+            if (CurrentPhase == 1) {
                 switch (_currentSelectionPhase1) {
                     case 'a':
-                        selectionA.GetComponent<Image>().tintColor = Color.green;
-                        selectionB.GetComponent<Image>().tintColor = Color.black;
-                        selectionC.GetComponent<Image>().tintColor = Color.black;
+                        selectionA.GetComponent<UnityEngine.UI.Image>().color = Color.green;
+                        selectionB.GetComponent<UnityEngine.UI.Image>().color = Color.black;
+                        selectionC.GetComponent<UnityEngine.UI.Image>().color = Color.black;
                         break;
                     case 'b':
-                        selectionB.GetComponent<Image>().tintColor = Color.green;
-                        selectionA.GetComponent<Image>().tintColor = Color.black;
-                        selectionC.GetComponent<Image>().tintColor = Color.black;
+                        selectionB.GetComponent<UnityEngine.UI.Image>().color = Color.green;
+                        selectionA.GetComponent<UnityEngine.UI.Image>().color = Color.black;
+                        selectionC.GetComponent<UnityEngine.UI.Image>().color = Color.black;
                         break;
                     case 'c':
-                        selectionC.GetComponent<Image>().tintColor = Color.green;
-                        selectionB.GetComponent<Image>().tintColor = Color.black;
-                        selectionA.GetComponent<Image>().tintColor = Color.black;
+                        selectionC.GetComponent<UnityEngine.UI.Image>().color = Color.green;
+                        selectionB.GetComponent<UnityEngine.UI.Image>().color = Color.black;
+                        selectionA.GetComponent<UnityEngine.UI.Image>().color = Color.black;
                         break;
                 }
             }
@@ -56,7 +56,7 @@ namespace Christopher.Scripts
         }
 
         public override void Validate() {
-            if (_currentPhase == 1) {
+            if (CurrentPhase == 1) {
                 IsActivated = false;
                 switch (_currentSelectionPhase1) {
                     case 'a':
@@ -69,10 +69,11 @@ namespace Christopher.Scripts
                         Phase1Value = 3;
                         break;
                 }
+                Debug.Log(Phase1Value);
             }
         }
         public override void NavigateLeft() {
-            if (_currentPhase == 1) {
+            if (CurrentPhase == 1) {
                 switch (_currentSelectionPhase1) {
                     case 'a':
                         _currentSelectionPhase1 = 'c';
@@ -87,7 +88,7 @@ namespace Christopher.Scripts
             }
         }
         public override void NavigateRight() {
-            if (_currentPhase == 1) {
+            if (CurrentPhase == 1) {
                 switch (_currentSelectionPhase1) {
                     case 'a':
                         _currentSelectionPhase1 = 'b';
@@ -102,7 +103,7 @@ namespace Christopher.Scripts
             }
         }
         public override void NavigateUp() {
-            if (_currentPhase == 1) {
+            if (CurrentPhase == 1) {
                 switch (_currentSelectionPhase1) {
                     case 'a':
                         _currentSelectionPhase1 = 'b';
@@ -117,7 +118,7 @@ namespace Christopher.Scripts
             }
         }
         public override void NavigateDown() {
-            if (_currentPhase == 1) {
+            if (CurrentPhase == 1) {
                 switch (_currentSelectionPhase1) {
                     case 'a':
                         _currentSelectionPhase1 = 'c';

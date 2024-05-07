@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Christopher.Scripts
 {
-    public abstract class Module : MonoBehaviour
+    public abstract class SubmarinModule : MonoBehaviour
     {
         public bool IsActivated;
         public abstract void Activate();
