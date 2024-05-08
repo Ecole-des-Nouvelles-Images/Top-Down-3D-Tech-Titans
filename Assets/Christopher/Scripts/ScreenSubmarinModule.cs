@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
@@ -8,11 +9,13 @@ namespace Christopher.Scripts
     public class ScreenSubmarinModule : SubmarinModule {
         public int Phase1Value;
         public int CurrentPhase;
+        
         [SerializeField] private GameObject displayPhase1; //préparation
         [SerializeField] private GameObject selectionA;
         [SerializeField] private GameObject selectionB;
         [SerializeField] private GameObject selectionC;
         [SerializeField] private GameObject displayPhase2; //minage
+        [SerializeField] private List<GameObject> rocks;
         [SerializeField] private GameObject displayPhase3; //remonté
         private Char _currentSelectionPhase1;
 
