@@ -9,10 +9,10 @@ namespace Christopher.Scripts
         public abstract void Deactivate();
         public abstract void Interact();
         public abstract void Validate();
-        public abstract void NavigateLeft();
-        public abstract void NavigateRight();
-        public abstract void NavigateUp();
-        public abstract void NavigateDown();
+        public abstract void NavigateX(float moveX);
+        //public abstract void NavigateRight(float moveX);
+        public abstract void NavigateY(float moveY);
+        //public abstract void NavigateDown(float moveY);
         public abstract bool Success();
     }  
 }

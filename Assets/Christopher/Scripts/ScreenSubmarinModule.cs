@@ -9,22 +9,24 @@ namespace Christopher.Scripts
     public class ScreenSubmarinModule : SubmarinModule {
         public int Phase1Value;
         public int CurrentPhase;
-        
+        public float TimerNavigationPhase1;
         [SerializeField] private GameObject displayPhase1; //préparation
         [SerializeField] private GameObject selectionA;
         [SerializeField] private GameObject selectionB;
         [SerializeField] private GameObject selectionC;
         [SerializeField] private GameObject displayPhase2; //minage
         [SerializeField] private List<GameObject> rocks;
+        [SerializeField] private GameObject drillHead;
         [SerializeField] private GameObject displayPhase3; //remonté
         private Char _currentSelectionPhase1;
+        private float _currentTimerNavP1;
 
         private void Start() {
-        displayPhase1.SetActive(true);
-        displayPhase2.SetActive(false);
-        displayPhase3.SetActive(false);
-        CurrentPhase = 1;
-        _currentSelectionPhase1 = 'a';
+            displayPhase1.SetActive(true);
+            displayPhase2.SetActive(false);
+            displayPhase3.SetActive(false);
+            CurrentPhase = 1;
+            _currentSelectionPhase1 = 'a';
         }
 
         private void Update() {
@@ -84,68 +86,57 @@ namespace Christopher.Scripts
                 Debug.Log(Phase1Value);
                 CurrentPhase = 2;
             }
-        }
-        public override void NavigateLeft() {
-            if (CurrentPhase == 1) {
-                switch (_currentSelectionPhase1) {
-                    case 'a':
-                        _currentSelectionPhase1 = 'c';
-                        break;
-                    case 'b':
-                        _currentSelectionPhase1 = 'a';
-                        break;
-                    case 'c':
-                        _currentSelectionPhase1 = 'b';
-                        break;
-                }
-            }
-        }
-        public override void NavigateRight() {
-            if (CurrentPhase == 1) {
-                switch (_currentSelectionPhase1) {
-                    case 'a':
-                        _currentSelectionPhase1 = 'b';
-                        break;
-                    case 'b':
-                        _currentSelectionPhase1 = 'c';
-                        break;
-                    case 'c':
-                        _currentSelectionPhase1 = 'a';
-                        break;
-                }
-            }
-        }
-        public override void NavigateUp() {
-            if (CurrentPhase == 1) {
-                switch (_currentSelectionPhase1) {
-                    case 'a':
-                        _currentSelectionPhase1 = 'b';
-                        break;
-                    case 'b':
-                        _currentSelectionPhase1 = 'c';
-                        break;
-                    case 'c':
-                        _currentSelectionPhase1 = 'a';
-                        break;
-                }
-            }
-        }
-        public override void NavigateDown() {
-            if (CurrentPhase == 1) {
-                switch (_currentSelectionPhase1) {
-                    case 'a':
-                        _currentSelectionPhase1 = 'c';
-                        break;
-                    case 'b':
-                        _currentSelectionPhase1 = 'a';
-                        break;
-                    case 'c':
-                        _currentSelectionPhase1 = 'b';
-                        break;
-                }
-            }
-        }
 
+            if (CurrentPhase == 2) {
+                foreach (GameObject x in rocks) {
+                    if (x.activeSelf)
+                    {
+                        Debug.Log("minage incomplet");
+                        return;
+                    }
+                }
+                //add collected mineralz
+                CurrentPhase = 3;
+            }
+        }
+        public override void NavigateX(float moveX) {
+            if (CurrentPhase == 1) {
+                if (_currentTimerNavP1 <= 0) {
+                    switch (_currentSelectionPhase1) {
+                        case 'a':
+                            if(moveX < -0.8) _currentSelectionPhase1 = 'c';
+                            if(moveX > 0.8) _currentSelectionPhase1 = 'b';
+                            break;
+                        case 'b':
+                            if(moveX < -0.8) _currentSelectionPhase1 = 'a';
+                            if(moveX > 0.8) _currentSelectionPhase1 = 'c';
+                            break;
+                        case 'c':
+                            if(moveX < -0.8) _currentSelectionPhase1 = 'b';
+                            if(moveX > 0.8) _currentSelectionPhase1 = 'a';
+                            break;
+                    }
+
+                    _currentTimerNavP1 = TimerNavigationPhase1;
+                }
+                _currentTimerNavP1 -= Time.deltaTime;
+            }
+
+            if (CurrentPhase == 2)
+            {
+                drillHead.GetComponent<DrillEntity>().MoveX(moveX);
+               // Debug.Log("moveX: "+moveX);
+            }
+        }
+        public override void NavigateY(float moveY) {
+            if (CurrentPhase == 1) {
+            }
+            if (CurrentPhase == 2)
+            {
+                drillHead.GetComponent<DrillEntity>().MoveY(moveY);
+                //Debug.Log("moveY: "+moveY);
+            }
+        }
         public override bool Success()
         {
             throw new NotImplementedException();
