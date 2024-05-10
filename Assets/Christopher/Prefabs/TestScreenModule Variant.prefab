@@ -151,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 6202758057559445070, guid: 1edec9ff097d3d144a71095eda3d98fa,
         type: 3}
       propertyPath: TimerNavigationPhase1
-      value: 0.2
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6986436167276220234, guid: 1edec9ff097d3d144a71095eda3d98fa,
         type: 3}

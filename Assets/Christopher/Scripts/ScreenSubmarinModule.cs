@@ -17,14 +17,15 @@ namespace Christopher.Scripts
         [SerializeField] private GameObject displayPhase2; //minage
         [SerializeField] private List<GameObject> rocks;
         [SerializeField] private GameObject drillHead;
+        [SerializeField] private GameObject endPhaseDisplay;
         [SerializeField] private GameObject displayPhase3; //remonté
         private Char _currentSelectionPhase1;
         private float _currentTimerNavP1;
-
         private void Start() {
             displayPhase1.SetActive(true);
             displayPhase2.SetActive(false);
             displayPhase3.SetActive(false);
+            endPhaseDisplay.SetActive(false);
             CurrentPhase = 1;
             _currentSelectionPhase1 = 'a';
         }
@@ -57,6 +58,15 @@ namespace Christopher.Scripts
                 displayPhase1.SetActive(false);
                 displayPhase2.SetActive(true);
                 displayPhase3.SetActive(false);
+                if(IsPhase2Finish()){endPhaseDisplay.SetActive(true);}
+                else {
+                    endPhaseDisplay.SetActive(false);
+                }
+            }
+            if (CurrentPhase == 3) {
+                displayPhase1.SetActive(false);
+                displayPhase2.SetActive(false);
+                displayPhase3.SetActive(true);
             }
         
         }
@@ -88,15 +98,13 @@ namespace Christopher.Scripts
             }
 
             if (CurrentPhase == 2) {
-                foreach (GameObject x in rocks) {
-                    if (x.activeSelf)
-                    {
-                        Debug.Log("minage incomplet");
-                        return;
-                    }
+                if (IsPhase2Finish())
+                {
+                    //add collected mineralz
+                    CurrentPhase = 3;
                 }
-                //add collected mineralz
-                CurrentPhase = 3;
+                
+                
             }
         }
         public override void NavigateX(float moveX) {
@@ -129,8 +137,6 @@ namespace Christopher.Scripts
             }
         }
         public override void NavigateY(float moveY) {
-            if (CurrentPhase == 1) {
-            }
             if (CurrentPhase == 2)
             {
                 drillHead.GetComponent<DrillEntity>().MoveY(moveY);
@@ -140,6 +146,17 @@ namespace Christopher.Scripts
         public override bool Success()
         {
             throw new NotImplementedException();
+        }
+
+        private bool IsPhase2Finish()
+        {
+            foreach (GameObject x in rocks) {
+                if (x.activeSelf)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
