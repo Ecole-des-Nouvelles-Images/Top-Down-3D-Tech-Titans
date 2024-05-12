@@ -6,30 +6,35 @@ using UnityEngine.UIElements;
 
 namespace Christopher.Scripts
 {
-    public class ScreenSubmarinModule : SubmarinModule {
+    public class ScreenSubmarinModuleTest : SubmarinModule {
         public int Phase1Value;
         public int CurrentPhase;
         public float TimerNavigationPhase1;
-        [SerializeField] private Material[] displayPhase;
-        [SerializeField] private GameObject screen;
+        [SerializeField] private GameObject displayPhase1; //préparation
         [SerializeField] private GameObject selectionA;
         [SerializeField] private GameObject selectionB;
         [SerializeField] private GameObject selectionC;
+        [SerializeField] private GameObject displayPhase2; //minage
         [SerializeField] private List<GameObject> rocks;
         [SerializeField] private GameObject drillHead;
-        [SerializeField] private GameObject endPhase2Message;
+        [SerializeField] private GameObject endPhaseDisplay;
+        [SerializeField] private GameObject displayPhase3; //remonté
         private Char _currentSelectionPhase1;
         private float _currentTimerNavP1;
-        private void Start()
-        {
-            if (displayPhase.Length > 0) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[0];
+        private void Start() {
+            displayPhase1.SetActive(true);
+            displayPhase2.SetActive(false);
+            displayPhase3.SetActive(false);
+            endPhaseDisplay.SetActive(false);
             CurrentPhase = 1;
             _currentSelectionPhase1 = 'a';
         }
 
         private void Update() {
             if (CurrentPhase == 1) {
-                if (displayPhase.Length > 1) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];
+                displayPhase1.SetActive(true);
+                displayPhase2.SetActive(false);
+                displayPhase3.SetActive(false);
                 switch (_currentSelectionPhase1) {
                     case 'a':
                         selectionA.GetComponent<UnityEngine.UI.Image>().color = Color.green;
@@ -48,15 +53,20 @@ namespace Christopher.Scripts
                         break;
                 }
             }
+
             if (CurrentPhase == 2) {
-                if (displayPhase.Length > 2) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[2];
-                if(IsPhase2Finish()){endPhase2Message.SetActive(true);}
+                displayPhase1.SetActive(false);
+                displayPhase2.SetActive(true);
+                displayPhase3.SetActive(false);
+                if(IsPhase2Finish()){endPhaseDisplay.SetActive(true);}
                 else {
-                    endPhase2Message.SetActive(false);
+                    endPhaseDisplay.SetActive(false);
                 }
             }
             if (CurrentPhase == 3) {
-                if (displayPhase.Length > 3) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[3];
+                displayPhase1.SetActive(false);
+                displayPhase2.SetActive(false);
+                displayPhase3.SetActive(true);
             }
         
         }
@@ -83,11 +93,13 @@ namespace Christopher.Scripts
                         Phase1Value = 3;
                         break;
                 }
+                Debug.Log(Phase1Value);
                 CurrentPhase = 2;
             }
 
             if (CurrentPhase == 2) {
-                if (IsPhase2Finish()) {
+                if (IsPhase2Finish())
+                {
                     //add collected mineralz
                     CurrentPhase = 3;
                 }
@@ -118,13 +130,17 @@ namespace Christopher.Scripts
                 _currentTimerNavP1 -= Time.deltaTime;
             }
 
-            if (CurrentPhase == 2) {
+            if (CurrentPhase == 2)
+            {
                 drillHead.GetComponent<DrillEntity>().MoveX(moveX);
+               // Debug.Log("moveX: "+moveX);
             }
         }
         public override void NavigateY(float moveY) {
-            if (CurrentPhase == 2) {
+            if (CurrentPhase == 2)
+            {
                 drillHead.GetComponent<DrillEntity>().MoveY(moveY);
+                //Debug.Log("moveY: "+moveY);
             }
         }
         public override bool Success()
