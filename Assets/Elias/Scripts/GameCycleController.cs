@@ -62,6 +62,11 @@ namespace Elias.Scripts
             }
         }
 
+        public int ReturnActiveModules()
+        {
+            return _activeModules;
+        }
+
         private void ActivateRandomModule()
         {
             if (_activeModules < difficulties[0].activeModulesLimit)

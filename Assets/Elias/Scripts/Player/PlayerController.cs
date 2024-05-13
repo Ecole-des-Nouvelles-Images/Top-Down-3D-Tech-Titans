@@ -1,13 +1,12 @@
 using UnityEngine;
-using Christopher.Scripts;
 
-namespace Elias.Scripts
+namespace Elias.Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
         public Collider playerObjectCollider;
         
-        [SerializeField] private float speed;
+        [SerializeField] private float _speed = 500;
 
         private Rigidbody _playerRigidbody;
 
@@ -19,13 +18,20 @@ namespace Elias.Scripts
             _playerRigidbody = GetComponent<Rigidbody>();
         }
 
-        private void Update() {
+        private void Update()
+        {
             float xMov = Input.GetAxisRaw("Horizontal");
             float zMov = Input.GetAxisRaw("Vertical");
 
-            Vector3 velocity = new Vector3(xMov, 0, zMov).normalized * (speed * Time.deltaTime);
+            Vector3 movementDirection = new Vector3(xMov, 0, zMov).normalized;
+            Vector3 velocity = movementDirection * (_speed * Time.deltaTime);
 
             _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
+
+            if (movementDirection != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(movementDirection);
+            }
 
             if (Input.GetButtonDown("Fire1"))
             {
@@ -37,10 +43,9 @@ namespace Elias.Scripts
                 {
                     QuitInteraction();
                 }
-            }            
+            }
+
         }
-        
-        
 
         private void Interact()
         {
