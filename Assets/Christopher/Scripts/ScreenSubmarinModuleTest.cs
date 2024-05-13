@@ -143,11 +143,6 @@ namespace Christopher.Scripts
                 //Debug.Log("moveY: "+moveY);
             }
         }
-        public override bool Success()
-        {
-            throw new NotImplementedException();
-        }
-
         private bool IsPhase2Finish()
         {
             foreach (GameObject x in rocks) {

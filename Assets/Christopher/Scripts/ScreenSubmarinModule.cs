@@ -10,6 +10,7 @@ namespace Christopher.Scripts
         public int Phase1Value;
         public int CurrentPhase;
         public float TimerNavigationPhase1;
+        
         [SerializeField] private Material[] displayPhase;
         [SerializeField] private GameObject screen;
         [SerializeField] private GameObject selectionA;
@@ -18,6 +19,8 @@ namespace Christopher.Scripts
         [SerializeField] private List<GameObject> rocks;
         [SerializeField] private GameObject drillHead;
         [SerializeField] private GameObject endPhase2Message;
+        [SerializeField] private GameObject submarine;
+        [SerializeField] private List<GameObject> mapPhase3;
         private Char _currentSelectionPhase1;
         private float _currentTimerNavP1;
         private void Start()
@@ -57,6 +60,29 @@ namespace Christopher.Scripts
             }
             if (CurrentPhase == 3) {
                 if (displayPhase.Length > 3) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[3];
+                switch (Phase1Value) {
+                    case 1:
+                        if (mapPhase3 != null && mapPhase3.Count == 3) {
+                            mapPhase3[0].SetActive(true);
+                            mapPhase3[1].SetActive(false);
+                            mapPhase3[2].SetActive(false);
+                        }
+                        break;
+                    case 2:
+                        if (mapPhase3 != null && mapPhase3.Count == 3) {
+                            mapPhase3[0].SetActive(false);
+                            mapPhase3[1].SetActive(true);
+                            mapPhase3[2].SetActive(false);
+                        }
+                        break;
+                    case 3:
+                        if (mapPhase3 != null && mapPhase3.Count == 3) {
+                            mapPhase3[0].SetActive(false);
+                            mapPhase3[1].SetActive(false);
+                            mapPhase3[2].SetActive(true);
+                        }
+                        break;
+                }
             }
         
         }
@@ -121,17 +147,18 @@ namespace Christopher.Scripts
             if (CurrentPhase == 2) {
                 drillHead.GetComponent<DrillEntity>().MoveX(moveX);
             }
+            if (CurrentPhase == 3) {
+                submarine.GetComponent<SubmarineController>().MoveX(moveX);
+            }
         }
         public override void NavigateY(float moveY) {
             if (CurrentPhase == 2) {
                 drillHead.GetComponent<DrillEntity>().MoveY(moveY);
             }
+            if (CurrentPhase == 3) {
+                submarine.GetComponent<SubmarineController>().MoveY(moveY);
+            }
         }
-        public override bool Success()
-        {
-            throw new NotImplementedException();
-        }
-
         private bool IsPhase2Finish()
         {
             foreach (GameObject x in rocks) {
