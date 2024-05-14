@@ -513,7 +513,6 @@ GameObject:
   - component: {fileID: 88011346992050517}
   - component: {fileID: 2954234590255633819}
   - component: {fileID: 7154525287125438322}
-  - component: {fileID: 717247238481013315}
   m_Layer: 0
   m_Name: ScreenModule 1
   m_TagString: Untagged
@@ -615,7 +614,7 @@ MonoBehaviour:
   Phase1Value: 0
   CurrentPhase: 3
   TimerNavigationPhase1: 0.25
-  playerDetector: {fileID: 0}
+  playerDetector: {fileID: 3708123334279387762}
   displayPhase:
   - {fileID: 2100000, guid: 339f93f02b731d24cb42dd135243e4df, type: 2}
   - {fileID: 2100000, guid: bc8ae6b44f27f2241bfc806e52ba5276, type: 2}
@@ -642,19 +641,6 @@ MonoBehaviour:
   - {fileID: 5260169912910586237}
   - {fileID: 4105714060574977718}
   - {fileID: 7460171997708848560}
---- !u!114 &717247238481013315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3600130844065742502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80840842a8f0e94479e3b2ab866cd9d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ModuleToTest: {fileID: 7154525287125438322}
 --- !u!1 &3708123334279387762
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4221797664577838877}
   - component: {fileID: 171659718835359086}
+  - component: {fileID: 8220895453525721316}
   m_Layer: 0
   m_Name: PlayerDetector
   m_TagString: Untagged
@@ -708,6 +695,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.7569847, y: 1.21, z: 4.487591}
   m_Center: {x: -0.008289814, y: 0, z: 0.0010603666}
+--- !u!114 &8220895453525721316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3708123334279387762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18843bb9ca37dd54b811e726b877b926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4105714060574977718
 GameObject:
   m_ObjectHideFlags: 0

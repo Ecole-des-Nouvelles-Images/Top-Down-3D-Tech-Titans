@@ -46,7 +46,12 @@ public class FixingDrillModule : SubmarinModule
     }
 
     public override void Interact(GameObject playerUsingModule) {
-        if(IsActivated) _playerUsingModule = playerUsingModule;
+        if(IsActivated) PlayerUsingModule = playerUsingModule;
+    }
+
+    public override void StopInteract()
+    {
+        throw new System.NotImplementedException();
     }
 
     public override void Validate()

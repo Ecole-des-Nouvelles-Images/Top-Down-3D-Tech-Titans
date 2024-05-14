@@ -79,6 +79,11 @@ namespace Christopher.Scripts
         public override void Interact(GameObject playerUsingModule) {
         }
 
+        public override void StopInteract()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Validate() {
             if (CurrentPhase == 1) {
                 IsActivated = false;

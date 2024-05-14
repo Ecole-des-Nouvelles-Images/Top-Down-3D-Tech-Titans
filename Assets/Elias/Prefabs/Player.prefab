@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6794702675732319268}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,7 +313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1801912047747371440
 RectTransform:
   m_ObjectHideFlags: 0
@@ -549,6 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e61094a07ad3d7439f128213fd5ecb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UsingModule: {fileID: 0}
   playerObjectCollider: {fileID: 6020541885398536836}
   speed: 500
 --- !u!136 &3364554360533342872

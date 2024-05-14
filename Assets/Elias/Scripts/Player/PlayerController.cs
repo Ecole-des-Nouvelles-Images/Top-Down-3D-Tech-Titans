@@ -1,3 +1,4 @@
+using Christopher.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -6,7 +7,7 @@ namespace Elias.Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        public Collider playerObjectCollider;
+        public SubmarinModule UsingModule;
         
         [SerializeField] public float speed = 500;
 
@@ -48,35 +49,45 @@ namespace Elias.Scripts.Player
         {
             float xMov = _moveInputValue.x;
             float zMov = _moveInputValue.y;
-
-            if (Mathf.Abs(xMov) > 0 || Mathf.Abs(zMov) > 0)
+            if (_isInteracting)
             {
-                Vector3 moveDirection = new Vector3(xMov, 0, zMov).normalized;
-
-                if (moveDirection != Vector3.zero)
-                {
-                    Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-                    _playerRigidbody.MoveRotation(targetRotation);
-                }
-
-                Vector3 velocity = moveDirection * (speed * Time.fixedDeltaTime);
-                _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
+                UsingModule.NavigateX(xMov);
+                UsingModule.NavigateY(zMov);
             }
             else
             {
-                _playerRigidbody.velocity = Vector3.zero;
+                if (Mathf.Abs(xMov) > 0 || Mathf.Abs(zMov) > 0)
+                {
+                    Vector3 moveDirection = new Vector3(xMov, 0, zMov).normalized;
+
+                    if (moveDirection != Vector3.zero)
+                    {
+                        Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+                        _playerRigidbody.MoveRotation(targetRotation);
+                    }
+
+                    Vector3 velocity = moveDirection * (speed * Time.fixedDeltaTime);
+                    _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
+                }
+                else
+                {
+                    _playerRigidbody.velocity = Vector3.zero;
+                } 
             }
+            
         }
 
         private void Interact()
         {
             _isInteracting = true;
+            UsingModule.Interact(gameObject);
             Debug.Log("Interaction started");
         }
 
         private void QuitInteraction()
         {
             _isInteracting = false;
+            UsingModule.StopInteract();
             Debug.Log("Interaction ended");
         }
     }

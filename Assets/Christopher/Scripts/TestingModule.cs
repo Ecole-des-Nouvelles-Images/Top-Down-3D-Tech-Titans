@@ -19,12 +19,6 @@ public class TestingModule : MonoBehaviour
         float zMov = Input.GetAxisRaw("Vertical");
         ModuleToTest.NavigateX(xMov);
         ModuleToTest.NavigateY(zMov);
-        /*
-        if (xMov > 0.9) ModuleToTest.NavigateRight();
-        if (xMov < -0.9) ModuleToTest.NavigateLeft();
-        if (zMov > 0.9) ModuleToTest.NavigateUp();
-        if (zMov < -0.9) ModuleToTest.NavigateDown();
-        */
         if (Input.GetButtonDown("Fire1")) {
             ModuleToTest.Validate();
         }
