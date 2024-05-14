@@ -9,7 +9,7 @@ namespace Elias.Scripts
     {
         private int _activeModules;
         private float _timer = 0f;
-        private List<Module> _modules = new List<Module>();
+        private List<SubmarinModule> _modules = new List<SubmarinModule>();
         
         public List<DifficultyParameters> difficulties;
 
@@ -18,8 +18,8 @@ namespace Elias.Scripts
             _timer = difficulties[0].waveInterval;
             
             // Populate _modules list
-            Module[] foundModules = FindObjectsOfType<Module>();
-            foreach (Module module in foundModules)
+            SubmarinModule[] foundModules = FindObjectsOfType<SubmarinModule>();
+            foreach (SubmarinModule module in foundModules)
             {
                 _modules.Add(module);
             }
@@ -53,7 +53,7 @@ namespace Elias.Scripts
         private void CountActiveModules()
         {
             _activeModules = 0;
-            foreach (Module module in _modules)
+            foreach (SubmarinModule module in _modules)
             {
                 if (module.IsActivated)
                 {
@@ -71,8 +71,8 @@ namespace Elias.Scripts
         {
             if (_activeModules < difficulties[0].activeModulesLimit)
             {
-                List<Module> inactiveModules = new List<Module>();
-                foreach (Module module in _modules)
+                List<SubmarinModule> inactiveModules = new List<SubmarinModule>();
+                foreach (SubmarinModule module in _modules)
                 {
                     if (!module.IsActivated)
                     {
@@ -82,13 +82,13 @@ namespace Elias.Scripts
 
                 if (inactiveModules.Count > 0)
                 {
-                    Module randomModule = inactiveModules[Random.Range(0, inactiveModules.Count)];
+                    SubmarinModule randomModule = inactiveModules[Random.Range(0, inactiveModules.Count)];
                     ActivateModule(randomModule);
                 }
             }
         }
 
-        private void ActivateModule(Module module)
+        private void ActivateModule(SubmarinModule module)
         {
             module.Activate();
             Debug.Log("Module activated!");
@@ -102,7 +102,7 @@ namespace Elias.Scripts
                 DifficultyParameters selectedDifficulty = difficulties[phase1Value - 1]; // Difficulty index starts from 0
                 // Update timer and active modules limit based on the selected difficulty
                 _timer = selectedDifficulty.waveInterval;
-                foreach (Module module in _modules)
+                foreach (SubmarinModule module in _modules)
                 {
                     module.IsActivated = false; // Deactivate all modules
                 }
