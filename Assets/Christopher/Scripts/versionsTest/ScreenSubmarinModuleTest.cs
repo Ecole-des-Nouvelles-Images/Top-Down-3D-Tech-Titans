@@ -76,7 +76,7 @@ namespace Christopher.Scripts
         public override void Deactivate() {
             if (IsActivated) IsActivated = false;
         }
-        public override void Interact() {
+        public override void Interact(GameObject playerUsingModule) {
         }
 
         public override void Validate() {

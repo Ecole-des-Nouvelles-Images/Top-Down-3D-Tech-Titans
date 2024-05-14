@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 0
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
@@ -5177,8 +5177,8 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
-  m_SpotAngle: 103.64937
-  m_InnerSpotAngle: 21.80208
+  m_SpotAngle: 149.40965
+  m_InnerSpotAngle: 100
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -5423,8 +5423,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5631,7 +5631,7 @@ PrefabInstance:
     - target: {fileID: 115178373162261770, guid: a0fa7d866c9a5f34c9e9256479a99d22,
         type: 3}
       propertyPath: Damage
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 115178373162261770, guid: a0fa7d866c9a5f34c9e9256479a99d22,
         type: 3}

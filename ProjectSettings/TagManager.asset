@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Rock
   - End
+  - LeftMapLimit
+  - RightMapLimit
   layers:
   - Default
   - TransparentFX

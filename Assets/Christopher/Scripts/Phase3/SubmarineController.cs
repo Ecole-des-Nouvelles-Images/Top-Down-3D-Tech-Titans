@@ -39,8 +39,10 @@ public class SubmarineController : MonoBehaviour
     
     public void MoveX(float moveX) {
         float xMov = moveX * -1;
+        if (_leftMapLimit && xMov > 0)xMov = 0;
+        if (_rightMapLimit && xMov < 0)xMov = 0;
         Vector2 velocity = transform.TransformDirection(new Vector2(xMov, 0).normalized) * (_currentSpeed * Time.fixedDeltaTime);
-        _rB2Dsubmarine.velocity = new Vector3(velocity.x, _rB2Dsubmarine.velocity.y);
+        _rB2Dsubmarine.velocity = new Vector3(velocity.x, _rB2Dsubmarine.velocity.y); 
     }
 
     public void MoveY(float moveY) {
@@ -54,14 +56,18 @@ public class SubmarineController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!_isRecovering && !other.CompareTag("End"))
-        {
+        if (!_isRecovering && !other.CompareTag("End") || !other.CompareTag("LeftMapLimit") || !other.CompareTag("RightMapLimit") ) {
             Debug.Log("obstacle touché !");
             screenModule.transform.GetComponent<ScreenSubmarinModule>().Succes.Add(false);
             _isRecovering = true;
             _currentTimerToTakeDamage = TimerToTakeDamage;
         }
-        if(other.CompareTag("End"))Debug.Log("partie fini");
+
+        if (other.CompareTag("End"))
+        {
+            Debug.Log("partie fini");
+            _rB2Dsubmarine.velocity = new Vector2(0, 0);
+        }
         screenModule.transform.GetComponent<ScreenSubmarinModule>().Succes.Add(true);
         if (other.CompareTag("LeftMapLimit")) {
             _leftMapLimit = true;
@@ -77,8 +83,6 @@ public class SubmarineController : MonoBehaviour
             _isRecovering = true;
             _currentTimerToTakeDamage = TimerToTakeDamage;
         }
-
-        
     }
 
     private void OnTriggerExit2D(Collider2D other) {
