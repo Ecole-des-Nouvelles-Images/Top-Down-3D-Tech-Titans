@@ -1,25 +1,57 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using Cinemachine;
+using Elias.Scripts.Player;
+using TMPro;
+using UnityEngine.InputSystem;
 
 namespace Elias.Scripts
 {
-    public class EventManager : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
         public GameObject playerPrefab;
         public GameObject water;
+        public GameObject playersContainer;
+        public CinemachineTargetGroup cameraTargetGroup;
 
-        public GameObject playersContainer; 
-        
+        public TextMeshPro playerNameText;
+
         private GameObject _playerInstance;
         private Quaternion _playerOriginalRotation;
         private Vector3 _originalWaterPosition;
-        
+
         private void Awake()
         {
-            _playerOriginalRotation = Quaternion.identity; // Set the original rotation to be the identity rotation
+            _playerOriginalRotation = Quaternion.identity;
             _originalWaterPosition = water.transform.position;
 
-            // Create the Players container GameObject if it doesn't exist
+            if (playersContainer == null)
+            {
+                playersContainer = new GameObject("Players");
+            }
+        }
+
+        private void OnEnable()
+        {
+            InputSystem.onDeviceChange += OnDeviceChange;
+        }
+
+        private void OnDisable()
+        {
+            InputSystem.onDeviceChange -= OnDeviceChange;
+        }
+
+        private void OnDeviceChange(InputDevice device, InputDeviceChange change)
+        {
+            if (change == InputDeviceChange.Added && device is Gamepad)
+            {
+                InstantiatePlayer();
+            }
+            else if (change == InputDeviceChange.Removed && device is Gamepad)
+            {
+                RemovePlayer();
+            }
         }
 
         private void Update()
@@ -97,12 +129,36 @@ namespace Elias.Scripts
         {
             if (playerPrefab != null)
             {
-                _playerInstance = Instantiate(playerPrefab, playersContainer.transform); // Set the parent to the Players container
+                _playerInstance = Instantiate(playerPrefab, playersContainer.transform);
+
+                PlayerHint playerHint = _playerInstance.GetComponentInChildren<PlayerHint>();
+                if (playerHint != null && cameraTargetGroup != null)
+                {
+                    cameraTargetGroup.AddMember(playerHint.transform, 1f, 0f);
+                }
+                else
+                {
+                    Debug.LogError("PlayerHint component not found or camera TargetGroup not assigned.");
+                }
+
+                //int playerNumber = playersContainer.transform.childCount;
+
+                //playerNameText.text = "Player " + playerNumber;
             }
             else
             {
                 Debug.LogError("Player prefab not assigned to the EventManager.");
             }
         }
+
+
+        public void RemovePlayer()
+        {
+            if (_playerInstance != null)
+            {
+                Destroy(_playerInstance);
+            }
+        }
     }
 }
+
