@@ -6,6 +6,7 @@ using UnityEngine;
 public class RockEntity : MonoBehaviour
 {
     public int MaxHP;
+    public GameObject RockToMine;
     private int _currentHP;
     
     // Start is called before the first frame update
@@ -15,6 +16,8 @@ public class RockEntity : MonoBehaviour
 
     public void TakeDamage(int damage) {
         _currentHP -= damage;
-        if(_currentHP<=0){gameObject.SetActive(false);}
+        if (_currentHP <= 0) {
+            gameObject.SetActive(false);
+        }
     }
 }

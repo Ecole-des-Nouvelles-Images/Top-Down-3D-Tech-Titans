@@ -56,7 +56,7 @@ namespace Elias.Scripts
 
         private void Update()
         {
-            WaterControl();
+            //WaterControl();
 
             if (Input.GetKeyDown(KeyCode.U))
             {

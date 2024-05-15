@@ -37,6 +37,8 @@ public class DrillEntity : MonoBehaviour
     public void FixDrill() {
         _currentEndurance += fixValue;
         if (_currentEndurance > MaxEndurance) _currentEndurance = MaxEndurance;
+        
+        Debug.Log("currentDrillHP after repair"+ _currentEndurance);
     }
     // Start is called before the first frame update
     private void Start()
@@ -52,13 +54,13 @@ public class DrillEntity : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (_currentEndurance == MaxEndurance) IsDamaged = false;
         if (_currentDiggingRock != null && !_currentDiggingRock.activeSelf) _currentDiggingRock = null;
         if(_currentDiggingRock != null)digEffect.SetActive(true);
         else
         {
             digEffect.SetActive(false);
         }
-
         if (IsDamaged) {
             transform.GetComponent<Collider>().enabled = false;
             drillFixingModule.transform.GetComponent<FixingDrillModule>().IsActivated = true;
@@ -92,20 +94,24 @@ public class DrillEntity : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other) {
-        if (other.CompareTag("Rock") )
-        {
+        if (other.CompareTag("Rock") ) {
             if (_currentDiggingRock == null) _currentDiggingRock = other.gameObject;
             if(other.gameObject.activeSelf)digEffect.SetActive(true);
             if (_currentTime <= 0) {
                 other.gameObject.GetComponent<RockEntity>().TakeDamage(Damage);
                 _currentEndurance -= Damage;
-                if (_currentEndurance < 0) _currentEndurance = 0;
+                if (_currentEndurance < 0) {
+                    _currentEndurance = 0;
+                    IsDamaged = true;
+                }
                 _currentTime = ProgressTime;
             }
             else {
                 
                 _currentTime -= Time.deltaTime;
             }
+            
+            Debug.Log("currentDrillHP "+ _currentEndurance);
         }
     }
 

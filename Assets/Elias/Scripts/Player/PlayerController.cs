@@ -20,31 +20,43 @@ namespace Elias.Scripts.Player
 
         private void Start()
         {
+            UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             PerformMoves();
-
-            if (Input.GetButtonDown("Fire1"))
-            {
-                if (!_isInteracting && _isWithinRange)
-                {
-                    Interact();
-                }
-                else
-                {
-                    QuitInteraction();
-                }
-            }
         }
         
         private void OnMoves(InputValue value) {
             _moveInputValue = value.Get<Vector2>();
             //Debug.Log(_moveInputValue);
         }
-        
+
+        private void OnInteraction()
+        {
+            if (UsingModule) _isWithinRange = true;
+            else
+            {
+                _isWithinRange = false;
+            }
+            if (!_isInteracting && _isWithinRange)
+            {
+                Interact();
+            }
+            else
+            {
+                QuitInteraction();
+            }
+        }
+        private void OnAction()
+        {
+            if (_isInteracting && UsingModule != null)
+            {
+                UsingModule.Validate();
+            }
+        }
         private void PerformMoves()
         {
             float xMov = _moveInputValue.x;
@@ -80,14 +92,18 @@ namespace Elias.Scripts.Player
         private void Interact()
         {
             _isInteracting = true;
-            UsingModule.Interact(gameObject);
+            if(UsingModule)UsingModule.Interact(gameObject);
             Debug.Log("Interaction started");
         }
 
-        private void QuitInteraction()
+        public void QuitInteraction()
         {
             _isInteracting = false;
-            UsingModule.StopInteract();
+            if (UsingModule)
+            {
+                UsingModule.StopInteract();
+                UsingModule = null;
+            }
             Debug.Log("Interaction ended");
         }
     }

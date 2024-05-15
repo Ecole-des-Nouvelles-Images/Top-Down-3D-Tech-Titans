@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e61094a07ad3d7439f128213fd5ecb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObjectCollider: {fileID: 8021342255410283542}
-  speed: 400
+  UsingModule: {fileID: 0}
+  speed: 200
 --- !u!1 &4265900599409525917
 GameObject:
   m_ObjectHideFlags: 0

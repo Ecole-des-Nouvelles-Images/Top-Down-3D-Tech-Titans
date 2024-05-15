@@ -457,7 +457,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.9, y: 1.85}
   m_EdgeRadius: 0
 --- !u!50 &8756466027313669714
 Rigidbody2D:
@@ -561,8 +561,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.344118, y: 1.6270374, z: 4.0470347}
-  m_Center: {x: 0.008607864, y: -0.030708253, z: -0.012720823}
+  m_Size: {x: 6.1, y: 2, z: 4.1}
+  m_Center: {x: 0.008607864, y: 0.2, z: -0.012720823}
 --- !u!54 &2954234590255633819
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -611,9 +611,10 @@ MonoBehaviour:
   StateDisplayObject:
   - {fileID: 243990414573622300}
   Succes: 
+  PlayerUsingModule: {fileID: 0}
   Phase1Value: 0
   CurrentPhase: 3
-  TimerNavigationPhase1: 0.25
+  TimerNavigationPhase1: 0.2
   playerDetector: {fileID: 3708123334279387762}
   displayPhase:
   - {fileID: 2100000, guid: 339f93f02b731d24cb42dd135243e4df, type: 2}
@@ -624,14 +625,14 @@ MonoBehaviour:
   selectionA: {fileID: 2289401461412627206}
   selectionB: {fileID: 6694144131058917365}
   selectionC: {fileID: 3878757577222705454}
-  rocks:
+  AllRocks:
   - {fileID: 2526949260847056316}
   - {fileID: 8559706770144304092}
+  - {fileID: 8197395120179492582}
   - {fileID: 8197395120179492582}
   - {fileID: 2557309751890317706}
   - {fileID: 8174554653848896002}
   - {fileID: 8266534597945705502}
-  - {fileID: 6658146562983783664}
   - {fileID: 7140548789258054250}
   - {fileID: 6038563029035736216}
   drillHead: {fileID: 2088107472756411855}
@@ -707,6 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18843bb9ca37dd54b811e726b877b926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myModule: {fileID: 7154525287125438322}
 --- !u!1 &4105714060574977718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,12 +2610,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1645197681992110586, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: RockToMine
+      value: 
+      objectReference: {fileID: 7695082260826531888}
+    - target: {fileID: 1837431823894192530, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: RockToMine
+      value: 
+      objectReference: {fileID: 7695082260826531888}
+    - target: {fileID: 3002428552183224160, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: RockToMine
+      value: 
+      objectReference: {fileID: 7695082260826531888}
+    - target: {fileID: 4038100479556368660, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: RockToMine
+      value: 
+      objectReference: {fileID: 7695082260826531888}
+    - target: {fileID: 4283038663960218604, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: RockToMine
+      value: 
+      objectReference: {fileID: 7695082260826531888}
+    - target: {fileID: 4306371101281451784, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: RockToMine
+      value: 
+      objectReference: {fileID: 7695082260826531888}
+    - target: {fileID: 4357435371445315286, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: RockToMine
+      value: 
+      objectReference: {fileID: 7695082260826531888}
+    - target: {fileID: 5483034291259396211, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: fixValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483034291259396211, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: MaxEndurance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6133136515796823937, guid: a79b82f313e04bd47a3188e905db2669,
         type: 3}
       propertyPath: m_Name
       value: Phase2Scene
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7611946899527235766, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: RockToMine
+      value: 
+      objectReference: {fileID: 7695082260826531888}
+    - target: {fileID: 7624581239128583296, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: RockToMine
+      value: 
+      objectReference: {fileID: 7695082260826531888}
+    - target: {fileID: 8722275845795504949, guid: a79b82f313e04bd47a3188e905db2669,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3496837459503140097, guid: a79b82f313e04bd47a3188e905db2669, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2654,15 +2717,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 417286967318081612}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6658146562983783664 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6461818072478391484, guid: a79b82f313e04bd47a3188e905db2669,
-    type: 3}
-  m_PrefabInstance: {fileID: 417286967318081612}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7140548789258054250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7409216349323827750, guid: a79b82f313e04bd47a3188e905db2669,
+    type: 3}
+  m_PrefabInstance: {fileID: 417286967318081612}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7695082260826531888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7998653260231432316, guid: a79b82f313e04bd47a3188e905db2669,
     type: 3}
   m_PrefabInstance: {fileID: 417286967318081612}
   m_PrefabAsset: {fileID: 0}
