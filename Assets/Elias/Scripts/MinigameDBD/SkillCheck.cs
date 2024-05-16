@@ -1,7 +1,7 @@
 using Christopher.Scripts;
 using UnityEngine;
 
-namespace Elias.Scripts
+namespace Elias.Scripts.MinigameDBD
 {
     public class SkillCheck : SubmarinModule
     {
@@ -80,8 +80,13 @@ namespace Elias.Scripts
         public override void Interact(GameObject playerUsingModule)
         {
             indicatorNeedle.localEulerAngles = Vector3.zero;
-            _playerUsingModule = playerUsingModule;
+            PlayerUsingModule = playerUsingModule;
             //Activate();
+        }
+
+        public override void StopInteract()
+        {
+            throw new System.NotImplementedException();
         }
 
         public override void Validate()

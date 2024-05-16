@@ -411,7 +411,6 @@ GameObject:
   - component: {fileID: 6020541885398536836}
   - component: {fileID: 4067089996365625284}
   - component: {fileID: 2254521352450462758}
-  - component: {fileID: 3364554360533342872}
   - component: {fileID: 8221284705475947638}
   m_Layer: 0
   m_Name: PlayerBody
@@ -518,7 +517,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8006088029358303408}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -550,31 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UsingModule: {fileID: 0}
-  playerObjectCollider: {fileID: 6020541885398536836}
   speed: 500
---- !u!136 &3364554360533342872
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8006088029358303408}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8221284705475947638
 MonoBehaviour:
   m_ObjectHideFlags: 0

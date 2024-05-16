@@ -5,20 +5,17 @@ namespace Elias.Scripts
 {
     public class ModuleTest : MonoBehaviour
     {
-        private void OnTriggerStay(Collider other)
+        private void OnCollisionStay(Collision collision)
         {
-            if (other.CompareTag("Player") && Input.GetKey(KeyCode.E))
+            if (collision.collider.CompareTag("Player") && Input.GetKey(KeyCode.E))
             {
                 Debug.Log("Module en réparation");
             }
-            else if (!Input.GetKey(KeyCode.E))
-            {
-                Debug.Log("Module n est plus en réparation");
-            }
         }
-        private void OnTriggerExit(Collider other)
+
+        private void OnCollisionExit(Collision collision)
         {
-            if (other.CompareTag("Player"))
+            if (collision.collider.CompareTag("Player"))
             {
                 Debug.Log("Module n est plus en réparation");
             }
