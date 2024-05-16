@@ -10,6 +10,7 @@ namespace Christopher.Scripts
         public List<Material> States;
         public GameObject[] StateDisplayObject;
         public List<bool> Succes;
+        [SerializeField] protected GameObject playerDetector;
         public GameObject PlayerUsingModule;
         public abstract void Activate();
         public abstract void Deactivate();

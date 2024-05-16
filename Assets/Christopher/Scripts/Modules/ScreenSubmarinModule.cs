@@ -11,7 +11,6 @@ namespace Christopher.Scripts
         public int Phase1Value;
         public int CurrentPhase;
         public float TimerNavigationPhase1;
-        [SerializeField] private GameObject playerDetector;
         [SerializeField] private Material[] displayPhase;
         [SerializeField] private GameObject screen;
         [SerializeField] private GameObject selectionA;

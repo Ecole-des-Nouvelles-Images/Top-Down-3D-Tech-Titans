@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Christopher.Scripts.Modules;
 using UnityEngine;
 
 public class DrillEntity : MonoBehaviour
@@ -10,9 +11,12 @@ public class DrillEntity : MonoBehaviour
     public int MaxEndurance;
     public bool IsDamaged;
     public int fixValue;
+    
+    [SerializeField] private RectTransform fixingProgressBar;
     [SerializeField] private GameObject drillFixingModule;
     [SerializeField] private GameObject digEffect;
     [SerializeField] private int moveSpeed;
+    
     private float _currentTime;
     private int _currentEndurance;
     private int _currentMoveSpeed;
@@ -37,8 +41,6 @@ public class DrillEntity : MonoBehaviour
     public void FixDrill() {
         _currentEndurance += fixValue;
         if (_currentEndurance > MaxEndurance) _currentEndurance = MaxEndurance;
-        
-        Debug.Log("currentDrillHP after repair"+ _currentEndurance);
     }
     // Start is called before the first frame update
     private void Start()
@@ -54,6 +56,7 @@ public class DrillEntity : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Helper.PourcentStateBarre(fixingProgressBar,'x',_currentEndurance,MaxEndurance);
         if (_currentEndurance == MaxEndurance) IsDamaged = false;
         if (_currentDiggingRock != null && !_currentDiggingRock.activeSelf) _currentDiggingRock = null;
         if(_currentDiggingRock != null)digEffect.SetActive(true);
@@ -110,8 +113,6 @@ public class DrillEntity : MonoBehaviour
                 
                 _currentTime -= Time.deltaTime;
             }
-            
-            Debug.Log("currentDrillHP "+ _currentEndurance);
         }
     }
 

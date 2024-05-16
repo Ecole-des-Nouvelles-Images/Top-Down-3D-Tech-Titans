@@ -256,6 +256,7 @@ MonoBehaviour:
   Succes: 
   PlayerUsingModule: {fileID: 0}
   playerDetector: {fileID: 98031510900276100}
+  minigameDisplay: {fileID: 8305188039049815471}
   drillHead: {fileID: 0}
   drillHeadOnSocleDisplay: {fileID: 25487270478023417}
 --- !u!1 &1386335992836437790
