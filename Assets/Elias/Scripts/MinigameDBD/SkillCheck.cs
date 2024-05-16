@@ -8,7 +8,7 @@ namespace Elias.Scripts
         public RectTransform indicatorNeedle;
         public RectTransform successZone;
         public float rotationSpeed = 200f;
-        private bool isClockwise = true;
+        private bool _isClockwise = true;
 
         void Update()
         {
@@ -22,12 +22,12 @@ namespace Elias.Scripts
         void RotateNeedle()
         {
             float angle = rotationSpeed * Time.deltaTime;
-            if (!isClockwise) angle = -angle;
+            if (!_isClockwise) angle = -angle;
             indicatorNeedle.Rotate(0, 0, angle);
 
             if (indicatorNeedle.localEulerAngles.z >= 360f || indicatorNeedle.localEulerAngles.z <= 0f)
             {
-                isClockwise = !isClockwise;
+                _isClockwise = !_isClockwise;
             }
         }
 
@@ -70,8 +70,6 @@ namespace Elias.Scripts
         public override void Activate()
         {
             IsActivated = true;
-            // Reset needle position if necessary
-            indicatorNeedle.localEulerAngles = Vector3.zero;
         }
 
         public override void Deactivate()
@@ -81,8 +79,9 @@ namespace Elias.Scripts
 
         public override void Interact(GameObject playerUsingModule)
         {
+            indicatorNeedle.localEulerAngles = Vector3.zero;
             _playerUsingModule = playerUsingModule;
-            Activate();
+            //Activate();
         }
 
         public override void Validate()
