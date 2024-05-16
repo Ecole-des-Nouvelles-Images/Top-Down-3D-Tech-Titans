@@ -10,6 +10,11 @@ namespace Elias.Scripts.MinigameDBD
         public float rotationSpeed = 200f;
         private bool _isClockwise = true;
 
+        void Start()
+        {
+            SetRandomSuccessZoneAngle();
+        }
+
         void Update()
         {
             if (IsActivated)
@@ -70,6 +75,7 @@ namespace Elias.Scripts.MinigameDBD
         public override void Activate()
         {
             IsActivated = true;
+            SetRandomSuccessZoneAngle();
         }
 
         public override void Deactivate()
@@ -99,6 +105,12 @@ namespace Elias.Scripts.MinigameDBD
 
         public override void NavigateY(float moveY)
         {
+        }
+
+        private void SetRandomSuccessZoneAngle()
+        {
+            float randomAngle = UnityEngine.Random.Range(30f, 330f);
+            successZone.localEulerAngles = new Vector3(successZone.localEulerAngles.x, successZone.localEulerAngles.y, randomAngle);
         }
     }
 }

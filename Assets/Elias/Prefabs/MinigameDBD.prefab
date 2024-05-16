@@ -151,6 +151,7 @@ MonoBehaviour:
   States: []
   StateDisplayObject: []
   Succes: 
+  PlayerUsingModule: {fileID: 0}
   indicatorNeedle: {fileID: 4497225975903406339}
   successZone: {fileID: 4036085555748955320}
   rotationSpeed: 200
@@ -334,8 +335,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4497225975903406339}
   - {fileID: 4036085555748955320}
+  - {fileID: 4497225975903406339}
   m_Father: {fileID: 3127725066145114691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
