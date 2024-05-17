@@ -15,8 +15,14 @@ namespace Elias.Scripts
 
         private void Start()
         {
+            if (difficulties == null || difficulties.Count == 0)
+            {
+                Debug.LogWarning("No difficulty parameters set.");
+                return;
+            }
+
             _timer = difficulties[0].waveInterval;
-            
+
             // Populate _modules list
             SubmarinModule[] foundModules = FindObjectsOfType<SubmarinModule>();
             foreach (SubmarinModule module in foundModules)
@@ -27,6 +33,11 @@ namespace Elias.Scripts
 
         private void Update()
         {
+            if (difficulties == null || difficulties.Count == 0)
+            {
+                return;
+            }
+
             _timer -= Time.deltaTime;
 
             if (_timer <= 0f)
@@ -94,19 +105,22 @@ namespace Elias.Scripts
             Debug.Log("Module activated!");
         }
 
-        // Method to update difficulty parameters based on Phase1Value
         private void UpdateDifficulty(int phase1Value)
         {
+            if (difficulties == null || difficulties.Count == 0)
+            {
+                Debug.LogWarning("Difficulty parameters not set.");
+                return;
+            }
+
             if (phase1Value >= 1 && phase1Value <= 3 && phase1Value <= difficulties.Count)
             {
-                DifficultyParameters selectedDifficulty = difficulties[phase1Value - 1]; // Difficulty index starts from 0
-                // Update timer and active modules limit based on the selected difficulty
+                DifficultyParameters selectedDifficulty = difficulties[phase1Value - 1];
                 _timer = selectedDifficulty.waveInterval;
                 foreach (SubmarinModule module in _modules)
                 {
-                    module.IsActivated = false; // Deactivate all modules
+                    module.IsActivated = false;
                 }
-                // Start new wave with updated difficulty
                 StartCoroutine(ActivateModulesWave());
             }
             else

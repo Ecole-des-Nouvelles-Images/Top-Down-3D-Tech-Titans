@@ -644,6 +644,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1259253220495112543, guid: ab4cc5bd84f07b04bab10bb6a1308598,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259253220495112543, guid: ab4cc5bd84f07b04bab10bb6a1308598,
+        type: 3}
+      propertyPath: difficulties.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1831946275312770672, guid: ab4cc5bd84f07b04bab10bb6a1308598,
         type: 3}
       propertyPath: m_Name
