@@ -3,7 +3,27 @@ guid: 24fc88c613f46a246adb8b30b7992f7c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkIron.007
+    second: {fileID: 2100000, guid: 993a71f2c39cf7d4d99b03f5e427a914, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron.009
+    second: {fileID: 2100000, guid: ebfcc8d78bbf9594183d3cfe108e4a67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightIron.007
+    second: {fileID: 2100000, guid: 9903e361c98472d40bf509925625e7e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lights
+    second: {fileID: 2100000, guid: c5d600f422802c64296c6836a5b09ac9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

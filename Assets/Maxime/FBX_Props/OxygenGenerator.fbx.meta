@@ -3,7 +3,72 @@ guid: 0b8fef57bfa6efc4290df25ec541b8d2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cahoutchouc.005
+    second: {fileID: 2100000, guid: b50958e227e617445836cf064c8ace8d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Copper.003
+    second: {fileID: 2100000, guid: 994831ab6b4390642bb4c85cad0eaeaf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkIron.008
+    second: {fileID: 2100000, guid: e358eac4bd780b440aca4c197134d5f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkIron.009
+    second: {fileID: 2100000, guid: 0682d0623fff3f441843509dd47309e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkestIron.004
+    second: {fileID: 2100000, guid: 9b6f6be4bbd55c648bc0e324e03743fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.004
+    second: {fileID: 2100000, guid: 7329e3da6525d8b4ca20e6ffe4590dbd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.005
+    second: {fileID: 2100000, guid: 58b6a3fc9fee0374ca329b3825a30f88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron.011
+    second: {fileID: 2100000, guid: aa0526e1859432e409def80fb860a260, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron.012
+    second: {fileID: 2100000, guid: 8f6983795b0971f4c8dccc7e05c4dd10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightIron.009
+    second: {fileID: 2100000, guid: adaa8e0966cda764688be81313812c8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlantTexture.001
+    second: {fileID: 2100000, guid: d89de33d4110bc648bbb92b18c245091, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedIron.002
+    second: {fileID: 2100000, guid: 8d31220cda0050f4a9a1dde4b3f01029, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedIron.003
+    second: {fileID: 2100000, guid: 7f5b7f926dce35f44b8b497922ffffdb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

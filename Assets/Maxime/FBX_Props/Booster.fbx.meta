@@ -3,7 +3,42 @@ guid: f48dbbe0560d65d45bd4345ade51a4cd
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cahoutchouc.001
+    second: {fileID: 2100000, guid: e2502946d4ca89c4d8ce1e06eb0772dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkIron.001
+    second: {fileID: 2100000, guid: c5562312aa633c44c8229b3551ca9c71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Green.002
+    second: {fileID: 2100000, guid: c26e5d51078c2654dbc720141680d4c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron.002
+    second: {fileID: 2100000, guid: 563471ce245fa634088daff770baea2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightIron.001
+    second: {fileID: 2100000, guid: 0d5be860bd62905408291459dec7b27a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Neon.001
+    second: {fileID: 2100000, guid: 0e7ca45d4e4d4a242b0e8795cb189667, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen.002
+    second: {fileID: 2100000, guid: 965b0476483045441b1b74ec626b69d4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

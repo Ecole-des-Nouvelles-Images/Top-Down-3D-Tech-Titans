@@ -3,7 +3,27 @@ guid: a6c774da1802c5b4aba809a9ec928d25
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bouton
+    second: {fileID: 2100000, guid: fe5b764fe98982c4fb292437f7e41f63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkIron.005
+    second: {fileID: 2100000, guid: 7d01f2c02bc098543855ddad6209cb7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkerIron
+    second: {fileID: 2100000, guid: 8701a0fc8e4155d4c858bceb91f84896, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron.007
+    second: {fileID: 2100000, guid: e26fb72de0b7e314593354ed4687e3c6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

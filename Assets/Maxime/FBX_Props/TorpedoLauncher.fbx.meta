@@ -3,7 +3,42 @@ guid: 001769cd061736a4fbec4a4cbf514040
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cahoutchouc
+    second: {fileID: 2100000, guid: d87b153c163317b42abbe2262261f415, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkIron.002
+    second: {fileID: 2100000, guid: e8cf537aec431784780ddead3e178f15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkestIron.001
+    second: {fileID: 2100000, guid: 2bacad4a55b89b041b32ff0a39959fab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron.006
+    second: {fileID: 2100000, guid: 1455bac30d8853e4ba84ccb3f4669a0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightIron.004
+    second: {fileID: 2100000, guid: 9cdb84c781c738541a13db8e1acdd1f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red Paint
+    second: {fileID: 2100000, guid: b6303018ab31a804b8cbf782d576b962, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen5
+    second: {fileID: 2100000, guid: 09dfeb4c9cfdd7b4f850ece182c4e744, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
