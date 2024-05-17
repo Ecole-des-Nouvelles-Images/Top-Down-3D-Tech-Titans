@@ -10,10 +10,7 @@ namespace Elias.Scripts.MinigameDBD
         public float rotationSpeed = 200f;
         private bool _isClockwise = true;
 
-        void Start()
-        {
-            SetRandomSuccessZoneAngle();
-        }
+        public GameObject canvas;
 
         void Update()
         {
@@ -21,6 +18,11 @@ namespace Elias.Scripts.MinigameDBD
             {
                 RotateNeedle();
                 CheckForInput();
+                canvas.SetActive(true);
+            }
+            else
+            {
+                canvas.SetActive(false);
             }
         }
 
@@ -43,6 +45,10 @@ namespace Elias.Scripts.MinigameDBD
                 float needleAngle = indicatorNeedle.localEulerAngles.z;
                 float successStartAngle = successZone.localEulerAngles.z - (successZone.rect.width / 2);
                 float successEndAngle = successZone.localEulerAngles.z + (successZone.rect.width / 2);
+
+                if (needleAngle > 180f) needleAngle -= 360f;
+                if (successStartAngle > 180f) successStartAngle -= 360f;
+                if (successEndAngle > 180f) successEndAngle -= 360f;
 
                 if (needleAngle >= successStartAngle && needleAngle <= successEndAngle)
                 {
@@ -87,12 +93,12 @@ namespace Elias.Scripts.MinigameDBD
         {
             indicatorNeedle.localEulerAngles = Vector3.zero;
             PlayerUsingModule = playerUsingModule;
-            //Activate();
+            Activate();
         }
 
         public override void StopInteract()
         {
-            throw new System.NotImplementedException();
+            PlayerUsingModule = null;
         }
 
         public override void Validate()
