@@ -8,6 +8,7 @@ TagManager:
   - End
   - LeftMapLimit
   - RightMapLimit
+  - Submarine
   layers:
   - Default
   - TransparentFX
