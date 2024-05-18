@@ -5,6 +5,7 @@ namespace Christopher.Scripts.Modules
 {
     public class FixingDrillModule : SubmarinModule
     {
+        
         [SerializeField] private GameObject minigameDisplay;
         [SerializeField] private GameObject drillHead;
         [SerializeField] private GameObject drillHeadOnSocleDisplay;
@@ -13,20 +14,24 @@ namespace Christopher.Scripts.Modules
             minigameDisplay.SetActive(false);
         }
         private void Update() {
-            if (IsActivated) {
-                if(States.Count > 0 && States[1] != null){ 
+            if (IsActivated)
+            {
+                State = 1;
+                if(StatesMaterials.Length > 0 && StatesMaterials[1] != null){ 
                     foreach (GameObject obj in StateDisplayObject) {
-                        obj.transform.GetComponent<MeshRenderer>().material = States[1];
+                        obj.transform.GetComponent<MeshRenderer>().material = StatesMaterials[1];
                     }
                 }
                 playerDetector.SetActive(true);
                 drillHeadOnSocleDisplay.SetActive(true);
             }
 
-            if (!IsActivated) {
-                if(States.Count > 0 && States[0] != null){ 
+            if (!IsActivated)
+            {
+                State = 0;
+                if(StatesMaterials.Length > 0 && StatesMaterials[0] != null){ 
                     foreach (GameObject obj in StateDisplayObject) {
-                        obj.transform.GetComponent<MeshRenderer>().material = States[0];
+                        obj.transform.GetComponent<MeshRenderer>().material = StatesMaterials[0];
                     }
                 }
                 playerDetector.SetActive(false);

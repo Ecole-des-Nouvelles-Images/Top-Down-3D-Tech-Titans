@@ -8,6 +8,7 @@ namespace Elias.Scripts.MinigameDBD
         public RectTransform indicatorNeedle;
         public RectTransform successZone;
         public float rotationSpeed = 200f;
+        public Material[] States;
         private bool _isClockwise = true;
 
         public GameObject canvas;
@@ -54,7 +55,7 @@ namespace Elias.Scripts.MinigameDBD
                 {
                     Debug.Log("Skill check succeeded!");
                     Succes.Add(true);
-                    if (States.Count > 0)
+                    if (States.Length > 0)
                     {
                         foreach (var obj in StateDisplayObject)
                         {
@@ -66,7 +67,7 @@ namespace Elias.Scripts.MinigameDBD
                 {
                     Debug.Log("Skill check failed!");
                     Succes.Add(false);
-                    if (States.Count > 0)
+                    if (States.Length > 0)
                     {
                         foreach (var obj in StateDisplayObject)
                         {

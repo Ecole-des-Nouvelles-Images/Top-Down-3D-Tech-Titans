@@ -2,32 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class OxygenModule : SubmarinModule
-{
-    // Start is called before the first frame update
-    void Start()
-    {
+public class OxygenModule : SubmarinModule {
+    public GameObject[] lightStates;
+    
+    void Start() {
         PlayerUsingModule = null;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!IsActivated)
-        {
-            if(States.Count > 0 && States[0] != null){ 
-                foreach (GameObject obj in StateDisplayObject) {
-                    obj.transform.GetComponent<MeshRenderer>().material = States[0];
-                }
+    void Update() {
+        if (!IsActivated) {
+            State = 0;
+            foreach (GameObject x in lightStates) {
+                x.SetActive(false);
             }
         }
-        if (IsActivated)
-        {
-            if(States.Count > 0 && States[1] != null){ 
-                foreach (GameObject obj in StateDisplayObject) {
-                    obj.transform.GetComponent<MeshRenderer>().material = States[1];
-                }
+        if (IsActivated) {
+            switch (State) {
+                case 1:
+                    lightStates[0].SetActive(true);
+                    lightStates[1].SetActive(false);
+                    lightStates[2].SetActive(false);
+                    break;
+                case 2:
+                    lightStates[0].SetActive(false);
+                    lightStates[1].SetActive(true);
+                    lightStates[2].SetActive(false);
+                    break;
+                case 3 :
+                    lightStates[0].SetActive(false);
+                    lightStates[1].SetActive(false);
+                    lightStates[2].SetActive(true);
+                    break;
+                default:
+                    lightStates[0].SetActive(true);
+                    lightStates[1].SetActive(false);
+                    lightStates[2].SetActive(false);
+                    break;
             }
         }
     }

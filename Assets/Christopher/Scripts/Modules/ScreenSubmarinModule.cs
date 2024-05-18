@@ -31,12 +31,9 @@ namespace Christopher.Scripts
             DisplayPhase1();
         }
         private void Update() {
-            if (!IsActivated) {
-                if(States.Count > 0 && States[0] != null){ 
-                    foreach (GameObject obj in StateDisplayObject) {
-                        obj.transform.GetComponent<MeshRenderer>().material = States[0];
-                    }
-                }
+            if (!IsActivated)
+            {
+                State = 0;
                 playerDetector.SetActive(false);
                 screen.transform.GetComponent<MeshRenderer>().material = displayPhase[0];
                 if(PlayerUsingModule)PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
@@ -46,11 +43,7 @@ namespace Christopher.Scripts
                 }
             }
             if (IsActivated) {
-                if(States.Count > 0 && States[1] != null){ 
-                    foreach (GameObject obj in StateDisplayObject) {
-                        obj.transform.GetComponent<MeshRenderer>().material = States[1];
-                    }
-                }
+                State = 1;
                 
                 playerDetector.SetActive(true);
                 

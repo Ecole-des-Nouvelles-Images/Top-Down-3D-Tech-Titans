@@ -6,7 +6,6 @@ using UnityEngine;
 public class RockEntity : MonoBehaviour
 {
     public int MaxHP;
-    public GameObject RockToMine;
     private int _currentHP;
     
     // Start is called before the first frame update

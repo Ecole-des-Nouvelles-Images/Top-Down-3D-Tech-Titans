@@ -7,7 +7,8 @@ namespace Christopher.Scripts
     public abstract class SubmarinModule : MonoBehaviour
     {
         public bool IsActivated;
-        public List<Material> States;
+        public int State;
+        public Material[] StatesMaterials;
         public GameObject[] StateDisplayObject;
         public List<bool> Succes;
         [SerializeField] protected GameObject playerDetector;
