@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 743ec146e7356a440885e6e76c235eee, type: 2}
+  - {fileID: 2100000, guid: c9fedc7068d127445bb4c5228d43dc6a, type: 2}
   - {fileID: 2100000, guid: 73cc9043bc330e74ba0d485f2888959d, type: 2}
   - {fileID: 2100000, guid: 791c60a9fc02a524fbf0a1ae4d66b068, type: 2}
   - {fileID: 2100000, guid: 30e4a92cb1b0a984bbca5bd60382a455, type: 2}
@@ -1301,6 +1301,27 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 8615620116615271381}
+    - target: {fileID: 6003474209507666244, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 73cc9043bc330e74ba0d485f2888959d, type: 2}
+    - target: {fileID: 6003474209507666244, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: c9fedc7068d127445bb4c5228d43dc6a, type: 2}
+    - target: {fileID: 6003474209507666244, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d31220cda0050f4a9a1dde4b3f01029, type: 2}
+    - target: {fileID: 6003474209507666244, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 1247058955692496880, guid: 53c89bc6b06fd7f4999eed60ba72d639,
+        type: 3}
     - target: {fileID: 6038563029035736216, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_Name
@@ -1386,6 +1407,11 @@ PrefabInstance:
       propertyPath: AllRocks.Array.data[7]
       value: 
       objectReference: {fileID: 4889298591432819453}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: StateDisplayObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7607473168796492240, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_IsTrigger
@@ -1451,7 +1477,9 @@ PrefabInstance:
     - {fileID: 7148344473973766802, guid: edeabba8ac3437146a98dee8eda16991, type: 3}
     - {fileID: 7326408252502043300, guid: edeabba8ac3437146a98dee8eda16991, type: 3}
     - {fileID: 4518488244684115856, guid: edeabba8ac3437146a98dee8eda16991, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 243990414573622300, guid: edeabba8ac3437146a98dee8eda16991, type: 3}
+    - {fileID: 8167036339896008411, guid: edeabba8ac3437146a98dee8eda16991, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 949589730479402089, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -1678,14 +1706,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1301519701991902308, guid: 4920ba4e8b3c8b4498523e0af5144e37,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1247058955692496880, guid: 53c89bc6b06fd7f4999eed60ba72d639,
+        type: 3}
     - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
         type: 3}
       propertyPath: drillHead
       value: 
       objectReference: {fileID: 931537656426042282}
+    - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
+        type: 3}
+      propertyPath: drillHeadOnSocleDisplay
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 584513465566768641, guid: 4920ba4e8b3c8b4498523e0af5144e37, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 25487270478023417, guid: 4920ba4e8b3c8b4498523e0af5144e37, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 292670937050108369, guid: 4920ba4e8b3c8b4498523e0af5144e37,
         type: 3}

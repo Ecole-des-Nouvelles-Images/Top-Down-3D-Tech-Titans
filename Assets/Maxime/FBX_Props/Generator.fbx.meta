@@ -3,10 +3,65 @@ guid: 5dac60439e73e2049a401dbe1cff9cb6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark Iron.002
+    second: {fileID: 2100000, guid: 9fd4c7b2525c7454884f4de45a857782, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Emission.001
+    second: {fileID: 2100000, guid: 587994af73b423d48b0f3634a6bf03ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.006
+    second: {fileID: 2100000, guid: 174f8e7c4509307468e227bd47281104, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron.014
+    second: {fileID: 2100000, guid: bcdba6a1c27877a4a9e2ac8e748666f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pipes.001
+    second: {fileID: 2100000, guid: 5167a615bd6d6cf418ca6c7efb7beb36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen 3
+    second: {fileID: 2100000, guid: 746a894ef981ff842a90e2fd3ff42f1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen 4
+    second: {fileID: 2100000, guid: aaddf098b1abaa8469375c9669c23ab5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen.006
+    second: {fileID: 2100000, guid: cb8402edab49327439e0f6f7abff372e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen1
+    second: {fileID: 2100000, guid: 310db60476db3964a84ad378ecbec8d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen2
+    second: {fileID: 2100000, guid: 66a6178ada38a7e4181c0438fd7a1464, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Valves.001
+    second: {fileID: 2100000, guid: 79ecf3fafe524bf4992d5d3d16204570, type: 2}
   materials:
     materialImportMode: 2
-    materialName: 0
+    materialName: 1
     materialSearch: 1
     materialLocation: 1
   animations:
