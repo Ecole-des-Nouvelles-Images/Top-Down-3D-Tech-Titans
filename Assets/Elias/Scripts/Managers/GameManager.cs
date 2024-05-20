@@ -62,6 +62,11 @@ namespace Elias.Scripts.Managers
             {
                 InstantiatePlayer();
             }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                LowerWaterToInitialPosition();
+            }
         }
 
         IEnumerator Ragdoll(float time = 2f)
@@ -140,6 +145,12 @@ namespace Elias.Scripts.Managers
             {
                 Debug.LogError("GameCycleController not found in the scene.");
             }
+        }
+
+        private void LowerWaterToInitialPosition()
+        {
+            float newWaterY = _originalWaterPosition.y;
+            water.transform.position = new Vector3(water.transform.position.x, newWaterY, water.transform.position.z);
         }
 
         public void InstantiatePlayer()
