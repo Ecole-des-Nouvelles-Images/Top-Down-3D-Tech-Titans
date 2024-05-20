@@ -79,43 +79,35 @@ namespace Elias.Scripts.MinigameDBD
             }
         }
 
-        public override void Activate()
-        {
+        public override void Activate() {
             IsActivated = true;
             SetRandomSuccessZoneAngle();
         }
 
-        public override void Deactivate()
-        {
+        public override void Deactivate() {
             IsActivated = false;
         }
 
-        public override void Interact(GameObject playerUsingModule)
-        {
+        public override void Interact(GameObject playerUsingModule) {
             indicatorNeedle.localEulerAngles = Vector3.zero;
             PlayerUsingModule = playerUsingModule;
             Activate();
         }
 
-        public override void StopInteract()
-        {
+        public override void StopInteract() {
             PlayerUsingModule = null;
         }
 
-        public override void Validate()
-        {
-        }
+        public override void Validate() { }
 
-        public override void NavigateX(float moveX)
-        {
-        }
+        public override void NavigateX(float moveX) { }
 
-        public override void NavigateY(float moveY)
-        {
-        }
-
-        private void SetRandomSuccessZoneAngle()
-        {
+        public override void NavigateY(float moveY) { }
+        public override void Up() {}
+        public override void Down() {}
+        public override void Left() {}
+        public override void Right() {}
+        private void SetRandomSuccessZoneAngle() {
             float randomAngle = UnityEngine.Random.Range(30f, 330f);
             successZone.localEulerAngles = new Vector3(successZone.localEulerAngles.x, successZone.localEulerAngles.y, randomAngle);
         }

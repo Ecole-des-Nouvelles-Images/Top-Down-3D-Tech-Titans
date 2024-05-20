@@ -3,7 +3,37 @@ guid: 53c89bc6b06fd7f4999eed60ba72d639
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark Iron
+    second: {fileID: 2100000, guid: b7c4b4b399dea0a47947d09ce46dbeb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fabric
+    second: {fileID: 2100000, guid: 817965d53bf16d14a8b414d6e59e78e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FabricBlack
+    second: {fileID: 2100000, guid: 1ba2c19765989714284ea062807e68e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fabric_Brown
+    second: {fileID: 2100000, guid: 43971e21608d0824bb17d0e94cbdec6f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.001
+    second: {fileID: 2100000, guid: 4a4421760a6b6a648aca0e842b218b76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron
+    second: {fileID: 2100000, guid: 1e29cf456378ad944b8b9b9d44b2f17a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

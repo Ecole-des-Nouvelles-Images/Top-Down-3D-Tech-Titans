@@ -61,12 +61,11 @@ namespace Christopher.Scripts.Modules
         public override void Validate() {
             drillHead.transform.GetComponent<DrillEntity>().FixDrill();
         }
-        public override void NavigateX(float moveX) {
-            return;
-        }
-
-        public override void NavigateY(float moveY) {
-            return;
-        }
+        public override void NavigateX(float moveX) {}
+        public override void NavigateY(float moveY) {}
+        public override void Up() {}
+        public override void Down() {}
+        public override void Left() {}
+        public override void Right() {}
     }
 }

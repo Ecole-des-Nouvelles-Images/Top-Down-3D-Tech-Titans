@@ -50,5 +50,25 @@ namespace Christopher.Scripts.Modules
         {
             throw new System.NotImplementedException();
         }
+
+        public override void Up()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Down()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Left()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Right()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

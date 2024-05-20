@@ -1,3 +1,4 @@
+using System;
 using Christopher.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +11,7 @@ namespace Elias.Scripts.Player
         public SubmarinModule UsingModule;
         
         [SerializeField] public float speed = 500;
-
+        [SerializeField] public GameObject inputInteractPanel;
         private Rigidbody _playerRigidbody;
         
         private Vector2 _moveInputValue;
@@ -20,6 +21,8 @@ namespace Elias.Scripts.Player
 
         private void Start()
         {
+            
+            if(inputInteractPanel!= null)inputInteractPanel.SetActive(false);
             UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
         }
@@ -27,8 +30,21 @@ namespace Elias.Scripts.Player
         private void FixedUpdate()
         {
             PerformMoves();
+            
         }
-        
+
+        private void Update()
+        {
+            if (UsingModule) _isWithinRange = true;
+            else
+            {
+                _isWithinRange = false;
+            }
+            if(_isWithinRange && !_isInteracting && inputInteractPanel.activeSelf == false )inputInteractPanel.SetActive(true);
+            else inputInteractPanel.SetActive(false);
+            
+        }
+
         private void OnMoves(InputValue value) {
             _moveInputValue = value.Get<Vector2>();
             //Debug.Log(_moveInputValue);
@@ -36,11 +52,6 @@ namespace Elias.Scripts.Player
 
         private void OnInteraction()
         {
-            if (UsingModule) _isWithinRange = true;
-            else
-            {
-                _isWithinRange = false;
-            }
             if (!_isInteracting && _isWithinRange)
             {
                 Interact();
@@ -55,6 +66,26 @@ namespace Elias.Scripts.Player
             if (_isInteracting && UsingModule != null)
             {
                 UsingModule.Validate();
+            }
+        }
+        private void OnUp() {
+            if (_isInteracting && UsingModule != null) {
+                UsingModule.Up();
+            }
+        }
+        private void OnDown() {
+            if (_isInteracting && UsingModule != null) {
+                UsingModule.Down();
+            }
+        }
+        private void OnLeft() {
+            if (_isInteracting && UsingModule != null) {
+                UsingModule.Left();
+            }
+        }
+        private void OnRight() {
+            if (_isInteracting && UsingModule != null) {
+                UsingModule.Right();
             }
         }
         private void PerformMoves()

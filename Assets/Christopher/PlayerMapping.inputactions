@@ -15,6 +15,42 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Down",
+                    "type": "Button",
+                    "id": "e7504d9a-66d2-4dfd-8d9a-8a15e6041f28",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right",
+                    "type": "Button",
+                    "id": "95d8d4bc-1e01-4702-8b79-9fa31f62ddf5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Left",
+                    "type": "Button",
+                    "id": "0d5776c6-e964-4c4e-9a0f-9df38d94a831",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Up",
+                    "type": "Button",
+                    "id": "978915bc-b771-4c5f-8a67-34889534df24",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interaction",
                     "type": "Button",
                     "id": "e970057e-ba0f-4e1b-806b-0cd81e52b6d5",
@@ -27,6 +63,15 @@
                     "name": "Action",
                     "type": "Button",
                     "id": "deb6caca-ec5a-4784-a3a9-d32e58b45412",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "e6f816c6-98bb-4724-96e2-368f0a02c057",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -121,72 +166,10 @@
                     "action": "Moves",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "partygame",
-            "id": "8f817a1b-f77a-499c-a1b4-481272dc36cd",
-            "actions": [
-                {
-                    "name": "Down",
-                    "type": "Button",
-                    "id": "da16f8f7-7e1b-4ce5-af07-3a92051d3d91",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
-                {
-                    "name": "Up",
-                    "type": "Button",
-                    "id": "f64b6217-e9b5-4b2b-8084-dc4b7080bd30",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Left",
-                    "type": "Button",
-                    "id": "1e0f0e07-0f2f-4c71-bf66-a0ffbb73fad9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Right",
-                    "type": "Button",
-                    "id": "ec68c632-29d9-4c1c-8d18-089300d72498",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Confirm",
-                    "type": "Button",
-                    "id": "a44aebd2-123f-4882-a558-7bbeb821492d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Leave",
-                    "type": "Button",
-                    "id": "bf27efeb-fe13-4607-97f5-9683fbdca072",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
                 {
                     "name": "",
-                    "id": "0fac7423-a6ac-47df-801d-fa94a1f303b2",
+                    "id": "da77904a-1956-4159-a07a-4275cccfd4bd",
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
@@ -197,7 +180,7 @@
                 },
                 {
                     "name": "",
-                    "id": "65e163c8-98dc-495b-a1de-240e2f758507",
+                    "id": "0432599e-122d-4895-b561-31f6d67f7e33",
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
@@ -208,7 +191,7 @@
                 },
                 {
                     "name": "",
-                    "id": "59075edf-095d-4584-8854-3d9a421433d9",
+                    "id": "e2bd110d-123e-4016-9320-ca8905ca4357",
                     "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
@@ -219,7 +202,7 @@
                 },
                 {
                     "name": "",
-                    "id": "cf2a82c6-acdf-4126-aee3-530653a8c01b",
+                    "id": "1ca26e1b-5eb1-4fcd-a824-bd8f96c558ab",
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
@@ -230,7 +213,7 @@
                 },
                 {
                     "name": "",
-                    "id": "e6560938-e8ac-41e7-89bf-61dbbb05a7da",
+                    "id": "8f0b315a-d2c7-45e3-80eb-2f6fb52dc623",
                     "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
@@ -241,7 +224,7 @@
                 },
                 {
                     "name": "",
-                    "id": "9d9e5ea8-919b-4d44-ae3c-73a546ce9703",
+                    "id": "febdb691-7816-4349-ae24-283455433f52",
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
@@ -252,7 +235,7 @@
                 },
                 {
                     "name": "",
-                    "id": "d13b9584-1431-4490-a9f6-5fc300ba5212",
+                    "id": "73ec2c4c-7800-4711-9cec-df1193586791",
                     "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
@@ -263,7 +246,7 @@
                 },
                 {
                     "name": "",
-                    "id": "9e844769-0004-4408-86ca-5454d3953564",
+                    "id": "5a069432-995d-4346-a0b8-022def50db5d",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
@@ -274,23 +257,12 @@
                 },
                 {
                     "name": "",
-                    "id": "4af1557e-2eb5-4d21-92d5-9a402ff686b4",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "73d48258-9fbf-4c9a-a3c3-88eaf5f2dd5e",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Confirm",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ba2f171a-cd65-435d-903a-e26e86828fce",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Leave",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

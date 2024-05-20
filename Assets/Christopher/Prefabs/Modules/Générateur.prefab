@@ -138,7 +138,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 73cc9043bc330e74ba0d485f2888959d, type: 2}
   - {fileID: 2100000, guid: 7329e3da6525d8b4ca20e6ffe4590dbd, type: 2}
-  - {fileID: 1247058955692496880, guid: 53c89bc6b06fd7f4999eed60ba72d639, type: 3}
+  - {fileID: 2100000, guid: b7c4b4b399dea0a47947d09ce46dbeb2, type: 2}
   - {fileID: 2100000, guid: 587994af73b423d48b0f3634a6bf03ab, type: 2}
   - {fileID: 2100000, guid: 79ecf3fafe524bf4992d5d3d16204570, type: 2}
   - {fileID: 2100000, guid: 5167a615bd6d6cf418ca6c7efb7beb36, type: 2}
@@ -239,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsActivated: 0
   State: 0
+  StatesMaterials: []
   StateDisplayObject:
   - {fileID: 0}
   Succes: 

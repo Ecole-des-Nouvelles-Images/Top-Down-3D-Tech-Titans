@@ -2176,6 +2176,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1942303877656336214, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942303877656336214, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942303877656336214, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942303877656336214, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2187,7 +2202,7 @@ PrefabInstance:
     - target: {fileID: 1942303877656336214, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.289589
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 1942303877656336214, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2503,8 +2518,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 1247058955692496880, guid: 53c89bc6b06fd7f4999eed60ba72d639,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: b7c4b4b399dea0a47947d09ce46dbeb2, type: 2}
     - target: {fileID: 6038563029035736216, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_Name
@@ -2702,13 +2716,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8567336732667053783, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
+      propertyPath: m_Intensity
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567336732667053783, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
       propertyPath: m_SpotAngle
-      value: 102.97853
+      value: 111.15205
       objectReference: {fileID: 0}
     - target: {fileID: 8567336732667053783, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_InnerSpotAngle
-      value: 26.350632
+      value: 36.567528
       objectReference: {fileID: 0}
     - target: {fileID: 8989536573216822137, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2960,8 +2979,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1247058955692496880, guid: 53c89bc6b06fd7f4999eed60ba72d639,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: b7c4b4b399dea0a47947d09ce46dbeb2, type: 2}
     - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
         type: 3}
       propertyPath: drillHead

@@ -161,6 +161,23 @@ namespace Christopher.Scripts
                 if(PlayerUsingModule == null)submarine.GetComponent<SubmarineController>().MoveY(0f);
             }
         }
+
+        public override void Up()
+        {
+        }
+
+        public override void Down()
+        {
+        }
+
+        public override void Left()
+        {
+        }
+
+        public override void Right()
+        {
+        }
+
         private bool IsPhase2Finish()
         {
             for (int i = 0; i < AllRocks.Length; i++) {

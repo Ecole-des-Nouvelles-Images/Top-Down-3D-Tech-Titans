@@ -20,6 +20,11 @@ namespace Christopher.Scripts
         public abstract void Validate();
         public abstract void NavigateX(float moveX);
         public abstract void NavigateY(float moveY);
+        public abstract void Up();
+        public abstract void Down();
+        public abstract void Left();
+        public abstract void Right();
+        
     }  
 }
 
