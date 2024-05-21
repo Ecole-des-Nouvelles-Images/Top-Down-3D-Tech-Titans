@@ -10,11 +10,13 @@ namespace Elias.Scripts
         private int _activeModules;
         private float _timer = 0f;
         private List<SubmarinModule> _modules = new List<SubmarinModule>();
-        
+
         public List<DifficultyParameters> difficulties;
 
-        private void Start()
+        public void InitializeGameCycle(int phase1Value)
         {
+            UpdateDifficulty(phase1Value);
+
             if (difficulties == null || difficulties.Count == 0)
             {
                 Debug.LogWarning("No difficulty parameters set.");
@@ -23,7 +25,6 @@ namespace Elias.Scripts
 
             _timer = difficulties[0].waveInterval;
 
-            // Populate _modules list
             SubmarinModule[] foundModules = FindObjectsOfType<SubmarinModule>();
             foreach (SubmarinModule module in foundModules)
             {
