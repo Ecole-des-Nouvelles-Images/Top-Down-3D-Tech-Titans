@@ -67,11 +67,11 @@ namespace Elias.Scripts.Minigames
                         {
                             Debug.Log("Skill check succeeded!");
                             Succes.Add(true);
-                            if (States.Count > 0)
+                            if (StatesMaterials.Length > 0)
                             {
                                 foreach (var obj in StateDisplayObject)
                                 {
-                                    obj.GetComponent<Renderer>().material = States[1];
+                                    obj.GetComponent<Renderer>().material = StatesMaterials[1];
                                 }
                             }
                             IsActivated = false;
@@ -82,11 +82,11 @@ namespace Elias.Scripts.Minigames
 
                 Debug.Log("Skill check failed!");
                 Succes.Add(false);
-                if (States.Count > 0)
+                if (StatesMaterials.Length > 0)
                 {
                     foreach (var obj in StateDisplayObject)
                     {
-                        obj.GetComponent<Renderer>().material = States[0];
+                        obj.GetComponent<Renderer>().material = StatesMaterials[0];
                     }
                 }
                 IsActivated = false;
@@ -100,11 +100,11 @@ namespace Elias.Scripts.Minigames
             {
                 Debug.Log("Time's up! Skill check failed!");
                 Succes.Add(false);
-                if (States.Count > 0)
+                if (StatesMaterials.Length > 0)
                 {
                     foreach (var obj in StateDisplayObject)
                     {
-                        obj.GetComponent<Renderer>().material = States[0];
+                        obj.GetComponent<Renderer>().material = StatesMaterials[0];
                     }
                 }
                 IsActivated = false;
@@ -148,6 +148,14 @@ namespace Elias.Scripts.Minigames
         public override void NavigateY(float moveY)
         {
         }
+
+        public override void Up() { }
+
+        public override void Down() { }
+
+        public override void Left() { }
+
+        public override void Right() { }
 
         private void SetRandomSuccessZoneAngles()
         {

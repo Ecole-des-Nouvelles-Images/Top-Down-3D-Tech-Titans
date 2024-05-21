@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoosterModule : SubmarinModule
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] private float cooldown;
+    private float _currentCooldownValue;
+    void Start() {
         PlayerUsingModule = null;
+        IsActivated = false;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         
     }
 
