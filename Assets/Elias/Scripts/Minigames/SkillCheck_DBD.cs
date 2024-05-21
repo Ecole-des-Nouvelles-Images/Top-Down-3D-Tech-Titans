@@ -1,9 +1,9 @@
 using Christopher.Scripts;
 using UnityEngine;
 
-namespace Elias.Scripts.MinigameDBD
+namespace Elias.Scripts.Minigames
 {
-    public class SkillCheck : SubmarinModule
+    public class SkillCheckDbd : SubmarinModule
     {
         public RectTransform indicatorNeedle;
         public RectTransform successZone;

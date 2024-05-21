@@ -1,12 +1,12 @@
 using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
 using Cinemachine;
+using Elias.Scripts.Minigames;
 using Elias.Scripts.Player;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Elias.Scripts
+namespace Elias.Scripts.Managers
 {
     public class GameManager : MonoBehaviour
     {
@@ -56,11 +56,16 @@ namespace Elias.Scripts
 
         private void Update()
         {
-            //WaterControl();
+            WaterControl();
 
             if (Input.GetKeyDown(KeyCode.U))
             {
                 InstantiatePlayer();
+            }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                LowerWaterToInitialPosition();
             }
         }
 
@@ -89,12 +94,26 @@ namespace Elias.Scripts
             GameCycleController gameCycleController = FindObjectOfType<GameCycleController>();
             if (gameCycleController != null)
             {
-                int activeModuleCount = gameCycleController.ReturnActiveModules();
+                // Get all active modules with the SkillCheckDbd script
+                SkillCheckDbd[] activeSkillCheckModules = FindObjectsOfType<SkillCheckDbd>();
+                int activeModuleCount = 0;
+
+                foreach (var breach in activeSkillCheckModules)
+                {
+                    if (breach.IsActivated)
+                    {
+                        activeModuleCount++;
+                    }
+                }
 
                 float movementSpeed = 1f;
 
                 switch (activeModuleCount)
                 {
+                    case 0:
+                        movementSpeed = 0;
+                        break;
+                    
                     case 1:
                         movementSpeed /= 10;
                         break;
@@ -117,12 +136,21 @@ namespace Elias.Scripts
                     newWaterY += Time.deltaTime * movementSpeed;
                 }
 
+                // Clamp the water's y position to ensure it does not exceed 5
+                newWaterY = Mathf.Clamp(newWaterY, _originalWaterPosition.y, 5f);
+
                 water.transform.position = new Vector3(water.transform.position.x, newWaterY, water.transform.position.z);
             }
             else
             {
                 Debug.LogError("GameCycleController not found in the scene.");
             }
+        }
+
+        private void LowerWaterToInitialPosition()
+        {
+            float newWaterY = _originalWaterPosition.y;
+            water.transform.position = new Vector3(water.transform.position.x, newWaterY, water.transform.position.z);
         }
 
         public void InstantiatePlayer()
@@ -151,7 +179,6 @@ namespace Elias.Scripts
             }
         }
 
-
         public void RemovePlayer()
         {
             if (_playerInstance != null)
@@ -161,4 +188,3 @@ namespace Elias.Scripts
         }
     }
 }
-
