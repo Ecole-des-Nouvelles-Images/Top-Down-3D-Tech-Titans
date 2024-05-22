@@ -3,7 +3,62 @@ guid: 614eb0b48d43eed48864db5d3bd86f1f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cristals
+    second: {fileID: 2100000, guid: b37efafbad6af1d44a2c536f15259780, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock
+    second: {fileID: 2100000, guid: a55755d4e696b3246833169c5bef4b15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock.001
+    second: {fileID: 2100000, guid: d9863551ab315904298445304bfe169b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock.002
+    second: {fileID: 2100000, guid: 3ea62a4092a36eb4f95657f5e9e4b3b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock.003
+    second: {fileID: 2100000, guid: c34fc9dd841cc4441aa724198c6bf7f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock.004
+    second: {fileID: 2100000, guid: a4af2053f0829a543ab7c1da77019a98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock.005
+    second: {fileID: 2100000, guid: bd30b753f5d1e6840b5dcedb436f246c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock.006
+    second: {fileID: 2100000, guid: 66521e9bcdf82654fad9f8c01918c62a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock.007
+    second: {fileID: 2100000, guid: 4ba4b3a06946d464f875432ceb8c28d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock.008
+    second: {fileID: 2100000, guid: 34a6e928e4d2f7143b90ec657ba25243, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock.009
+    second: {fileID: 2100000, guid: 4d8a07c2890be9343aa581790d1e74d8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

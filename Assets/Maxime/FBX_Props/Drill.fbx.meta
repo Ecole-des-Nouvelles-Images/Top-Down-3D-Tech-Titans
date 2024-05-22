@@ -3,7 +3,27 @@ guid: 0861cb776304cb343b1e193f77443c92
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlueIron
+    second: {fileID: 2100000, guid: 791c60a9fc02a524fbf0a1ae4d66b068, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkIron.006
+    second: {fileID: 2100000, guid: 30e4a92cb1b0a984bbca5bd60382a455, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iroon
+    second: {fileID: 2100000, guid: 73cc9043bc330e74ba0d485f2888959d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightIron.005
+    second: {fileID: 2100000, guid: 743ec146e7356a440885e6e76c235eee, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

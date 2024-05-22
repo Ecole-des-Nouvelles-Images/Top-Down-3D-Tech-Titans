@@ -3,7 +3,32 @@ guid: 3d47819825163204fa6a2c31a77e30bf
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cahoutchouc.004
+    second: {fileID: 2100000, guid: 695ac8ef5ea0872499e23dbcd81e9c7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark_Iron.001
+    second: {fileID: 2100000, guid: d5a3a8bdaa4193643944b5523f0b27fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: f359d8710719c3444878b3e929c07ad1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightIron.006
+    second: {fileID: 2100000, guid: 1aac37f2982a5874cbc60f9b7fe5d07c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: iRON.001
+    second: {fileID: 2100000, guid: 4083cac92c66ce84bbc62b07a7d18ee3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
