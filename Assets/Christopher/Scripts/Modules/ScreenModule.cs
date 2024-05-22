@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Christopher.Scripts.Modules;
 using Elias.Scripts.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -7,10 +8,11 @@ using UnityEngine.UIElements;
 
 namespace Christopher.Scripts
 {
-    public class ScreenSubmarinModule : SubmarinModule {
+    public class ScreenModule : SubmarinModule {
         public int Phase1Value;
         public int CurrentPhase;
         public float TimerNavigationPhase1;
+        public GameObject Submarine;
         [SerializeField] private Material[] displayPhase;
         [SerializeField] private GameObject screen;
         [SerializeField] private GameObject selectionA;
@@ -19,11 +21,12 @@ namespace Christopher.Scripts
         [SerializeField] private GameObject[] AllRocks;
         [SerializeField] private GameObject drillHead;
         [SerializeField] private GameObject endPhase2Message;
-        [SerializeField] private GameObject submarine;
+        [SerializeField] private BoosterModule[] boosterModules;
         [SerializeField] private List<GameObject> mapPhase3;
         private Char _currentSelectionPhase1;
         private float _currentTimerNavP1;
         private void Start() {
+            PlayerUsingModule = null;
             IsActivated = true;
             if (displayPhase.Length > 0) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[0];
             CurrentPhase = 1;
@@ -56,6 +59,9 @@ namespace Christopher.Scripts
                     }
                 }
                 if (CurrentPhase == 3) {
+                    foreach (BoosterModule boosterModule in boosterModules) {
+                        if (boosterModule.IsActivated == false) boosterModule.IsActivated = true;
+                    }
                     if (displayPhase.Length > 3) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[3];
                     switch (Phase1Value) {
                         case 1:
@@ -79,6 +85,12 @@ namespace Christopher.Scripts
                                 mapPhase3[2].SetActive(true);
                             }
                             break;
+                    }
+                }
+                else
+                {
+                    foreach (BoosterModule boosterModule in boosterModules) {
+                        if (boosterModule.IsActivated) boosterModule.IsActivated = false;
                     }
                 }
             }
@@ -122,34 +134,12 @@ namespace Christopher.Scripts
             }
         }
         public override void NavigateX(float moveX) {
-            if (CurrentPhase == 1) {
-                if (_currentTimerNavP1 <= 0) {
-                    switch (_currentSelectionPhase1) {
-                        case 'a':
-                            if(moveX < -0.8) _currentSelectionPhase1 = 'c';
-                            if(moveX > 0.8) _currentSelectionPhase1 = 'b';
-                            break;
-                        case 'b':
-                            if(moveX < -0.8) _currentSelectionPhase1 = 'a';
-                            if(moveX > 0.8) _currentSelectionPhase1 = 'c';
-                            break;
-                        case 'c':
-                            if(moveX < -0.8) _currentSelectionPhase1 = 'b';
-                            if(moveX > 0.8) _currentSelectionPhase1 = 'a';
-                            break;
-                    }
-                    DisplayPhase1();
-                    _currentTimerNavP1 = TimerNavigationPhase1;
-                }
-                _currentTimerNavP1 -= Time.deltaTime;
-            }
-
             if (CurrentPhase == 2) {
                 drillHead.GetComponent<DrillEntity>().MoveX(moveX);
             }
             if (CurrentPhase == 3) {
-                submarine.GetComponent<SubmarineController>().MoveX(moveX);
-                if(PlayerUsingModule == null)submarine.GetComponent<SubmarineController>().MoveY(0f);
+                Submarine.GetComponent<SubmarineController>().MoveX(moveX);
+                if(PlayerUsingModule == null)Submarine.GetComponent<SubmarineController>().MoveY(0f);
             }
         }
         public override void NavigateY(float moveY) {
@@ -157,25 +147,47 @@ namespace Christopher.Scripts
                 drillHead.GetComponent<DrillEntity>().MoveY(moveY);
             }
             if (CurrentPhase == 3) {
-                submarine.GetComponent<SubmarineController>().MoveY(moveY);
-                if(PlayerUsingModule == null)submarine.GetComponent<SubmarineController>().MoveY(0f);
+                Submarine.GetComponent<SubmarineController>().MoveY(moveY);
+                if(PlayerUsingModule == null)Submarine.GetComponent<SubmarineController>().MoveY(0f);
             }
         }
 
-        public override void Up()
-        {
+        public override void Up() { }
+
+        public override void Down() { }
+
+        public override void Left() {
+            if (CurrentPhase == 1) {
+                switch (_currentSelectionPhase1) {
+                    case 'a':
+                        _currentSelectionPhase1 = 'c';
+                        break;
+                    case 'b':
+                        _currentSelectionPhase1 = 'a';
+                        break;
+                    case 'c':
+                        _currentSelectionPhase1 = 'b';
+                        break;
+                }
+            }
+            DisplayPhase1();
         }
 
-        public override void Down()
-        {
-        }
-
-        public override void Left()
-        {
-        }
-
-        public override void Right()
-        {
+        public override void Right() {
+            if (CurrentPhase == 1) {
+                switch (_currentSelectionPhase1) {
+                    case 'a':
+                        _currentSelectionPhase1 = 'b';
+                        break;
+                    case 'b':
+                        _currentSelectionPhase1 = 'c';
+                        break;
+                    case 'c':
+                        _currentSelectionPhase1 = 'a';
+                        break;
+                }
+                DisplayPhase1();
+            }
         }
 
         private bool IsPhase2Finish()

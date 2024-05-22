@@ -5,7 +5,6 @@ namespace Christopher.Scripts.Modules
 {
     public class FixingDrillModule : SubmarinModule
     {
-        
         [SerializeField] private GameObject minigameDisplay;
         [SerializeField] private GameObject drillHead;
         [SerializeField] private GameObject drillHeadOnSocleDisplay;

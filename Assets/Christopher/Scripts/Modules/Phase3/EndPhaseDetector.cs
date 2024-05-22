@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EndPhaseDetector : MonoBehaviour
 {
-   [SerializeField] private ScreenSubmarinModule screenModule;
+   [SerializeField] private ScreenModule screenModule;
    private void OnTriggerEnter2D(Collider2D other)
    {
       if (other.CompareTag("Submarine"))

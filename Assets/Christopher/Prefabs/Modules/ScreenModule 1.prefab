@@ -664,11 +664,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
-  States:
-  - {fileID: 2100000, guid: 0d45b50648b5c5f4ca093f4fa53c9f76, type: 2}
-  - {fileID: 2100000, guid: b5b6cb451b6342d4786890990fd27154, type: 2}
-  - {fileID: 2100000, guid: 12c429e63c259834ca0c12d1c2f329a6, type: 2}
-  - {fileID: 2100000, guid: 6d3fb191003fd864794d06ebfb0ef8dd, type: 2}
+  State: 0
+  StatesMaterials: []
   StateDisplayObject:
   - {fileID: 243990414573622300}
   Succes: 
@@ -677,6 +674,7 @@ MonoBehaviour:
   Phase1Value: 0
   CurrentPhase: 3
   TimerNavigationPhase1: 0.2
+  Submarine: {fileID: 2770638057380931796}
   displayPhase:
   - {fileID: 2100000, guid: 339f93f02b731d24cb42dd135243e4df, type: 2}
   - {fileID: 2100000, guid: bc8ae6b44f27f2241bfc806e52ba5276, type: 2}
@@ -698,7 +696,9 @@ MonoBehaviour:
   - {fileID: 6038563029035736216}
   drillHead: {fileID: 2088107472756411855}
   endPhase2Message: {fileID: 5339445516962247799}
-  submarine: {fileID: 2770638057380931796}
+  boosterModules:
+  - {fileID: 0}
+  - {fileID: 0}
   mapPhase3:
   - {fileID: 5260169912910586237}
   - {fileID: 4105714060574977718}

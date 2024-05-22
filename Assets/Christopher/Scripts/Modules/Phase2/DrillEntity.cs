@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts.Modules;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DrillEntity : MonoBehaviour
 {
@@ -82,7 +83,7 @@ public class DrillEntity : MonoBehaviour
             _currentDiggingRock = other.gameObject;
             if (_currentTime <= 0) {
                 other.gameObject.GetComponent<RockEntity>().TakeDamage(Damage);
-                _currentEndurance -= Damage;
+                _currentEndurance -= Random.Range(0,Damage);
                 if (_currentEndurance < 0) {
                     _currentEndurance = 0;
                     IsDamaged = true;
