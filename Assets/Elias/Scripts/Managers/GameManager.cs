@@ -143,7 +143,7 @@ namespace Elias.Scripts.Managers
             }
             else
             {
-                Debug.LogError("GameCycleController not found in the scene.");
+                //Debug.LogError("GameCycleController not found in the scene.");
             }
         }
 

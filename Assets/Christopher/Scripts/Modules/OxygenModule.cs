@@ -94,21 +94,14 @@ public class OxygenModule : SubmarinModule {
             }
         }
     }
-
     private void ResetPartyGame() {
         for (int i = 0; i < _toDo.Length; i++) {
             _toDo[i] = Random.Range(1, 4);
         }
         _input.Clear();
     }
-    public override void Activate() {
-        IsActivated = true;
-    }
-
-    public override void Deactivate() {
-        IsActivated = false;
-    }
-
+    public override void Activate() { IsActivated = true; }
+    public override void Deactivate() { IsActivated = false; }
     public override void Interact(GameObject playerUsingModule) {
         if (IsActivated && PlayerUsingModule == null) {
             PlayerUsingModule = playerUsingModule;
