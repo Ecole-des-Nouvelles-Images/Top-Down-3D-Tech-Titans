@@ -47,7 +47,10 @@ public class PressureModule : SubmarinModule {
         else {
             State = 0;
         }
-        StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials[4]= StatesMaterials[State];
+
+        Material[] mat = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
+        mat[4] = StatesMaterials[State];
+        StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mat;
         switch (State)
         {
             case 0:
