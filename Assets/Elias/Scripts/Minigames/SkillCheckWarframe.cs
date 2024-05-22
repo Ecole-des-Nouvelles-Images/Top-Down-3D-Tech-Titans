@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
+using Elias.Scripts.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,8 +19,11 @@ namespace Elias.Scripts.Minigames
         private int _selectedIndex;
         public bool IsPatternValid => ValidatePattern();
 
+        private PatternManager _patternManager; // Reference to the PatternManager
+
         private void Start()
         {
+            _patternManager = GetComponent<PatternManager>(); // Assuming PatternManager is on the same GameObject
             InitializePatternSquares();
             _selectedIndex = 0; // Start with the first square selected
             HighlightSelectedSquare();
@@ -83,21 +88,21 @@ namespace Elias.Scripts.Minigames
             {
                 PatternSquare currentSquare = _patternSquares[i];
 
-                if (i % 3 != 2 && !currentSquare.IsConnected(_patternSquares[i + 1], PatternSquare.Direction.Right)) return false; // Check right
-                if (i % 3 != 0 && !currentSquare.IsConnected(_patternSquares[i - 1], PatternSquare.Direction.Left)) return false;  // Check left
-                if (i / 3 != 2 && !currentSquare.IsConnected(_patternSquares[i + 3], PatternSquare.Direction.Down)) return false;  // Check bottom
-                if (i / 3 != 0 && !currentSquare.IsConnected(_patternSquares[i - 3], PatternSquare.Direction.Up)) return false;   // Check top
+                if (i % 3 != 2 && !currentSquare.IsConnected(_patternSquares[i + 1], PatternSquare.Direction.Right)) {
+                    return false; // Check right
+                }
+                if (i % 3 != 0 && !currentSquare.IsConnected(_patternSquares[i - 1], PatternSquare.Direction.Left)) {
+                    return false;  // Check left
+                }
+                if (i / 3 != 2 && !currentSquare.IsConnected(_patternSquares[i + 3], PatternSquare.Direction.Down)) {
+                    return false;  // Check bottom
+                }
+                if (i / 3 != 0 && !currentSquare.IsConnected(_patternSquares[i - 3], PatternSquare.Direction.Up)) {
+                    return false;   // Check top
+                }
             }
             return true;
         }
-
-        /*void UpdateStateDisplayObjects(Material material)
-        {
-            foreach (var obj in StateDisplayObject)
-            {
-                obj.GetComponent<Renderer>().material = material;
-            }
-        }*/
 
         public override void Activate()
         {
@@ -109,16 +114,23 @@ namespace Elias.Scripts.Minigames
         {
             IsActivated = false;
             State = 0;
+            canvas.SetActive(false);
+            PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
+            StopInteract();
         }
 
-        public override void Interact(GameObject playerUsingModule)
-        {
+        public override void Interact(GameObject playerUsingModule) {
+            if (IsActivated && PlayerUsingModule == null) {
+                PlayerUsingModule = playerUsingModule;
+            }
+            
             playerInteracting = true;
             Activate();
+            InitializePatternSquares();
         }
 
-        public override void StopInteract()
-        {
+        public override void StopInteract() {
+            PlayerUsingModule = null;
             playerInteracting = false;
             PlayerUsingModule = null;
         }
@@ -131,16 +143,21 @@ namespace Elias.Scripts.Minigames
             {
                 Debug.Log("Pattern matched!");
                 Succes.Add(true);
-                //UpdateStateDisplayObjects(StatesMaterials[1]);
-                Deactivate();
-                canvas.SetActive(false);
+                StartCoroutine(DeactivateAfterDelay());
             }
             else
             {
                 Debug.Log("Pattern not matched!");
                 Succes.Add(false);
-                //UpdateStateDisplayObjects(StatesMaterials[0]);
             }
+        }
+
+        private IEnumerator DeactivateAfterDelay()
+        {
+            yield return new WaitForSeconds(1f); // Wait for 1 second
+            Deactivate();
+            canvas.SetActive(false);
+            
         }
 
         public override void NavigateX(float moveX) { }
