@@ -95,7 +95,7 @@ namespace Elias.Scripts.Managers
             if (gameCycleController != null)
             {
                 // Get all active modules with the SkillCheckDbd script
-                SkillCheckDbd[] activeSkillCheckModules = FindObjectsOfType<SkillCheckDbd>();
+                BreachModule[] activeSkillCheckModules = FindObjectsOfType<BreachModule>();
                 int activeModuleCount = 0;
 
                 foreach (var breach in activeSkillCheckModules)

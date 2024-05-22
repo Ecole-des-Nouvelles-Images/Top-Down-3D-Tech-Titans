@@ -1,10 +1,12 @@
+using System.Collections;
 using Christopher.Scripts;
+using Elias.Scripts.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Elias.Scripts.Minigames
 {
-    public class SkillCheckDbd : SubmarinModule
+    public class BreachModule : SubmarinModule
     {
         public RectTransform indicatorNeedle;
         public RectTransform successZone;
@@ -12,13 +14,13 @@ namespace Elias.Scripts.Minigames
         private bool _isClockwise = true;
         public bool playerInteracting;
         public GameObject canvas;
+        private bool _needleStopped;
 
         void Update()
         {
             if (playerInteracting)
             {
                 RotateNeedle();
-                CheckForInput();
                 canvas.SetActive(true);
             }
             else
@@ -29,8 +31,12 @@ namespace Elias.Scripts.Minigames
 
         void RotateNeedle()
         {
+            if (!_isClockwise)
+            {
+                return; // Exit the method if the needle is stopped
+            }
+
             float angle = rotationSpeed * Time.deltaTime;
-            if (!_isClockwise) angle = -angle;
             indicatorNeedle.Rotate(0, 0, angle);
 
             if (indicatorNeedle.localEulerAngles.z >= 360f || indicatorNeedle.localEulerAngles.z <= 0f)
@@ -39,24 +45,7 @@ namespace Elias.Scripts.Minigames
             }
         }
 
-        void CheckForInput()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                float needleAngle = NormalizeAngle(indicatorNeedle.localEulerAngles.z);
-                float successStartAngle = NormalizeAngle(successZone.localEulerAngles.z - (successZone.rect.width / 2));
-                float successEndAngle = NormalizeAngle(successZone.localEulerAngles.z + (successZone.rect.width / 2));
 
-                if (needleAngle >= successStartAngle && needleAngle <= successEndAngle)
-                {
-                    OnSkillCheckSuccess();
-                }
-                else
-                {
-                    OnSkillCheckFailure();
-                }
-            }
-        }
 
         float NormalizeAngle(float angle)
         {
@@ -72,10 +61,14 @@ namespace Elias.Scripts.Minigames
             {
                 UpdateStateDisplayObjects(StatesMaterials[1]);
             }
-            playerInteracting = false; // Ensure playerInteracting is set to false on success
-            canvas.SetActive(false); // Deactivate canvas after success
-            Deactivate();
+            StartCoroutine(DeactivateAfterDelay());
+
+            _isClockwise = false;
+            indicatorNeedle.localEulerAngles = new Vector3(indicatorNeedle.localEulerAngles.x, indicatorNeedle.localEulerAngles.y, NormalizeAngle(indicatorNeedle.localEulerAngles.z));
+            _needleStopped = true;
         }
+
+
 
         void OnSkillCheckFailure()
         {
@@ -85,7 +78,16 @@ namespace Elias.Scripts.Minigames
             {
                 UpdateStateDisplayObjects(StatesMaterials[0]);
             }
+
+            StartCoroutine(ResetNeedleAfterDelay());
+
+            _isClockwise = false;
+            indicatorNeedle.localEulerAngles = new Vector3(indicatorNeedle.localEulerAngles.x, indicatorNeedle.localEulerAngles.y, NormalizeAngle(indicatorNeedle.localEulerAngles.z));
+            _needleStopped = true;
         }
+
+
+
 
         void UpdateStateDisplayObjects(Material material)
         {
@@ -106,23 +108,56 @@ namespace Elias.Scripts.Minigames
         {
             IsActivated = false;
             State = 0;
+            canvas.SetActive(false);
+            
+            if (PlayerUsingModule != null)
+            {
+                var playerController = PlayerUsingModule.GetComponent<PlayerController>();
+                if (playerController != null)
+                {
+                    playerController.QuitInteraction();
+                }
+            }
         }
 
         public override void Interact(GameObject playerUsingModule)
         {
+            Activate();
+            if (IsActivated && PlayerUsingModule == null) {
+                PlayerUsingModule = playerUsingModule;
+            }
             playerInteracting = true;
             indicatorNeedle.localEulerAngles = Vector3.zero;
-            PlayerUsingModule = playerUsingModule;
-            Activate();
+
+            // Add these lines to check if the needle is stopped and resume its rotation
+            if (_needleStopped)
+            {
+                _isClockwise = true;
+                _needleStopped = false;
+            }
         }
 
         public override void StopInteract()
         {
-            playerInteracting = false;
             PlayerUsingModule = null;
+            playerInteracting = false;
         }
 
-        public override void Validate() { }
+        public override void Validate()
+        {
+            float needleAngle = NormalizeAngle(indicatorNeedle.localEulerAngles.z);
+            float successStartAngle = NormalizeAngle(successZone.localEulerAngles.z - (successZone.rect.width / 2));
+            float successEndAngle = NormalizeAngle(successZone.localEulerAngles.z + (successZone.rect.width / 2));
+
+            if (needleAngle >= successStartAngle && needleAngle <= successEndAngle)
+            {
+                OnSkillCheckSuccess();
+            }
+            else
+            {
+                OnSkillCheckFailure();
+            }
+        }
 
         public override void NavigateX(float moveX) { }
 
@@ -140,6 +175,19 @@ namespace Elias.Scripts.Minigames
         {
             float randomAngle = UnityEngine.Random.Range(30f, 330f);
             successZone.localEulerAngles = new Vector3(successZone.localEulerAngles.x, successZone.localEulerAngles.y, randomAngle);
+        }
+
+        private IEnumerator ResetNeedleAfterDelay()
+        {
+            yield return new WaitForSeconds(1f);
+            _isClockwise = true;
+            indicatorNeedle.localEulerAngles = Vector3.zero;
+        }
+        
+        private IEnumerator DeactivateAfterDelay()
+        {
+            yield return new WaitForSeconds(1f); // Wait for 1 second
+            Deactivate();
         }
     }
 }

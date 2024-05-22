@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Elias.Scripts.Minigames
 {
-    public class SkillCheckWarframe : SubmarinModule
+    public class GeneratorModule : SubmarinModule
     {
         public bool playerInteracting;
         public GameObject canvas;
@@ -115,25 +115,35 @@ namespace Elias.Scripts.Minigames
             IsActivated = false;
             State = 0;
             canvas.SetActive(false);
-            PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
-            StopInteract();
+
+            if (PlayerUsingModule != null)
+            {
+                var playerController = PlayerUsingModule.GetComponent<PlayerController>();
+                if (playerController != null)
+                {
+                    playerController.QuitInteraction();
+                }
+            }
         }
 
+
         public override void Interact(GameObject playerUsingModule) {
+            
+            Activate();
             if (IsActivated && PlayerUsingModule == null) {
                 PlayerUsingModule = playerUsingModule;
             }
             
             playerInteracting = true;
-            Activate();
             InitializePatternSquares();
         }
 
-        public override void StopInteract() {
+        public override void StopInteract()
+        {
             PlayerUsingModule = null;
             playerInteracting = false;
-            PlayerUsingModule = null;
         }
+
 
         public override void Validate()
         {
@@ -156,9 +166,8 @@ namespace Elias.Scripts.Minigames
         {
             yield return new WaitForSeconds(1f); // Wait for 1 second
             Deactivate();
-            canvas.SetActive(false);
-            
         }
+
 
         public override void NavigateX(float moveX) { }
 
