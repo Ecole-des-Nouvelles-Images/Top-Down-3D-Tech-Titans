@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using Christopher.Scripts;
+using Elias.Scripts.Managers;
 using Elias.Scripts.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -15,6 +17,13 @@ namespace Elias.Scripts.Minigames
         public bool playerInteracting;
         public GameObject canvas;
         private bool _needleStopped;
+
+        public GameObject skin;
+
+        private void Start()
+        {
+            skin.SetActive(false);
+        }
 
         void Update()
         {
@@ -100,6 +109,7 @@ namespace Elias.Scripts.Minigames
         public override void Activate()
         {
             IsActivated = true;
+            skin.SetActive(true);
             State = 1;
             SetRandomSuccessZoneAngle();
         }
@@ -107,6 +117,7 @@ namespace Elias.Scripts.Minigames
         public override void Deactivate()
         {
             IsActivated = false;
+            skin.SetActive(false);
             State = 0;
             canvas.SetActive(false);
             

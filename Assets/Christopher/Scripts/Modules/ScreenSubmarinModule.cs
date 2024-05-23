@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elias.Scripts.Managers;
 using Elias.Scripts.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
-namespace Christopher.Scripts
+namespace Christopher.Scripts.Modules
 {
     public class ScreenSubmarinModule : SubmarinModule {
         public int Phase1Value;
@@ -23,6 +23,9 @@ namespace Christopher.Scripts
         [SerializeField] private List<GameObject> mapPhase3;
         private Char _currentSelectionPhase1;
         private float _currentTimerNavP1;
+
+        public GameCycleController gameCycleController;
+        
         private void Start() {
             IsActivated = true;
             if (displayPhase.Length > 0) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[0];
@@ -109,6 +112,9 @@ namespace Christopher.Scripts
                         Phase1Value = 3;
                         break;
                 }
+                
+                gameCycleController.UpdateDifficulty(Phase1Value);
+                
                 CurrentPhase = 2;
             }
 

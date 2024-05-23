@@ -147,7 +147,7 @@ namespace Elias.Scripts.Managers
             }
         }
 
-        private void LowerWaterToInitialPosition()
+        public void LowerWaterToInitialPosition()
         {
             float newWaterY = _originalWaterPosition.y;
             water.transform.position = new Vector3(water.transform.position.x, newWaterY, water.transform.position.z);
