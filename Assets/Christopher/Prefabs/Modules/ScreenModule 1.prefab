@@ -994,8 +994,15 @@ MonoBehaviour:
   - {fileID: 5260169912910586237}
   - {fileID: 4105714060574977718}
   - {fileID: 7460171997708848560}
-  PanelPhase1: []
-  TimerTransition: []
+  PanelPhase1:
+  - {fileID: 8778638978667413579}
+  - {fileID: 2625966883098905118}
+  - {fileID: 174132693008268880}
+  - {fileID: 3941318437375957884}
+  TimerTransition:
+  - 4
+  - 4
+  - 6
 --- !u!1 &3708123334279387762
 GameObject:
   m_ObjectHideFlags: 0
