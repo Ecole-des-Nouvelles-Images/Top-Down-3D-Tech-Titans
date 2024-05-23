@@ -1,9 +1,11 @@
+using Elias.Scripts.Managers;
 using UnityEngine;
 
 namespace Christopher.Scripts.Modules
 {
     public class HatchesModule : SubmarinModule
     {
+        private GameManager _gameManager;
         // Start is called before the first frame update
         void Start()
         {
@@ -28,7 +30,8 @@ namespace Christopher.Scripts.Modules
 
         public override void Interact(GameObject playerUsingModule)
         {
-            throw new System.NotImplementedException();
+            _gameManager.LowerWaterToInitialPosition();
+            StopInteract();
         }
 
         public override void StopInteract()

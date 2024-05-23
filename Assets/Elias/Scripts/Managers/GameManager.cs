@@ -95,7 +95,7 @@ namespace Elias.Scripts.Managers
             if (gameCycleController != null)
             {
                 // Get all active modules with the SkillCheckDbd script
-                SkillCheckDbd[] activeSkillCheckModules = FindObjectsOfType<SkillCheckDbd>();
+                BreachModule[] activeSkillCheckModules = FindObjectsOfType<BreachModule>();
                 int activeModuleCount = 0;
 
                 foreach (var breach in activeSkillCheckModules)
@@ -147,7 +147,7 @@ namespace Elias.Scripts.Managers
             }
         }
 
-        private void LowerWaterToInitialPosition()
+        public void LowerWaterToInitialPosition()
         {
             float newWaterY = _originalWaterPosition.y;
             water.transform.position = new Vector3(water.transform.position.x, newWaterY, water.transform.position.z);

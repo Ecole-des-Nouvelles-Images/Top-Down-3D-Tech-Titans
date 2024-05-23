@@ -1,36 +1,19 @@
 using System.Collections.Generic;
-using UnityEngine;
-using Random = UnityEngine.Random;
 using Christopher.Scripts;
+using Elias.Scripts.Minigames;
+using UnityEngine;
 
-namespace Elias.Scripts
+namespace Elias.Scripts.Managers
 {
     public class GameCycleController : MonoBehaviour
     {
         private int _activeModules;
         private float _timer = 0f;
-        private List<SubmarinModule> _modules = new List<SubmarinModule>();
+        private List<BreachModule> _modules = new List<BreachModule>();
 
         public List<DifficultyParameters> difficulties;
 
-        public void InitializeGameCycle(int phase1Value)
-        {
-            UpdateDifficulty(phase1Value);
-
-            if (difficulties == null || difficulties.Count == 0)
-            {
-                Debug.LogWarning("No difficulty parameters set.");
-                return;
-            }
-
-            _timer = difficulties[0].waveInterval;
-
-            SubmarinModule[] foundModules = FindObjectsOfType<SubmarinModule>();
-            foreach (SubmarinModule module in foundModules)
-            {
-                _modules.Add(module);
-            }
-        }
+        
 
         private void Update()
         {
@@ -56,12 +39,23 @@ namespace Elias.Scripts
             while (waveTimer < difficulties[0].waveDuration)
             {
                 yield return new WaitForSeconds(Random.Range(3f, 5f));
+                
+                FindModules();
                 CountActiveModules();
                 ActivateRandomModule();
                 waveTimer += 5f;
             }
         }
 
+        public void FindModules()
+        {
+            BreachModule[] foundModules = FindObjectsOfType<BreachModule>();
+            foreach (BreachModule module in foundModules)
+            {
+                _modules.Add(module);
+            }
+        }
+        
         private void CountActiveModules()
         {
             _activeModules = 0;
@@ -74,10 +68,10 @@ namespace Elias.Scripts
             }
         }
 
-        public int ReturnActiveModules()
+        /*public int ReturnActiveModules()
         {
             return _activeModules;
-        }
+        }*/
 
         private void ActivateRandomModule()
         {
@@ -106,7 +100,7 @@ namespace Elias.Scripts
             Debug.Log("Module activated!");
         }
 
-        private void UpdateDifficulty(int phase1Value)
+        public void UpdateDifficulty(int phase1Value)
         {
             if (difficulties == null || difficulties.Count == 0)
             {
