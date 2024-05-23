@@ -17,7 +17,10 @@ public class SubmarineController : MonoBehaviour
     private float _currentTimerToTakeDamage;
     private bool _leftMapLimit;
     private bool _rightMapLimit;
-    void Start() {
+    private Vector3 _originPosition;
+    void Start()
+    {
+        _originPosition = transform.position;
         _currentSpeed = MoveSpeed;
         _rB2Dsubmarine = transform.GetComponent<Rigidbody2D>();
         _isRecovering = false;
@@ -34,6 +37,10 @@ public class SubmarineController : MonoBehaviour
             _isRecovering = false;
             transform.GetComponent<SpriteRenderer>().enabled = true;
         }
+    }
+
+    public void ResetPosition() {
+        transform.position = _originPosition;
     }
     public void MoveX(float moveX) {
         float xMov = moveX * -1;

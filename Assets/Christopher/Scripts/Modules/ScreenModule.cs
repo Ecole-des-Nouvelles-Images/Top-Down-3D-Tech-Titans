@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Christopher.Scripts.Modules;
 using Elias.Scripts.Player;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
@@ -9,10 +10,12 @@ using UnityEngine.UIElements;
 namespace Christopher.Scripts
 {
     public class ScreenModule : SubmarinModule {
-        public int Phase1Value;
+        public int Difficulty;
+        public int Score;
+        public int[] GainByDifficulty;
         public int CurrentPhase;
-        public float TimerNavigationPhase1;
         public GameObject Submarine;
+        [SerializeField] private TMP_Text scoreDisplay;
         [SerializeField] private Material[] displayPhase;
         [SerializeField] private GameObject screen;
         [SerializeField] private GameObject selectionA;
@@ -23,9 +26,17 @@ namespace Christopher.Scripts
         [SerializeField] private GameObject endPhase2Message;
         [SerializeField] private BoosterModule[] boosterModules;
         [SerializeField] private List<GameObject> mapPhase3;
+        [SerializeField] private GameObject[] PanelPhase1;
+        [SerializeField] private float[] TimerTransition;
         private Char _currentSelectionPhase1;
         private float _currentTimerNavP1;
-        private void Start() {
+        private Vector3 _drillOriginPosition;
+        private bool _transitionPhase1;
+        private bool _transitionPhase2;
+        private bool _transitionPhase3;
+        private void Start()
+        {
+            _drillOriginPosition = drillHead.transform.parent.gameObject.transform.position;
             PlayerUsingModule = null;
             IsActivated = true;
             if (displayPhase.Length > 0) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[0];
@@ -34,8 +45,8 @@ namespace Christopher.Scripts
             DisplayPhase1();
         }
         private void Update() {
-            if (!IsActivated)
-            {
+            scoreDisplay.text = Score.ToString();
+            if (!IsActivated) {
                 State = 0;
                 playerDetector.SetActive(false);
                 screen.transform.GetComponent<MeshRenderer>().material = displayPhase[0];
@@ -49,48 +60,57 @@ namespace Christopher.Scripts
                 State = 1;
                 
                 playerDetector.SetActive(true);
-                
-                if (CurrentPhase == 2) {
-                    if (drillHead.transform.GetComponent<DrillEntity>().IsDamaged) IsActivated = false;
-                    if (displayPhase.Length > 2) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[2];
-                    if (IsPhase2Finish()){endPhase2Message.SetActive(true);}
-                    else {
-                        endPhase2Message.SetActive(false);
-                    }
-                }
-                if (CurrentPhase == 3) {
-                    foreach (BoosterModule boosterModule in boosterModules) {
-                        if (boosterModule.IsActivated == false) boosterModule.IsActivated = true;
-                    }
-                    if (displayPhase.Length > 3) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[3];
-                    switch (Phase1Value) {
+                if (!_transitionPhase1 && !_transitionPhase2 && !_transitionPhase3)
+                {
+                    switch (CurrentPhase)
+                    {
                         case 1:
-                            if (mapPhase3 != null && mapPhase3.Count == 3) {
-                                mapPhase3[0].SetActive(true);
-                                mapPhase3[1].SetActive(false);
-                                mapPhase3[2].SetActive(false);
+                            screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];
+                            foreach (BoosterModule boosterModule in boosterModules) {
+                                if (boosterModule.IsActivated) boosterModule.IsActivated = false;
                             }
                             break;
-                        case 2: 
-                            if (mapPhase3 != null && mapPhase3.Count == 3) {
-                                mapPhase3[0].SetActive(false);
-                                mapPhase3[1].SetActive(true);
-                                mapPhase3[2].SetActive(false);
+                        case 2:
+                            if (drillHead.transform.GetComponent<DrillEntity>().IsDamaged) IsActivated = false;
+                            if (displayPhase.Length > 2) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[2];
+                            if (IsPhase2Finish()){endPhase2Message.SetActive(true);}
+                            else {
+                                endPhase2Message.SetActive(false);
+                            }
+                            foreach (BoosterModule boosterModule in boosterModules) {
+                                if (boosterModule.IsActivated) boosterModule.IsActivated = false;
                             }
                             break;
                         case 3:
-                            if (mapPhase3 != null && mapPhase3.Count == 3) { 
-                                mapPhase3[0].SetActive(false);
-                                mapPhase3[1].SetActive(false);
-                                mapPhase3[2].SetActive(true);
+                            foreach (BoosterModule boosterModule in boosterModules) {
+                                if (boosterModule.IsActivated == false) boosterModule.IsActivated = true;
+                            }
+                            if(Submarine.activeSelf==false)Submarine.SetActive(true);
+                            if (displayPhase.Length > 3) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[3];
+                            switch (Difficulty) {
+                                case 1:
+                                    if (mapPhase3 != null && mapPhase3.Count == 3) {
+                                        mapPhase3[0].SetActive(true);
+                                        mapPhase3[1].SetActive(false);
+                                        mapPhase3[2].SetActive(false);
+                                    }
+                                    break;
+                                case 2: 
+                                    if (mapPhase3 != null && mapPhase3.Count == 3) {
+                                        mapPhase3[0].SetActive(false);
+                                        mapPhase3[1].SetActive(true);
+                                        mapPhase3[2].SetActive(false);
+                                    }
+                                    break;
+                                case 3:
+                                    if (mapPhase3 != null && mapPhase3.Count == 3) { 
+                                        mapPhase3[0].SetActive(false);
+                                        mapPhase3[1].SetActive(false);
+                                        mapPhase3[2].SetActive(true);
+                                    }
+                                    break;
                             }
                             break;
-                    }
-                }
-                else
-                {
-                    foreach (BoosterModule boosterModule in boosterModules) {
-                        if (boosterModule.IsActivated) boosterModule.IsActivated = false;
                     }
                 }
             }
@@ -112,13 +132,13 @@ namespace Christopher.Scripts
             if (CurrentPhase == 1) {
                 switch (_currentSelectionPhase1) {
                     case 'a':
-                        Phase1Value = 1;
+                        Difficulty = 1;
                         break;
                     case 'b':
-                        Phase1Value = 2;
+                        Difficulty = 2;
                         break;
                     case 'c':
-                        Phase1Value = 3;
+                        Difficulty = 3;
                         break;
                 }
                 CurrentPhase = 2;
@@ -127,6 +147,7 @@ namespace Christopher.Scripts
             if (CurrentPhase == 2) {
                 if (IsPhase2Finish()) {
                     //add collected mineralz
+                    ResetPhase2();
                     CurrentPhase = 3;
                 }
                 
@@ -190,6 +211,25 @@ namespace Christopher.Scripts
             }
         }
 
+        public void AddScore() {
+            switch (Difficulty) {
+                case 1:
+                    Score += GainByDifficulty[0];
+                    break;
+                case 2:
+                    Score += GainByDifficulty[1];
+                    break;
+                case 3:
+                    Score += GainByDifficulty[2];
+                    break;
+            }
+            Submarine.GetComponent<SubmarineController>().ResetPosition();
+            Submarine.SetActive(false);
+            foreach (BoosterModule boosterModule in boosterModules) {
+                if (boosterModule.IsActivated == true) boosterModule.IsActivated = false;
+            }
+            CurrentPhase = 1;
+        }
         private bool IsPhase2Finish()
         {
             for (int i = 0; i < AllRocks.Length; i++) {
@@ -198,6 +238,12 @@ namespace Christopher.Scripts
             return true;
         }
 
+        private void ResetPhase2() {
+            for (int i = 0; i < AllRocks.Length; i++) {
+                if (!AllRocks[i].activeSelf)AllRocks[i].SetActive(true) ;
+            }
+            drillHead.transform.parent.gameObject.transform.position = _drillOriginPosition;
+        }
         private void DisplayPhase1()
         {
             if (displayPhase.Length > 1) screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];

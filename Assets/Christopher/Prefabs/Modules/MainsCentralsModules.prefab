@@ -2187,6 +2187,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
         type: 3}
+      propertyPath: IsActivated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
       propertyPath: screenModule
       value: 
       objectReference: {fileID: 8313351245481496855}
@@ -3148,6 +3153,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
+      propertyPath: IsActivated
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
         type: 3}

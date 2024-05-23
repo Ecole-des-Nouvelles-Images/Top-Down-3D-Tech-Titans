@@ -13,6 +13,7 @@ public class EndPhaseDetector : MonoBehaviour
       {
          Debug.Log("Finito !!!!");
          screenModule.Succes.Add(true);
+         screenModule.AddScore();
       }
    }
 }
