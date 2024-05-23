@@ -1,15 +1,21 @@
 using Elias.Scripts.Managers;
+using Elias.Scripts.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Christopher.Scripts.Modules
 {
     public class HatchesModule : SubmarinModule
     {
-        private GameManager _gameManager;
+        public GameManager gameManager;
+
+        public GameCycleController gameCycleController;
+        
         // Start is called before the first frame update
         void Start()
         {
             PlayerUsingModule = null;
+            
         }
 
         // Update is called once per frame
@@ -30,48 +36,48 @@ namespace Christopher.Scripts.Modules
 
         public override void Interact(GameObject playerUsingModule)
         {
-            _gameManager.LowerWaterToInitialPosition();
-            StopInteract();
+            if (IsActivated && PlayerUsingModule == null) {
+                PlayerUsingModule = playerUsingModule;
+            }
         }
 
         public override void StopInteract()
         {
-            throw new System.NotImplementedException();
+            PlayerUsingModule = null;
         }
 
         public override void Validate()
         {
-            throw new System.NotImplementedException();
+            gameCycleController.CountActiveBreach();
+            if (gameCycleController._noActiveBreach)
+            {
+                gameManager.LowerWaterToInitialPosition();
+            }
+            PlayerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }
-
+        
         public override void NavigateX(float moveX)
         {
-            throw new System.NotImplementedException();
         }
 
         public override void NavigateY(float moveY)
         {
-            throw new System.NotImplementedException();
         }
 
         public override void Up()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void Down()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void Left()
         {
-            throw new System.NotImplementedException();
         }
 
         public override void Right()
         {
-            throw new System.NotImplementedException();
         }
     }
 }
