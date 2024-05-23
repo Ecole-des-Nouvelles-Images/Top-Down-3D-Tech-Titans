@@ -7,14 +7,20 @@ using UnityEngine.UI;
 using UnityEngine.Serialization;
 
 public class OxygenModule : SubmarinModule {
-    public GameObject[] lightStates;
-    public Sprite[] inputQTE;
+    public float CurrentOxygenValue;
+    public float SpeedDecrease;
+    public GameObject[] LightStates;
+    public Sprite[] InputQTE;
     public GameObject[] DisplayToDoInput;
     public GameObject[] DisplayDoingInput;
     public GameObject PartyGameDisplay;
+    [SerializeField]private float maxOxygenValue;
+    [SerializeField]private float yellowPourcentLimit;
+    [SerializeField]private float redPourcentLimit;
     private int[] _toDo;
     private List<int> _input;
     void Start() {
+        CurrentOxygenValue = maxOxygenValue;
         IsActivated = true;
         PlayerUsingModule = null;
         _toDo = new int[7];
@@ -22,9 +28,10 @@ public class OxygenModule : SubmarinModule {
         ResetPartyGame();
     }
     void Update() {
+        CurrentOxygenValue -= Time.deltaTime * SpeedDecrease;
         if (!IsActivated) {
             State = 0;
-            foreach (GameObject x in lightStates) {
+            foreach (GameObject x in LightStates) {
                 x.SetActive(false);
             }
             playerDetector.SetActive(false);
@@ -33,32 +40,37 @@ public class OxygenModule : SubmarinModule {
         }
         if (IsActivated) {
             playerDetector.SetActive(true);
+            if (CurrentOxygenValue < yellowPourcentLimit && CurrentOxygenValue > redPourcentLimit) State = 2;
+            else if (CurrentOxygenValue < redPourcentLimit) State = 3;
+            else {
+                State = 1;
+            }
             switch (State) {
                 case 1:
-                    lightStates[0].SetActive(true);
-                    lightStates[1].SetActive(false);
-                    lightStates[2].SetActive(false);
+                    LightStates[0].SetActive(true);
+                    LightStates[1].SetActive(false);
+                    LightStates[2].SetActive(false);
                     break;
                 case 2:
-                    lightStates[0].SetActive(false);
-                    lightStates[1].SetActive(true);
-                    lightStates[2].SetActive(false);
+                    LightStates[0].SetActive(false);
+                    LightStates[1].SetActive(true);
+                    LightStates[2].SetActive(false);
                     break;
                 case 3 :
-                    lightStates[0].SetActive(false);
-                    lightStates[1].SetActive(false);
-                    lightStates[2].SetActive(true);
+                    LightStates[0].SetActive(false);
+                    LightStates[1].SetActive(false);
+                    LightStates[2].SetActive(true);
                     break;
                 default:
-                    lightStates[0].SetActive(true);
-                    lightStates[1].SetActive(false);
-                    lightStates[2].SetActive(false);
+                    LightStates[0].SetActive(true);
+                    LightStates[1].SetActive(false);
+                    LightStates[2].SetActive(false);
                     break;
             }
             if (PlayerUsingModule != null && _input.Count == _toDo.Length) {
                 for (int i = 0; i < _toDo.Length; i++) {
                     if (_input[i] != _toDo[i]) {
-                        Debug.Log("minigame3 lose");
+                        Debug.Log("minigame lose");
                         if(PlayerUsingModule)PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
                         if(PartyGameDisplay.activeSelf)PartyGameDisplay.SetActive(false);
                         Succes.Add(false);
@@ -69,23 +81,24 @@ public class OxygenModule : SubmarinModule {
                 if(PlayerUsingModule)PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
                 if(PartyGameDisplay.activeSelf)PartyGameDisplay.SetActive(false);
                 Succes.Add(true);
-                Debug.Log("minigame3 win");
+                CurrentOxygenValue = maxOxygenValue;
+                Debug.Log("minigame win");
                 ResetPartyGame();
             }
         }
         for (int i = 0; i < _toDo.Length; i++) {
-            if (_toDo[i] == 1) DisplayToDoInput[i].GetComponent<Image>().sprite = inputQTE[0];
-            if (_toDo[i] == 2) DisplayToDoInput[i].GetComponent<Image>().sprite = inputQTE[1];
-            if (_toDo[i] == 3) DisplayToDoInput[i].GetComponent<Image>().sprite = inputQTE[2];
-            if (_toDo[i] == 4) DisplayToDoInput[i].GetComponent<Image>().sprite = inputQTE[3];
+            if (_toDo[i] == 1) DisplayToDoInput[i].GetComponent<Image>().sprite = InputQTE[0];
+            if (_toDo[i] == 2) DisplayToDoInput[i].GetComponent<Image>().sprite = InputQTE[1];
+            if (_toDo[i] == 3) DisplayToDoInput[i].GetComponent<Image>().sprite = InputQTE[2];
+            if (_toDo[i] == 4) DisplayToDoInput[i].GetComponent<Image>().sprite = InputQTE[3];
         }
 
         if (_input.Count > 0){
             for (int i = 0; i < _input.Count; i++) {
-                if (_input[i] == 1) DisplayDoingInput[i].GetComponent<Image>().sprite = inputQTE[0];
-                if (_input[i] == 2) DisplayDoingInput[i].GetComponent<Image>().sprite = inputQTE[1];
-                if (_input[i] == 3) DisplayDoingInput[i].GetComponent<Image>().sprite = inputQTE[2];
-                if (_input[i] == 4) DisplayDoingInput[i].GetComponent<Image>().sprite = inputQTE[3];
+                if (_input[i] == 1) DisplayDoingInput[i].GetComponent<Image>().sprite = InputQTE[0];
+                if (_input[i] == 2) DisplayDoingInput[i].GetComponent<Image>().sprite = InputQTE[1];
+                if (_input[i] == 3) DisplayDoingInput[i].GetComponent<Image>().sprite = InputQTE[2];
+                if (_input[i] == 4) DisplayDoingInput[i].GetComponent<Image>().sprite = InputQTE[3];
             }
         }
         else {

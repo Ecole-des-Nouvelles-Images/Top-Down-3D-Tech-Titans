@@ -7,13 +7,17 @@ namespace Christopher.Scripts.Modules
         // Start is called before the first frame update
         void Start()
         {
+            IsActivated = false;
             PlayerUsingModule = null;
         }
 
         // Update is called once per frame
         void Update()
         {
-        
+            if (!IsActivated)
+            {
+                
+            }
         }
 
         public override void Activate()

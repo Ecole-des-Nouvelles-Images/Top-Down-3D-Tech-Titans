@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
+using Elias.Scripts.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,33 +20,45 @@ public class TorpedoThrowerModule : SubmarinModule
         PartyGameDisplay.SetActive(false);
         PlayerUsingModule = null;
         IsActivated = true;
-        PlayerUsingModule = null;
         _toDo = new int[3];
         _doing = new int[3];
         ResetPartyGame();
     }
     void Update() {
-        for (int i = 0; i < _toDo.Length; i++) {
-            if (i != _currentSlot) DisplayDoingInput[i].GetComponent<Image>().sprite = SelectedFond[0];
-            else { DisplayDoingInput[i].GetComponent<Image>().sprite = SelectedFond[1]; }
-        }
-        if (_toDo.Length> 0){
+        if (IsActivated)
+        {
+            State = 1;
+            playerDetector.SetActive(true);
             for (int i = 0; i < _toDo.Length; i++) {
-                DisplayToDo[i].text = _toDo[i].ToString();
-                DisplayDoingContent[i].text = _doing[i].ToString();
+                if (i != _currentSlot) DisplayDoingInput[i].GetComponent<Image>().sprite = SelectedFond[0];
+                else { DisplayDoingInput[i].GetComponent<Image>().sprite = SelectedFond[1]; }
+            }
+            if (_toDo.Length> 0){
+                for (int i = 0; i < _toDo.Length; i++) {
+                    DisplayToDo[i].text = _toDo[i].ToString();
+                    DisplayDoingContent[i].text = _doing[i].ToString();
+                }
+            }
+            else {
+                for (int i = 0; i < DisplayDoingInput.Length; i++) {
+                    DisplayDoingInput[i].GetComponent<Image>().sprite = null;
+                }
+            }
+            if (Verif()) {
+                Succes.Add(true);
+                PartyGameDisplay.SetActive(false);
+                ResetPartyGame();
+                if(PlayerUsingModule)PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
             }
         }
-        else {
-            for (int i = 0; i < DisplayDoingInput.Length; i++) {
-                DisplayDoingInput[i].GetComponent<Image>().sprite = null;
-            }
+        else
+        {
+            State = 0;
+            playerDetector.SetActive(false);
         }
-        if (Verif()) {
-            Succes.Add(true);
-            PartyGameDisplay.SetActive(false);
-            ResetPartyGame();
-            StopInteract();
-        }
+        Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
+        mats[3] = StatesMaterials[State];
+        StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mats;
         
     }
     private void ResetPartyGame() {

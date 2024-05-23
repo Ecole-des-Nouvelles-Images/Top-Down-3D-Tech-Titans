@@ -40,7 +40,7 @@ namespace Elias.Scripts.Player
             {
                 _isWithinRange = false;
             }
-            if(_isWithinRange && !_isInteracting && inputInteractPanel.activeSelf == false )inputInteractPanel.SetActive(true);
+            if(_isWithinRange && !_isInteracting )inputInteractPanel.SetActive(true);
             else inputInteractPanel.SetActive(false);
             
         }
