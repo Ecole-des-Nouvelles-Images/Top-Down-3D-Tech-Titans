@@ -31,9 +31,9 @@ namespace Christopher.Scripts.Modules
         }
         void Update() {
             if (IsActivated) {
-                if(!playerDetector.activeSelf)playerDetector.SetActive(true);
-                if(!boostDisplay.activeSelf)boostDisplay.SetActive(true);
-                if(partyGameDisplay.activeSelf)partyGameDisplay.SetActive(true);
+                playerDetector.SetActive(true);
+                boostDisplay.SetActive(true);
+                partyGameDisplay.SetActive(true);
                 State = 1;
             }
             else {

@@ -29,13 +29,14 @@ namespace Christopher.Scripts
         [SerializeField] private GameObject[] PanelPhase1;
         [SerializeField] private float[] TimerTransition;
         private Char _currentSelectionPhase1;
-        private float _currentTimerNavP1;
+        private float _currentTimerTransition;
         private Vector3 _drillOriginPosition;
         private bool _transitionPhase1;
         private bool _transitionPhase2;
         private bool _transitionPhase3;
         private void Start()
         {
+            _currentTimerTransition = TimerTransition[0];
             _drillOriginPosition = drillHead.transform.parent.gameObject.transform.position;
             PlayerUsingModule = null;
             IsActivated = true;
@@ -58,14 +59,62 @@ namespace Christopher.Scripts
             }
             if (IsActivated) {
                 State = 1;
-                
                 playerDetector.SetActive(true);
-                if (!_transitionPhase1 && !_transitionPhase2 && !_transitionPhase3)
-                {
-                    switch (CurrentPhase)
-                    {
+                if (_transitionPhase1) {
+                    if(screen.transform.GetComponent<MeshRenderer>().material != displayPhase[1])
+                        screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];
+                    playerDetector.SetActive(false);
+                    if(PlayerUsingModule)PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
+                    for (int i = 0; i < PanelPhase1.Length; i++) {
+                        if(i==1)PanelPhase1[i].SetActive(true);
+                        else if(PanelPhase1[i].activeSelf)PanelPhase1[i].SetActive(false);
+                    }
+                    if (_currentTimerTransition > 0) _currentTimerTransition -= Time.deltaTime;
+                    else {
+                        _currentTimerTransition = TimerTransition[1];
+                        _transitionPhase1 = false;
+                    }
+                }
+
+                if (_transitionPhase2) {
+                    if(screen.transform.GetComponent<MeshRenderer>().material != displayPhase[1])
+                        screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];
+                    playerDetector.SetActive(false);
+                    if(PlayerUsingModule)PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
+                    for (int i = 0; i < PanelPhase1.Length; i++) {
+                        if(i==2)PanelPhase1[i].SetActive(true);
+                        else if(PanelPhase1[i].activeSelf)PanelPhase1[i].SetActive(false);
+                    }
+                    if (_currentTimerTransition > 0) _currentTimerTransition -= Time.deltaTime;
+                    else {
+                        _currentTimerTransition = TimerTransition[2];
+                        _transitionPhase2 = false;
+                    }
+                }
+                if (_transitionPhase3) {
+                    if(screen.transform.GetComponent<MeshRenderer>().material != displayPhase[1])
+                        screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];
+                    playerDetector.SetActive(false);
+                    if(PlayerUsingModule)PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
+                    for (int i = 0; i < PanelPhase1.Length; i++) {
+                        if(i==3)PanelPhase1[i].SetActive(true);
+                        else if(PanelPhase1[i].activeSelf)PanelPhase1[i].SetActive(false);
+                    }
+                    if (_currentTimerTransition > 0) _currentTimerTransition -= Time.deltaTime;
+                    else {
+                        _currentTimerTransition = TimerTransition[0];
+                        _transitionPhase3 = false;
+                    }
+                }
+                if (!_transitionPhase1 && !_transitionPhase2 && !_transitionPhase3) {
+                    switch (CurrentPhase) {
                         case 1:
-                            screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];
+                            if(screen.transform.GetComponent<MeshRenderer>().material != displayPhase[1])
+                                screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];
+                            for (int i = 0; i < PanelPhase1.Length; i++) {
+                                if(i == 0 )PanelPhase1[i].SetActive(true);
+                                else if(PanelPhase1[i].activeSelf)PanelPhase1[i].SetActive(false);
+                            }
                             foreach (BoosterModule boosterModule in boosterModules) {
                                 if (boosterModule.IsActivated) boosterModule.IsActivated = false;
                             }
@@ -141,6 +190,8 @@ namespace Christopher.Scripts
                         Difficulty = 3;
                         break;
                 }
+
+                _transitionPhase1 = true;
                 CurrentPhase = 2;
             }
 
@@ -148,6 +199,7 @@ namespace Christopher.Scripts
                 if (IsPhase2Finish()) {
                     //add collected mineralz
                     ResetPhase2();
+                    _transitionPhase2 = true;
                     CurrentPhase = 3;
                 }
                 
@@ -229,6 +281,7 @@ namespace Christopher.Scripts
                 if (boosterModule.IsActivated == true) boosterModule.IsActivated = false;
             }
             CurrentPhase = 1;
+            _transitionPhase3 = true;
         }
         private bool IsPhase2Finish()
         {

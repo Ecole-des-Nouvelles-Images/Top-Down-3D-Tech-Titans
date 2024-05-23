@@ -2267,6 +2267,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7531377191878179322}
     m_Modifications:
+    - target: {fileID: 35035493888292855, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_text
+      value: 'capteurs d''ascension automatique h.s.
+
+
+        preparation du system
+        d''assistance manuel'
+      objectReference: {fileID: 0}
     - target: {fileID: 88011346992050517, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_Size.x
@@ -2321,6 +2330,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222746519521365241, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_text
+      value: plonge rapide au site de minage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891597233060000229, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_text
+      value: Moyen
       objectReference: {fileID: 0}
     - target: {fileID: 1942303877656336214, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2421,6 +2440,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304067984402990181, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_text
+      value: Moyen
       objectReference: {fileID: 0}
     - target: {fileID: 2526949260847056316, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2737,6 +2761,11 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.53433716
       objectReference: {fileID: 0}
+    - target: {fileID: 6441197810626718998, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_text
+      value: Facile
+      objectReference: {fileID: 0}
     - target: {fileID: 6523138271574686579, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_IsActive
@@ -2751,6 +2780,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rockg
+      objectReference: {fileID: 0}
+    - target: {fileID: 6690738806065862806, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_text
+      value: "L\xE9ger"
       objectReference: {fileID: 0}
     - target: {fileID: 7140548789258054250, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2887,10 +2921,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rockf
       objectReference: {fileID: 0}
+    - target: {fileID: 8318764516256628542, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_text
+      value: Difficile
+      objectReference: {fileID: 0}
     - target: {fileID: 8559706770144304092, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_Name
       value: Rockb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560160324522494654, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_text
+      value: Lourd
       objectReference: {fileID: 0}
     - target: {fileID: 8567336732667053783, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
