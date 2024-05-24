@@ -1,32 +1,43 @@
 using System.Collections.Generic;
 using Christopher.Scripts;
-using Elias.Scripts.Minigames;
 using UnityEngine;
+using Elias.Scripts.Minigames;
 
 namespace Elias.Scripts.Managers
 {
     public class GameCycleController : MonoBehaviour
     {
-        private int _activeModules;
-        private float _timer = 0f;
+        public int _activeModules;
+        public float timer = 10f;
         private List<BreachModule> _modules = new List<BreachModule>();
-
         public List<DifficultyParameters> difficulties;
+        private bool _isDifficultySet;
+        private bool _hasUpdatedDifficulty;
+        private int _activeDifficulty;
 
-        
+        public bool _noActiveBreach;
 
         private void Update()
         {
-            if (difficulties == null || difficulties.Count == 0)
+            if (!_hasUpdatedDifficulty)
             {
                 return;
             }
 
-            _timer -= Time.deltaTime;
-
-            if (_timer <= 0f)
+            if (!_isDifficultySet)
             {
-                _timer = difficulties[0].waveInterval;
+                if (difficulties != null && difficulties.Count > 0)
+                {
+                    _isDifficultySet = true;
+                }
+                return;
+            }
+
+            timer -= Time.deltaTime;
+
+            if (timer <= 0f)
+            {
+                timer = difficulties[_activeDifficulty].waveInterval;
 
                 StartCoroutine(ActivateModulesWave());
             }
@@ -36,12 +47,12 @@ namespace Elias.Scripts.Managers
         {
             float waveTimer = 0f;
 
-            while (waveTimer < difficulties[0].waveDuration)
+            while (waveTimer < difficulties[_activeDifficulty].waveDuration)
             {
                 yield return new WaitForSeconds(Random.Range(3f, 5f));
-                
+
                 FindModules();
-                CountActiveModules();
+                CountActiveBreach();
                 ActivateRandomModule();
                 waveTimer += 5f;
             }
@@ -49,22 +60,33 @@ namespace Elias.Scripts.Managers
 
         public void FindModules()
         {
+            _modules.Clear();
+
             BreachModule[] foundModules = FindObjectsOfType<BreachModule>();
             foreach (BreachModule module in foundModules)
             {
                 _modules.Add(module);
             }
         }
-        
-        private void CountActiveModules()
+
+        public void CountActiveBreach()
         {
             _activeModules = 0;
-            foreach (SubmarinModule module in _modules)
+            foreach (BreachModule module in _modules)
             {
                 if (module.IsActivated)
                 {
                     _activeModules++;
                 }
+            }
+
+            if (_activeModules == 0)
+            {
+                _noActiveBreach = true;
+            }
+            else
+            {
+                _noActiveBreach = false;
             }
         }
 
@@ -75,7 +97,7 @@ namespace Elias.Scripts.Managers
 
         private void ActivateRandomModule()
         {
-            if (_activeModules < difficulties[0].activeModulesLimit)
+            if (_activeModules < difficulties[_activeDifficulty].activeModulesLimit)
             {
                 List<SubmarinModule> inactiveModules = new List<SubmarinModule>();
                 foreach (SubmarinModule module in _modules)
@@ -111,11 +133,13 @@ namespace Elias.Scripts.Managers
             if (phase1Value >= 1 && phase1Value <= 3 && phase1Value <= difficulties.Count)
             {
                 DifficultyParameters selectedDifficulty = difficulties[phase1Value - 1];
-                _timer = selectedDifficulty.waveInterval;
+                timer = selectedDifficulty.waveInterval;
+                _activeDifficulty = phase1Value - 1;
                 foreach (SubmarinModule module in _modules)
                 {
                     module.IsActivated = false;
                 }
+                _hasUpdatedDifficulty = true;
                 StartCoroutine(ActivateModulesWave());
             }
             else

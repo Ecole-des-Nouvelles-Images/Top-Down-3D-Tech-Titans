@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Easy
   m_EditorClassIdentifier: 
   waveDuration: 20
-  waveInterval: 90
-  activeModulesLimit: 3
+  waveInterval: 60
+  activeModulesLimit: 5

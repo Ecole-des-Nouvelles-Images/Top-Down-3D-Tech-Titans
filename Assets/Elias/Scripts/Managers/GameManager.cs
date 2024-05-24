@@ -126,15 +126,9 @@ namespace Elias.Scripts.Managers
                 }
 
                 float newWaterY = water.transform.position.y;
-                if (activeModuleCount == 0)
-                {
-                    newWaterY -= Time.deltaTime * movementSpeed;
-                    newWaterY = Mathf.Max(newWaterY, _originalWaterPosition.y);
-                }
-                else
-                {
-                    newWaterY += Time.deltaTime * movementSpeed;
-                }
+                
+                newWaterY += Time.deltaTime * movementSpeed;
+                
 
                 // Clamp the water's y position to ensure it does not exceed 5
                 newWaterY = Mathf.Clamp(newWaterY, _originalWaterPosition.y, 5f);
@@ -149,9 +143,10 @@ namespace Elias.Scripts.Managers
 
         public void LowerWaterToInitialPosition()
         {
-            float newWaterY = _originalWaterPosition.y;
-            water.transform.position = new Vector3(water.transform.position.x, newWaterY, water.transform.position.z);
+            
+            water.transform.position = new Vector3(water.transform.position.x, _originalWaterPosition.y, water.transform.position.z);
         }
+
 
         public void InstantiatePlayer()
         {
