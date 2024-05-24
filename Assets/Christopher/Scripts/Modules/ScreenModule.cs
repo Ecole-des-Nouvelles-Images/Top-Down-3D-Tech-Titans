@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Christopher.Scripts.Modules;
+using Elias.Scripts.Managers;
 using Elias.Scripts.Player;
 using TMPro;
 using UnityEngine;
@@ -34,6 +35,9 @@ namespace Christopher.Scripts
         private bool _transitionPhase1;
         private bool _transitionPhase2;
         private bool _transitionPhase3;
+
+        public GameCycleController gameCycleController;
+        
         private void Start()
         {
             _currentTimerTransition = TimerTransition[0];
@@ -193,6 +197,8 @@ namespace Christopher.Scripts
 
                 _transitionPhase1 = true;
                 CurrentPhase = 2;
+                
+                gameCycleController.UpdateDifficulty(Difficulty);
             }
 
             if (CurrentPhase == 2) {

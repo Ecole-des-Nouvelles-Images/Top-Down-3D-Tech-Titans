@@ -58,8 +58,7 @@ namespace Elias.Scripts.Minigames
 
         float NormalizeAngle(float angle)
         {
-            if (angle > 180f) angle -= 360f;
-            return angle;
+            return Mathf.Repeat(angle, 360);
         }
 
         void OnSkillCheckSuccess()
@@ -146,6 +145,10 @@ namespace Elias.Scripts.Minigames
                 _isClockwise = true;
                 _needleStopped = false;
             }
+            
+            float successStartAngle = NormalizeAngle(successZone.localEulerAngles.z - 15);
+            float successEndAngle = NormalizeAngle(successZone.localEulerAngles.z + 15);
+            Debug.LogFormat("Success start angle: {0}, success end angle: {1}", successStartAngle, successEndAngle);
         }
 
         public override void StopInteract()
@@ -157,10 +160,11 @@ namespace Elias.Scripts.Minigames
         public override void Validate()
         {
             float needleAngle = NormalizeAngle(indicatorNeedle.localEulerAngles.z);
-            float successStartAngle = NormalizeAngle(successZone.localEulerAngles.z - (successZone.rect.width / 2));
-            float successEndAngle = NormalizeAngle(successZone.localEulerAngles.z + (successZone.rect.width / 2));
+            float successStartAngle = NormalizeAngle(successZone.localEulerAngles.z - 15);
+            float successEndAngle = NormalizeAngle(successZone.localEulerAngles.z + 15);
 
-            if (needleAngle >= successStartAngle && needleAngle <= successEndAngle)
+            float tolerance = 5f;
+            if (needleAngle >= successStartAngle - tolerance && needleAngle <= successEndAngle + tolerance)
             {
                 OnSkillCheckSuccess();
             }

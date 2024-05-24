@@ -49,7 +49,7 @@ namespace Christopher.Scripts.Modules
         public override void Validate()
         {
             gameCycleController.CountActiveBreach();
-            if (gameCycleController._noActiveBreach)
+            if (gameCycleController.noActiveBreach)
             {
                 gameManager.LowerWaterToInitialPosition();
             }

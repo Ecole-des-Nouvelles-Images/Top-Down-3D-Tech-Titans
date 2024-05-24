@@ -2,20 +2,22 @@ using System.Collections.Generic;
 using Christopher.Scripts;
 using UnityEngine;
 using Elias.Scripts.Minigames;
+using UnityEngine.Serialization;
 
 namespace Elias.Scripts.Managers
 {
     public class GameCycleController : MonoBehaviour
     {
-        public int _activeModules;
+        public int activeModules;
         public float timer = 10f;
         private List<BreachModule> _modules = new List<BreachModule>();
         public List<DifficultyParameters> difficulties;
         private bool _isDifficultySet;
         private bool _hasUpdatedDifficulty;
         private int _activeDifficulty;
+        
 
-        public bool _noActiveBreach;
+        public bool noActiveBreach;
 
         private void Update()
         {
@@ -71,22 +73,22 @@ namespace Elias.Scripts.Managers
 
         public void CountActiveBreach()
         {
-            _activeModules = 0;
+            activeModules = 0;
             foreach (BreachModule module in _modules)
             {
                 if (module.IsActivated)
                 {
-                    _activeModules++;
+                    activeModules++;
                 }
             }
 
-            if (_activeModules == 0)
+            if (activeModules == 0)
             {
-                _noActiveBreach = true;
+                noActiveBreach = true;
             }
             else
             {
-                _noActiveBreach = false;
+                noActiveBreach = false;
             }
         }
 
@@ -97,7 +99,7 @@ namespace Elias.Scripts.Managers
 
         private void ActivateRandomModule()
         {
-            if (_activeModules < difficulties[_activeDifficulty].activeModulesLimit)
+            if (activeModules < difficulties[_activeDifficulty].activeModulesLimit)
             {
                 List<SubmarinModule> inactiveModules = new List<SubmarinModule>();
                 foreach (SubmarinModule module in _modules)
