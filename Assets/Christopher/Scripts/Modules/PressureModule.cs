@@ -26,8 +26,8 @@ public class PressureModule : SubmarinModule {
     private float _redZone2 = 2.5f;
     private float _yellowZone1 = 0.5f;
     private float _yellowZone2 = 1.5f;
-    private float _greenZoneMin = 0.8f;
-    private float _greenZoneMax = 1.1f;
+    //private float _greenZoneMin = 0.8f;
+    //private float _greenZoneMax = 1.1f;
     
     void Start() {
         IsActivated = true;
