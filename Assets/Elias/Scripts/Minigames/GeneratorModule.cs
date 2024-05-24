@@ -128,14 +128,16 @@ namespace Elias.Scripts.Minigames
 
 
         public override void Interact(GameObject playerUsingModule) {
-            
-            Activate();
-            if (IsActivated && PlayerUsingModule == null) {
+            if (IsActivated && PlayerUsingModule == null && playerUsingModule.GetComponent<PlayerController>().MyItem == 2) {
+                Activate();
                 PlayerUsingModule = playerUsingModule;
+                playerInteracting = true;
+                InitializePatternSquares();
+                PlayerUsingModule.GetComponent<PlayerController>().MyItem = 0;
             }
-            
-            playerInteracting = true;
-            InitializePatternSquares();
+            else {
+                playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
+            }
         }
 
         public override void StopInteract()

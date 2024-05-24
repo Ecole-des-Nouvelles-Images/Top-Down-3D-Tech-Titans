@@ -171,7 +171,12 @@ namespace Christopher.Scripts
             if (IsActivated) IsActivated = false;
         }
         public override void Interact(GameObject playerUsingModule) {
-            if(IsActivated) PlayerUsingModule = playerUsingModule;
+            if (IsActivated && PlayerUsingModule == null) {
+                PlayerUsingModule = playerUsingModule;
+            }
+            else {
+                playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
+            }
         }
         public override void StopInteract()
         {

@@ -3,7 +3,32 @@ guid: d8241672b5abee14ea9abd2f6cdf78fe
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crystal
+    second: {fileID: 2100000, guid: 85e774c44d3916c4faa14d4685a085f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark Iron.003
+    second: {fileID: 2100000, guid: e36f7eed74a35194784bbd6d479c90bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Emmisive
+    second: {fileID: 2100000, guid: 58f542ec3de79734ea721f3989e71595, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.007
+    second: {fileID: 2100000, guid: 83ab94b1dc743f643abedc5138226df8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron.015
+    second: {fileID: 2100000, guid: e500798253f0131459b50b844e296159, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

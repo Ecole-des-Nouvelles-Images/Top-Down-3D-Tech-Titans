@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
+using Elias.Scripts.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -82,6 +83,9 @@ public class PressureModule : SubmarinModule {
         if (IsActivated && PlayerUsingModule == null) {
             PlayerUsingModule = playerUsingModule;
             if(!partyGameDisplay.activeSelf)partyGameDisplay.SetActive(true);
+        }
+        else {
+            playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }
     }
     public override void StopInteract() {

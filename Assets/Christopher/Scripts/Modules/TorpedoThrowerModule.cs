@@ -59,7 +59,6 @@ public class TorpedoThrowerModule : SubmarinModule
         Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
         mats[3] = StatesMaterials[State];
         StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mats;
-        
     }
     private void ResetPartyGame() {
         for (int i = 0; i < _toDo.Length; i++) {
@@ -70,9 +69,13 @@ public class TorpedoThrowerModule : SubmarinModule
     public override void Activate() { IsActivated = true; }
     public override void Deactivate() { IsActivated = false; }
     public override void Interact(GameObject playerUsingModule) {
-        if (IsActivated && PlayerUsingModule == null) {
+        if (IsActivated && PlayerUsingModule == null && playerUsingModule.GetComponent<PlayerController>().MyItem == 3) {
             PlayerUsingModule = playerUsingModule;
             if(!PartyGameDisplay.activeSelf)PartyGameDisplay.SetActive(true);
+            PlayerUsingModule.GetComponent<PlayerController>().MyItem = 0;
+        }
+        else {
+            playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }
     }
     public override void StopInteract() {
@@ -98,7 +101,6 @@ public class TorpedoThrowerModule : SubmarinModule
         if (_currentSlot == 2) _currentSlot = 0;
         else _currentSlot++;
     }
-
     private bool Verif() {
         for (int i = 0; i < _toDo.Length; i++) {
             if(_toDo[i] != _doing[i])return false;

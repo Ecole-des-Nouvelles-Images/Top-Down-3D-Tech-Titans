@@ -9,9 +9,10 @@ namespace Elias.Scripts.Player
     public class PlayerController : MonoBehaviour
     {
         public SubmarinModule UsingModule;
-        
+        public int MyItem; //0:rien 1:CO2 2:CapsuleCristal 3:Torpedo
         [SerializeField] public float speed = 500;
         [SerializeField] public GameObject inputInteractPanel;
+        [SerializeField] public GameObject[] itemsDisplay;
         private Rigidbody _playerRigidbody;
         
         private Vector2 _moveInputValue;
@@ -30,11 +31,31 @@ namespace Elias.Scripts.Player
         private void FixedUpdate()
         {
             PerformMoves();
-            
         }
 
-        private void Update()
-        {
+        private void Update() {
+            switch (MyItem) {
+                case 0:
+                    itemsDisplay[0].SetActive(false);
+                    itemsDisplay[1].SetActive(false);
+                    itemsDisplay[2].SetActive(false);
+                    break;
+                case 1:
+                    itemsDisplay[0].SetActive(true);
+                    itemsDisplay[1].SetActive(false);
+                    itemsDisplay[2].SetActive(false);
+                    break;
+                case 2:
+                    itemsDisplay[0].SetActive(false);
+                    itemsDisplay[1].SetActive(true);
+                    itemsDisplay[2].SetActive(false);
+                    break;
+                case 3:
+                    itemsDisplay[0].SetActive(false);
+                    itemsDisplay[1].SetActive(false);
+                    itemsDisplay[2].SetActive(true);
+                    break;
+            }
             if (UsingModule) _isWithinRange = true;
             else
             {

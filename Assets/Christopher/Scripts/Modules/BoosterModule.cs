@@ -1,3 +1,4 @@
+using Elias.Scripts.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
@@ -77,6 +78,9 @@ namespace Christopher.Scripts.Modules
             if (IsActivated && PlayerUsingModule == null) {
                 PlayerUsingModule = playerUsingModule;
                 if(!partyGameDisplay.activeSelf)partyGameDisplay.SetActive(true);
+            }
+            else {
+                playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
             }
         }
         public override void StopInteract() {

@@ -3,7 +3,37 @@ guid: 9bfc4ad117f8cfb46ad1d21ee26ff2aa
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blue Paint.001
+    second: {fileID: 2100000, guid: 68019518fb3c96145b3a68a1d4ab527a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark Iron.005
+    second: {fileID: 2100000, guid: 3ce54c5b85a7119468da8ed8cca19038, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Emission.002
+    second: {fileID: 2100000, guid: 1c5f094b65ff6f44da0e88a40b0e3c87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iron.017
+    second: {fileID: 2100000, guid: ffddfe473b3ed644d904f9eca928840b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red Paint.002
+    second: {fileID: 2100000, guid: 47558ce738b53b64aa769b2e3c2b2bd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White Paint.001
+    second: {fileID: 2100000, guid: d8e101f938ef4da4b915775a40c713aa, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
