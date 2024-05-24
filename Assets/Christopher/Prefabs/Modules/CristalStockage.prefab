@@ -75,7 +75,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 0d45b50648b5c5f4ca093f4fa53c9f76, type: 2}
   - {fileID: 2100000, guid: b5b6cb451b6342d4786890990fd27154, type: 2}
   StateDisplayObject:
-  - {fileID: 2449666154173127486}
+  - {fileID: 1823553037427371356}
   Succes: 
   playerDetector: {fileID: 3584026467105043483}
   PlayerUsingModule: {fileID: 0}
@@ -83,6 +83,93 @@ MonoBehaviour:
   cooldown: 10
   cooldownDisplay: {fileID: 8103972652547003271}
   itemDisplay: {fileID: 4528021630329277522}
+--- !u!1 &1823553037427371356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1298549070561884134}
+  - component: {fileID: 2714127868892166211}
+  - component: {fileID: 166197381356768393}
+  m_Layer: 0
+  m_Name: Storage (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1298549070561884134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823553037427371356}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.49991274, y: -0.50008726, z: -0.49991274, w: 0.50008726}
+  m_LocalPosition: {x: -0.3000002, y: -2.1, z: -0.3499999}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9153551179162819105}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2714127868892166211
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823553037427371356}
+  m_Mesh: {fileID: 2356215394265448488, guid: 7fed4c7d6685bde488fce11248e7921e, type: 3}
+--- !u!23 &166197381356768393
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823553037427371356}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b1b22c07a8aec1f458744ecdf953f526, type: 2}
+  - {fileID: 2100000, guid: adeca560a5a2bec4088ad1df1d704211, type: 2}
+  - {fileID: 2100000, guid: 004f5aafbd1683f42b1aa716ca757ab1, type: 2}
+  - {fileID: 2100000, guid: b7ff495273475dd4c837fa4d7c015099, type: 2}
+  - {fileID: 2100000, guid: d3d7b0882b580a54bbd71dce04b2b86a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2426978192143951560
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9029712900781554264
 Transform:
   m_ObjectHideFlags: 0
@@ -305,7 +392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3833022129872189681
 Transform:
   m_ObjectHideFlags: 0
@@ -810,6 +897,7 @@ Transform:
   m_Children:
   - {fileID: 9029712900781554264}
   - {fileID: 7797501330361238279}
+  - {fileID: 1298549070561884134}
   m_Father: {fileID: 5987951755484586700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8103972652547003271

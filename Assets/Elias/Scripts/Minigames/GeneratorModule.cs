@@ -23,6 +23,7 @@ namespace Elias.Scripts.Minigames
 
         private void Start()
         {
+            IsActivated = true;
             _patternManager = GetComponent<PatternManager>(); // Assuming PatternManager is on the same GameObject
             InitializePatternSquares();
             _selectedIndex = 0; // Start with the first square selected
@@ -72,6 +73,8 @@ namespace Elias.Scripts.Minigames
 
         void Update()
         {
+            if (IsActivated) State = 1;
+            else State = 0;
             if (playerInteracting)
             {
                 canvas.SetActive(true);
@@ -79,6 +82,20 @@ namespace Elias.Scripts.Minigames
             else
             {
                 canvas.SetActive(false);
+            }
+
+            switch (State)
+            {
+                case 0 :
+                    Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
+                    mats[3] = StatesMaterials[State];
+                    StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mats;
+                    break;
+                case 1:
+                    mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
+                    mats[3] = StatesMaterials[State];
+                    StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mats;
+                    break;
             }
         }
 
@@ -104,10 +121,8 @@ namespace Elias.Scripts.Minigames
             return true;
         }
 
-        public override void Activate()
-        {
+        public override void Activate() {
             IsActivated = true;
-            State = 1;
         }
 
         public override void Deactivate()

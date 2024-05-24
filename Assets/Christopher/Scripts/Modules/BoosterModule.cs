@@ -43,7 +43,8 @@ namespace Christopher.Scripts.Modules
                 State = 0;
             }
             Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
-            mats[5] = StatesMaterials[State];
+            mats[1] = StatesMaterials[State];
+            mats[4] = StatesMaterials[State];
             StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mats;
             cooldownDisplay.transform.GetComponent<Image>().fillAmount = _currentCooldownValue / cooldown;
             Vector3 fillbarrevalue =new Vector3(_currentBoostValue/ maxBoostValue, boostFillbarre.transform.localScale.y,

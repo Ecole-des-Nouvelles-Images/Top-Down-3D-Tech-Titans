@@ -2219,7 +2219,7 @@ PrefabInstance:
         type: 3}
       propertyPath: StateDisplayObject.Array.data[0]
       value: 
-      objectReference: {fileID: 6455140881273066299}
+      objectReference: {fileID: 3356130047265556968}
     - target: {fileID: 8823804845720588872, guid: e9034b82d5798a049ab375b53b9bc27a,
         type: 3}
       propertyPath: m_Color.a
@@ -2240,15 +2240,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9034b82d5798a049ab375b53b9bc27a, type: 3}
---- !u!4 &5223054479227215742 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4959583748815142097, guid: e9034b82d5798a049ab375b53b9bc27a,
+--- !u!1 &3356130047265556968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2467023972117752391, guid: e9034b82d5798a049ab375b53b9bc27a,
     type: 3}
   m_PrefabInstance: {fileID: 914229917996344239}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6455140881273066299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6141426830975365268, guid: e9034b82d5798a049ab375b53b9bc27a,
+--- !u!4 &5223054479227215742 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4959583748815142097, guid: e9034b82d5798a049ab375b53b9bc27a,
     type: 3}
   m_PrefabInstance: {fileID: 914229917996344239}
   m_PrefabAsset: {fileID: 0}
