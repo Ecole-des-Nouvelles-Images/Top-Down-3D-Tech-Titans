@@ -116,9 +116,15 @@ public class OxygenModule : SubmarinModule {
     public override void Activate() { IsActivated = true; }
     public override void Deactivate() { IsActivated = false; }
     public override void Interact(GameObject playerUsingModule) {
-        if (IsActivated && PlayerUsingModule == null) {
-            PlayerUsingModule = playerUsingModule;
-            if(!PartyGameDisplay.activeSelf)PartyGameDisplay.SetActive(true);
+        if (playerUsingModule.GetComponent<PlayerController>().MyItem == 1) {
+            if (IsActivated && PlayerUsingModule == null) {
+                PlayerUsingModule = playerUsingModule;
+                if(!PartyGameDisplay.activeSelf)PartyGameDisplay.SetActive(true);
+            }
+            PlayerUsingModule.GetComponent<PlayerController>().MyItem = 0;
+        }
+        else {
+            playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }
     }
 
