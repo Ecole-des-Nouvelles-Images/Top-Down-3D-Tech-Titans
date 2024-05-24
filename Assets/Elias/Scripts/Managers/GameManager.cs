@@ -5,7 +5,9 @@ using Elias.Scripts.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Elias.Scripts.Managers
 {
@@ -15,14 +17,16 @@ namespace Elias.Scripts.Managers
         public GameObject water;
         public GameObject playersContainer;
         public CinemachineTargetGroup cameraTargetGroup;
-
         public TextMeshPro playerNameText;
-
         private GameObject _playerInstance;
         private Quaternion _playerOriginalRotation;
         private Vector3 _originalWaterPosition;
         
-        public float gameOverTimer = 60f;
+        public float waterTimer = 5f;
+        private float _waterTimeCurrent;
+        private bool _isWaterFilled;
+        
+        public Image fadeImage;
 
         private void Awake()
         {
@@ -33,6 +37,11 @@ namespace Elias.Scripts.Managers
             {
                 playersContainer = new GameObject("Players");
             }
+
+            _waterTimeCurrent = waterTimer;
+            _isWaterFilled = false;
+            
+            fadeImage.gameObject.SetActive(false);
         }
 
         private void OnEnable()
@@ -43,18 +52,6 @@ namespace Elias.Scripts.Managers
         private void OnDisable()
         {
             InputSystem.onDeviceChange -= OnDeviceChange;
-        }
-
-        private void OnDeviceChange(InputDevice device, InputDeviceChange change)
-        {
-            if (change == InputDeviceChange.Added && device is Gamepad)
-            {
-                InstantiatePlayer();
-            }
-            else if (change == InputDeviceChange.Removed && device is Gamepad)
-            {
-                RemovePlayer();
-            }
         }
 
         private void Update()
@@ -69,6 +66,15 @@ namespace Elias.Scripts.Managers
             if (Input.GetKeyDown(KeyCode.O))
             {
                 LowerWaterToInitialPosition();
+            }
+
+            if (_isWaterFilled)
+            {
+                _waterTimeCurrent -= Time.deltaTime;
+                if (_waterTimeCurrent <= 0)
+                {
+                    GameOver("Le Sous Marin est Noyé");
+                }
             }
         }
 
@@ -115,7 +121,7 @@ namespace Elias.Scripts.Managers
                     case 0:
                         movementSpeed = 0;
                         break;
-                    
+
                     case 1:
                         movementSpeed /= 10;
                         break;
@@ -128,14 +134,23 @@ namespace Elias.Scripts.Managers
                 }
 
                 float newWaterY = water.transform.position.y;
-                
+
                 newWaterY += Time.deltaTime * movementSpeed;
-                
 
                 // Clamp the water's y position to ensure it does not exceed 5
                 newWaterY = Mathf.Clamp(newWaterY, _originalWaterPosition.y, 5f);
 
                 water.transform.position = new Vector3(water.transform.position.x, newWaterY, water.transform.position.z);
+
+                if (newWaterY == 5f)
+                {
+                    _isWaterFilled = true;
+                }
+                else if (newWaterY < 5f && _isWaterFilled)
+                {
+                    _isWaterFilled = false;
+                    _waterTimeCurrent = waterTimer;
+                }
             }
             else
             {
@@ -143,12 +158,22 @@ namespace Elias.Scripts.Managers
             }
         }
 
-        public void LowerWaterToInitialPosition()
+        private void OnDeviceChange(InputDevice device, InputDeviceChange change)
         {
-            
-            water.transform.position = new Vector3(water.transform.position.x, _originalWaterPosition.y, water.transform.position.z);
+            if (change == InputDeviceChange.Added && device is Gamepad)
+            {
+                InstantiatePlayer();
+            }
+            else if (change == InputDeviceChange.Removed && device is Gamepad)
+            {
+                RemovePlayer();
+            }
         }
 
+        public void LowerWaterToInitialPosition()
+        {
+            water.transform.position = new Vector3(water.transform.position.x, _originalWaterPosition.y, water.transform.position.z);
+        }
 
         public void InstantiatePlayer()
         {
@@ -184,9 +209,14 @@ namespace Elias.Scripts.Managers
             }
         }
 
-        public void GameOver()
+        public void GameOver(string looseCause)
         {
-            Debug.Log("GAME OVER !!!");
+            Debug.Log("GAME OVER !!! " + looseCause);
+            
+            fadeImage.gameObject.SetActive(true);
+            WaitForSeconds waitForSeconds = new WaitForSeconds(5);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
     }
 }
