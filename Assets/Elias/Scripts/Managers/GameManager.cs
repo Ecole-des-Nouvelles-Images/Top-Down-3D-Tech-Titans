@@ -5,6 +5,7 @@ using Elias.Scripts.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Elias.Scripts.Managers
 {
@@ -20,6 +21,8 @@ namespace Elias.Scripts.Managers
         private GameObject _playerInstance;
         private Quaternion _playerOriginalRotation;
         private Vector3 _originalWaterPosition;
+        
+        public float gameOverTimer = 60f;
 
         private void Awake()
         {
@@ -94,7 +97,6 @@ namespace Elias.Scripts.Managers
             GameCycleController gameCycleController = FindObjectOfType<GameCycleController>();
             if (gameCycleController != null)
             {
-                // Get all active modules with the SkillCheckDbd script
                 BreachModule[] activeSkillCheckModules = FindObjectsOfType<BreachModule>();
                 int activeModuleCount = 0;
 
@@ -180,6 +182,11 @@ namespace Elias.Scripts.Managers
             {
                 Destroy(_playerInstance);
             }
+        }
+
+        public void GameOver()
+        {
+            Debug.Log("GAME OVER !!!");
         }
     }
 }
