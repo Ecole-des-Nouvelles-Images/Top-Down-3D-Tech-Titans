@@ -69,11 +69,13 @@ public class TorpedoThrowerModule : SubmarinModule
     public override void Activate() { IsActivated = true; }
     public override void Deactivate() { IsActivated = false; }
     public override void Interact(GameObject playerUsingModule) {
-        if (playerUsingModule.GetComponent<PlayerController>().MyItem == 3) {
-            if (IsActivated && PlayerUsingModule == null) {
-                PlayerUsingModule = playerUsingModule;
-                if(!PartyGameDisplay.activeSelf)PartyGameDisplay.SetActive(true);
-            }
+        if (IsActivated && PlayerUsingModule == null && playerUsingModule.GetComponent<PlayerController>().MyItem == 3) {
+            PlayerUsingModule = playerUsingModule;
+            if(!PartyGameDisplay.activeSelf)PartyGameDisplay.SetActive(true);
+            PlayerUsingModule.GetComponent<PlayerController>().MyItem = 0;
+        }
+        else {
+            playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }
     }
     public override void StopInteract() {

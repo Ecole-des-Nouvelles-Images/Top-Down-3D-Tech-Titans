@@ -45,18 +45,15 @@ namespace Christopher.Scripts.Modules
         public override void Activate() { IsActivated = true; }
         public override void Deactivate() { IsActivated = false; }
         public override void Interact(GameObject playerUsingModule) {
-            if (playerUsingModule.GetComponent<PlayerController>().MyItem == 0) {
-                if (IsActivated && PlayerUsingModule == null) {
-                    PlayerUsingModule = playerUsingModule;
-                    if (!_playCooldown) {
-                        PlayerUsingModule.transform.GetComponent<PlayerController>().MyItem = _myObject;
-                        _playCooldown = true;
-                    }
-                    PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
+            if (IsActivated && PlayerUsingModule == null && playerUsingModule.GetComponent<PlayerController>().MyItem == 0) {
+                PlayerUsingModule = playerUsingModule;
+                if (!_playCooldown) {
+                    PlayerUsingModule.transform.GetComponent<PlayerController>().MyItem = _myObject;
+                    _playCooldown = true;
                 }
+                PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
             }
-            else
-            {
+            else {
                 playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
             }
         }

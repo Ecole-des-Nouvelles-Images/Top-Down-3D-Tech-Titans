@@ -575,7 +575,7 @@ MonoBehaviour:
   Succes: 
   playerDetector: {fileID: 6591016912053763740}
   PlayerUsingModule: {fileID: 0}
-  myObject: 0
+  myObject: 1
   cooldown: 10
   cooldownDisplay: {fileID: 1166052709168456594}
   itemDisplay: {fileID: 2463127879211493217}

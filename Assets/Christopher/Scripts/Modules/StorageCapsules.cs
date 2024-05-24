@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace Christopher.Scripts.Modules
 {
     public class StorageCapsules : SubmarinModule {
-        [SerializeField,Range(1,2)] private int myObject;// 1:CO2 2:CapsuleCristal 3:Torpedo
+        [SerializeField] private int myObject;// 1:CO2 2:CapsuleCristal 3:Torpedo
         [SerializeField] private float cooldown;
         [SerializeField] private GameObject cooldownDisplay;
         [SerializeField] private GameObject itemDisplay;
@@ -43,16 +43,13 @@ namespace Christopher.Scripts.Modules
         public override void Activate() { IsActivated = true; }
         public override void Deactivate() { IsActivated = false; }
         public override void Interact(GameObject playerUsingModule) {
-            if (playerUsingModule.GetComponent<PlayerController>().MyItem == 0)
-            {
-                if (IsActivated && PlayerUsingModule == null) {
-                    PlayerUsingModule = playerUsingModule;
-                    if (!_playCooldown) {
-                        PlayerUsingModule.transform.GetComponent<PlayerController>().MyItem = myObject;
-                        _playCooldown = true;
-                    }
-                    PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
+            if (IsActivated && PlayerUsingModule == null && playerUsingModule.GetComponent<PlayerController>().MyItem == 0) {
+                PlayerUsingModule = playerUsingModule;
+                if (!_playCooldown) {
+                    PlayerUsingModule.transform.GetComponent<PlayerController>().MyItem = myObject;
+                    _playCooldown = true;
                 }
+                PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
             }
             else
             {
