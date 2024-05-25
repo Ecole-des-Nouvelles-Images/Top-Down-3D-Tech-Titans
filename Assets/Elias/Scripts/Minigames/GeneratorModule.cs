@@ -14,7 +14,7 @@ namespace Elias.Scripts.Minigames
         public GameObject squareList; // Reference to the SquareList GameObject
         public List<GameObject> squarePrefabs; // List of prefab variants
         public Transform gridTransform; // Reference to the Grid GameObject with GridLayoutGroup
-
+        [SerializeField] private GameObject greenLights;
         private List<PatternSquare> _patternSquares;
         private int _selectedIndex;
         public bool IsPatternValid => ValidatePattern();
@@ -62,19 +62,22 @@ namespace Elias.Scripts.Minigames
             }
         }
 
-        private void HighlightSelectedSquare()
-        {
-            for (int i = 0; i < _patternSquares.Count; i++)
-            {
+        private void HighlightSelectedSquare() {
+            for (int i = 0; i < _patternSquares.Count; i++) {
                 var image = _patternSquares[i].GetComponent<Image>();
                 image.color = (i == _selectedIndex) ? Color.yellow : Color.white; // Highlight selected square
             }
         }
 
-        void Update()
-        {
-            if (IsActivated) State = 1;
-            else State = 0;
+        void Update() {
+            if (IsActivated) {
+                State = 1;
+                greenLights.SetActive(true);
+            }
+            else {
+                State = 0;
+                greenLights.SetActive(false);
+            }
             if (playerInteracting)
             {
                 canvas.SetActive(true);

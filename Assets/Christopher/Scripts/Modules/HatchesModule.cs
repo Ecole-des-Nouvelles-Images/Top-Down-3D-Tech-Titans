@@ -19,19 +19,28 @@ namespace Christopher.Scripts.Modules
         }
 
         // Update is called once per frame
-        void Update()
-        {
-        
+        void Update() {
+            if (IsActivated) {
+                State = 1;
+                playerDetector.SetActive(true);
+            }
+            else {
+                State = 0;
+                playerDetector.SetActive(false);
+            }
+            Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
+            mats[3] = StatesMaterials[State];
+            StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mats;
         }
 
         public override void Activate()
         {
-            throw new System.NotImplementedException();
+            IsActivated = true;
         }
 
         public override void Deactivate()
         {
-            throw new System.NotImplementedException();
+            IsActivated = false;
         }
 
         public override void Interact(GameObject playerUsingModule)
@@ -41,13 +50,11 @@ namespace Christopher.Scripts.Modules
             }
         }
 
-        public override void StopInteract()
-        {
+        public override void StopInteract() {
             PlayerUsingModule = null;
         }
 
-        public override void Validate()
-        {
+        public override void Validate() {
             gameCycleController.CountActiveBreach();
             if (gameCycleController.noActiveBreach)
             {
@@ -56,28 +63,16 @@ namespace Christopher.Scripts.Modules
             PlayerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }
         
-        public override void NavigateX(float moveX)
-        {
-        }
+        public override void NavigateX(float moveX) { }
 
-        public override void NavigateY(float moveY)
-        {
-        }
+        public override void NavigateY(float moveY) { }
 
-        public override void Up()
-        {
-        }
+        public override void Up() { }
 
-        public override void Down()
-        {
-        }
+        public override void Down() { }
 
-        public override void Left()
-        {
-        }
+        public override void Left() { }
 
-        public override void Right()
-        {
-        }
+        public override void Right() { }
     }
 }
