@@ -13,19 +13,24 @@ namespace Elias.Scripts.Player
         [SerializeField] public float speed = 500;
         [SerializeField] public GameObject inputInteractPanel;
         [SerializeField] public GameObject[] itemsDisplay;
-        private Rigidbody _playerRigidbody;
         
-        private Vector2 _moveInputValue;
+        // New variables for animations
+        private Animator _animator;
+        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
 
+        private Rigidbody _playerRigidbody;
+        private Vector2 _moveInputValue;
         private bool _isInteracting;
         private bool _isWithinRange;
 
         private void Start()
         {
-            
-            if(inputInteractPanel!= null)inputInteractPanel.SetActive(false);
+            if(inputInteractPanel != null) inputInteractPanel.SetActive(false);
             UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
+
+            // Initialize the Animator
+            _animator = GetComponent<Animator>();
         }
 
         private void FixedUpdate()
@@ -56,19 +61,13 @@ namespace Elias.Scripts.Player
                     itemsDisplay[2].SetActive(true);
                     break;
             }
-            if (UsingModule) _isWithinRange = true;
-            else
-            {
-                _isWithinRange = false;
-            }
-            if(_isWithinRange && !_isInteracting )inputInteractPanel.SetActive(true);
-            else inputInteractPanel.SetActive(false);
-            
+
+            _isWithinRange = UsingModule != null;
+            inputInteractPanel.SetActive(_isWithinRange && !_isInteracting);
         }
 
         private void OnMoves(InputValue value) {
             _moveInputValue = value.Get<Vector2>();
-            //Debug.Log(_moveInputValue);
         }
 
         private void OnInteraction()
@@ -82,6 +81,7 @@ namespace Elias.Scripts.Player
                 QuitInteraction();
             }
         }
+
         private void OnAction()
         {
             if (_isInteracting && UsingModule != null)
@@ -89,26 +89,31 @@ namespace Elias.Scripts.Player
                 UsingModule.Validate();
             }
         }
+
         private void OnUp() {
             if (_isInteracting && UsingModule != null) {
                 UsingModule.Up();
             }
         }
+
         private void OnDown() {
             if (_isInteracting && UsingModule != null) {
                 UsingModule.Down();
             }
         }
+
         private void OnLeft() {
             if (_isInteracting && UsingModule != null) {
                 UsingModule.Left();
             }
         }
+
         private void OnRight() {
             if (_isInteracting && UsingModule != null) {
                 UsingModule.Right();
             }
         }
+
         private void PerformMoves()
         {
             float xMov = _moveInputValue.x;
@@ -120,31 +125,33 @@ namespace Elias.Scripts.Player
             }
             else
             {
-                if (Mathf.Abs(xMov) > 0 || Mathf.Abs(zMov) > 0)
-                {
-                    Vector3 moveDirection = new Vector3(xMov, 0, zMov).normalized;
+                Vector3 moveDirection = new Vector3(xMov, 0, zMov).normalized;
 
-                    if (moveDirection != Vector3.zero)
-                    {
-                        Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-                        _playerRigidbody.MoveRotation(targetRotation);
-                    }
+                if (moveDirection != Vector3.zero)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+                    _playerRigidbody.MoveRotation(targetRotation);
 
                     Vector3 velocity = moveDirection * (speed * Time.fixedDeltaTime);
                     _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
+
+                    // Trigger walking animation
+                    _animator.SetBool(IsMoving, true);
                 }
                 else
                 {
                     _playerRigidbody.velocity = Vector3.zero;
+                    
+                    // Trigger idle animation
+                    _animator.SetBool(IsMoving, false);
                 } 
             }
-            
         }
 
         private void Interact()
         {
             _isInteracting = true;
-            if(UsingModule)UsingModule.Interact(gameObject);
+            if(UsingModule) UsingModule.Interact(gameObject);
             Debug.Log("Interaction started");
         }
 
