@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace Christopher.Scripts.Modules
 {
     public class StorageTorpedo : SubmarinModule {
-       
+        public Animator StorageAnimator;
         [SerializeField] private float cooldown;
         [SerializeField] private GameObject cooldownDisplay;
         [SerializeField] private GameObject itemDisplay;
@@ -17,6 +17,8 @@ namespace Christopher.Scripts.Modules
             PlayerUsingModule = null;
             _currentCooldownValue = cooldown;
             cooldownDisplay.SetActive(false);
+            itemDisplay.SetActive(true);
+            StorageAnimator.SetTrigger("SpawnItem");
         }
         void Update() {
             if (!IsActivated) {
@@ -39,6 +41,7 @@ namespace Christopher.Scripts.Modules
                     _playCooldown = false;
                     cooldownDisplay.SetActive(false);
                     itemDisplay.SetActive(true);
+                    StorageAnimator.SetTrigger("SpawnItem");
                 }
             }
         }

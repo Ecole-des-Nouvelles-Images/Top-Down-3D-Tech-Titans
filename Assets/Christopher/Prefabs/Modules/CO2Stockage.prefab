@@ -495,6 +495,7 @@ MonoBehaviour:
   cooldown: 10
   cooldownDisplay: {fileID: 1166052709168456594}
   itemDisplay: {fileID: 8636939751028971456}
+  StorageAnimator: {fileID: 2631794358534376498}
 --- !u!1 &6591016912053763740
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +651,7 @@ GameObject:
   - component: {fileID: 1478801924406237786}
   - component: {fileID: 8556161019404613725}
   - component: {fileID: 6957138178854623505}
+  - component: {fileID: 2631794358534376498}
   m_Layer: 0
   m_Name: Co2Bottle (1)
   m_TagString: Untagged
@@ -723,6 +725,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &2631794358534376498
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8636939751028971456}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 897e11adac12b92408248e6dac953b45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8865629084558927506
 GameObject:
   m_ObjectHideFlags: 0

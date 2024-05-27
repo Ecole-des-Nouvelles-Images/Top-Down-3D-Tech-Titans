@@ -5,16 +5,24 @@ namespace Christopher.Scripts.Modules
 {
     public class FixingDrillModule : SubmarinModule
     {
+        public Animator groundTrap;
+        public Animator drillHeadAnimator;
         [SerializeField] private GameObject minigameDisplay;
         [SerializeField] private GameObject drillHead;
         [SerializeField] private GameObject drillHeadOnSocleDisplay;
+       
 
         private void Start() {
             minigameDisplay.SetActive(false);
+            groundTrap.SetBool("isTrapOpen",false);
+            drillHeadAnimator.SetBool("isDrillDamaged",false);
+           // drillHeadOnSocleDisplay.SetActive(false);// cette ligne sera surement à supprimer <---------------------------------------------------------------------
         }
         private void Update() {
             if (IsActivated)
             {
+                groundTrap.SetBool("isTrapOpen",true);
+                drillHeadAnimator.SetBool("isDrillDamaged",true);
                 State = 1;
                 if(StatesMaterials.Length > 0 && StatesMaterials[1] != null){ 
                     foreach (GameObject obj in StateDisplayObject) {
@@ -23,6 +31,7 @@ namespace Christopher.Scripts.Modules
                 }
                 playerDetector.SetActive(true);
                 drillHeadOnSocleDisplay.SetActive(true);
+                
             }
 
             if (!IsActivated)
@@ -34,7 +43,9 @@ namespace Christopher.Scripts.Modules
                     }
                 }
                 playerDetector.SetActive(false);
-                drillHeadOnSocleDisplay.SetActive(false);
+                drillHeadAnimator.SetBool("isDrillDamaged",false);
+                groundTrap.SetBool("isTrapOpen",false);
+                //drillHeadOnSocleDisplay.SetActive(false);// cette ligne sera surement à supprimer <---------------------------------------------------------------------
                 if(PlayerUsingModule)PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
                 if(minigameDisplay.activeSelf)minigameDisplay.SetActive(false);
             }

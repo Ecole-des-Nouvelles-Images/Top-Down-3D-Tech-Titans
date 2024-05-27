@@ -471,6 +471,7 @@ GameObject:
   - component: {fileID: 693357892406483340}
   - component: {fileID: 4615076644318764009}
   - component: {fileID: 7517721821036012245}
+  - component: {fileID: 7563580942473972015}
   m_Layer: 0
   m_Name: Torpedo (1)
   m_TagString: Untagged
@@ -548,6 +549,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &7563580942473972015
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8650536093821631860}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1a7f8aaa11423c48ad46ece7585000a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8752575928225861083
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,3 +652,4 @@ MonoBehaviour:
   cooldown: 10
   cooldownDisplay: {fileID: 1325286752366240327}
   itemDisplay: {fileID: 8650536093821631860}
+  StorageAnimator: {fileID: 7563580942473972015}
