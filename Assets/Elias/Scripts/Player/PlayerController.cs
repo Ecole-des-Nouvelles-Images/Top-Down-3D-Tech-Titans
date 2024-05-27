@@ -13,21 +13,23 @@ namespace Elias.Scripts.Player
         [SerializeField] public float speed = 500;
         [SerializeField] public GameObject inputInteractPanel;
         [SerializeField] public GameObject[] itemsDisplay;
-        
+
         // New variables for animations
         private Animator _animator;
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
 
         private Rigidbody _playerRigidbody;
+        private RigidbodyConstraints _originalConstraints;
         private Vector2 _moveInputValue;
         private bool _isInteracting;
         private bool _isWithinRange;
-
         private void Start()
         {
-            if(inputInteractPanel != null) inputInteractPanel.SetActive(false);
+            
+            if (inputInteractPanel != null) inputInteractPanel.SetActive(false);
             UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
+            _originalConstraints = _playerRigidbody.constraints;
 
             // Initialize the Animator
             _animator = GetComponent<Animator>();
@@ -38,8 +40,10 @@ namespace Elias.Scripts.Player
             PerformMoves();
         }
 
-        private void Update() {
-            switch (MyItem) {
+        private void Update()
+        {
+            switch (MyItem)
+            {
                 case 0:
                     itemsDisplay[0].SetActive(false);
                     itemsDisplay[1].SetActive(false);
@@ -66,7 +70,8 @@ namespace Elias.Scripts.Player
             inputInteractPanel.SetActive(_isWithinRange && !_isInteracting);
         }
 
-        private void OnMoves(InputValue value) {
+        private void OnMoves(InputValue value)
+        {
             _moveInputValue = value.Get<Vector2>();
         }
 
@@ -74,10 +79,12 @@ namespace Elias.Scripts.Player
         {
             if (!_isInteracting && _isWithinRange)
             {
+                _playerRigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 Interact();
             }
             else
             {
+                _playerRigidbody.constraints = _originalConstraints;
                 QuitInteraction();
             }
         }
@@ -90,26 +97,34 @@ namespace Elias.Scripts.Player
             }
         }
 
-        private void OnUp() {
-            if (_isInteracting && UsingModule != null) {
+        private void OnUp()
+        {
+            if (_isInteracting && UsingModule != null)
+            {
                 UsingModule.Up();
             }
         }
 
-        private void OnDown() {
-            if (_isInteracting && UsingModule != null) {
+        private void OnDown()
+        {
+            if (_isInteracting && UsingModule != null)
+            {
                 UsingModule.Down();
             }
         }
 
-        private void OnLeft() {
-            if (_isInteracting && UsingModule != null) {
+        private void OnLeft()
+        {
+            if (_isInteracting && UsingModule != null)
+            {
                 UsingModule.Left();
             }
         }
 
-        private void OnRight() {
-            if (_isInteracting && UsingModule != null) {
+        private void OnRight()
+        {
+            if (_isInteracting && UsingModule != null)
+            {
                 UsingModule.Right();
             }
         }
@@ -141,17 +156,17 @@ namespace Elias.Scripts.Player
                 else
                 {
                     _playerRigidbody.velocity = Vector3.zero;
-                    
+
                     // Trigger idle animation
                     _animator.SetBool(IsMoving, false);
-                } 
+                }
             }
         }
 
         private void Interact()
         {
             _isInteracting = true;
-            if(UsingModule) UsingModule.Interact(gameObject);
+            if (UsingModule) UsingModule.Interact(gameObject);
             Debug.Log("Interaction started");
         }
 
@@ -163,6 +178,7 @@ namespace Elias.Scripts.Player
                 UsingModule.StopInteract();
                 UsingModule = null;
             }
+            _playerRigidbody.constraints = _originalConstraints;
             Debug.Log("Interaction ended");
         }
     }

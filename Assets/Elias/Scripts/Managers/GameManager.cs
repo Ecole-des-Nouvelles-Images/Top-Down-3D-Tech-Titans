@@ -13,9 +13,7 @@ namespace Elias.Scripts.Managers
 {
     public class GameManager : MonoBehaviour
     {
-        public GameObject playerPrefab;
         public GameObject water;
-        public GameObject playersContainer;
         public CinemachineTargetGroup cameraTargetGroup;
         public TextMeshPro playerNameText;
         private GameObject _playerInstance;
@@ -32,11 +30,6 @@ namespace Elias.Scripts.Managers
         {
             _playerOriginalRotation = Quaternion.identity;
             _originalWaterPosition = water.transform.position;
-
-            if (playersContainer == null)
-            {
-                playersContainer = new GameObject("Players");
-            }
 
             _waterTimeCurrent = waterTimer;
             _isWaterFilled = false;
@@ -57,11 +50,6 @@ namespace Elias.Scripts.Managers
         private void Update()
         {
             WaterControl();
-
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                InstantiatePlayer();
-            }
 
             if (Input.GetKeyDown(KeyCode.O))
             {
@@ -123,14 +111,24 @@ namespace Elias.Scripts.Managers
                         break;
 
                     case 1:
-                        movementSpeed /= 10;
+                        movementSpeed /= 20;
                         break;
                     case 2:
-                        movementSpeed /= 5;
+                        movementSpeed /= 10;
                         break;
                     case 3:
+                        movementSpeed /= 5;
+                        break;
+                    case 4:
+                        movementSpeed /= 3;
+                        break;
+                    case 5:
                         movementSpeed /= 2;
                         break;
+                    case 6:
+                        movementSpeed /= 1;
+                        break;
+                    
                 }
 
                 float newWaterY = water.transform.position.y;
@@ -160,11 +158,7 @@ namespace Elias.Scripts.Managers
 
         private void OnDeviceChange(InputDevice device, InputDeviceChange change)
         {
-            if (change == InputDeviceChange.Added && device is Gamepad)
-            {
-                InstantiatePlayer();
-            }
-            else if (change == InputDeviceChange.Removed && device is Gamepad)
+            if (change == InputDeviceChange.Removed && device is Gamepad)
             {
                 RemovePlayer();
             }
@@ -174,33 +168,9 @@ namespace Elias.Scripts.Managers
         {
             water.transform.position = new Vector3(water.transform.position.x, _originalWaterPosition.y, water.transform.position.z);
         }
-
-        public void InstantiatePlayer()
-        {
-            if (playerPrefab != null)
-            {
-                _playerInstance = Instantiate(playerPrefab, playersContainer.transform);
-
-                PlayerHint playerHint = _playerInstance.GetComponentInChildren<PlayerHint>();
-                if (playerHint != null && cameraTargetGroup != null)
-                {
-                    cameraTargetGroup.AddMember(playerHint.transform, 1f, 0f);
-                }
-                else
-                {
-                    Debug.LogError("PlayerHint component not found or camera TargetGroup not assigned.");
-                }
-
-                //int playerNumber = playersContainer.transform.childCount;
-
-                //playerNameText.text = "Player " + playerNumber;
-            }
-            else
-            {
-                Debug.LogError("Player prefab not assigned to the EventManager.");
-            }
-        }
-
+        
+        
+        
         public void RemovePlayer()
         {
             if (_playerInstance != null)
