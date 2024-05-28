@@ -134,7 +134,7 @@ namespace Elias.Scripts.Player
                 case PressureModule:
                     animator.SetBool(IsInteractingPressure, true);
                     break;
-                case TorpedoThrowerModule:
+                case TorpedoLauncherModule:
                     animator.SetBool(InsertionTorpedo, true);
                     break;
                 case OxygenModule:
