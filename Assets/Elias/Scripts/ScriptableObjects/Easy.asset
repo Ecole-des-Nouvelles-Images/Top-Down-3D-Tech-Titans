@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d223c48c651c7df4caa85cf46048e7a9, type: 3}
   m_Name: Easy
   m_EditorClassIdentifier: 
-  waveDuration: 20
-  waveInterval: 60
-  activeModulesLimit: 5
+  waveDurationRange:
+    x: 15
+    y: 25
+  waveIntervalRange:
+    x: 60
+    y: 80
+  activeModulesLimit: 3
+  initialDelay: 60

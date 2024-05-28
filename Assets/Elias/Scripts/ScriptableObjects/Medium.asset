@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d223c48c651c7df4caa85cf46048e7a9, type: 3}
   m_Name: Medium
   m_EditorClassIdentifier: 
-  waveDuration: 30
-  waveInterval: 60
-  activeModulesLimit: 7
+  waveDurationRange:
+    x: 35
+    y: 45
+  waveIntervalRange:
+    x: 45
+    y: 60
+  activeModulesLimit: 4
+  initialDelay: 30

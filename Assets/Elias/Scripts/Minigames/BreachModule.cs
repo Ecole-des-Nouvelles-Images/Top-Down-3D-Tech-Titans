@@ -23,6 +23,7 @@ namespace Elias.Scripts.Minigames
         private void Start()
         {
             skin.SetActive(false);
+            playerDetector.SetActive(false);
         }
 
         void Update()
@@ -109,6 +110,7 @@ namespace Elias.Scripts.Minigames
         {
             IsActivated = true;
             skin.SetActive(true);
+            playerDetector.SetActive(true);
             State = 1;
             SetRandomSuccessZoneAngle();
         }
@@ -117,6 +119,7 @@ namespace Elias.Scripts.Minigames
         {
             IsActivated = false;
             skin.SetActive(false);
+            playerDetector.SetActive(false);
             State = 0;
             canvas.SetActive(false);
             
