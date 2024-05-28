@@ -849,3 +849,5 @@ MonoBehaviour:
   Succes: 
   playerDetector: {fileID: 2960710120970361077}
   PlayerUsingModule: {fileID: 0}
+  gameManager: {fileID: 0}
+  gameCycleController: {fileID: 0}
