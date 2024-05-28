@@ -668,6 +668,7 @@ MonoBehaviour:
   - {fileID: 1002557891509506040}
   - {fileID: 4429642665107359100}
   - {fileID: 8297122395108443444}
+  animator: {fileID: 1422245354938354552}
 --- !u!114 &8221284705475947638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,7 +710,7 @@ Animator:
   m_GameObject: {fileID: 8006088029358303408}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9696b3e835ba62845aa98dcb9c85bcf5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

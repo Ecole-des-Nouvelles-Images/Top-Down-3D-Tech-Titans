@@ -1,5 +1,7 @@
 using System;
 using Christopher.Scripts;
+using Christopher.Scripts.Modules;
+using Elias.Scripts.Minigames;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -15,14 +17,33 @@ namespace Elias.Scripts.Player
         [SerializeField] public GameObject[] itemsDisplay;
 
         // New variables for animations
-        private Animator _animator;
-        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-
+        public Animator animator;
+        
+        private static readonly int Idle = Animator.StringToHash("Idle");
+        private static readonly int IsRunning = Animator.StringToHash("IsRunning");
+        private static readonly int IsRunningWater = Animator.StringToHash("IsRunningWater");
+        private static readonly int IsRepairing = Animator.StringToHash("IsRepairing");
+        private static readonly int IsActivatingLauncher = Animator.StringToHash("IsActivatingLauncher");
+        private static readonly int IsActivatingGenerator = Animator.StringToHash("IsActivatingGenerator");
+        private static readonly int IsInteractingHatches = Animator.StringToHash("IsInteractingHatches");
+        private static readonly int IsInteractingScreen = Animator.StringToHash("IsInteractingScreen");
+        private static readonly int IsInteractingPressure = Animator.StringToHash("IsInteractingPressure");
+        private static readonly int InsertionTorpedo = Animator.StringToHash("InsertionTorpedo");
+        private static readonly int InsertionCo2 = Animator.StringToHash("InsertionCo2");
+        private static readonly int InsertionPetrol = Animator.StringToHash("InsertionPetrol");
+        private static readonly int IsHoldingTorpedo = Animator.StringToHash("IsHoldingTorpedo");
+        private static readonly int IsHoldingBottle = Animator.StringToHash("IsHoldingBottle");
+        
+        private static readonly int StandUp = Animator.StringToHash("StandUp");
+        
         private Rigidbody _playerRigidbody;
         private RigidbodyConstraints _originalConstraints;
         private Vector2 _moveInputValue;
         private bool _isInteracting;
         private bool _isWithinRange;
+        
+        
+        
         private void Start()
         {
             
@@ -32,12 +53,17 @@ namespace Elias.Scripts.Player
             _originalConstraints = _playerRigidbody.constraints;
 
             // Initialize the Animator
-            _animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
         }
 
         private void FixedUpdate()
         {
             PerformMoves();
+
+            switch (IsRunning)
+            {
+                
+            }
         }
 
         private void Update()
@@ -87,6 +113,35 @@ namespace Elias.Scripts.Player
                 _playerRigidbody.constraints = _originalConstraints;
                 QuitInteraction();
             }
+
+            switch (UsingModule)
+            {
+                case BreachModule :
+                    animator.SetBool(IsRepairing, true);
+                    break;
+                case FixingDrillModule:
+                    animator.SetBool(IsRepairing, true);
+                    break;
+                case GeneratorModule:
+                    animator.SetBool(InsertionPetrol, true);
+                    break;
+                case HatchesModule:
+                    animator.SetBool(IsInteractingHatches, true);
+                    break;
+                case ScreenModule:
+                    animator.SetBool(IsInteractingScreen, true);
+                    break;
+                case PressureModule:
+                    animator.SetBool(IsInteractingPressure, true);
+                    break;
+                case TorpedoThrowerModule:
+                    animator.SetBool(InsertionTorpedo, true);
+                    break;
+                case OxygenModule:
+                    animator.SetBool(InsertionCo2, true);
+                    break;
+            }
+            
         }
 
         private void OnAction()
@@ -151,14 +206,14 @@ namespace Elias.Scripts.Player
                     _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
 
                     // Trigger walking animation
-                    _animator.SetBool(IsMoving, true);
+                    animator.SetBool(IsRunning, true);
                 }
                 else
                 {
                     _playerRigidbody.velocity = Vector3.zero;
 
                     // Trigger idle animation
-                    _animator.SetBool(IsMoving, false);
+                    animator.SetBool(IsRunning, false);
                 }
             }
         }
