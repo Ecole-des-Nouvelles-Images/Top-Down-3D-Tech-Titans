@@ -20,6 +20,9 @@ namespace Elias.Scripts.Managers
         private Quaternion _playerOriginalRotation;
         private Vector3 _originalWaterPosition;
         
+        private Vector3 _waterPosition;
+        public bool waterWalk;
+        
         public float waterTimer = 5f;
         private float _waterTimeCurrent;
         private bool _isWaterFilled;
@@ -30,6 +33,8 @@ namespace Elias.Scripts.Managers
         {
             _playerOriginalRotation = Quaternion.identity;
             _originalWaterPosition = water.transform.position;
+
+            _waterPosition = _originalWaterPosition;
 
             _waterTimeCurrent = waterTimer;
             _isWaterFilled = false;
@@ -51,18 +56,23 @@ namespace Elias.Scripts.Managers
         {
             WaterControl();
 
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                LowerWaterToInitialPosition();
-            }
-
-            if (_isWaterFilled)
-            {
+            if (Input.GetKeyDown(KeyCode.O))                                  
+            {                                                                 
+                LowerWaterToInitialPosition();                                
+            }                                                                 
+                                                                              
+            if (_isWaterFilled)                                               
+            {                                                                 
                 _waterTimeCurrent -= Time.deltaTime;
                 if (_waterTimeCurrent <= 0)
                 {
                     GameOver("Le Sous Marin est Noyé");
                 }
+            }
+
+            while (_waterPosition.y >= 1)
+            {
+                waterWalk = true;
             }
         }
 
@@ -131,14 +141,14 @@ namespace Elias.Scripts.Managers
                     
                 }
 
-                float newWaterY = water.transform.position.y;
+                float newWaterY = _waterPosition.y;
 
                 newWaterY += Time.deltaTime * movementSpeed;
 
                 // Clamp the water's y position to ensure it does not exceed 5
                 newWaterY = Mathf.Clamp(newWaterY, _originalWaterPosition.y, 5f);
 
-                water.transform.position = new Vector3(water.transform.position.x, newWaterY, water.transform.position.z);
+                _waterPosition = new Vector3(water.transform.position.x, newWaterY, _waterPosition.z);
 
                 if (newWaterY == 5f)
                 {
@@ -149,10 +159,6 @@ namespace Elias.Scripts.Managers
                     _isWaterFilled = false;
                     _waterTimeCurrent = waterTimer;
                 }
-            }
-            else
-            {
-                //Debug.LogError("GameCycleController not found in the scene.");
             }
         }
 
@@ -166,7 +172,7 @@ namespace Elias.Scripts.Managers
 
         public void LowerWaterToInitialPosition()
         {
-            water.transform.position = new Vector3(water.transform.position.x, _originalWaterPosition.y, water.transform.position.z);
+            _waterPosition = new Vector3(_waterPosition.x, _originalWaterPosition.y, _waterPosition.z);
         }
         
         

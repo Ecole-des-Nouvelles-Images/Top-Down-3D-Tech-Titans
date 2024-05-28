@@ -3,19 +3,38 @@ using System.Collections.Generic;
 using Christopher.Scripts;
 using UnityEngine;
 using Elias.Scripts.Minigames;
+using Random = UnityEngine.Random;
 
 namespace Elias.Scripts.Managers
 {
     public class GameCycleController : MonoBehaviour
     {
         public int activeModules;
-        private float _timer; // Public timer before the first breach is instantiated
+
         private List<BreachModule> _modules = new List<BreachModule>();
         public List<DifficultyParameters> difficulties;
         private bool _isDifficultySet;
         private bool _hasUpdatedDifficulty;
         private int _activeDifficulty;
         public bool noActiveBreach;
+
+        private float _intervalTimer;
+
+        private void Start()
+        {
+            // Reset all difficulty parameters at the start of the game
+            foreach (var difficulty in difficulties)
+            {
+                if (difficulty != null)
+                {
+                    difficulty.ResetValues();
+                }
+                else
+                {
+                    Debug.LogWarning("A DifficultyParameters instance is null.");
+                }
+            }
+        }
 
         private void Update()
         {
@@ -24,30 +43,45 @@ namespace Elias.Scripts.Managers
                 return;
             }
 
-            difficulties[_activeDifficulty].initialDelay -= Time.deltaTime;
-
-            Debug.Log(difficulties[_activeDifficulty].initialDelay);
-
-            if (difficulties[_activeDifficulty].initialDelay <= 0f && _timer <= 0f)
+            var currentDifficulty = difficulties[_activeDifficulty];
+            if (currentDifficulty == null)
             {
-                _timer = difficulties[_activeDifficulty].GetRandomWaveInterval();
+                Debug.LogError("Current difficulty is null.");
+                return;
+            }
+
+            Debug.Log(currentDifficulty.initialDelay);
+
+            currentDifficulty.initialDelay -= Time.deltaTime;
+            _intervalTimer -= Time.deltaTime;
+
+            if (currentDifficulty.initialDelay <= 0f && _intervalTimer <= 0f)
+            {
                 StartCoroutine(ActivateModulesWave());
+                _intervalTimer = currentDifficulty.GetRandomWaveInterval();
             }
         }
 
         private IEnumerator ActivateModulesWave()
         {
+            var currentDifficulty = difficulties[_activeDifficulty];
+            if (currentDifficulty == null)
+            {
+                yield break;
+            }
+
             float waveTimer = 0f;
-            float waveDuration = difficulties[_activeDifficulty].GetRandomWaveDuration();
+            float waveDuration = currentDifficulty.GetRandomWaveDuration();
 
             while (waveTimer < waveDuration)
             {
+                waveTimer += Time.deltaTime;
+
                 yield return new WaitForSeconds(Random.Range(3f, 5f));
 
                 FindModules();
                 CountActiveBreach();
                 ActivateRandomModule();
-                waveTimer += 5f;
             }
         }
 
@@ -78,7 +112,13 @@ namespace Elias.Scripts.Managers
 
         private void ActivateRandomModule()
         {
-            if (activeModules < difficulties[_activeDifficulty].activeModulesLimit)
+            var currentDifficulty = difficulties[_activeDifficulty];
+            if (currentDifficulty == null)
+            {
+                return;
+            }
+
+            if (activeModules < currentDifficulty.activeModulesLimit)
             {
                 List<SubmarinModule> inactiveModules = new List<SubmarinModule>();
                 foreach (SubmarinModule module in _modules)
@@ -111,18 +151,24 @@ namespace Elias.Scripts.Managers
                 return;
             }
 
-            if (phase1Value >= 1 && phase1Value <= 3 && phase1Value <= difficulties.Count)
+            if (phase1Value >= 1 && phase1Value <= difficulties.Count)
             {
                 DifficultyParameters selectedDifficulty = difficulties[phase1Value - 1];
-                _timer = selectedDifficulty.GetRandomWaveInterval();
+                if (selectedDifficulty == null)
+                {
+                    Debug.LogError("Selected difficulty is null.");
+                    return;
+                }
+
+                selectedDifficulty.ResetValues(); // Reset to initial values
+                _intervalTimer = selectedDifficulty.GetRandomWaveInterval();
                 _activeDifficulty = phase1Value - 1;
                 foreach (SubmarinModule module in _modules)
                 {
                     module.IsActivated = false;
                 }
                 _hasUpdatedDifficulty = true;
-                _isDifficultySet = true;  // Ensure the difficulty is marked as set
-                StartCoroutine(ActivateModulesWave());
+                _isDifficultySet = true;
             }
             else
             {

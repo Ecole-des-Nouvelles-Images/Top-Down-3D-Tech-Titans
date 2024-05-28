@@ -18,5 +18,8 @@ MonoBehaviour:
   waveIntervalRange:
     x: 45
     y: 60
+  breachIntervalRange:
+    x: 6
+    y: 10
   activeModulesLimit: 4
   initialDelay: 30

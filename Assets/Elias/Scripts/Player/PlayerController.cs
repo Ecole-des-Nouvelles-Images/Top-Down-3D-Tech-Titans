@@ -1,6 +1,7 @@
 using System;
 using Christopher.Scripts;
 using Christopher.Scripts.Modules;
+using Elias.Scripts.Managers;
 using Elias.Scripts.Minigames;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,8 @@ namespace Elias.Scripts.Player
         [SerializeField] public float speed = 500;
         [SerializeField] public GameObject inputInteractPanel;
         [SerializeField] public GameObject[] itemsDisplay;
+
+        private GameManager _gameManager; 
 
         // New variables for animations
         public Animator animator;
@@ -42,11 +45,8 @@ namespace Elias.Scripts.Player
         private bool _isInteracting;
         private bool _isWithinRange;
         
-        
-        
         private void Start()
         {
-            
             if (inputInteractPanel != null) inputInteractPanel.SetActive(false);
             UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
@@ -54,16 +54,12 @@ namespace Elias.Scripts.Player
 
             // Initialize the Animator
             animator = GetComponent<Animator>();
+            _gameManager = FindObjectOfType<GameManager>();
         }
 
         private void FixedUpdate()
         {
             PerformMoves();
-
-            switch (IsRunning)
-            {
-                
-            }
         }
 
         private void Update()
@@ -74,21 +70,26 @@ namespace Elias.Scripts.Player
                     itemsDisplay[0].SetActive(false);
                     itemsDisplay[1].SetActive(false);
                     itemsDisplay[2].SetActive(false);
+                    animator.SetBool(IsHoldingTorpedo, false);
+                    animator.SetBool(IsHoldingBottle, false);
                     break;
                 case 1:
                     itemsDisplay[0].SetActive(true);
                     itemsDisplay[1].SetActive(false);
                     itemsDisplay[2].SetActive(false);
+                    animator.SetBool(IsHoldingBottle, true);
                     break;
                 case 2:
                     itemsDisplay[0].SetActive(false);
                     itemsDisplay[1].SetActive(true);
                     itemsDisplay[2].SetActive(false);
+                    animator.SetBool(IsHoldingBottle, true);
                     break;
                 case 3:
                     itemsDisplay[0].SetActive(false);
                     itemsDisplay[1].SetActive(false);
                     itemsDisplay[2].SetActive(true);
+                    animator.SetBool(IsHoldingTorpedo, true);
                     break;
             }
 
@@ -114,34 +115,36 @@ namespace Elias.Scripts.Player
                 QuitInteraction();
             }
 
-            switch (UsingModule)
+            if (UsingModule != null)
             {
-                case BreachModule :
-                    animator.SetBool(IsRepairing, true);
-                    break;
-                case FixingDrillModule:
-                    animator.SetBool(IsRepairing, true);
-                    break;
-                case GeneratorModule:
-                    animator.SetBool(InsertionPetrol, true);
-                    break;
-                case HatchesModule:
-                    animator.SetBool(IsInteractingHatches, true);
-                    break;
-                case ScreenModule:
-                    animator.SetBool(IsInteractingScreen, true);
-                    break;
-                case PressureModule:
-                    animator.SetBool(IsInteractingPressure, true);
-                    break;
-                case TorpedoLauncherModule:
-                    animator.SetBool(InsertionTorpedo, true);
-                    break;
-                case OxygenModule:
-                    animator.SetBool(InsertionCo2, true);
-                    break;
+                switch (UsingModule)
+                {
+                    case BreachModule:
+                        animator.SetBool(IsRepairing, true);
+                        break;
+                    case FixingDrillModule:
+                        animator.SetBool(IsRepairing, true);
+                        break;
+                    case GeneratorModule:
+                        animator.SetBool(InsertionPetrol, true);
+                        break;
+                    case HatchesModule:
+                        animator.SetBool(IsInteractingHatches, true);
+                        break;
+                    case ScreenModule:
+                        animator.SetBool(IsInteractingScreen, true);
+                        break;
+                    case PressureModule:
+                        animator.SetBool(IsInteractingPressure, true);
+                        break;
+                    case TorpedoLauncherModule:
+                        animator.SetBool(InsertionTorpedo, true);
+                        break;
+                    case OxygenModule:
+                        animator.SetBool(InsertionCo2, true);
+                        break;
+                }
             }
-            
         }
 
         private void OnAction()
@@ -190,8 +193,8 @@ namespace Elias.Scripts.Player
             float zMov = _moveInputValue.y;
             if (_isInteracting)
             {
-                UsingModule.NavigateX(xMov);
-                UsingModule.NavigateY(zMov);
+                UsingModule?.NavigateX(xMov);
+                UsingModule?.NavigateY(zMov);
             }
             else
             {
@@ -206,13 +209,24 @@ namespace Elias.Scripts.Player
                     _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
 
                     // Trigger walking animation
-                    animator.SetBool(IsRunning, true);
+                    switch (_gameManager.waterWalk)
+                    {
+                        case true:
+                            animator.SetBool(IsRunningWater, true);
+                            break;
+                        
+                        case false:
+                            animator.SetBool(IsRunning, true);
+                            break;
+                    }
+
+                   
                 }
                 else
                 {
                     _playerRigidbody.velocity = Vector3.zero;
 
-                    // Trigger idle animation
+                    animator.SetBool(IsRunningWater, false);
                     animator.SetBool(IsRunning, false);
                 }
             }
@@ -221,15 +235,43 @@ namespace Elias.Scripts.Player
         private void Interact()
         {
             _isInteracting = true;
-            if (UsingModule) UsingModule.Interact(gameObject);
+            UsingModule?.Interact(gameObject);
             Debug.Log("Interaction started");
         }
 
         public void QuitInteraction()
         {
             _isInteracting = false;
-            if (UsingModule)
+            if (UsingModule != null)
             {
+                switch (UsingModule)
+                {
+                    case BreachModule:
+                        animator.SetBool(IsRepairing, false);
+                        break;
+                    case FixingDrillModule:
+                        animator.SetBool(IsRepairing, false);
+                        break;
+                    case HatchesModule:
+                        animator.SetBool(IsInteractingHatches, false);
+                        break;
+                    case ScreenModule:
+                        animator.SetBool(IsInteractingScreen, false);
+                        Debug.Log("hihi");
+                        break;
+                    case PressureModule:
+                        animator.SetBool(IsInteractingPressure, false);
+                        break;
+                    /*case TorpedoLauncherModule:
+                        animator.SetBool(InsertionTorpedo, false);
+                        break;
+                    case OxygenModule:
+                        animator.SetBool(InsertionCo2, false);
+                        break;
+                    case GeneratorModule:
+                        animator.SetBool(InsertionPetrol, false);
+                        break;*/
+                }
                 UsingModule.StopInteract();
                 UsingModule = null;
             }

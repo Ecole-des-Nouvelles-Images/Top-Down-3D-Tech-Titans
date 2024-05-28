@@ -6,10 +6,36 @@ namespace Elias.Scripts
     [CreateAssetMenu(fileName = "DifficultyParameters", menuName = "Game/DifficultyParameters")]
     public class DifficultyParameters : ScriptableObject
     {
-        public float2 waveDurationRange; // Min and Max values for waveDuration
-        public float2 waveIntervalRange; // Min and Max values for waveInterval
+        public float2 waveDurationRange;
+        public float2 waveIntervalRange;
+        public float2 breachIntervalRange;
         public int activeModulesLimit;
         public float initialDelay;
+
+        // Store original values to reset later
+        private float2 _originalWaveDurationRange;
+        private float2 _originalWaveIntervalRange;
+        private float2 _originalBreachIntervalRange;
+        private int _originalActiveModulesLimit;
+        private float _originalInitialDelay;
+
+        private void OnEnable()
+        {
+            _originalWaveDurationRange = waveDurationRange;
+            _originalWaveIntervalRange = waveIntervalRange;
+            _originalBreachIntervalRange = breachIntervalRange;
+            _originalActiveModulesLimit = activeModulesLimit;
+            _originalInitialDelay = initialDelay;
+        }
+
+        public void ResetValues()
+        {
+            waveDurationRange = _originalWaveDurationRange;
+            waveIntervalRange = _originalWaveIntervalRange;
+            breachIntervalRange = _originalBreachIntervalRange;
+            activeModulesLimit = _originalActiveModulesLimit;
+            initialDelay = _originalInitialDelay;
+        }
 
         public float GetRandomWaveDuration()
         {
@@ -19,6 +45,11 @@ namespace Elias.Scripts
         public float GetRandomWaveInterval()
         {
             return UnityEngine.Random.Range(waveIntervalRange.x, waveIntervalRange.y);
+        }
+
+        public float GetRandomBreachInterval()
+        {
+            return UnityEngine.Random.Range(breachIntervalRange.x, breachIntervalRange.y);
         }
     }
 }
