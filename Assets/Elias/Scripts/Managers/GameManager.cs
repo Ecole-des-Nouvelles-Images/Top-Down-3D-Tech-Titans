@@ -24,7 +24,7 @@ namespace Elias.Scripts.Managers
         private float _waterTimeCurrent;
         private bool _isWaterFilled;
         
-        public Image fadeImage;
+        public GameObject fadeImageObject;
 
         private void Awake()
         {
@@ -34,7 +34,7 @@ namespace Elias.Scripts.Managers
             _waterTimeCurrent = waterTimer;
             _isWaterFilled = false;
             
-            fadeImage.gameObject.SetActive(false);
+            fadeImageObject.SetActive(false);
         }
 
         private void OnEnable()
@@ -183,7 +183,7 @@ namespace Elias.Scripts.Managers
         {
             Debug.Log("GAME OVER !!! " + looseCause);
             
-            fadeImage.gameObject.SetActive(true);
+            fadeImageObject.SetActive(true);
             WaitForSeconds waitForSeconds = new WaitForSeconds(5);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
