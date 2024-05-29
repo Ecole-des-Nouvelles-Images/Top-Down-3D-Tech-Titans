@@ -20,7 +20,6 @@ namespace Elias.Scripts.Managers
         private Quaternion _playerOriginalRotation;
         private Vector3 _originalWaterPosition;
         
-        private Vector3 _waterPosition;
         public bool waterWalk;
         
         public float waterTimer = 5f;
@@ -33,8 +32,6 @@ namespace Elias.Scripts.Managers
         {
             _playerOriginalRotation = Quaternion.identity;
             _originalWaterPosition = water.transform.position;
-
-            _waterPosition = _originalWaterPosition;
 
             _waterTimeCurrent = waterTimer;
             _isWaterFilled = false;
@@ -70,9 +67,13 @@ namespace Elias.Scripts.Managers
                 }
             }
 
-            while (_waterPosition.y >= 1)
+            if (water.transform.position.y >= 1)
             {
                 waterWalk = true;
+            }
+            else
+            {
+                waterWalk = false;
             }
         }
 
@@ -141,14 +142,14 @@ namespace Elias.Scripts.Managers
                     
                 }
 
-                float newWaterY = _waterPosition.y;
+                float newWaterY = water.transform.position.y;
 
                 newWaterY += Time.deltaTime * movementSpeed;
 
                 // Clamp the water's y position to ensure it does not exceed 5
                 newWaterY = Mathf.Clamp(newWaterY, _originalWaterPosition.y, 5f);
 
-                _waterPosition = new Vector3(water.transform.position.x, newWaterY, _waterPosition.z);
+                water.transform.position = new Vector3(water.transform.position.x, newWaterY, water.transform.position.z);
 
                 if (newWaterY == 5f)
                 {
@@ -172,7 +173,7 @@ namespace Elias.Scripts.Managers
 
         public void LowerWaterToInitialPosition()
         {
-            _waterPosition = new Vector3(_waterPosition.x, _originalWaterPosition.y, _waterPosition.z);
+            water.transform.position = new Vector3(_originalWaterPosition.x, _originalWaterPosition.y, _originalWaterPosition.z);
         }
         
         

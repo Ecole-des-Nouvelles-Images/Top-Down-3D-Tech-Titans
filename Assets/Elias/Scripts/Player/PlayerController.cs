@@ -22,22 +22,22 @@ namespace Elias.Scripts.Player
         // New variables for animations
         public Animator animator;
         
-        private static readonly int Idle = Animator.StringToHash("Idle");
-        private static readonly int IsRunning = Animator.StringToHash("IsRunning");
-        private static readonly int IsRunningWater = Animator.StringToHash("IsRunningWater");
-        private static readonly int IsRepairing = Animator.StringToHash("IsRepairing");
-        private static readonly int IsActivatingLauncher = Animator.StringToHash("IsActivatingLauncher");
-        private static readonly int IsActivatingGenerator = Animator.StringToHash("IsActivatingGenerator");
-        private static readonly int IsInteractingHatches = Animator.StringToHash("IsInteractingHatches");
-        private static readonly int IsInteractingScreen = Animator.StringToHash("IsInteractingScreen");
-        private static readonly int IsInteractingPressure = Animator.StringToHash("IsInteractingPressure");
-        private static readonly int InsertionTorpedo = Animator.StringToHash("InsertionTorpedo");
-        private static readonly int InsertionCo2 = Animator.StringToHash("InsertionCo2");
-        private static readonly int InsertionPetrol = Animator.StringToHash("InsertionPetrol");
-        private static readonly int IsHoldingTorpedo = Animator.StringToHash("IsHoldingTorpedo");
-        private static readonly int IsHoldingBottle = Animator.StringToHash("IsHoldingBottle");
+        public static readonly int Idle = Animator.StringToHash("Idle");
+        public static readonly int IsRunning = Animator.StringToHash("IsRunning");
+        public static readonly int IsRunningWater = Animator.StringToHash("IsRunningWater");
+        public static readonly int IsRepairing = Animator.StringToHash("IsRepairing");
+        public static readonly int IsActivatingLauncher = Animator.StringToHash("IsActivatingLauncher");
+        public static readonly int IsActivatingGenerator = Animator.StringToHash("IsActivatingGenerator");
+        public static readonly int IsInteractingHatches = Animator.StringToHash("IsInteractingHatches");
+        public static readonly int IsInteractingScreen = Animator.StringToHash("IsInteractingScreen");
+        public static readonly int IsInteractingPressure = Animator.StringToHash("IsInteractingPressure");
+        public static readonly int InsertionTorpedo = Animator.StringToHash("InsertionTorpedo");
+        public static readonly int InsertionCo2 = Animator.StringToHash("InsertionCo2");
+        public static readonly int InsertionPetrol = Animator.StringToHash("InsertionPetrol");
+        public static readonly int IsHoldingTorpedo = Animator.StringToHash("IsHoldingTorpedo");
+        public static readonly int IsHoldingBottle = Animator.StringToHash("IsHoldingBottle");
         
-        private static readonly int StandUp = Animator.StringToHash("StandUp");
+        public static readonly int StandUp = Animator.StringToHash("StandUp");
         
         private Rigidbody _playerRigidbody;
         private RigidbodyConstraints _originalConstraints;
@@ -47,15 +47,26 @@ namespace Elias.Scripts.Player
         
         private void Start()
         {
+            animator = GetComponent<Animator>();
+
+            if (animator == null)
+            {
+                Debug.LogError("Animator component not found on the GameObject.");
+                return;
+            }
+            else
+            {
+                Debug.Log("Animator component found.");
+            }
+
             if (inputInteractPanel != null) inputInteractPanel.SetActive(false);
             UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
             _originalConstraints = _playerRigidbody.constraints;
 
-            // Initialize the Animator
-            animator = GetComponent<Animator>();
             _gameManager = FindObjectOfType<GameManager>();
         }
+
 
         private void FixedUpdate()
         {
