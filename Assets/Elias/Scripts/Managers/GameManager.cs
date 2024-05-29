@@ -20,6 +20,8 @@ namespace Elias.Scripts.Managers
         private Quaternion _playerOriginalRotation;
         private Vector3 _originalWaterPosition;
         
+        public bool waterWalk;
+        
         public float waterTimer = 5f;
         private float _waterTimeCurrent;
         private bool _isWaterFilled;
@@ -51,18 +53,27 @@ namespace Elias.Scripts.Managers
         {
             WaterControl();
 
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                LowerWaterToInitialPosition();
-            }
-
-            if (_isWaterFilled)
-            {
+            if (Input.GetKeyDown(KeyCode.O))                                  
+            {                                                                 
+                LowerWaterToInitialPosition();                                
+            }                                                                 
+                                                                              
+            if (_isWaterFilled)                                               
+            {                                                                 
                 _waterTimeCurrent -= Time.deltaTime;
                 if (_waterTimeCurrent <= 0)
                 {
                     GameOver("Le Sous Marin est Noyé");
                 }
+            }
+
+            if (water.transform.position.y >= 1)
+            {
+                waterWalk = true;
+            }
+            else
+            {
+                waterWalk = false;
             }
         }
 
@@ -150,10 +161,6 @@ namespace Elias.Scripts.Managers
                     _waterTimeCurrent = waterTimer;
                 }
             }
-            else
-            {
-                //Debug.LogError("GameCycleController not found in the scene.");
-            }
         }
 
         private void OnDeviceChange(InputDevice device, InputDeviceChange change)
@@ -166,7 +173,7 @@ namespace Elias.Scripts.Managers
 
         public void LowerWaterToInitialPosition()
         {
-            water.transform.position = new Vector3(water.transform.position.x, _originalWaterPosition.y, water.transform.position.z);
+            water.transform.position = new Vector3(_originalWaterPosition.x, _originalWaterPosition.y, _originalWaterPosition.z);
         }
         
         

@@ -428,6 +428,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Breach
       objectReference: {fileID: 0}
+    - target: {fileID: 3780448038710008584, guid: e0e72ecba3f614f46be88fe58904c0c2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3965992388364063910, guid: e0e72ecba3f614f46be88fe58904c0c2,
         type: 3}
       propertyPath: m_LocalRotation.w
