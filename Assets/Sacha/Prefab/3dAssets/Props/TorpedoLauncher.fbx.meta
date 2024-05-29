@@ -8,42 +8,42 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Cahoutchouc
-    second: {fileID: 2100000, guid: ebe9f64eff004924d9fd65ea70b9dc44, type: 2}
+    second: {fileID: 2100000, guid: a97c4895e60e8c741956977f163c1ae6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: DarkIron.002
-    second: {fileID: 2100000, guid: b5c8f7c2db7fe584abc2121bf030349d, type: 2}
+    second: {fileID: 2100000, guid: 5ccd8d0501034e847909913e60fafe1d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: DarkestIron.001
-    second: {fileID: 2100000, guid: 443648a85b8cf6041a35322e5fe96daf, type: 2}
+    second: {fileID: 2100000, guid: 8433259cb82bca546a7b14725bcdcb36, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Iron.001
-    second: {fileID: 2100000, guid: 3b25471d4fc3e04469be5937fb4c5f4e, type: 2}
+    second: {fileID: 2100000, guid: 7f10f5bcc161dc643a3359ce7c1cc44f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Iron.006
-    second: {fileID: 2100000, guid: f755a8d34ffd8a54b86803c6e57364a0, type: 2}
+    second: {fileID: 2100000, guid: a358e457641dd7042930486ac574b295, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: LightIron.004
-    second: {fileID: 2100000, guid: f4b3057f78b1a3e43aeee87a82ce8439, type: 2}
+    second: {fileID: 2100000, guid: 41563b0cd09185a4899759fd177d9c91, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Red Paint
-    second: {fileID: 2100000, guid: 15b2d3501cb3a134db3a2338981114e1, type: 2}
+    second: {fileID: 2100000, guid: bcff4bb92150c244cb706cf4a95056a5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Screen5
-    second: {fileID: 2100000, guid: 1f52c15038b244b4b834477f50cce460, type: 2}
+    second: {fileID: 2100000, guid: fd8169a2b2453d14da854978d13257f9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

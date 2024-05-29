@@ -19,8 +19,7 @@ namespace Christopher.Scripts.Modules
            // drillHeadOnSocleDisplay.SetActive(false);// cette ligne sera surement à supprimer <---------------------------------------------------------------------
         }
         private void Update() {
-            if (IsActivated)
-            {
+            if (IsActivated) {
                 groundTrap.SetBool("isTrapOpen",true);
                 drillHeadAnimator.SetBool("isDrillDamaged",true);
                 State = 1;
@@ -31,11 +30,9 @@ namespace Christopher.Scripts.Modules
                 }
                 playerDetector.SetActive(true);
                 drillHeadOnSocleDisplay.SetActive(true);
-                
             }
 
-            if (!IsActivated)
-            {
+            if (!IsActivated) {
                 State = 0;
                 if(StatesMaterials.Length > 0 && StatesMaterials[0] != null){ 
                     foreach (GameObject obj in StateDisplayObject) {
