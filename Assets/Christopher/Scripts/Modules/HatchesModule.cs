@@ -7,9 +7,6 @@ namespace Christopher.Scripts.Modules
 {
     public class HatchesModule : SubmarinModule
     {
-        public GameManager gameManager;
-
-        public GameCycleController gameCycleController;
         
         // Start is called before the first frame update
         void Start()
@@ -55,10 +52,10 @@ namespace Christopher.Scripts.Modules
         }
 
         public override void Validate() {
-            gameCycleController.CountActiveBreach();
-            if (gameCycleController.noActiveBreach)
+            GameCycleController.Instance.CountActiveBreach();
+            if (GameCycleController.Instance.noActiveBreach)
             {
-                gameManager.LowerWaterToInitialPosition();
+                GameManager.Instance.LowerWaterToInitialPosition();
             }
             PlayerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }

@@ -16,6 +16,7 @@ namespace Christopher.Scripts.Modules
         private int[] _toDo;
         private int[] _doing;
         private int _currentSlot;
+        
         void Start() {
             TorpedoLauncherAnimator.SetBool("isDoorOpen", true);
             PartyGameDisplay.SetActive(false);

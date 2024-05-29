@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
+using Christopher.Scripts.Modules;
+using Elias.Scripts.Managers;
 using Elias.Scripts.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,13 +73,85 @@ namespace Elias.Scripts.Minigames
         }
 
         void Update() {
+            
             if (IsActivated) {
                 State = 1;
                 greenLights.SetActive(true);
+                
+                List<SubmarinModule> foundModules = new List<SubmarinModule>(FindObjectsOfType<SubmarinModule>());
+                foreach (SubmarinModule module in foundModules)
+                {
+                    switch (module.GetType().Name)
+                    {
+                        case nameof(ScreenModule):
+                            module.IsActivated = true;
+                            break;
+                        case nameof(BoosterModule):
+                            module.IsActivated = true;
+                            break;
+                        case nameof(FixingDrillModule):
+                            module.IsActivated = true;
+                            break;
+                        case nameof(PressureModule):
+                            module.IsActivated = true;
+                            break;
+                        case nameof(StorageTorpedo):
+                            module.IsActivated = true;
+                            break;
+                        case nameof(TorpedoLauncherModule):
+                            module.IsActivated = true;
+                            break;
+                        case nameof(HatchesModule):
+                            module.IsActivated = true;
+                            break;
+                        case nameof(OxygenModule):
+                            module.IsActivated = true;
+                            break;
+                        case nameof(StorageCapsules):
+                            module.IsActivated = true;
+                            break;
+                    }
+                }
             }
-            else {
+            
+            else if (!IsActivated) {
                 State = 0;
                 greenLights.SetActive(false);
+                
+                List<SubmarinModule> foundModules = new List<SubmarinModule>(FindObjectsOfType<SubmarinModule>());
+                foreach (SubmarinModule module in foundModules)
+                {
+                    switch (module.GetType().Name)
+                    {
+                        case nameof(ScreenModule):
+                            module.IsActivated = false;
+                            break;
+                        case nameof(BoosterModule):
+                            module.IsActivated = false;
+                            break;
+                        case nameof(FixingDrillModule):
+                            module.IsActivated = false;
+                            break;
+                        case nameof(PressureModule):
+                            module.IsActivated = false;
+                            break;
+                        case nameof(StorageTorpedo):
+                            module.IsActivated = false;
+                            break;
+                        case nameof(TorpedoLauncherModule):
+                            module.IsActivated = false;
+                            break;
+                        case nameof(HatchesModule):
+                            module.IsActivated = false;
+                            break;
+                        case nameof(OxygenModule):
+                            module.IsActivated = false;
+                            break;
+                        case nameof(StorageCapsules):
+                            module.IsActivated = false;
+                            break;
+                    }
+                }
             }
             if (playerInteracting)
             {
@@ -125,12 +200,12 @@ namespace Elias.Scripts.Minigames
         }
 
         public override void Activate() {
-            IsActivated = true;
+            IsActivated = false;
         }
 
         public override void Deactivate()
         {
-            IsActivated = false;
+            IsActivated = true;
             State = 0;
             canvas.SetActive(false);
 
@@ -147,7 +222,6 @@ namespace Elias.Scripts.Minigames
 
         public override void Interact(GameObject playerUsingModule) {
             if (!IsActivated && PlayerUsingModule == null && playerUsingModule.GetComponent<PlayerController>().MyItem == 2) {
-                Activate();
                 PlayerUsingModule = playerUsingModule;
                 playerInteracting = true;
                 InitializePatternSquares();

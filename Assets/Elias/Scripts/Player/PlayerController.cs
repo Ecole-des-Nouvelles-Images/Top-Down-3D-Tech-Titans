@@ -17,8 +17,6 @@ namespace Elias.Scripts.Player
         [SerializeField] public GameObject inputInteractPanel;
         [SerializeField] public GameObject[] itemsDisplay;
 
-        private GameManager _gameManager; 
-
         // New variables for animations
         public Animator animator;
         
@@ -63,8 +61,6 @@ namespace Elias.Scripts.Player
             UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
             _originalConstraints = _playerRigidbody.constraints;
-
-            _gameManager = FindObjectOfType<GameManager>();
         }
 
 
@@ -220,7 +216,7 @@ namespace Elias.Scripts.Player
                     _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
 
                     // Trigger walking animation
-                    switch (_gameManager.waterWalk)
+                    switch (GameManager.Instance.waterWalk)
                     {
                         case true:
                             animator.SetBool(IsRunningWater, true);
