@@ -34,6 +34,10 @@ namespace Elias.Scripts.Player
         private static readonly int IsHoldingTorpedo = Animator.StringToHash("IsHoldingTorpedo");
         private static readonly int IsHoldingBottle = Animator.StringToHash("IsHoldingBottle");
         
+        private static readonly float X = Animator.StringToHash("X");
+        private static readonly float Y = Animator.StringToHash("Y");
+        
+        
         private static readonly int StandUp = Animator.StringToHash("StandUp");
         
         private Rigidbody _playerRigidbody;
@@ -234,6 +238,35 @@ namespace Elias.Scripts.Player
                 UsingModule = null;
             }
             _playerRigidbody.constraints = _originalConstraints;
+            
+            switch (UsingModule)
+            {
+                 case BreachModule :
+                      animator.SetBool(IsRepairing, false);
+                      break;
+                  case FixingDrillModule:
+                      animator.SetBool(IsRepairing, false);
+                      break;
+                  case GeneratorModule:
+                      animator.SetBool(InsertionPetrol, false);
+                      break;
+                case HatchesModule:
+                    animator.SetBool(IsInteractingHatches, false);
+                    break;
+                case ScreenModule:
+                    animator.SetBool(IsInteractingScreen, false);
+                    break;
+                case PressureModule:
+                    animator.SetBool(IsInteractingPressure, false);
+                    break;
+                case TorpedoLauncherModule:
+                    animator.SetBool(InsertionTorpedo, false);
+                    break;
+                case OxygenModule:
+                    animator.SetBool(InsertionCo2, false);
+                    break;
+            }
+            
             Debug.Log("Interaction ended");
         }
     }
