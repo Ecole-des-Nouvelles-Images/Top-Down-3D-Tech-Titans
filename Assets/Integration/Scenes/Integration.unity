@@ -757,6 +757,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pression
       objectReference: {fileID: 0}
+    - target: {fileID: 8911512247721048484, guid: ca583c145bc4aeb47bfe16f6735fe2e3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -785,6 +790,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403832490893885891, guid: cb16d0a581dcdc7429a124974eb66c3a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8540640689780872641, guid: cb16d0a581dcdc7429a124974eb66c3a,
         type: 3}
@@ -1120,6 +1130,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ModuleEcoutille
+      objectReference: {fileID: 0}
+    - target: {fileID: 9009429269248479326, guid: 0d009a240fc40c74d8b69d30af170f1b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1776,6 +1791,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 921549429}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &921549432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6600119722616402896, guid: e0e72ecba3f614f46be88fe58904c0c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 921549429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d274031637f99074790038a661953ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &940466132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1784,6 +1811,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1389990446}
     m_Modifications:
+    - target: {fileID: 176686127114227067, guid: ca56dbdda055f6a47a82d25703f2dabb,
+        type: 3}
+      propertyPath: State
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 176686127114227067, guid: ca56dbdda055f6a47a82d25703f2dabb,
+        type: 3}
+      propertyPath: Succes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1796237818008188545, guid: ca56dbdda055f6a47a82d25703f2dabb,
         type: 3}
       propertyPath: m_Enabled
@@ -1793,6 +1830,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "G\xE9n\xE9rateur"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3704973639498256404, guid: ca56dbdda055f6a47a82d25703f2dabb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5777822825188283849, guid: ca56dbdda055f6a47a82d25703f2dabb,
         type: 3}
@@ -1998,13 +2040,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2315436927991582464, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
         type: 3}
+      propertyPath: State
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2315436927991582464, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
+        type: 3}
+      propertyPath: IsActivated
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2315436927991582464, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
+        type: 3}
       propertyPath: PartyGameDisplay
       value: 
       objectReference: {fileID: 1054599157}
+    - target: {fileID: 2315436927991582464, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
+        type: 3}
+      propertyPath: Succes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2315436927991582464, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
+        type: 3}
+      propertyPath: StatesMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5b6cb451b6342d4786890990fd27154, type: 2}
+    - target: {fileID: 2315436927991582464, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
+        type: 3}
+      propertyPath: StatesMaterials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 12c429e63c259834ca0c12d1c2f329a6, type: 2}
     - target: {fileID: 3800699536758616792, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
         type: 3}
       propertyPath: m_Name
       value: LanceTorpille
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800699536758616792, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5274200987537222991, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
         type: 3}
@@ -2713,6 +2785,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1506362673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3531963256080995291, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
+    type: 3}
+  m_PrefabInstance: {fileID: 1876555437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1621247817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2786,12 +2864,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5592328403339753450, guid: aa4c312f00c74a14a9c88ba8cc622d7c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8004586695082819373, guid: aa4c312f00c74a14a9c88ba8cc622d7c,
         type: 3}
       propertyPath: m_PlayerPrefab
       value: 
       objectReference: {fileID: 1025480765810817401, guid: d275fd30663a4894aab68a87f66af928,
         type: 3}
+    - target: {fileID: 8176812208297536276, guid: aa4c312f00c74a14a9c88ba8cc622d7c,
+        type: 3}
+      propertyPath: activePhase
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176812208297536276, guid: aa4c312f00c74a14a9c88ba8cc622d7c,
+        type: 3}
+      propertyPath: modules.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176812208297536276, guid: aa4c312f00c74a14a9c88ba8cc622d7c,
+        type: 3}
+      propertyPath: generatorEventCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176812208297536276, guid: aa4c312f00c74a14a9c88ba8cc622d7c,
+        type: 3}
+      propertyPath: modules.Array.data[0]
+      value: 
+      objectReference: {fileID: 921549432}
+    - target: {fileID: 8176812208297536276, guid: aa4c312f00c74a14a9c88ba8cc622d7c,
+        type: 3}
+      propertyPath: modules.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2829,6 +2937,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1389990446}
     m_Modifications:
+    - target: {fileID: 5694199726619475782, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
+        type: 3}
+      propertyPath: StatesMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d45b50648b5c5f4ca093f4fa53c9f76, type: 2}
+    - target: {fileID: 5694199726619475782, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
+        type: 3}
+      propertyPath: StatesMaterials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5b6cb451b6342d4786890990fd27154, type: 2}
+    - target: {fileID: 5694199726619475782, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
+        type: 3}
+      propertyPath: StateDisplayObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 1506362673}
     - target: {fileID: 6376473971095141595, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2879,10 +3002,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6795736720240243420, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
+        type: 3}
+      propertyPath: myModule
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8752575928225861083, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
         type: 3}
       propertyPath: m_Name
       value: StockageTorpille
+      objectReference: {fileID: 0}
+    - target: {fileID: 8752575928225861083, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2977,6 +3110,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "Oxyg\xE8ne"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604041912178434535, guid: d6932f3d362e8f749976a76b5de96f04,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

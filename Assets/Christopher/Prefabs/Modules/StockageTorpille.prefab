@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18843bb9ca37dd54b811e726b877b926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myModule: {fileID: 2259563178070559406}
+  myModule: {fileID: 5694199726619475782}
 --- !u!1 &8650536093821631860
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6376473971095141595}
   - component: {fileID: 3186341217720639357}
-  - component: {fileID: 2259563178070559406}
+  - component: {fileID: 5694199726619475782}
   m_Layer: 0
   m_Name: StockageTorpille
   m_TagString: Untagged
@@ -627,7 +627,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.5556173, y: 1.533247, z: 1.4655077}
   m_Center: {x: -0.0021092892, y: -0.12053168, z: -0.056949258}
---- !u!114 &2259563178070559406
+--- !u!114 &5694199726619475782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8752575928225861083}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dc40cca51bc4ff089144173a9653f5a, type: 3}
+  m_Script: {fileID: 11500000, guid: f88a42faa200ba7438079d359266b38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsActivated: 0
@@ -649,7 +649,8 @@ MonoBehaviour:
   Succes: 
   playerDetector: {fileID: 8295233457817121040}
   PlayerUsingModule: {fileID: 0}
+  StorageAnimator: {fileID: 7563580942473972015}
+  myObject: 3
   cooldown: 10
   cooldownDisplay: {fileID: 1325286752366240327}
   itemDisplay: {fileID: 8650536093821631860}
-  StorageAnimator: {fileID: 7563580942473972015}

@@ -141,11 +141,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeModules: 0
+  modules: []
   difficulties:
   - {fileID: 11400000, guid: 767a9308c0f87f84285b66a3b958d7a9, type: 2}
   - {fileID: 11400000, guid: d0621cd418443844baa86d25e62c289b, type: 2}
   - {fileID: 11400000, guid: f9ccdf7f1f9c5f745b83034ea1a40213, type: 2}
   noActiveBreach: 0
+  activePhase: 1
+  generatorEventCount: 0
 --- !u!114 &8004586695082819373
 MonoBehaviour:
   m_ObjectHideFlags: 0

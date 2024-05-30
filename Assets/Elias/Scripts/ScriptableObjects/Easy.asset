@@ -24,6 +24,9 @@ MonoBehaviour:
   generatorRange:
     x: 240
     y: 300
+  torpedoIntervalRange:
+    x: 100
+    y: 120
   activeModulesLimit: 3
   initialDelay: 45
   generatorCountLimit: 1

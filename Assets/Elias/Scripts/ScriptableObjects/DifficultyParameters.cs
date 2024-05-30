@@ -10,6 +10,7 @@ namespace Elias.Scripts
         public float2 waveIntervalRange;
         public float2 breachIntervalRange;
         public float2 generatorRange;
+        public float2 torpedoIntervalRange;
         
         public int activeModulesLimit;
         public float initialDelay;
@@ -20,6 +21,7 @@ namespace Elias.Scripts
         private float2 _originalWaveIntervalRange;
         private float2 _originalBreachIntervalRange;
         private float2 _originalGeneratorRange;
+        private float2 _originalTorpedoIntervalRange;
         
         private int _originalActiveModulesLimit;
         private float _originalInitialDelay;
@@ -32,6 +34,7 @@ namespace Elias.Scripts
             _originalWaveIntervalRange = waveIntervalRange;
             _originalBreachIntervalRange = breachIntervalRange;
             _originalGeneratorRange = generatorRange;
+            _originalTorpedoIntervalRange = torpedoIntervalRange;
             
             _originalActiveModulesLimit = activeModulesLimit;
             _originalInitialDelay = initialDelay;
@@ -45,6 +48,7 @@ namespace Elias.Scripts
             waveIntervalRange = _originalWaveIntervalRange;
             breachIntervalRange = _originalBreachIntervalRange;
             generatorRange = _originalGeneratorRange;
+            torpedoIntervalRange = _originalTorpedoIntervalRange;
             
             activeModulesLimit = _originalActiveModulesLimit;
             initialDelay = _originalInitialDelay;
@@ -67,9 +71,14 @@ namespace Elias.Scripts
             return UnityEngine.Random.Range(breachIntervalRange.x, breachIntervalRange.y);
         }
         
-        public float GetRandomGeneratorRange()
+        public float GetRandomGeneratorInterval()
         {
             return UnityEngine.Random.Range(generatorRange.x, generatorRange.y);
+        }
+        
+        public float GetRandomTorpedoInterval()
+        {
+            return UnityEngine.Random.Range(torpedoIntervalRange.x, torpedoIntervalRange.y);
         }
     }
 }

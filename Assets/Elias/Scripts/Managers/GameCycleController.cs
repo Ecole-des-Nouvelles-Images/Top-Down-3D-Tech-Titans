@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
+using Christopher.Scripts.Modules;
 using UnityEngine;
 using Elias.Scripts.Minigames;
 using Unity.VisualScripting;
@@ -20,7 +21,8 @@ namespace Elias.Scripts.Managers
         private int _activeDifficulty;
         public bool noActiveBreach;
 
-        private float _generatorTime;
+        private float _torpedoTimer;
+        private float _generatorTimer;
         private float _waveTimer;
         private float _cooldownTimer;
         private bool _halfCooldown;
@@ -35,6 +37,12 @@ namespace Elias.Scripts.Managers
 
         private void Start()
         {
+            // Initialize the difficulties list if it's null
+            if (difficulties == null)
+            {
+                difficulties = new List<DifficultyParameters>();
+            }
+
             foreach (var difficulty in difficulties)
             {
                 if (difficulty != null)
@@ -58,37 +66,69 @@ namespace Elias.Scripts.Managers
             }
         }
 
+        
         private void Update()
         {
             if (activePhase == 1)
             {
-                difficulties = null;
+                return;
             }
 
-            if (_generatorTime > 0)
+            if (_generatorTimer > 0)
             {
-                _generatorTime -= Time.deltaTime;
+                _generatorTimer -= Time.deltaTime;
+            }
+            
+            if (_torpedoTimer > 0)
+            {
+                _torpedoTimer -= Time.deltaTime;
             }
 
-            if (difficulties != null && activePhase != 1 || _generatorTime <= 0 && generatorEventCount != 0)
+            // Generator logic
+            if (difficulties != null && activePhase != 1 || _generatorTimer <= 0 && generatorEventCount != 0)
             {
-                _generatorTime = difficulties[_activeDifficulty].GetRandomGeneratorRange();
-                
-                if (_generatorTime <= 0 && generatorEventCount <= difficulties[_activeDifficulty].generatorCountLimit)
+                if (difficulties != null)
                 {
-                    generatorEventCount++;
-                    
-                    GeneratorModule generator = FindObjectOfType<GeneratorModule>();
-                    if (generator != null)
-                    {
-                        generator.IsActivated = false;
-                    }
+                    _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
 
-                    if (generatorEventCount < difficulties[_activeDifficulty].generatorCountLimit)
+                    if (_generatorTimer <= 0 &&
+                        generatorEventCount <= difficulties[_activeDifficulty].generatorCountLimit)
                     {
-                        _generatorTime = difficulties[_activeDifficulty].GetRandomGeneratorRange();
+                        generatorEventCount++;
+
+                        GeneratorModule generator = FindObjectOfType<GeneratorModule>();
+                        if (generator != null)
+                        {
+                            generator.Activate();
+                        }
+
+                        if (generatorEventCount < difficulties[_activeDifficulty].generatorCountLimit)
+                        {
+                            _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
+                        }
                     }
                 }
+            }
+            
+            // Torpedo logic
+            if (difficulties != null && activePhase != 1 && _torpedoTimer <= 0)
+            {
+                if (difficulties != null)
+                {
+                    _torpedoTimer = difficulties[_activeDifficulty].GetRandomTorpedoInterval();
+                    
+                    if (_torpedoTimer <= 0)
+                    {
+                    
+                        TorpedoLauncherModule torpedo = FindObjectOfType<TorpedoLauncherModule>();
+                        if (torpedo != null)
+                        {
+                            torpedo.Deactivate();
+                        }
+                    }
+                }
+
+                
             }
             
             if (!_hasUpdatedDifficulty || !_isDifficultySet)
@@ -116,6 +156,7 @@ namespace Elias.Scripts.Managers
                     break;
             }
         }
+
 
         private void HandleInitialDelay(DifficultyParameters currentDifficulty)
         {
@@ -233,15 +274,9 @@ namespace Elias.Scripts.Managers
                 if (inactiveModules.Count > 0)
                 {
                     SubmarinModule randomModule = inactiveModules[Random.Range(0, inactiveModules.Count)];
-                    ActivateModule(randomModule);
+                    randomModule.Activate();
                 }
             }
-        }
-
-        private void ActivateModule(SubmarinModule module)
-        {
-            module.Activate();
-            Debug.Log("Module activated!");
         }
 
         public void HalfWaveCooldown()
@@ -295,5 +330,16 @@ namespace Elias.Scripts.Managers
                 Debug.LogWarning("Invalid Phase1Value or Difficulty Parameters not set for this phase.");
             }
         }
+
+        public void ActivateBreaches()
+        {
+            FindBreachModules();
+            CountActiveBreach();
+            ActivateRandomModule();
+            ActivateRandomModule();
+            ActivateRandomModule();
+            difficulties[_activeDifficulty].GetRandomTorpedoInterval();
+        }
+
     }
 }

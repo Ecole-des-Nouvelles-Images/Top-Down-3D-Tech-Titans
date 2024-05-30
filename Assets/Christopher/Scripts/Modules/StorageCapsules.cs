@@ -23,20 +23,28 @@ namespace Christopher.Scripts.Modules
             if (!IsActivated) {
                 State = 0;
                 playerDetector.SetActive(false);
-            }
-            else {
+            } else {
                 State = 1;
                 playerDetector.SetActive(true);
             }
-            Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
-            mats[4] = StatesMaterials[State];
-            StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mats;
+
+            MeshRenderer renderer = StateDisplayObject[0].transform.GetComponent<MeshRenderer>();
+            Material[] mats = renderer.materials;
+
+            if (mats.Length > 4) {
+                mats[4] = StatesMaterials[State];
+                renderer.materials = mats;
+            } else {
+                Debug.LogWarning("Materials array does not have the expected length.");
+            }
+
             cooldownDisplay.transform.GetComponent<Image>().fillAmount = _currentCooldownValue / cooldown;
             if (_playCooldown) {
                 cooldownDisplay.SetActive(true);
                 itemDisplay.SetActive(false);
-                if (_currentCooldownValue > 0) _currentCooldownValue -= Time.deltaTime;
-                else {
+                if (_currentCooldownValue > 0) {
+                    _currentCooldownValue -= Time.deltaTime;
+                } else {
                     _currentCooldownValue = cooldown;
                     _playCooldown = false;
                     cooldownDisplay.SetActive(false);
@@ -45,10 +53,11 @@ namespace Christopher.Scripts.Modules
                 }
             }
         }
+
         public override void Activate() { IsActivated = true; }
         public override void Deactivate() { IsActivated = false; }
         public override void Interact(GameObject playerUsingModule) {
-            if (IsActivated && PlayerUsingModule == null && playerUsingModule.GetComponent<PlayerController>().MyItem == 0) {
+            if (IsActivated && PlayerUsingModule == null /*&& playerUsingModule.GetComponent<PlayerController>().MyItem == 0*/) {
                 PlayerUsingModule = playerUsingModule;
                 if (!_playCooldown) {
                     PlayerUsingModule.transform.GetComponent<PlayerController>().MyItem = myObject;

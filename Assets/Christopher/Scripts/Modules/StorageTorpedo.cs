@@ -23,10 +23,11 @@ namespace Christopher.Scripts.Modules
         void Update() {
             if (!IsActivated) {
                 State = 0;
-                
+                playerDetector.SetActive(false);
             }
             else {
                 State = 1;
+                playerDetector.SetActive(true);
             }
             Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
             mats[3] = StatesMaterials[State];

@@ -28,6 +28,11 @@ namespace Elias.Scripts.Minigames
         {
             IsActivated = true;
             _patternManager = GetComponent<PatternManager>(); // Assuming PatternManager is on the same GameObject
+            if (gridTransform == null)
+            {
+                Debug.LogError("gridTransform is not assigned in the Inspector!");
+                return;
+            }
             InitializePatternSquares();
             _selectedIndex = 0; // Start with the first square selected
             HighlightSelectedSquare();
@@ -35,6 +40,18 @@ namespace Elias.Scripts.Minigames
 
         private void InitializePatternSquares()
         {
+            if (gridTransform == null)
+            {
+                Debug.LogError("gridTransform is not assigned in the Inspector!");
+                return;
+            }
+
+            _patternSquares = new List<PatternSquare>();
+
+            foreach (Transform child in gridTransform)
+            {
+                Destroy(child.gameObject);
+            }
             _patternSquares = new List<PatternSquare>();
             
             foreach (Transform child in gridTransform)
@@ -83,31 +100,13 @@ namespace Elias.Scripts.Minigames
                 {
                     switch (module.GetType().Name)
                     {
-                        case nameof(ScreenModule):
-                            module.IsActivated = true;
-                            break;
-                        case nameof(BoosterModule):
-                            module.IsActivated = true;
-                            break;
-                        case nameof(FixingDrillModule):
-                            module.IsActivated = true;
-                            break;
                         case nameof(PressureModule):
-                            module.IsActivated = true;
-                            break;
-                        case nameof(StorageTorpedo):
-                            module.IsActivated = true;
-                            break;
-                        case nameof(TorpedoLauncherModule):
                             module.IsActivated = true;
                             break;
                         case nameof(HatchesModule):
                             module.IsActivated = true;
                             break;
                         case nameof(OxygenModule):
-                            module.IsActivated = true;
-                            break;
-                        case nameof(StorageCapsules):
                             module.IsActivated = true;
                             break;
                     }
@@ -123,31 +122,13 @@ namespace Elias.Scripts.Minigames
                 {
                     switch (module.GetType().Name)
                     {
-                        case nameof(ScreenModule):
-                            module.IsActivated = false;
-                            break;
-                        case nameof(BoosterModule):
-                            module.IsActivated = false;
-                            break;
-                        case nameof(FixingDrillModule):
-                            module.IsActivated = false;
-                            break;
                         case nameof(PressureModule):
-                            module.IsActivated = false;
-                            break;
-                        case nameof(StorageTorpedo):
-                            module.IsActivated = false;
-                            break;
-                        case nameof(TorpedoLauncherModule):
                             module.IsActivated = false;
                             break;
                         case nameof(HatchesModule):
                             module.IsActivated = false;
                             break;
                         case nameof(OxygenModule):
-                            module.IsActivated = false;
-                            break;
-                        case nameof(StorageCapsules):
                             module.IsActivated = false;
                             break;
                     }

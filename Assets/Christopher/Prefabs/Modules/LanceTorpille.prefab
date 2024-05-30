@@ -1347,8 +1347,8 @@ MonoBehaviour:
   IsActivated: 0
   State: 0
   StatesMaterials:
-  - {fileID: 2100000, guid: 0d45b50648b5c5f4ca093f4fa53c9f76, type: 2}
   - {fileID: 2100000, guid: b5b6cb451b6342d4786890990fd27154, type: 2}
+  - {fileID: 2100000, guid: 12c429e63c259834ca0c12d1c2f329a6, type: 2}
   StateDisplayObject:
   - {fileID: 2469547365308099630}
   Succes: 
