@@ -59,7 +59,7 @@ namespace Christopher.Scripts.Modules
                 playerDetector.SetActive(false);
             }
             Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
-            mats[3] = StatesMaterials[State];
+            mats[2] = StatesMaterials[State];
             StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mats;
         }
         private void ResetPartyGame() {
