@@ -29,6 +29,10 @@ namespace Christopher.Scripts
         [SerializeField] private List<GameObject> mapPhase3;
         [SerializeField] private GameObject[] PanelPhase1;
         [SerializeField] private float[] TimerTransition;
+        [SerializeField] private AudioClip[] transitionSounds; // 0:transition1->2  1:transiton2->3   2:transition3->1
+        [SerializeField] private AudioClip[] phase1Sounds;// 0:navigation  1:pick 
+        [SerializeField] private AudioSource transitionAudioSource;  
+        [SerializeField] private AudioSource navigationAudioSource;
         private Char _currentSelectionPhase1;
         private float _currentTimerTransition;
         private Vector3 _drillOriginPosition;
@@ -79,7 +83,6 @@ namespace Christopher.Scripts
                         _transitionPhase1 = false;
                     }
                 }
-
                 if (_transitionPhase2) {
                     if(screen.transform.GetComponent<MeshRenderer>().material != displayPhase[1])
                         screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];
@@ -96,6 +99,8 @@ namespace Christopher.Scripts
                     }
                 }
                 if (_transitionPhase3) {
+                    transitionAudioSource.clip = transitionSounds[2];
+                    transitionAudioSource.Play();
                     if(screen.transform.GetComponent<MeshRenderer>().material != displayPhase[1])
                         screen.transform.GetComponent<MeshRenderer>().material = displayPhase[1];
                     playerDetector.SetActive(false);
@@ -199,22 +204,24 @@ namespace Christopher.Scripts
                         Difficulty = 3;
                         break;
                 }
-
+                navigationAudioSource.clip = phase1Sounds[1];
+                navigationAudioSource.Play();
+                transitionAudioSource.clip = transitionSounds[0];
+                transitionAudioSource.Play();
                 _transitionPhase1 = true;
                 CurrentPhase = 2;
-                
                 gameCycleController.UpdateDifficulty(Difficulty);
             }
 
             if (CurrentPhase == 2) {
                 if (IsPhase2Finish()) {
+                    transitionAudioSource.clip = transitionSounds[1];
+                    transitionAudioSource.Play();
                     //add collected mineralz
                     ResetPhase2();
                     _transitionPhase2 = true;
                     CurrentPhase = 3;
                 }
-                
-                
             }
         }
         public override void NavigateX(float moveX) {
@@ -253,8 +260,10 @@ namespace Christopher.Scripts
                         _currentSelectionPhase1 = 'b';
                         break;
                 }
+                navigationAudioSource.clip = phase1Sounds[0];
+                navigationAudioSource.Play();
+                DisplayPhase1();
             }
-            DisplayPhase1();
         }
 
         public override void Right() {
@@ -270,6 +279,8 @@ namespace Christopher.Scripts
                         _currentSelectionPhase1 = 'a';
                         break;
                 }
+                navigationAudioSource.clip = phase1Sounds[0];
+                navigationAudioSource.Play();
                 DisplayPhase1();
             }
         }
