@@ -2030,6 +2030,13 @@ MonoBehaviour:
   - {fileID: 4104465123314629746}
   partyGameDisplay: {fileID: 3535637016940814680}
   sliderDisplayLevel: {fileID: 2517982063901709673}
+  sounds:
+  - {fileID: 8300000, guid: 4fe1023af4757c24ea5d3017bf9bff45, type: 3}
+  - {fileID: 8300000, guid: 974aec74b793bd944aeaf2f902c9082b, type: 3}
+  - {fileID: 8300000, guid: 99c0621eb3329fb4a9748ce8aeea6a3b, type: 3}
+  audioSource: {fileID: 0}
+  alarmAudioSource: {fileID: 0}
+  validationAudioSource: {fileID: 0}
 --- !u!1 &9112187952619772526
 GameObject:
   m_ObjectHideFlags: 0

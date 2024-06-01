@@ -377,6 +377,11 @@ MonoBehaviour:
   - {fileID: 9110079851661042702, guid: 12dbd7ed6c9a26f43a3b4a57c85a03e3, type: 3}
   gridTransform: {fileID: 2144717949911638453}
   greenLights: {fileID: 5207450275272736934}
+  sounds:
+  - {fileID: 8300000, guid: 233833f9320b68c4b9a4f299fd779269, type: 3}
+  - {fileID: 8300000, guid: 1212571924b87a748b54bfee2cb26335, type: 3}
+  - {fileID: 8300000, guid: 50ed1e069c44339499d9f9afe2f59f1d, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &3766061322824228916
 GameObject:
   m_ObjectHideFlags: 0

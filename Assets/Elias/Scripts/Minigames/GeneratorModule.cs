@@ -15,8 +15,13 @@ namespace Elias.Scripts.Minigames
         public List<GameObject> squarePrefabs; // List of prefab variants
         public Transform gridTransform; // Reference to the Grid GameObject with GridLayoutGroup
         [SerializeField] private GameObject greenLights;
+        [SerializeField] private AudioClip[] sounds; // 0:start sound  1:runing sound   2:stop sound
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioSource interactionAudioSource;
         private List<PatternSquare> _patternSquares;
         private int _selectedIndex;
+        private bool isGeneratorStarted;
+        private bool isGeneratorStop;
         public bool IsPatternValid => ValidatePattern();
 
         private PatternManager _patternManager; // Reference to the PatternManager
@@ -71,13 +76,16 @@ namespace Elias.Scripts.Minigames
 
         void Update() {
             if (IsActivated) {
+                
                 State = 1;
                 greenLights.SetActive(true);
             }
             else {
+               
                 State = 0;
                 greenLights.SetActive(false);
             }
+            SoundManaging();
             if (playerInteracting)
             {
                 canvas.SetActive(true);
@@ -152,6 +160,7 @@ namespace Elias.Scripts.Minigames
                 playerInteracting = true;
                 InitializePatternSquares();
                 PlayerUsingModule.GetComponent<PlayerController>().MyItem = 0;
+                interactionAudioSource.Play();
             }
             else {
                 playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
@@ -230,6 +239,32 @@ namespace Elias.Scripts.Minigames
             {
                 _selectedIndex = newIndex;
                 HighlightSelectedSquare();
+            }
+        }
+
+        private void SoundManaging() {
+            if (IsActivated) {
+                if (!isGeneratorStarted) {
+                    audioSource.clip = sounds[0];
+                    audioSource.loop = false;
+                    audioSource.Play();
+                    isGeneratorStarted = true;
+                    isGeneratorStop = false;
+                }
+                if (isGeneratorStarted && !audioSource.isPlaying) {
+                    audioSource.clip = sounds[1];
+                    audioSource.loop = true;
+                    audioSource.Play();
+                }
+            }
+            else {
+                if (!isGeneratorStop) {
+                    audioSource.clip = sounds[2];
+                    audioSource.loop = false;
+                    audioSource.Play();
+                    isGeneratorStop = true;
+                    isGeneratorStarted = false;
+                }
             }
         }
     }
