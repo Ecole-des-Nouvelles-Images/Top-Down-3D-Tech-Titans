@@ -1,11 +1,10 @@
-using System;
+using System.Collections.Generic;
 using Christopher.Scripts;
 using Christopher.Scripts.Modules;
 using Elias.Scripts.Managers;
-using Elias.Scripts.Minigames;
+using Elias.Scripts.Minigames; // Add this to use List<T>
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Elias.Scripts.Player
 {
@@ -20,6 +19,11 @@ namespace Elias.Scripts.Player
         // New variables for animations
         public Animator animator;
         
+        // New variables for sounds
+        [SerializeField] private List<AudioClip> playerSteps;
+        private AudioSource audioSource;
+        private int lastPlayedStepIndex = -1;
+
         // booleans
         public static readonly int Idle = Animator.StringToHash("Idle");
         public static readonly int IsRunning = Animator.StringToHash("IsRunning");
@@ -34,7 +38,7 @@ namespace Elias.Scripts.Player
         public static readonly int IsHoldingTorpedo = Animator.StringToHash("IsHoldingTorpedo");
         public static readonly int IsHoldingBottle = Animator.StringToHash("IsHoldingBottle");
         
-        //triggers
+        // triggers
         public static readonly int InsertionTorpedo = Animator.StringToHash("InsertionTorpedo");
         public static readonly int InsertionCo2 = Animator.StringToHash("InsertionCo2");
         public static readonly int InsertionPetrol = Animator.StringToHash("InsertionPetrol");
@@ -65,8 +69,14 @@ namespace Elias.Scripts.Player
             UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
             _originalConstraints = _playerRigidbody.constraints;
-        }
 
+            // Initialize the audio source
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
 
         private void FixedUpdate()
         {
@@ -242,6 +252,9 @@ namespace Elias.Scripts.Player
                             animator.SetBool(IsRunningWater, false);
                             break;
                     }
+                    
+                    // Play step sound
+                    PlayRandomStepSound();
                 }
                 else
                 {
@@ -252,6 +265,21 @@ namespace Elias.Scripts.Player
                     animator.SetBool(IsWalking, false);
                 }
             }
+        }
+
+        private void PlayRandomStepSound()
+        {
+            if (playerSteps.Count == 0) return;
+
+            int newStepIndex;
+            do
+            {
+                newStepIndex = Random.Range(0, playerSteps.Count);
+            } while (newStepIndex == lastPlayedStepIndex);
+
+            lastPlayedStepIndex = newStepIndex;
+            audioSource.clip = playerSteps[newStepIndex];
+            audioSource.Play();
         }
 
         private void Interact()
