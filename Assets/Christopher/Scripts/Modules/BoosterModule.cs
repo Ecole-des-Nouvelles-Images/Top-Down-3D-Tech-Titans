@@ -18,14 +18,15 @@ namespace Christopher.Scripts.Modules
         [SerializeField] private AudioClip[] sounds; // 0:start sound  1:running sound   2:stop sound
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private GameObject interactionAudioSource;
-        private bool isStationStarted;
-        private bool isStationStop;
+        private bool _isStationStarted;
+        private bool _isStationStop;
         private float _currentCooldownValue;
         private bool _boostActive;
         private bool _cooldownActive;
         private float _currentBoostValue;
         private SubmarineController _submarine;
-        void Awake() {
+        void Start() {
+            _isStationStop = true;
             _boostActive = false;
             PlayerUsingModule = null;
             IsActivated = false;
@@ -34,7 +35,6 @@ namespace Christopher.Scripts.Modules
             _submarine = screenModule.Submarine.GetComponent<SubmarineController>();
             boostDisplay.SetActive(true);
             cooldownDisplay.SetActive(false);
-            SoundManaging();
         }
         void Update() {
             SoundManaging();
@@ -103,8 +103,7 @@ namespace Christopher.Scripts.Modules
         public override void StopInteract() {
             PlayerUsingModule = null;
         }
-        public override void Validate() {
-        }
+        public override void Validate() { }
         public override void NavigateX(float moveX) {}
         public override void NavigateY(float moveY) {}
         public override void Up() {}
@@ -113,26 +112,26 @@ namespace Christopher.Scripts.Modules
         public override void Right() {}
         private void SoundManaging() {
             if (IsActivated) {
-                if (!isStationStarted) {
+                if (!_isStationStarted) {
                     audioSource.clip = sounds[0];
                     audioSource.loop = false;
                     audioSource.Play();
-                    isStationStarted = true;
-                    isStationStop = false;
+                    _isStationStarted = true;
+                    _isStationStop = false;
                 }
-                if (isStationStarted && !audioSource.isPlaying) {
+                if (_isStationStarted && !audioSource.isPlaying) {
                     audioSource.clip = sounds[1];
                     audioSource.loop = true;
                     audioSource.Play();
                 }
             }
             else {
-                if (!isStationStop) {
+                if (!_isStationStop) {
                     audioSource.clip = sounds[2];
                     audioSource.loop = false;
                     audioSource.Play();
-                    isStationStop = true;
-                    isStationStarted = false;
+                    _isStationStop = true;
+                    _isStationStarted = false;
                 }
             }
         }

@@ -2442,13 +2442,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
+      propertyPath: TrailModule.widthOverTrail.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2489,6 +2494,41 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.minMaxState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.a
+      value: 0.6117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2770638057380931796, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2580,6 +2620,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5233407132165512653, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5322453121180999743, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: fixValue

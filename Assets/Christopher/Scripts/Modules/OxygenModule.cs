@@ -24,19 +24,17 @@ namespace Christopher.Scripts.Modules
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private GameObject alarmAudioSource;
         [SerializeField] private AudioSource interactionAudioSource;
-        private bool isStationStarted;
-        private bool isStationStop;
+        private bool _isStationStarted;
+        private bool _isStationStop;
         private int[] _toDo;
         private List<int> _input;
-
         public GameManager gameManager;
-
         public float oxygenTimer = 5f;
         private float _oxygenTimeCurrent;
         private bool _isOxygenEmpty;
-
         private void Awake()
         {
+            _isStationStarted = true;
             _oxygenTimeCurrent = oxygenTimer;
             _isOxygenEmpty = false;
         }
@@ -195,26 +193,26 @@ namespace Christopher.Scripts.Modules
         
         private void SoundManaging() {
             if (IsActivated) {
-                if (!isStationStarted) {
+                if (!_isStationStarted) {
                     audioSource.clip = sounds[0];
                     audioSource.loop = false;
                     audioSource.Play();
-                    isStationStarted = true;
-                    isStationStop = false;
+                    _isStationStarted = true;
+                    _isStationStop = false;
                 }
-                if (isStationStarted && !audioSource.isPlaying) {
+                if (_isStationStarted && !audioSource.isPlaying) {
                     audioSource.clip = sounds[1];
                     audioSource.loop = true;
                     audioSource.Play();
                 }
             }
             else {
-                if (!isStationStop) {
+                if (!_isStationStop) {
                     audioSource.clip = sounds[2];
                     audioSource.loop = false;
                     audioSource.Play();
-                    isStationStop = true;
-                    isStationStarted = false;
+                    _isStationStop = true;
+                    _isStationStarted = false;
                 }
             }
             if(State == 3)alarmAudioSource.SetActive(true);

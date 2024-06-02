@@ -15,6 +15,7 @@ namespace Elias.Scripts.Minigames
         public List<GameObject> squarePrefabs; // List of prefab variants
         public Transform gridTransform; // Reference to the Grid GameObject with GridLayoutGroup
         [SerializeField] private GameObject greenLights;
+        [SerializeField] private GameObject redLights;
         [SerializeField] private AudioClip[] sounds; // 0:start sound  1:runing sound   2:stop sound
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioSource interactionAudioSource;
@@ -28,6 +29,7 @@ namespace Elias.Scripts.Minigames
 
         private void Start()
         {
+            isGeneratorStarted = true;
             IsActivated = true;
             _patternManager = GetComponent<PatternManager>(); // Assuming PatternManager is on the same GameObject
             InitializePatternSquares();
@@ -79,11 +81,13 @@ namespace Elias.Scripts.Minigames
                 
                 State = 1;
                 greenLights.SetActive(true);
+                redLights.SetActive(false);
             }
             else {
                
                 State = 0;
                 greenLights.SetActive(false);
+                redLights.SetActive(true);
             }
             SoundManaging();
             if (playerInteracting)

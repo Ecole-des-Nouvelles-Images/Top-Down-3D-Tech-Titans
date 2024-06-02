@@ -15,7 +15,7 @@ namespace Christopher.Scripts.Modules
         private bool _isStationStarted;
         private bool _isStationStop;
         private void Start() {
-            _isStationStarted = true;
+            _isStationStop = true;
             minigameDisplay.SetActive(false);
             groundTrap.SetBool("isTrapOpen",false);
             drillHeadAnimator.SetBool("isDrillDamaged",false);

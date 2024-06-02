@@ -1483,11 +1483,6 @@ PrefabInstance:
       propertyPath: interactionAudioSource
       value: 
       objectReference: {fileID: 550551124}
-    - target: {fileID: 176686127114227067, guid: ca56dbdda055f6a47a82d25703f2dabb,
-        type: 3}
-      propertyPath: StatesMaterials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 12c429e63c259834ca0c12d1c2f329a6, type: 2}
     - target: {fileID: 3704973639498256404, guid: ca56dbdda055f6a47a82d25703f2dabb,
         type: 3}
       propertyPath: m_Name
