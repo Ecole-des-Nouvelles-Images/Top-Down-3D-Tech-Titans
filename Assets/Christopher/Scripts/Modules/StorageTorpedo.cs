@@ -9,6 +9,9 @@ namespace Christopher.Scripts.Modules
         [SerializeField] private float cooldown;
         [SerializeField] private GameObject cooldownDisplay;
         [SerializeField] private GameObject itemDisplay;
+        [SerializeField] private AudioSource railUpAudioSource;
+        [SerializeField] private AudioSource railDownAudioSource;
+        [SerializeField] private AudioSource interactionAudioSource;
         private int _myObject = 3;
         private float _currentCooldownValue;
         private bool _playCooldown;
@@ -42,6 +45,7 @@ namespace Christopher.Scripts.Modules
                     cooldownDisplay.SetActive(false);
                     itemDisplay.SetActive(true);
                     StorageAnimator.SetTrigger("SpawnItem");
+                    railUpAudioSource.Play();
                 }
             }
         }
@@ -53,6 +57,8 @@ namespace Christopher.Scripts.Modules
                 if (!_playCooldown) {
                     PlayerUsingModule.transform.GetComponent<PlayerController>().MyItem = _myObject;
                     _playCooldown = true;
+                    interactionAudioSource.Play();
+                    railDownAudioSource.Play();
                 }
                 PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
             }

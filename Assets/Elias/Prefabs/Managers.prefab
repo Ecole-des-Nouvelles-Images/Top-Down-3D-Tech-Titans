@@ -99,6 +99,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4107574509479355774}
   - component: {fileID: 8012164687450805415}
+  - component: {fileID: 8026310020573436615}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -133,12 +134,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6f6ebbc39f3b247958cc7a65690d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1025480765810817401, guid: 9a680f3a8d706cd4ca5b3495f453795b,
-    type: 3}
   water: {fileID: 0}
-  playersContainer: {fileID: 0}
   cameraTargetGroup: {fileID: 0}
   playerNameText: {fileID: 0}
+  waterWalk: 0
+  waterTimer: 5
+  fadeImageObject: {fileID: 0}
+--- !u!114 &8026310020573436615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370002263854449021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationBehavior: 0
+  m_MaxPlayerCount: 4
+  m_AllowJoining: 1
+  m_JoinBehavior: 1
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Join
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8bd64373-7491-4683-8542-1f0be8d6cf20
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -3613736771268745241, guid: 10c4308ee9ed67e4bab5a62cd095ca2b,
+      type: 3}
+  m_PlayerPrefab: {fileID: 1025480765810817401, guid: 9a680f3a8d706cd4ca5b3495f453795b,
+    type: 3}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1831946275312770672
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,4 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af1970e16d9afc40be5784c66140e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeModules: 0
   difficulties: []
+  noActiveBreach: 0

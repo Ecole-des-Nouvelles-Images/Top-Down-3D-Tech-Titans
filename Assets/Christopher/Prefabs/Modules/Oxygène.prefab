@@ -1748,6 +1748,15 @@ MonoBehaviour:
   maxOxygenValue: 500
   yellowPourcentLimit: 65
   redPourcentLimit: 20
+  sounds:
+  - {fileID: 8300000, guid: 69d563a5c8555174fa02823e710bf61a, type: 3}
+  - {fileID: 8300000, guid: afe7721753301be4bb6ad08c08398439, type: 3}
+  - {fileID: 8300000, guid: 2b5bdbb2edf27db45aa1b41a3be0c4ef, type: 3}
+  audioSource: {fileID: 0}
+  alarmAudioSource: {fileID: 0}
+  interactionAudioSource: {fileID: 0}
+  gameManager: {fileID: 0}
+  oxygenTimer: 5
 --- !u!1 &7021974071752902343
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Elias.Scripts.Managers;
 using Elias.Scripts.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -19,17 +20,21 @@ namespace Christopher.Scripts.Modules
         [SerializeField]private float maxOxygenValue;
         [SerializeField]private float yellowPourcentLimit;
         [SerializeField]private float redPourcentLimit;
+        [SerializeField] private AudioClip[] sounds; // 0:start sound  1:runing sound   2:stop sound
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private GameObject alarmAudioSource;
+        [SerializeField] private AudioSource interactionAudioSource;
+        private bool _isStationStarted;
+        private bool _isStationStop;
         private int[] _toDo;
         private List<int> _input;
-
         public GameManager gameManager;
-
         public float oxygenTimer = 5f;
         private float _oxygenTimeCurrent;
         private bool _isOxygenEmpty;
-
         private void Awake()
         {
+            _isStationStarted = true;
             _oxygenTimeCurrent = oxygenTimer;
             _isOxygenEmpty = false;
         }
@@ -43,19 +48,15 @@ namespace Christopher.Scripts.Modules
             ResetPartyGame();
         }
         void Update() {
+            SoundManaging();
             CurrentOxygenValue -= Time.deltaTime * SpeedDecrease;
-
             OxygenControl();
-            
-            if (_isOxygenEmpty)
-            {
+            if (_isOxygenEmpty) {
                 _oxygenTimeCurrent -= Time.deltaTime;
-                if (_oxygenTimeCurrent <= 0)
-                {
+                if (_oxygenTimeCurrent <= 0) {
                     gameManager.GameOver("Le Sous Marin est asphyxé");
                 }
             }
-            
             if (!IsActivated) {
                 State = 0;
                 foreach (GameObject x in LightStates) {
@@ -67,8 +68,8 @@ namespace Christopher.Scripts.Modules
             }
             if (IsActivated) {
                 playerDetector.SetActive(true);
-                if (CurrentOxygenValue < yellowPourcentLimit && CurrentOxygenValue > redPourcentLimit) State = 2;
-                else if (CurrentOxygenValue < redPourcentLimit) State = 3;
+                if (PourcentageEmpty() < yellowPourcentLimit && CurrentOxygenValue > redPourcentLimit) State = 2;
+                else if (PourcentageEmpty() < redPourcentLimit) State = 3;
                 else {
                     State = 1;
                 }
@@ -148,6 +149,9 @@ namespace Christopher.Scripts.Modules
             }
         }
 
+        private float PourcentageEmpty() {
+            return CurrentOxygenValue / maxOxygenValue * 100;
+        }
         private void ResetPartyGame() {
             for (int i = 0; i < _toDo.Length; i++) {
                 _toDo[i] = Random.Range(1, 4);
@@ -161,6 +165,7 @@ namespace Christopher.Scripts.Modules
                 PlayerUsingModule = playerUsingModule;
                 if(!PartyGameDisplay.activeSelf)PartyGameDisplay.SetActive(true);
                 PlayerUsingModule.GetComponent<PlayerController>().MyItem = 0;
+                interactionAudioSource.Play();
             }
             else {
                 playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
@@ -185,5 +190,33 @@ namespace Christopher.Scripts.Modules
         public override void Left() {_input.Add(3);}
 
         public override void Right() {_input.Add(4);}
+        
+        private void SoundManaging() {
+            if (IsActivated) {
+                if (!_isStationStarted) {
+                    audioSource.clip = sounds[0];
+                    audioSource.loop = false;
+                    audioSource.Play();
+                    _isStationStarted = true;
+                    _isStationStop = false;
+                }
+                if (_isStationStarted && !audioSource.isPlaying) {
+                    audioSource.clip = sounds[1];
+                    audioSource.loop = true;
+                    audioSource.Play();
+                }
+            }
+            else {
+                if (!_isStationStop) {
+                    audioSource.clip = sounds[2];
+                    audioSource.loop = false;
+                    audioSource.Play();
+                    _isStationStop = true;
+                    _isStationStarted = false;
+                }
+            }
+            if(State == 3)alarmAudioSource.SetActive(true);
+            else alarmAudioSource.SetActive(false);
+        }
     }
 }

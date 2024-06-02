@@ -16,6 +16,8 @@ public class DrillEntity : MonoBehaviour
     [SerializeField] private RectTransform fixingProgressBar;
     [SerializeField] private GameObject drillFixingModule;
     [SerializeField] private GameObject digEffect;
+    [SerializeField] private GameObject digSound;
+    [SerializeField] private GameObject movingSound;
     [SerializeField] private int moveSpeed;
     
     private float _currentTime;
@@ -57,13 +59,22 @@ public class DrillEntity : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(_drillRB.velocity == Vector3.zero)movingSound.SetActive(false);
+        else
+        {
+            movingSound.SetActive(true);
+        }
         Helper.PourcentStateBarre(fixingProgressBar,'x',_currentEndurance,MaxEndurance);
         if (_currentEndurance == MaxEndurance) IsDamaged = false;
-        if (_currentDiggingRock != null && !_currentDiggingRock.activeSelf) _currentDiggingRock = null;
-        if(_currentDiggingRock != null)digEffect.SetActive(true);
+        if (_currentDiggingRock != null && _currentDiggingRock.activeSelf == false) _currentDiggingRock = null;
+        if (_currentDiggingRock != null && IsDamaged == false) {
+            digEffect.SetActive(true);
+            digSound.SetActive(true);
+        }
         else
         {
             digEffect.SetActive(false);
+            digSound.SetActive(false);
         }
         if (IsDamaged) {
             transform.GetComponent<Collider>().enabled = false;
