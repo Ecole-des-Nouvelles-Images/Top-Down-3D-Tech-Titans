@@ -10,15 +10,19 @@ namespace Christopher.Scripts.Modules
         [SerializeField] private GameObject minigameDisplay;
         [SerializeField] private GameObject drillHead;
         [SerializeField] private GameObject drillHeadOnSocleDisplay;
-       
-
+        [SerializeField] private AudioClip[] sounds; // 0:come up  1:go down
+        [SerializeField] private AudioSource audioSource;
+        private bool _isStationStarted;
+        private bool _isStationStop;
         private void Start() {
+            _isStationStarted = true;
             minigameDisplay.SetActive(false);
             groundTrap.SetBool("isTrapOpen",false);
             drillHeadAnimator.SetBool("isDrillDamaged",false);
            // drillHeadOnSocleDisplay.SetActive(false);// cette ligne sera surement à supprimer <---------------------------------------------------------------------
         }
         private void Update() {
+            SoundManaging();
             if (IsActivated)
             {
                 groundTrap.SetBool("isTrapOpen",true);
@@ -77,5 +81,25 @@ namespace Christopher.Scripts.Modules
         public override void Down() {}
         public override void Left() {}
         public override void Right() {}
+        private void SoundManaging() {
+            if (IsActivated) {
+                if (!_isStationStarted) {
+                    audioSource.clip = sounds[0];
+                    audioSource.loop = false;
+                    audioSource.Play();
+                    _isStationStarted = true;
+                    _isStationStop = false;
+                }
+            }
+            else {
+                if (!_isStationStop) {
+                    audioSource.clip = sounds[1];
+                    audioSource.loop = false;
+                    audioSource.Play();
+                    _isStationStop = true;
+                    _isStationStarted = false;
+                }
+            }
+        }
     }
 }

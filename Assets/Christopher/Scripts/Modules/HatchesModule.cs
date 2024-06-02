@@ -10,6 +10,7 @@ namespace Christopher.Scripts.Modules
         public GameManager gameManager;
 
         public GameCycleController gameCycleController;
+        [SerializeField] private AudioSource audioSource;
         
         // Start is called before the first frame update
         void Start()
@@ -60,6 +61,7 @@ namespace Christopher.Scripts.Modules
             {
                 gameManager.LowerWaterToInitialPosition();
             }
+            audioSource.Play();
             PlayerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }
         

@@ -3375,6 +3375,21 @@ PrefabInstance:
       objectReference: {fileID: 2258672191168644043}
     - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
         type: 3}
+      propertyPath: sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
+        type: 3}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0952d1d3a7fd26c47a73f7bc0826531a, type: 3}
+    - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
+        type: 3}
+      propertyPath: sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ef4d52470f33bfd4f9b17229346f4088, type: 3}
+    - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
+        type: 3}
       propertyPath: drillHeadOnSocleDisplay
       value: 
       objectReference: {fileID: 9182143155548960639}
