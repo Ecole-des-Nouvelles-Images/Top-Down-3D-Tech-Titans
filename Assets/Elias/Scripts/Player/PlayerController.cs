@@ -15,6 +15,7 @@ namespace Elias.Scripts.Player
         [SerializeField] public float speed;
         [SerializeField] public GameObject inputInteractPanel;
         [SerializeField] public GameObject[] itemsDisplay;
+        public GameObject repairTool;
 
         // New variables for animations
         public Animator animator;
@@ -54,6 +55,8 @@ namespace Elias.Scripts.Player
         private void Start()
         {
             animator = GetComponent<Animator>();
+            
+            repairTool.SetActive(false);
 
             if (animator == null)
             {
@@ -145,9 +148,17 @@ namespace Elias.Scripts.Player
                 {
                     case BreachModule:
                         animator.SetBool(IsRepairing, true);
+                        while (UsingModule)
+                        {
+                            repairTool.SetActive(true);
+                        }
                         break;
                     case FixingDrillModule:
                         animator.SetBool(IsRepairing, true);
+                        while (UsingModule)
+                        {
+                            repairTool.SetActive(true);
+                        }
                         break;
                     case HatchesModule:
                         animator.SetBool(IsInteractingHatches, true);
