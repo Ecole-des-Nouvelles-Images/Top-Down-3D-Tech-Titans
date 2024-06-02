@@ -17,7 +17,7 @@ public class DrillEntity : MonoBehaviour
     [SerializeField] private GameObject drillFixingModule;
     [SerializeField] private GameObject digEffect;
     [SerializeField] private int moveSpeed;
-    
+
     private float _currentTime;
     private int _currentEndurance;
     private int _currentMoveSpeed;
@@ -25,6 +25,8 @@ public class DrillEntity : MonoBehaviour
     private GameObject _currentDiggingRock;
     private Rigidbody _drillRB;
     private GameObject _playerUsingModule;
+
+    
     
     public void MoveX(float moveX)
     {

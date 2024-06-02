@@ -20,6 +20,7 @@ namespace Christopher.Scripts.Modules
         private bool _cooldownActive;
         private float _currentBoostValue;
         private SubmarineController _submarine;
+
         void Start() {
             _boostActive = false;
             PlayerUsingModule = null;
@@ -29,7 +30,9 @@ namespace Christopher.Scripts.Modules
             _submarine = screenModule.Submarine.GetComponent<SubmarineController>();
             boostDisplay.SetActive(true);
             cooldownDisplay.SetActive(false);
+            audioSource = GetComponent<AudioSource>(); // Initialize audio source
         }
+
         void Update() {
             if (IsActivated) {
                 playerDetector.SetActive(true);
@@ -38,22 +41,25 @@ namespace Christopher.Scripts.Modules
                 State = 1;
             }
             else {
-                if(partyGameDisplay.activeSelf)partyGameDisplay.SetActive(false);
-                if(playerDetector.activeSelf)playerDetector.SetActive(false);
+                if(partyGameDisplay.activeSelf) partyGameDisplay.SetActive(false);
+                if(playerDetector.activeSelf) playerDetector.SetActive(false);
                 State = 0;
             }
-            Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
+
+            Material[] mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;
             mats[1] = StatesMaterials[State];
             mats[4] = StatesMaterials[State];
             StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials = mats;
+
             cooldownDisplay.transform.GetComponent<Image>().fillAmount = _currentCooldownValue / cooldown;
-            Vector3 fillbarrevalue =new Vector3(_currentBoostValue/ maxBoostValue, boostFillbarre.transform.localScale.y,
+            Vector3 fillbarrevalue = new Vector3(_currentBoostValue / maxBoostValue, boostFillbarre.transform.localScale.y,
                 boostFillbarre.transform.localScale.z);
             boostFillbarre.transform.localScale = fillbarrevalue;
+
             if (_boostActive) {
                 boostDisplay.SetActive(true);
                 cooldownDisplay.SetActive(false);
-                if(_currentBoostValue > 0) _currentBoostValue -= Time.deltaTime * speedDecreaseBoost;
+                if (_currentBoostValue > 0) _currentBoostValue -= Time.deltaTime * speedDecreaseBoost;
                 else {
                     _currentBoostValue = maxBoostValue;
                     _boostActive = false;
@@ -61,6 +67,7 @@ namespace Christopher.Scripts.Modules
                     _submarine.BoostOff();
                 }
             }
+
             if (_cooldownActive) {
                 boostDisplay.SetActive(false);
                 cooldownDisplay.SetActive(true);
@@ -73,20 +80,31 @@ namespace Christopher.Scripts.Modules
                 }
             }
         }
-        public override void Activate() { IsActivated = true; }
-        public override void Deactivate() { IsActivated = false; }
+
+        public override void Activate() { 
+            IsActivated = true; 
+            audioSource.Play(); // Start playing sound
+        }
+
+        public override void Deactivate() { 
+            IsActivated = false; 
+            audioSource.Stop(); // Stop playing sound
+        }
+
         public override void Interact(GameObject playerUsingModule) {
             if (IsActivated && PlayerUsingModule == null) {
                 PlayerUsingModule = playerUsingModule;
-                if(!partyGameDisplay.activeSelf)partyGameDisplay.SetActive(true);
+                if (!partyGameDisplay.activeSelf) partyGameDisplay.SetActive(true);
             }
             else {
                 playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
             }
         }
+
         public override void StopInteract() {
             PlayerUsingModule = null;
         }
+
         public override void Validate() {
             if (State == 1 && !_cooldownActive && !_boostActive) {
                 _submarine.BoostOn();
@@ -97,6 +115,7 @@ namespace Christopher.Scripts.Modules
                 _boostActive = false;
             }
         }
+
         public override void NavigateX(float moveX) {}
         public override void NavigateY(float moveY) {}
         public override void Up() {}

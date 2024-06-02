@@ -33,11 +33,13 @@ namespace Christopher.Scripts.Modules
         public override void Activate()
         {
             IsActivated = true;
+            audioSource.Play();
         }
 
         public override void Deactivate()
         {
             IsActivated = false;
+            audioSource.Stop();
         }
 
         public override void Interact(GameObject playerUsingModule)

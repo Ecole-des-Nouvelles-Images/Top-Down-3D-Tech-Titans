@@ -182,11 +182,13 @@ namespace Elias.Scripts.Minigames
 
         public override void Activate() {
             IsActivated = false;
+            audioSource.Play();
         }
 
         public override void Deactivate()
         {
             IsActivated = true;
+            audioSource.Stop();
             State = 0;
             canvas.SetActive(false);
 
