@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Christopher.Scripts.Modules;
 using Elias.Scripts.Managers;
 using Elias.Scripts.Player;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
-namespace Christopher.Scripts
+namespace Christopher.Scripts.Modules
 {
     public class ScreenModule : SubmarinModule {
         public int Difficulty;
@@ -212,7 +209,7 @@ namespace Christopher.Scripts
                 transitionAudioSource.Play();
                 _transitionPhase1 = true;
                 CurrentPhase = 2;
-                gameCycleController.UpdateDifficulty(Difficulty);
+                GameCycleController.Instance.UpdateDifficulty(Difficulty);
             }
 
             if (CurrentPhase == 2) {

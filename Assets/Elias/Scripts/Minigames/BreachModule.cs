@@ -109,7 +109,6 @@ namespace Elias.Scripts.Minigames
         public override void Activate()
         {
             IsActivated = true;
-            audioSource.Play();
             skin.SetActive(true);
             playerDetector.SetActive(true);
             State = 1;
@@ -119,7 +118,6 @@ namespace Elias.Scripts.Minigames
         public override void Deactivate()
         {
             IsActivated = false;
-            audioSource.Stop();
             skin.SetActive(false);
             playerDetector.SetActive(false);
             State = 0;

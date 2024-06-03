@@ -89,7 +89,6 @@ namespace Christopher.Scripts.Modules
 
         public override void Activate() {
                 IsActivated = true; // Set IsActivated to true only if it's currently false
-                audioSource.Play();
                 PartyGameDisplay.SetActive(true);
                 TorpedoLauncherAnimator.SetBool("isDoorOpen", false);
         }
@@ -97,7 +96,6 @@ namespace Christopher.Scripts.Modules
 
         public override void Deactivate() {
             IsActivated = false; // Set IsActivated to false
-            audioSource.Stop();
             State = 0;
             PartyGameDisplay.SetActive(false);
             if (PlayerUsingModule) {
