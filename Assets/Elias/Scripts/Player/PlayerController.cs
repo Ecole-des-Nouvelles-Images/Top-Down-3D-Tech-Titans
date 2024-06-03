@@ -15,12 +15,10 @@ namespace Elias.Scripts.Player
         [SerializeField] public float speed;
         [SerializeField] public GameObject inputInteractPanel;
         [SerializeField] public GameObject[] itemsDisplay;
-        
-        //public GameObject repairTool;
 
         // New variables for animations
         public Animator animator;
-        
+
         // New variables for sounds
         [SerializeField] private List<AudioClip> playerSteps;
         private AudioSource audioSource;
@@ -37,26 +35,27 @@ namespace Elias.Scripts.Player
         public static readonly int IsInteractingPressure = Animator.StringToHash("IsInteractingPressure");
         public static readonly int IsHoldingTorpedo = Animator.StringToHash("IsHoldingTorpedo");
         public static readonly int IsHoldingBottle = Animator.StringToHash("IsHoldingBottle");
-        
+
         // triggers
         public static readonly int InsertionCo2 = Animator.StringToHash("InsertionCo2");
         public static readonly int InsertionPetrol = Animator.StringToHash("InsertionPetrol");
-        
+
         public static readonly int StandUp = Animator.StringToHash("StandUp");
-        
-        public static  float X = Animator.StringToHash("X");
-        public static  float Y = Animator.StringToHash("Y");
-        
+
+        public static readonly int X = Animator.StringToHash("X");
+        public static readonly int Y = Animator.StringToHash("Y");
+        //public static readonly int Z = Animator.StringToHash("Z");
+
         private Rigidbody _playerRigidbody;
         private RigidbodyConstraints _originalConstraints;
         private Vector2 _moveInputValue;
         private bool _isInteracting;
         private bool _isWithinRange;
-        
+
         private void Start()
         {
             animator = GetComponent<Animator>();
-            
+
             //repairTool.SetActive(false);
 
             if (animator == null)
@@ -225,32 +224,37 @@ namespace Elias.Scripts.Player
 
         private void PerformMoves()
         {
-            X = _moveInputValue.x;
-            Y = _moveInputValue.y;
+            float x = _moveInputValue.x;
+            float y = _moveInputValue.y;
+
+            // Update Animator parameters
+            animator.SetFloat(X, x);
+            animator.SetFloat(Y, y);
+
             if (_isInteracting)
             {
-                UsingModule?.NavigateX(X);
-                UsingModule?.NavigateY(Y);
+                UsingModule?.NavigateX(x);
+                UsingModule?.NavigateY(y);
             }
             else
             {
-                Vector3 moveDirection = new Vector3(X, 0, Y).normalized;
+                Vector3 moveDirection = new Vector3(x, 0, y).normalized;
 
                 if (moveDirection != Vector3.zero)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                     _playerRigidbody.MoveRotation(targetRotation);
-            
-                    float inputMagnitude = new Vector2(X, Y).magnitude;
+
+                    float inputMagnitude = new Vector2(x, y).magnitude;
                     bool isRunning = inputMagnitude >= 0.5f;
 
                     float moveSpeed = isRunning && !GameManager.Instance.waterWalk ? speed : speed / 2;
 
                     Vector3 velocity = moveDirection * (moveSpeed * Time.fixedDeltaTime);
                     _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
-            
+
                     animator.SetBool(IsRunningWater, GameManager.Instance.waterWalk);
-            
+
                     PlayRandomStepSound();
                 }
                 else
@@ -260,7 +264,6 @@ namespace Elias.Scripts.Player
                 }
             }
         }
-
 
         private void PlayRandomStepSound()
         {
