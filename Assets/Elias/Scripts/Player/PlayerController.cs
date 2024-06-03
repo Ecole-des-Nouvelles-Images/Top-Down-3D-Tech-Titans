@@ -28,8 +28,6 @@ namespace Elias.Scripts.Player
 
         // booleans
         public static readonly int Idle = Animator.StringToHash("Idle");
-        public static readonly int IsRunning = Animator.StringToHash("IsRunning");
-        public static readonly int IsWalking = Animator.StringToHash("IsWalking");
         public static readonly int IsRunningWater = Animator.StringToHash("IsRunningWater");
         public static readonly int IsRepairing = Animator.StringToHash("IsRepairing");
         public static readonly int IsActivatingLauncher = Animator.StringToHash("IsActivatingLauncher");
@@ -45,6 +43,9 @@ namespace Elias.Scripts.Player
         public static readonly int InsertionPetrol = Animator.StringToHash("InsertionPetrol");
         
         public static readonly int StandUp = Animator.StringToHash("StandUp");
+        
+        public static  float X = Animator.StringToHash("X");
+        public static  float Y = Animator.StringToHash("Y");
         
         private Rigidbody _playerRigidbody;
         private RigidbodyConstraints _originalConstraints;
@@ -224,59 +225,42 @@ namespace Elias.Scripts.Player
 
         private void PerformMoves()
         {
-            float xMov = _moveInputValue.x;
-            float zMov = _moveInputValue.y;
+            X = _moveInputValue.x;
+            Y = _moveInputValue.y;
             if (_isInteracting)
             {
-                UsingModule?.NavigateX(xMov);
-                UsingModule?.NavigateY(zMov);
+                UsingModule?.NavigateX(X);
+                UsingModule?.NavigateY(Y);
             }
             else
             {
-                Vector3 moveDirection = new Vector3(xMov, 0, zMov).normalized;
+                Vector3 moveDirection = new Vector3(X, 0, Y).normalized;
 
                 if (moveDirection != Vector3.zero)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                     _playerRigidbody.MoveRotation(targetRotation);
-                    
-                    float inputMagnitude = new Vector2(xMov, zMov).magnitude;
-                    
-                    bool isWalking = inputMagnitude < 0.5f && inputMagnitude > 0f;
+            
+                    float inputMagnitude = new Vector2(X, Y).magnitude;
                     bool isRunning = inputMagnitude >= 0.5f;
-                    
-                    float moveSpeed = isRunning ? speed : speed / 2;
+
+                    float moveSpeed = isRunning && !GameManager.Instance.waterWalk ? speed : speed / 2;
 
                     Vector3 velocity = moveDirection * (moveSpeed * Time.fixedDeltaTime);
                     _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
-                    
-                    switch (GameManager.Instance.waterWalk)
-                    {
-                        case true:
-                            animator.SetBool(IsRunningWater, isRunning || isWalking);
-                            animator.SetBool(IsRunning, false);
-                            animator.SetBool(IsWalking, false);
-                            break;
-                        case false:
-                            animator.SetBool(IsRunning, isRunning);
-                            animator.SetBool(IsWalking, isWalking);
-                            animator.SetBool(IsRunningWater, false);
-                            break;
-                    }
-                    
-                    // Play step sound
+            
+                    animator.SetBool(IsRunningWater, GameManager.Instance.waterWalk);
+            
                     PlayRandomStepSound();
                 }
                 else
                 {
                     _playerRigidbody.velocity = Vector3.zero;
-
                     animator.SetBool(IsRunningWater, false);
-                    animator.SetBool(IsRunning, false);
-                    animator.SetBool(IsWalking, false);
                 }
             }
         }
+
 
         private void PlayRandomStepSound()
         {
