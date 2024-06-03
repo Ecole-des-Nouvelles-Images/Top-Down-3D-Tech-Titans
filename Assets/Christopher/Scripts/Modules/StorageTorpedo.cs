@@ -59,7 +59,7 @@ namespace Christopher.Scripts.Modules
                     PlayerUsingModule.transform.GetComponent<PlayerController>().MyItem = _myObject;
                     _playCooldown = true;
                     interactionAudioSource.Play();
-                    railDownAudioSource.Play();
+                    if(railDownAudioSource != null)railDownAudioSource.Play();
                 }
                 PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
             }

@@ -12,14 +12,17 @@ namespace Christopher.Scripts.Modules
         [SerializeField] private GameObject itemDisplay; // 0:start sound  1:runing sound   2:stop sound
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioSource interactionAudioSource;
+        [SerializeField] private AudioSource railDown;
         private float _currentCooldownValue;
         private bool _playCooldown;
         void Start() {
+            if (myObject != 3) railDown = null;
             IsActivated = true;
             PlayerUsingModule = null;
             _currentCooldownValue = cooldown;
             cooldownDisplay.SetActive(false);
             StorageAnimator.SetTrigger("SpawnItem");
+            audioSource.Play();
         }
         void Update() {
             if (!IsActivated) {
@@ -29,17 +32,18 @@ namespace Christopher.Scripts.Modules
                 State = 1;
                 playerDetector.SetActive(true);
             }
-
             MeshRenderer renderer = StateDisplayObject[0].transform.GetComponent<MeshRenderer>();
             Material[] mats = renderer.materials;
-
-            if (mats.Length > 4) {
+            if (myObject != 3) {
                 mats[4] = StatesMaterials[State];
                 renderer.materials = mats;
-            } else {
-                Debug.LogWarning("Materials array does not have the expected length.");
             }
-
+            else {
+                mats[3] = StatesMaterials[State];
+                renderer.materials = mats;
+            }
+           
+            
             cooldownDisplay.transform.GetComponent<Image>().fillAmount = _currentCooldownValue / cooldown;
             if (_playCooldown) {
                 cooldownDisplay.SetActive(true);
@@ -66,6 +70,7 @@ namespace Christopher.Scripts.Modules
                     PlayerUsingModule.transform.GetComponent<PlayerController>().MyItem = myObject;
                     _playCooldown = true;
                     interactionAudioSource.Play();
+                    if(myObject == 3)railDown.Play();
                 }
                 PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
             }

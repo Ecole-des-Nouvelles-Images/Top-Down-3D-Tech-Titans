@@ -4281,7 +4281,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 8639251175404074148}
+      objectReference: {fileID: 0}
     - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
         type: 3}
       propertyPath: drillHeadAnimator

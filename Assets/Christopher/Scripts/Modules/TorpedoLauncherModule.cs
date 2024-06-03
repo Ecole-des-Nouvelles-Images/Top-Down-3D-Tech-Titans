@@ -2,6 +2,7 @@ using Elias.Scripts.Managers;
 using Elias.Scripts.Player;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Christopher.Scripts.Modules
@@ -14,13 +15,16 @@ namespace Christopher.Scripts.Modules
         public TMP_Text[] DisplayDoingContent;
         public GameObject PartyGameDisplay;
         public Animator TorpedoLauncherAnimator;
+        [SerializeField] private AudioClip[] sounds; // 0:open door  1:close door   2:shoot sound
+        [SerializeField] private AudioSource doorAudioSource;
+        [SerializeField] private AudioSource shootAudioSource;
         private int[] _toDo = new int[3];
         private int[] _doing = new int[3];
         private int _currentSlot;
         private float _activationTimer = 5f;
 
-        void Start()
-        {
+        void Start() {
+            shootAudioSource.clip = sounds[2];
             TorpedoLauncherAnimator.SetBool("isDoorOpen", true);
             PartyGameDisplay.SetActive(false);
             PlayerUsingModule = null;
@@ -60,6 +64,7 @@ namespace Christopher.Scripts.Modules
                 }
                 if (Verif()) {
                     Succes.Add(true);
+                    shootAudioSource.Play();
                     Deactivate();
                 }
             } else {
@@ -90,7 +95,6 @@ namespace Christopher.Scripts.Modules
         public override void Activate() {
                 IsActivated = true; // Set IsActivated to true only if it's currently false
                 PartyGameDisplay.SetActive(true);
-                TorpedoLauncherAnimator.SetBool("isDoorOpen", false);
         }
 
 
@@ -103,6 +107,8 @@ namespace Christopher.Scripts.Modules
                 PlayerUsingModule = null;
             }
             TorpedoLauncherAnimator.SetBool("isDoorOpen", true);
+            doorAudioSource.clip = sounds[0];
+            doorAudioSource.Play();
         }
 
         public override void Interact(GameObject playerUsingModule) {
@@ -110,6 +116,9 @@ namespace Christopher.Scripts.Modules
                 PlayerUsingModule = playerUsingModule;
                 PartyGameDisplay.SetActive(true);
                 PlayerUsingModule.GetComponent<PlayerController>().MyItem = 0;
+                TorpedoLauncherAnimator.SetBool("isDoorOpen", false);
+                doorAudioSource.clip = sounds[1];
+                doorAudioSource.Play();
             } else {
                 playerUsingModule.GetComponent<PlayerController>().QuitInteraction();
             }
