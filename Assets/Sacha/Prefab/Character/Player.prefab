@@ -4690,7 +4690,7 @@ Transform:
   m_GameObject: {fileID: 4121007961758642825}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.249, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -9347,7 +9347,6 @@ MonoBehaviour:
   - {fileID: 6569200560288166726}
   - {fileID: 6926161129648763714}
   - {fileID: 4471009578110913235}
-  repairTool: {fileID: 4017984486653162590}
   animator: {fileID: 1422245354938354552}
   playerSteps: []
 --- !u!114 &8221284705475947638
