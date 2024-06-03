@@ -87,6 +87,7 @@ MonoBehaviour:
   itemDisplay: {fileID: 1210328476406880978}
   audioSource: {fileID: 1942736217899760134}
   interactionAudioSource: {fileID: 101625143746499414}
+  railDown: {fileID: 0}
 --- !u!1 &1210328476406880978
 GameObject:
   m_ObjectHideFlags: 0

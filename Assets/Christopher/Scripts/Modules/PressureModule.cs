@@ -13,6 +13,12 @@ public class PressureModule : SubmarinModule {
     [SerializeField] private GameObject[] lightStates;
     [SerializeField] private GameObject partyGameDisplay;
     [SerializeField] private GameObject sliderDisplayLevel;
+    [SerializeField] private AudioClip[] sounds; // 0:start sound  1:runing sound   2:stop sound
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private GameObject alarmAudioSource;
+    [SerializeField] private AudioSource interactionAudioSource;
+    private bool _isStationStarted;
+    private bool _isStationStop;
     private bool _needState;
     private bool _urgentState;
     private float _maxPressure = 3.0f;
@@ -23,12 +29,14 @@ public class PressureModule : SubmarinModule {
     private float _yellowZone2 = 1.5f;
     
     void Start() {
+        _isStationStarted = true;
         IsActivated = true;
         PlayerUsingModule = null;
         partyGameDisplay.SetActive(false);
     }
 
     void Update() {
+        SoundManaging();
         sliderDisplayLevel.transform.GetComponent<Slider>().value = PressureValue;
         if (PressureValue > _maxPressure) PressureValue = _maxPressure;
         if (PressureValue < _minPressure) PressureValue = _minPressure;
@@ -119,4 +127,31 @@ public class PressureModule : SubmarinModule {
     public override void Down() {}
     public override void Left() {}
     public override void Right() {}
+    private void SoundManaging() {
+        if (IsActivated) {
+            if (!_isStationStarted) {
+                audioSource.clip = sounds[0];
+                audioSource.loop = false;
+                audioSource.Play();
+                _isStationStarted = true;
+                _isStationStop = false;
+            }
+            if (_isStationStarted && !audioSource.isPlaying) {
+                audioSource.clip = sounds[1];
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+        }
+        else {
+            if (!_isStationStop) {
+                audioSource.clip = sounds[2];
+                audioSource.loop = false;
+                audioSource.Play();
+                _isStationStop = true;
+                _isStationStarted = false;
+            }
+        }
+        if(State == 3)alarmAudioSource.SetActive(true);
+        else alarmAudioSource.SetActive(false);
+    }
 }
