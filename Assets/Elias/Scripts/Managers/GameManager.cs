@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace Elias.Scripts.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         public GameObject water;
         public CinemachineTargetGroup cameraTargetGroup;
@@ -99,8 +99,7 @@ namespace Elias.Scripts.Managers
 
         private void WaterControl()
         {
-            GameCycleController gameCycleController = FindObjectOfType<GameCycleController>();
-            if (gameCycleController != null)
+            if (GameCycleController.Instance != null)
             {
                 BreachModule[] activeSkillCheckModules = FindObjectsOfType<BreachModule>();
                 int activeModuleCount = 0;
@@ -176,8 +175,6 @@ namespace Elias.Scripts.Managers
             water.transform.position = new Vector3(_originalWaterPosition.x, _originalWaterPosition.y, _originalWaterPosition.z);
         }
         
-        
-        
         public void RemovePlayer()
         {
             if (_playerInstance != null)
@@ -194,6 +191,5 @@ namespace Elias.Scripts.Managers
             WaitForSeconds waitForSeconds = new WaitForSeconds(5);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
     }
 }

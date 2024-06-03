@@ -1,28 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
+using Christopher.Scripts.Modules;
 using UnityEngine;
 using Elias.Scripts.Minigames;
+using Unity.VisualScripting;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Elias.Scripts.Managers
 {
-    public class GameCycleController : MonoBehaviour
+    public class GameCycleController : MonoBehaviourSingleton<GameCycleController>
     {
         public int activeModules;
 
-        private List<BreachModule> _modules = new List<BreachModule>();
+        public List<BreachModule> modules = new List<BreachModule>();
         public List<DifficultyParameters> difficulties;
         private bool _isDifficultySet;
         private bool _hasUpdatedDifficulty;
         private int _activeDifficulty;
         public bool noActiveBreach;
 
-        private float _intervalTimer;
+        private float _torpedoTimer;
+        private float _generatorTimer;
+        private float _waveTimer;
+        private float _cooldownTimer;
+        private bool _halfCooldown;
+        private bool _noCooldown;
+        private bool _cooldownAdjusted;
+        
+        public int activePhase;
+        public int generatorEventCount;
+
+        private enum GameState { InitialDelay, Wave, Cooldown }
+        private GameState _currentState;
 
         private void Start()
         {
-            // Reset all difficulty parameters at the start of the game
+            // Initialize the difficulties list if it's null
+            if (difficulties == null)
+            {
+                difficulties = new List<DifficultyParameters>();
+            }
+
             foreach (var difficulty in difficulties)
             {
                 if (difficulty != null)
@@ -34,10 +54,83 @@ namespace Elias.Scripts.Managers
                     Debug.LogWarning("A DifficultyParameters instance is null.");
                 }
             }
+
+            if (difficulties.Count > 0)
+            {
+                _currentState = GameState.InitialDelay;
+                _waveTimer = difficulties[_activeDifficulty].initialDelay;
+            }
+            else
+            {
+                Debug.LogError("No difficulties set.");
+            }
         }
 
+        
         private void Update()
         {
+            if (activePhase == 1)
+            {
+                return;
+            }
+
+            if (_generatorTimer > 0)
+            {
+                _generatorTimer -= Time.deltaTime;
+            }
+            
+            if (_torpedoTimer > 0)
+            {
+                _torpedoTimer -= Time.deltaTime;
+            }
+
+            // Generator logic
+            if (difficulties != null && activePhase != 1 || _generatorTimer <= 0 && generatorEventCount != 0)
+            {
+                if (difficulties != null)
+                {
+                    _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
+
+                    if (_generatorTimer <= 0 &&
+                        generatorEventCount <= difficulties[_activeDifficulty].generatorCountLimit)
+                    {
+                        generatorEventCount++;
+
+                        GeneratorModule generator = FindObjectOfType<GeneratorModule>();
+                        if (generator != null)
+                        {
+                            generator.Activate();
+                        }
+
+                        if (generatorEventCount < difficulties[_activeDifficulty].generatorCountLimit)
+                        {
+                            _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
+                        }
+                    }
+                }
+            }
+            
+            // Torpedo logic
+            if (difficulties != null && activePhase != 1 && _torpedoTimer <= 0)
+            {
+                if (difficulties != null)
+                {
+                    _torpedoTimer = difficulties[_activeDifficulty].GetRandomTorpedoInterval();
+                    
+                    if (_torpedoTimer <= 0)
+                    {
+                    
+                        TorpedoLauncherModule torpedo = FindObjectOfType<TorpedoLauncherModule>();
+                        if (torpedo != null)
+                        {
+                            torpedo.Deactivate();
+                        }
+                    }
+                }
+
+                
+            }
+            
             if (!_hasUpdatedDifficulty || !_isDifficultySet)
             {
                 return;
@@ -50,15 +143,69 @@ namespace Elias.Scripts.Managers
                 return;
             }
 
-            Debug.Log(currentDifficulty.initialDelay);
-
-            currentDifficulty.initialDelay -= Time.deltaTime;
-            _intervalTimer -= Time.deltaTime;
-
-            if (currentDifficulty.initialDelay <= 0f && _intervalTimer <= 0f)
+            switch (_currentState)
             {
+                case GameState.InitialDelay:
+                    HandleInitialDelay(currentDifficulty);
+                    break;
+                case GameState.Wave:
+                    HandleWave(currentDifficulty);
+                    break;
+                case GameState.Cooldown:
+                    HandleCooldown(currentDifficulty);
+                    break;
+            }
+        }
+
+
+        private void HandleInitialDelay(DifficultyParameters currentDifficulty)
+        {
+            _waveTimer -= Time.deltaTime;
+            if (_waveTimer <= 0f)
+            {
+                _currentState = GameState.Wave;
+                _waveTimer = currentDifficulty.GetRandomWaveDuration();
                 StartCoroutine(ActivateModulesWave());
-                _intervalTimer = currentDifficulty.GetRandomWaveInterval();
+            }
+        }
+
+        private void HandleWave(DifficultyParameters currentDifficulty)
+        {
+            _waveTimer -= Time.deltaTime;
+            if (_waveTimer <= 0f)
+            {
+                _currentState = GameState.Cooldown;
+                _cooldownTimer = currentDifficulty.GetRandomWaveInterval();
+                AdjustCooldownTimer();
+                StopCoroutine(ActivateModulesWave());
+            }
+        }
+
+        private void HandleCooldown(DifficultyParameters currentDifficulty)
+        {
+            _cooldownTimer -= Time.deltaTime;
+            if (_cooldownTimer <= 0f)
+            {
+                _currentState = GameState.Wave;
+                _waveTimer = currentDifficulty.GetRandomWaveDuration();
+                StartCoroutine(ActivateModulesWave());
+                ResetCooldownModifiers();
+            }
+        }
+
+        private void AdjustCooldownTimer()
+        {
+            if (!_cooldownAdjusted)
+            {
+                if (_halfCooldown)
+                {
+                    _cooldownTimer /= 2;
+                }
+                if (_noCooldown)
+                {
+                    _cooldownTimer = 0;
+                }
+                _cooldownAdjusted = true;
             }
         }
 
@@ -70,36 +217,31 @@ namespace Elias.Scripts.Managers
                 yield break;
             }
 
-            float waveTimer = 0f;
-            float waveDuration = currentDifficulty.GetRandomWaveDuration();
-
-            while (waveTimer < waveDuration)
+            while (_currentState == GameState.Wave)
             {
-                waveTimer += Time.deltaTime;
-
                 yield return new WaitForSeconds(Random.Range(3f, 5f));
 
-                FindModules();
+                FindBreachModules();
                 CountActiveBreach();
                 ActivateRandomModule();
             }
         }
 
-        public void FindModules()
+        public void FindBreachModules()
         {
-            _modules.Clear();
+            modules.Clear();
 
             BreachModule[] foundModules = FindObjectsOfType<BreachModule>();
             foreach (BreachModule module in foundModules)
             {
-                _modules.Add(module);
+                modules.Add(module);
             }
         }
 
         public void CountActiveBreach()
         {
             activeModules = 0;
-            foreach (BreachModule module in _modules)
+            foreach (BreachModule module in modules)
             {
                 if (module.IsActivated)
                 {
@@ -121,7 +263,7 @@ namespace Elias.Scripts.Managers
             if (activeModules < currentDifficulty.activeModulesLimit)
             {
                 List<SubmarinModule> inactiveModules = new List<SubmarinModule>();
-                foreach (SubmarinModule module in _modules)
+                foreach (SubmarinModule module in modules)
                 {
                     if (!module.IsActivated)
                     {
@@ -132,15 +274,26 @@ namespace Elias.Scripts.Managers
                 if (inactiveModules.Count > 0)
                 {
                     SubmarinModule randomModule = inactiveModules[Random.Range(0, inactiveModules.Count)];
-                    ActivateModule(randomModule);
+                    randomModule.Activate();
                 }
             }
         }
 
-        private void ActivateModule(SubmarinModule module)
+        public void HalfWaveCooldown()
         {
-            module.Activate();
-            Debug.Log("Module activated!");
+            _halfCooldown = true;
+        }
+
+        public void NoWaveCooldown()
+        {
+            _noCooldown = true;
+        }
+
+        public void ResetCooldownModifiers()
+        {
+            _halfCooldown = false;
+            _noCooldown = false;
+            _cooldownAdjusted = false;
         }
 
         public void UpdateDifficulty(int phase1Value)
@@ -161,19 +314,32 @@ namespace Elias.Scripts.Managers
                 }
 
                 selectedDifficulty.ResetValues(); // Reset to initial values
-                _intervalTimer = selectedDifficulty.GetRandomWaveInterval();
+                _waveTimer = selectedDifficulty.initialDelay;
                 _activeDifficulty = phase1Value - 1;
-                foreach (SubmarinModule module in _modules)
+                foreach (SubmarinModule module in modules)
                 {
                     module.IsActivated = false;
                 }
                 _hasUpdatedDifficulty = true;
                 _isDifficultySet = true;
+                _currentState = GameState.InitialDelay;
+                ResetCooldownModifiers(); // Reset cooldown modifiers when difficulty is updated
             }
             else
             {
                 Debug.LogWarning("Invalid Phase1Value or Difficulty Parameters not set for this phase.");
             }
         }
+
+        public void ActivateBreaches()
+        {
+            FindBreachModules();
+            CountActiveBreach();
+            ActivateRandomModule();
+            ActivateRandomModule();
+            ActivateRandomModule();
+            difficulties[_activeDifficulty].GetRandomTorpedoInterval();
+        }
+
     }
 }

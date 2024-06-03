@@ -9232,6 +9232,7 @@ MonoBehaviour:
   - {fileID: 6926161129648763714}
   - {fileID: 4471009578110913235}
   animator: {fileID: 1422245354938354552}
+  playerSteps: []
 --- !u!114 &8221284705475947638
 MonoBehaviour:
   m_ObjectHideFlags: 0

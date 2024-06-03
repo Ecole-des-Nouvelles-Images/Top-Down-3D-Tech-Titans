@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
+using Christopher.Scripts.Modules;
+using Elias.Scripts.Managers;
 using Elias.Scripts.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +35,11 @@ namespace Elias.Scripts.Minigames
             isGeneratorStarted = true;
             IsActivated = true;
             _patternManager = GetComponent<PatternManager>(); // Assuming PatternManager is on the same GameObject
+            if (gridTransform == null)
+            {
+                Debug.LogError("gridTransform is not assigned in the Inspector!");
+                return;
+            }
             InitializePatternSquares();
             _selectedIndex = 0; // Start with the first square selected
             HighlightSelectedSquare();
@@ -39,6 +47,18 @@ namespace Elias.Scripts.Minigames
 
         private void InitializePatternSquares()
         {
+            if (gridTransform == null)
+            {
+                Debug.LogError("gridTransform is not assigned in the Inspector!");
+                return;
+            }
+
+            _patternSquares = new List<PatternSquare>();
+
+            foreach (Transform child in gridTransform)
+            {
+                Destroy(child.gameObject);
+            }
             _patternSquares = new List<PatternSquare>();
             
             foreach (Transform child in gridTransform)
@@ -77,6 +97,7 @@ namespace Elias.Scripts.Minigames
         }
 
         void Update() {
+            
             if (IsActivated) {
                 
                 State = 1;
@@ -137,12 +158,14 @@ namespace Elias.Scripts.Minigames
         }
 
         public override void Activate() {
-            IsActivated = true;
+            IsActivated = false;
+            audioSource.Play();
         }
 
         public override void Deactivate()
         {
-            IsActivated = false;
+            IsActivated = true;
+            audioSource.Stop();
             State = 0;
             canvas.SetActive(false);
 
@@ -159,7 +182,6 @@ namespace Elias.Scripts.Minigames
 
         public override void Interact(GameObject playerUsingModule) {
             if (!IsActivated && PlayerUsingModule == null && playerUsingModule.GetComponent<PlayerController>().MyItem == 2) {
-                Activate();
                 PlayerUsingModule = playerUsingModule;
                 playerInteracting = true;
                 InitializePatternSquares();

@@ -39,8 +39,6 @@ namespace Christopher.Scripts
         private bool _transitionPhase1;
         private bool _transitionPhase2;
         private bool _transitionPhase3;
-
-        public GameCycleController gameCycleController;
         
         private void Start()
         {
@@ -53,7 +51,11 @@ namespace Christopher.Scripts
             _currentSelectionPhase1 = 'a';
             DisplayPhase1();
         }
-        private void Update() {
+        private void Update()
+        {
+
+            GameCycleController.Instance.activePhase = CurrentPhase;
+            
             scoreDisplay.text = Score.ToString();
             if (!IsActivated) {
                 State = 0;
