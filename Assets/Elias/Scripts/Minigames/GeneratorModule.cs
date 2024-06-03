@@ -92,7 +92,7 @@ namespace Elias.Scripts.Minigames
         private void HighlightSelectedSquare() {
             for (int i = 0; i < _patternSquares.Count; i++) {
                 var image = _patternSquares[i].GetComponent<Image>();
-                image.color = (i == _selectedIndex) ? Color.yellow : Color.white; // Highlight selected square
+                image.color = (i == _selectedIndex) ? Color.cyan : Color.black; // Highlight selected square
             }
         }
 
