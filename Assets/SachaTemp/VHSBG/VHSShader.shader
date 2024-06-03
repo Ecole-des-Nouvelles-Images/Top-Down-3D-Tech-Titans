@@ -4,8 +4,7 @@ Shader "Custom/VHSShader"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _NoiseTex ("Noise Texture", 2D) = "white" {}
-        _ScanlineTex ("Scanline Texture", 2D) = "black
-       " {}
+        _ScanlineTex ("Scanline Texture", 2D) = "white" {}
         _NoiseIntensity ("Noise Intensity", Range(0, 1)) = 0.5
         _ScanlineIntensity ("Scanline Intensity", Range(0, 1)) = 0.5
         _ColorDistortion ("Color Distortion", Range(0, 1)) = 0.5
@@ -53,16 +52,16 @@ Shader "Custom/VHSShader"
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
 
-                // Add noise
+                
                 float2 noiseUV = float2(i.uv.x * _Time.y, i.uv.y * _Time.y);
                 fixed4 noise = tex2D(_NoiseTex, noiseUV);
                 col.rgb += noise.rgb * _NoiseIntensity;
 
-                // Add scanlines
-                float scanline = sin(i.uv.y * 300.0 + _Time.y * 3.0) * 0.5 + 0.5;
+                
+                float scanline = sin(i.uv.y * 700.0 + _Time.y * 3.0) * 0.5 + 0.5;
                 col.rgb *= lerp(1.0, scanline, _ScanlineIntensity);
 
-                // Add color distortion
+                
                 float2 offsetUV = i.uv + float2(sin(i.uv.y * 20.0 + _Time.y) * 0.005, 0.0);
                 fixed4 distortedCol = tex2D(_MainTex, offsetUV);
                 col.rgb = lerp(col.rgb, distortedCol.rgb, _ColorDistortion);
