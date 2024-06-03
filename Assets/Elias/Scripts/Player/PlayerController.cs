@@ -15,7 +15,8 @@ namespace Elias.Scripts.Player
         [SerializeField] public float speed;
         [SerializeField] public GameObject inputInteractPanel;
         [SerializeField] public GameObject[] itemsDisplay;
-        public GameObject repairTool;
+        
+        //public GameObject repairTool;
 
         // New variables for animations
         public Animator animator;
@@ -40,7 +41,6 @@ namespace Elias.Scripts.Player
         public static readonly int IsHoldingBottle = Animator.StringToHash("IsHoldingBottle");
         
         // triggers
-        public static readonly int InsertionTorpedo = Animator.StringToHash("InsertionTorpedo");
         public static readonly int InsertionCo2 = Animator.StringToHash("InsertionCo2");
         public static readonly int InsertionPetrol = Animator.StringToHash("InsertionPetrol");
         
@@ -56,7 +56,7 @@ namespace Elias.Scripts.Player
         {
             animator = GetComponent<Animator>();
             
-            repairTool.SetActive(false);
+            //repairTool.SetActive(false);
 
             if (animator == null)
             {
@@ -148,17 +148,17 @@ namespace Elias.Scripts.Player
                 {
                     case BreachModule:
                         animator.SetBool(IsRepairing, true);
-                        while (UsingModule)
+                        /*while (UsingModule)
                         {
                             repairTool.SetActive(true);
-                        }
+                        }*/
                         break;
                     case FixingDrillModule:
                         animator.SetBool(IsRepairing, true);
-                        while (UsingModule)
+                        /*while (UsingModule)
                         {
                             repairTool.SetActive(true);
-                        }
+                        }*/
                         break;
                     case HatchesModule:
                         animator.SetBool(IsInteractingHatches, true);
@@ -170,7 +170,7 @@ namespace Elias.Scripts.Player
                         animator.SetBool(IsInteractingPressure, true);
                         break;
                     case TorpedoLauncherModule:
-                        animator.SetTrigger(InsertionTorpedo);
+                        animator.SetTrigger(InsertionCo2);
                         break;
                     case OxygenModule:
                         animator.SetTrigger(InsertionCo2);
