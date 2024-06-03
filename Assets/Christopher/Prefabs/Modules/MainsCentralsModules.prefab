@@ -2224,6 +2224,26 @@ PrefabInstance:
       objectReference: {fileID: 8313351245481496855}
     - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
         type: 3}
+      propertyPath: sounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 88f0d5e3a56a4dd4e8d39df338943d1c, type: 3}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
+      propertyPath: sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: af980f571aa66894eaaaa00cc1e7e945, type: 3}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
+      propertyPath: sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6dafa21c5319ddd449481525e32895c4, type: 3}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
       propertyPath: StatesMaterials.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -2530,13 +2550,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
+      propertyPath: TrailModule.widthOverTrail.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2577,6 +2602,41 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.minMaxState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.a
+      value: 0.6117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627644991964745410, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2770638057380931796, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2668,6 +2728,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5233407132165512653, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5322453121180999743, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: fixValue
@@ -2900,8 +2965,28 @@ PrefabInstance:
       objectReference: {fileID: 8787021111065114684}
     - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
+      propertyPath: phase1Sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
       propertyPath: StatesMaterials.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: phase1Sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c537c74941067f64abc151777751d6a1, type: 3}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: phase1Sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 124f5b30e6e0c394592617e0fe24debb, type: 3}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: transitionSounds.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
@@ -2923,6 +3008,26 @@ PrefabInstance:
       propertyPath: StatesMaterials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: b5b6cb451b6342d4786890990fd27154, type: 2}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: TimerTransition.Array.data[0]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: transitionSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5ea98a81c1a5e5a4bbe481abdfd65e12, type: 3}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: transitionSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dbb44a9f94afcd44f9a1dcd7cb4575eb, type: 3}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: transitionSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c0ada4b53bf05149bcad302f112d538, type: 3}
     - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: StateDisplayObject.Array.data[0]
@@ -3295,6 +3400,26 @@ PrefabInstance:
       propertyPath: screenModule
       value: 
       objectReference: {fileID: 8313351245481496855}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 88f0d5e3a56a4dd4e8d39df338943d1c, type: 3}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
+      propertyPath: sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: af980f571aa66894eaaaa00cc1e7e945, type: 3}
+    - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
+        type: 3}
+      propertyPath: sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6dafa21c5319ddd449481525e32895c4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3401,6 +3526,21 @@ PrefabInstance:
       propertyPath: drillHeadAnimator
       value: 
       objectReference: {fileID: 5036237680873578339}
+    - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
+        type: 3}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0952d1d3a7fd26c47a73f7bc0826531a, type: 3}
+    - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
+        type: 3}
+      propertyPath: sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ef4d52470f33bfd4f9b17229346f4088, type: 3}
     - target: {fileID: 2599994833637982499, guid: 4920ba4e8b3c8b4498523e0af5144e37,
         type: 3}
       propertyPath: drillHeadOnSocleDisplay
