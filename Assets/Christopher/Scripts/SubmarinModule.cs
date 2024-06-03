@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,6 +14,15 @@ namespace Christopher.Scripts
         public List<bool> Succes;
         [SerializeField] protected GameObject playerDetector;
         public GameObject PlayerUsingModule;
+        
+        [SerializeField] private AudioClip soundEffect;
+        [SerializeField] protected AudioSource audioSource;
+
+        private void Start()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
         public abstract void Activate();
         public abstract void Deactivate();
         public abstract void Interact(GameObject playerUsingModule);

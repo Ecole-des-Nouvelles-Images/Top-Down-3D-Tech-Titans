@@ -13,13 +13,20 @@ MonoBehaviour:
   m_Name: Easy
   m_EditorClassIdentifier: 
   waveDurationRange:
-    x: 15
-    y: 25
+    x: 10
+    y: 20
   waveIntervalRange:
-    x: 60
-    y: 80
+    x: 40
+    y: 60
   breachIntervalRange:
     x: 8
-    y: 12
+    y: 13
+  generatorRange:
+    x: 240
+    y: 300
+  torpedoIntervalRange:
+    x: 100
+    y: 120
   activeModulesLimit: 3
   initialDelay: 45
+  generatorCountLimit: 1

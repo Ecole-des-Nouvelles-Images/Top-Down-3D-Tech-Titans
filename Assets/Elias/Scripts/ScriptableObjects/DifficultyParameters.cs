@@ -9,23 +9,37 @@ namespace Elias.Scripts
         public float2 waveDurationRange;
         public float2 waveIntervalRange;
         public float2 breachIntervalRange;
+        public float2 generatorRange;
+        public float2 torpedoIntervalRange;
+        
         public int activeModulesLimit;
         public float initialDelay;
+        
+        public int generatorCountLimit;
 
-        // Store original values to reset later
         private float2 _originalWaveDurationRange;
         private float2 _originalWaveIntervalRange;
         private float2 _originalBreachIntervalRange;
+        private float2 _originalGeneratorRange;
+        private float2 _originalTorpedoIntervalRange;
+        
         private int _originalActiveModulesLimit;
         private float _originalInitialDelay;
+        
+        private int _originalGeneratorCountLimit;
 
         private void OnEnable()
         {
             _originalWaveDurationRange = waveDurationRange;
             _originalWaveIntervalRange = waveIntervalRange;
             _originalBreachIntervalRange = breachIntervalRange;
+            _originalGeneratorRange = generatorRange;
+            _originalTorpedoIntervalRange = torpedoIntervalRange;
+            
             _originalActiveModulesLimit = activeModulesLimit;
             _originalInitialDelay = initialDelay;
+
+            _originalGeneratorCountLimit = generatorCountLimit;
         }
 
         public void ResetValues()
@@ -33,8 +47,13 @@ namespace Elias.Scripts
             waveDurationRange = _originalWaveDurationRange;
             waveIntervalRange = _originalWaveIntervalRange;
             breachIntervalRange = _originalBreachIntervalRange;
+            generatorRange = _originalGeneratorRange;
+            torpedoIntervalRange = _originalTorpedoIntervalRange;
+            
             activeModulesLimit = _originalActiveModulesLimit;
             initialDelay = _originalInitialDelay;
+
+            generatorCountLimit = _originalGeneratorCountLimit;
         }
 
         public float GetRandomWaveDuration()
@@ -50,6 +69,16 @@ namespace Elias.Scripts
         public float GetRandomBreachInterval()
         {
             return UnityEngine.Random.Range(breachIntervalRange.x, breachIntervalRange.y);
+        }
+        
+        public float GetRandomGeneratorInterval()
+        {
+            return UnityEngine.Random.Range(generatorRange.x, generatorRange.y);
+        }
+        
+        public float GetRandomTorpedoInterval()
+        {
+            return UnityEngine.Random.Range(torpedoIntervalRange.x, torpedoIntervalRange.y);
         }
     }
 }

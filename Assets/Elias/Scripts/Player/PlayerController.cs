@@ -1,11 +1,10 @@
-using System;
+using System.Collections.Generic;
 using Christopher.Scripts;
 using Christopher.Scripts.Modules;
 using Elias.Scripts.Managers;
-using Elias.Scripts.Minigames;
+using Elias.Scripts.Minigames; // Add this to use List<T>
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Elias.Scripts.Player
 {
@@ -13,17 +12,23 @@ namespace Elias.Scripts.Player
     {
         public SubmarinModule UsingModule;
         public int MyItem; //0:rien 1:CO2 2:CapsuleCristal 3:Torpedo
-        [SerializeField] public float speed = 500;
+        [SerializeField] public float speed;
         [SerializeField] public GameObject inputInteractPanel;
         [SerializeField] public GameObject[] itemsDisplay;
-
-        private GameManager _gameManager; 
+        public GameObject repairTool;
 
         // New variables for animations
         public Animator animator;
         
+        // New variables for sounds
+        [SerializeField] private List<AudioClip> playerSteps;
+        private AudioSource audioSource;
+        private int lastPlayedStepIndex = -1;
+
+        // booleans
         public static readonly int Idle = Animator.StringToHash("Idle");
         public static readonly int IsRunning = Animator.StringToHash("IsRunning");
+        public static readonly int IsWalking = Animator.StringToHash("IsWalking");
         public static readonly int IsRunningWater = Animator.StringToHash("IsRunningWater");
         public static readonly int IsRepairing = Animator.StringToHash("IsRepairing");
         public static readonly int IsActivatingLauncher = Animator.StringToHash("IsActivatingLauncher");
@@ -31,11 +36,13 @@ namespace Elias.Scripts.Player
         public static readonly int IsInteractingHatches = Animator.StringToHash("IsInteractingHatches");
         public static readonly int IsInteractingScreen = Animator.StringToHash("IsInteractingScreen");
         public static readonly int IsInteractingPressure = Animator.StringToHash("IsInteractingPressure");
+        public static readonly int IsHoldingTorpedo = Animator.StringToHash("IsHoldingTorpedo");
+        public static readonly int IsHoldingBottle = Animator.StringToHash("IsHoldingBottle");
+        
+        // triggers
         public static readonly int InsertionTorpedo = Animator.StringToHash("InsertionTorpedo");
         public static readonly int InsertionCo2 = Animator.StringToHash("InsertionCo2");
         public static readonly int InsertionPetrol = Animator.StringToHash("InsertionPetrol");
-        public static readonly int IsHoldingTorpedo = Animator.StringToHash("IsHoldingTorpedo");
-        public static readonly int IsHoldingBottle = Animator.StringToHash("IsHoldingBottle");
         
         public static readonly int StandUp = Animator.StringToHash("StandUp");
         
@@ -48,6 +55,8 @@ namespace Elias.Scripts.Player
         private void Start()
         {
             animator = GetComponent<Animator>();
+            
+            repairTool.SetActive(false);
 
             if (animator == null)
             {
@@ -64,9 +73,13 @@ namespace Elias.Scripts.Player
             _playerRigidbody = GetComponent<Rigidbody>();
             _originalConstraints = _playerRigidbody.constraints;
 
-            _gameManager = FindObjectOfType<GameManager>();
+            // Initialize the audio source
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
         }
-
 
         private void FixedUpdate()
         {
@@ -88,12 +101,14 @@ namespace Elias.Scripts.Player
                     itemsDisplay[0].SetActive(true);
                     itemsDisplay[1].SetActive(false);
                     itemsDisplay[2].SetActive(false);
+                    animator.SetBool(IsHoldingTorpedo, false);
                     animator.SetBool(IsHoldingBottle, true);
                     break;
                 case 2:
                     itemsDisplay[0].SetActive(false);
                     itemsDisplay[1].SetActive(true);
                     itemsDisplay[2].SetActive(false);
+                    animator.SetBool(IsHoldingTorpedo, false);
                     animator.SetBool(IsHoldingBottle, true);
                     break;
                 case 3:
@@ -101,6 +116,7 @@ namespace Elias.Scripts.Player
                     itemsDisplay[1].SetActive(false);
                     itemsDisplay[2].SetActive(true);
                     animator.SetBool(IsHoldingTorpedo, true);
+                    animator.SetBool(IsHoldingBottle, false);
                     break;
             }
 
@@ -132,12 +148,17 @@ namespace Elias.Scripts.Player
                 {
                     case BreachModule:
                         animator.SetBool(IsRepairing, true);
+                        while (UsingModule)
+                        {
+                            repairTool.SetActive(true);
+                        }
                         break;
                     case FixingDrillModule:
                         animator.SetBool(IsRepairing, true);
-                        break;
-                    case GeneratorModule:
-                        animator.SetBool(InsertionPetrol, true);
+                        while (UsingModule)
+                        {
+                            repairTool.SetActive(true);
+                        }
                         break;
                     case HatchesModule:
                         animator.SetBool(IsInteractingHatches, true);
@@ -149,10 +170,13 @@ namespace Elias.Scripts.Player
                         animator.SetBool(IsInteractingPressure, true);
                         break;
                     case TorpedoLauncherModule:
-                        animator.SetBool(InsertionTorpedo, true);
+                        animator.SetTrigger(InsertionTorpedo);
                         break;
                     case OxygenModule:
-                        animator.SetBool(InsertionCo2, true);
+                        animator.SetTrigger(InsertionCo2);
+                        break;
+                    case GeneratorModule:
+                        animator.SetTrigger(InsertionPetrol);
                         break;
                 }
             }
@@ -215,23 +239,33 @@ namespace Elias.Scripts.Player
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
                     _playerRigidbody.MoveRotation(targetRotation);
+                    
+                    float inputMagnitude = new Vector2(xMov, zMov).magnitude;
+                    
+                    bool isWalking = inputMagnitude < 0.5f && inputMagnitude > 0f;
+                    bool isRunning = inputMagnitude >= 0.5f;
+                    
+                    float moveSpeed = isRunning ? speed : speed / 2;
 
-                    Vector3 velocity = moveDirection * (speed * Time.fixedDeltaTime);
+                    Vector3 velocity = moveDirection * (moveSpeed * Time.fixedDeltaTime);
                     _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
-
-                    // Trigger walking animation
-                    switch (_gameManager.waterWalk)
+                    
+                    switch (GameManager.Instance.waterWalk)
                     {
                         case true:
-                            animator.SetBool(IsRunningWater, true);
+                            animator.SetBool(IsRunningWater, isRunning || isWalking);
+                            animator.SetBool(IsRunning, false);
+                            animator.SetBool(IsWalking, false);
                             break;
-                        
                         case false:
-                            animator.SetBool(IsRunning, true);
+                            animator.SetBool(IsRunning, isRunning);
+                            animator.SetBool(IsWalking, isWalking);
+                            animator.SetBool(IsRunningWater, false);
                             break;
                     }
-
-                   
+                    
+                    // Play step sound
+                    PlayRandomStepSound();
                 }
                 else
                 {
@@ -239,8 +273,24 @@ namespace Elias.Scripts.Player
 
                     animator.SetBool(IsRunningWater, false);
                     animator.SetBool(IsRunning, false);
+                    animator.SetBool(IsWalking, false);
                 }
             }
+        }
+
+        private void PlayRandomStepSound()
+        {
+            if (playerSteps.Count == 0) return;
+
+            int newStepIndex;
+            do
+            {
+                newStepIndex = Random.Range(0, playerSteps.Count);
+            } while (newStepIndex == lastPlayedStepIndex);
+
+            lastPlayedStepIndex = newStepIndex;
+            audioSource.clip = playerSteps[newStepIndex];
+            audioSource.Play();
         }
 
         private void Interact()
@@ -268,20 +318,19 @@ namespace Elias.Scripts.Player
                         break;
                     case ScreenModule:
                         animator.SetBool(IsInteractingScreen, false);
-                        Debug.Log("hihi");
                         break;
                     case PressureModule:
                         animator.SetBool(IsInteractingPressure, false);
                         break;
-                    /*case TorpedoLauncherModule:
-                        animator.SetBool(InsertionTorpedo, false);
+                    case TorpedoLauncherModule:
+                        animator.SetBool(IsActivatingLauncher, false);
                         break;
                     case OxygenModule:
-                        animator.SetBool(InsertionCo2, false);
+                        animator.SetBool(IsActivatingLauncher, false);
                         break;
                     case GeneratorModule:
-                        animator.SetBool(InsertionPetrol, false);
-                        break;*/
+                        animator.SetBool(IsActivatingGenerator, false);
+                        break;
                 }
                 UsingModule.StopInteract();
                 UsingModule = null;

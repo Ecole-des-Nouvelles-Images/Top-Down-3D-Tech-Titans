@@ -37,11 +37,13 @@ namespace Christopher.Scripts.Modules
         public override void Activate()
         {
             IsActivated = true;
+            audioSource.Play();
         }
 
         public override void Deactivate()
         {
             IsActivated = false;
+            audioSource.Stop();
         }
 
         public override void Interact(GameObject playerUsingModule)
@@ -56,10 +58,10 @@ namespace Christopher.Scripts.Modules
         }
 
         public override void Validate() {
-            gameCycleController.CountActiveBreach();
-            if (gameCycleController.noActiveBreach)
+            GameCycleController.Instance.CountActiveBreach();
+            if (GameCycleController.Instance.noActiveBreach)
             {
-                gameManager.LowerWaterToInitialPosition();
+                GameManager.Instance.LowerWaterToInitialPosition();
             }
             audioSource.Play();
             PlayerUsingModule.GetComponent<PlayerController>().QuitInteraction();
