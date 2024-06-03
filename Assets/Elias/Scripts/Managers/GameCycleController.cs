@@ -217,6 +217,8 @@ namespace Elias.Scripts.Managers
                 yield break;
             }
 
+            GameManager.Instance.Ragdoll();
+            
             while (_currentState == GameState.Wave)
             {
                 yield return new WaitForSeconds(Random.Range(3f, 5f));
