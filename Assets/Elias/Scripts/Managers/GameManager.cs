@@ -77,7 +77,7 @@ namespace Elias.Scripts.Managers
             }
         }
 
-        IEnumerator Ragdoll(float time = 2f)
+        public IEnumerator Ragdoll(float time = 2f)
         {
             if (_playerInstance != null)
             {
