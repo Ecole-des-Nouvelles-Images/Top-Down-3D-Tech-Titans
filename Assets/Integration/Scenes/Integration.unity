@@ -1222,6 +1222,12 @@ Transform:
   - {fileID: 1354147847}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &594024565 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4114702849439894343, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
+    type: 3}
+  m_PrefabInstance: {fileID: 491093709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &675796703 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5915459513796386830, guid: d6932f3d362e8f749976a76b5de96f04,
@@ -1936,14 +1942,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 176686127114227067, guid: ca56dbdda055f6a47a82d25703f2dabb,
         type: 3}
-      propertyPath: State
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 176686127114227067, guid: ca56dbdda055f6a47a82d25703f2dabb,
-        type: 3}
-      propertyPath: Succes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: gridTransform
+      value: 
+      objectReference: {fileID: 594024565}
     - target: {fileID: 1796237818008188545, guid: ca56dbdda055f6a47a82d25703f2dabb,
         type: 3}
       propertyPath: m_Enabled
