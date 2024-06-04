@@ -14,6 +14,8 @@ namespace Elias.Scripts.Player
         public int MyItem; //0:rien 1:CO2 2:CapsuleCristal 3:Torpedo
         [SerializeField] public float speed;
         [SerializeField] public GameObject inputInteractPanel;
+        [SerializeField] public GameObject inputThrowPanel;
+        [SerializeField] public GameObject inputActivatePanel;
         [SerializeField] public GameObject[] itemsDisplay;
 
         // New variables for animations
@@ -70,6 +72,8 @@ namespace Elias.Scripts.Player
             }
 
             if (inputInteractPanel != null) inputInteractPanel.SetActive(false);
+            if (inputActivatePanel != null) inputActivatePanel.SetActive(false);
+            if (inputThrowPanel != null) inputThrowPanel.SetActive(false);
             UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
             _originalConstraints = _playerRigidbody.constraints;
@@ -122,7 +126,21 @@ namespace Elias.Scripts.Player
             }
 
             _isWithinRange = UsingModule != null;
+            if (MyItem != 0 && UsingModule == null) {
+                inputThrowPanel.SetActive(true);
+                inputActivatePanel.SetActive(false);
+                inputInteractPanel.SetActive(false);
+            }
+            else {
+                inputThrowPanel.SetActive(false);
+            }
             inputInteractPanel.SetActive(_isWithinRange && !_isInteracting);
+        }
+
+        private void OnThrowItem() {
+            if (MyItem != 0 && UsingModule == null) {
+                MyItem = 0;
+            }
         }
 
         private void OnMoves(InputValue value)
