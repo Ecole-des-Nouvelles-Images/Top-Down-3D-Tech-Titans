@@ -5,6 +5,7 @@ using Christopher.Scripts.Modules;
 using Elias.Scripts.Camera;
 using UnityEngine;
 using Elias.Scripts.Minigames;
+using Elias.Scripts.Scripts;
 using Unity.VisualScripting;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -37,6 +38,14 @@ namespace Elias.Scripts.Managers
 
         private enum GameState { InitialDelay, Wave, Cooldown }
         private GameState _currentState;
+
+        
+        private LightColorAnimation[] _lights;
+        
+        private void Awake()
+        {
+            _lights = FindObjectsOfType<LightColorAnimation>(true); // 'true' if you want inactive lights;
+        }
 
         private void Start()
         {
@@ -88,6 +97,9 @@ namespace Elias.Scripts.Managers
             {
                 _torpedoTimer -= Time.deltaTime;
             }
+
+            if (_currentState == GameState.Wave)
+                StartCoroutine(AnimateColorCoroutine());
 
             // Generator logic
             if (difficulties != null && activePhase != 1 || _generatorTimer <= 0 && generatorEventCount != 0)
@@ -162,6 +174,38 @@ namespace Elias.Scripts.Managers
             }
         }
 
+        
+        private IEnumerator AnimateColorCoroutine()
+        {
+            float t = 0f;
+            float duration = 1f;
+
+            while (_currentState == GameState.Wave) // Make the lights red
+            {
+                if (t > 1) yield return null; // Keep them red while the state is still 'Wave'
+
+                t += Time.deltaTime / duration;
+                foreach (LightColorAnimation light in _lights)
+                {
+                    Color start = light.OriginalColor;
+                    light.Light.color = Color.Lerp(start, Color.red, t);
+                    yield return null;
+                }
+            }
+
+            t = 0f; // Reset animation (Lerp)
+
+            while (t < 1) // Return to normal color
+            {
+                t += Time.deltaTime / duration;
+                foreach (LightColorAnimation light in _lights)
+                {
+                    Color start = light.CurrentColor;
+                    light.Light.color = Color.Lerp(start, light.OriginalColor, t);
+                    yield return null;
+                }
+            }
+        }
 
         private void HandleInitialDelay(DifficultyParameters currentDifficulty)
         {
@@ -224,7 +268,7 @@ namespace Elias.Scripts.Managers
 
             _cameraHandler.StartShake();
             GameManager.Instance.Ragdoll();
-            
+
             while (_currentState == GameState.Wave)
             {
                 yield return new WaitForSeconds(Random.Range(3f, 5f));

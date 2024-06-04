@@ -102,7 +102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5592328403339753450}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.69, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -129,6 +129,8 @@ MonoBehaviour:
   - {fileID: 1025480765810817401, guid: 56f41b7b10c9b764fbf099a937b95009, type: 3}
   - {fileID: 1025480765810817401, guid: ded76b0a324b4294686a485f7f5315a0, type: 3}
   - {fileID: 1025480765810817401, guid: 5d960d18579ae024dadb286a9e5ddf39, type: 3}
+  playerVersion: 0
+  playerInputManager: {fileID: 0}
   waterWalk: 0
   waterTimer: 5
   fadeImageObject: {fileID: 1897483026912330450}
@@ -152,7 +154,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f9ccdf7f1f9c5f745b83034ea1a40213, type: 2}
   noActiveBreach: 0
   activePhase: 1
-  generatorEventCount: 0
+  generatorEventCount: 1
+  lightContainer: {fileID: 0}
 --- !u!114 &8004586695082819373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,8 +191,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -3613736771268745241, guid: 10c4308ee9ed67e4bab5a62cd095ca2b,
       type: 3}
-  m_PlayerPrefab: {fileID: 1025480765810817401, guid: d275fd30663a4894aab68a87f66af928,
-    type: 3}
+  m_PlayerPrefab: {fileID: 0}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
