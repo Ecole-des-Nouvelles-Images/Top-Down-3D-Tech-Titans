@@ -491,6 +491,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3903470511566921747}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1129615259 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1725633281357671092, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
+    type: 3}
+  m_PrefabInstance: {fileID: 113936792229751773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1141395563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1106,6 +1112,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1114958927935770319}
     m_Modifications:
+    - target: {fileID: 5694199726619475782, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
+        type: 3}
+      propertyPath: StorageAnimator
+      value: 
+      objectReference: {fileID: 1129615259}
     - target: {fileID: 6376473971095141595, guid: 7c6fb3306933b5844ab87f3f6e0ccf64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1161,7 +1172,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TorpedoStorage
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7563580942473972015, guid: 7c6fb3306933b5844ab87f3f6e0ccf64, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
