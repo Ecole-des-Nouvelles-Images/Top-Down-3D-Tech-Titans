@@ -736,6 +736,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 176686127114227067, guid: ca56dbdda055f6a47a82d25703f2dabb,
         type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 629579161}
+    - target: {fileID: 176686127114227067, guid: ca56dbdda055f6a47a82d25703f2dabb,
+        type: 3}
+      propertyPath: gridTransform
+      value: 
+      objectReference: {fileID: 629579160}
+    - target: {fileID: 176686127114227067, guid: ca56dbdda055f6a47a82d25703f2dabb,
+        type: 3}
       propertyPath: Succes.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -812,6 +822,18 @@ PrefabInstance:
 --- !u!4 &629579159 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5777822825188283849, guid: ca56dbdda055f6a47a82d25703f2dabb,
+    type: 3}
+  m_PrefabInstance: {fileID: 629579158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &629579160 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7124908741627078369, guid: ca56dbdda055f6a47a82d25703f2dabb,
+    type: 3}
+  m_PrefabInstance: {fileID: 629579158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &629579161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4540818047468013887, guid: ca56dbdda055f6a47a82d25703f2dabb,
     type: 3}
   m_PrefabInstance: {fileID: 629579158}
   m_PrefabAsset: {fileID: 0}
@@ -7001,12 +7023,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1762032768}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1777984966 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2791704232764020357, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 1941226287}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1792751475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7277,12 +7293,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1792751475}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &1795703882 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 8639251175404074148, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
-    type: 3}
-  m_PrefabInstance: {fileID: 1941226287}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1941226287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7295,12 +7305,17 @@ PrefabInstance:
         type: 3}
       propertyPath: groundTrap
       value: 
-      objectReference: {fileID: 1777984966}
+      objectReference: {fileID: 0}
     - target: {fileID: 2174689710746710299, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
         type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 1795703882}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538870891210680775, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3311669380111096503, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
         type: 3}
       propertyPath: m_AnchorMax.y
