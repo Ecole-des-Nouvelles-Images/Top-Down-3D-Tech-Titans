@@ -365,8 +365,8 @@ Transform:
   m_GameObject: {fileID: 1406032796511885540}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.025, y: -2.308, z: 0}
-  m_LocalScale: {x: 0.7, y: 1, z: 0.5}
+  m_LocalPosition: {x: -0.025, y: -2.308, z: -0.2866}
+  m_LocalScale: {x: 0.7, y: 1, z: 1.2823975}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7958512722671298566}
@@ -626,8 +626,9 @@ MonoBehaviour:
   cooldown: 10
   cooldownDisplay: {fileID: 1166052709168456594}
   itemDisplay: {fileID: 8636939751028971456}
-  audioSource: {fileID: 0}
-  interactionAudioSource: {fileID: 0}
+  audioSource: {fileID: 8732623085561468812}
+  interactionAudioSource: {fileID: 5905752871340952010}
+  railDown: {fileID: 0}
 --- !u!1 &6591016912053763740
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,8 +682,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7745675, y: 3.4840302, z: 0.51666284}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.7745675, y: 3.4840302, z: 1.1467336}
+  m_Center: {x: 0, y: 0, z: -0.3150354}
 --- !u!114 &2531673428534885419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,7 +1060,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &208028166972746686
 RectTransform:
   m_ObjectHideFlags: 0
