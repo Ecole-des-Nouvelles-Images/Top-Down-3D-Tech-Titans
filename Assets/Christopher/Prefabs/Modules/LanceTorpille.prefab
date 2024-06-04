@@ -1221,7 +1221,7 @@ MonoBehaviour:
   - {fileID: 6499933620026840653}
   - {fileID: 4205252865150882169}
   PartyGameDisplay: {fileID: 1941715697370187230}
-  TorpedoLauncherAnimator: {fileID: 2328172843861884464}
+  TorpedoLauncherAnimator: {fileID: 5997191649721380930}
   sounds:
   - {fileID: 8300000, guid: df6a2f10c9538f2469ed70caa040e031, type: 3}
   - {fileID: 8300000, guid: 1026810df5b8bc4488312aa1e5ecb876, type: 3}

@@ -626,8 +626,9 @@ MonoBehaviour:
   cooldown: 10
   cooldownDisplay: {fileID: 1166052709168456594}
   itemDisplay: {fileID: 8636939751028971456}
-  audioSource: {fileID: 0}
-  interactionAudioSource: {fileID: 0}
+  audioSource: {fileID: 8732623085561468812}
+  interactionAudioSource: {fileID: 5905752871340952010}
+  railDown: {fileID: 0}
 --- !u!1 &6591016912053763740
 GameObject:
   m_ObjectHideFlags: 0

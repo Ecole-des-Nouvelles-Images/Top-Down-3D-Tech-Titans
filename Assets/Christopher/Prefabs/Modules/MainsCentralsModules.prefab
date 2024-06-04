@@ -3138,7 +3138,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3174965437330777393}
     - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
         type: 3}
       propertyPath: screenModule
@@ -3168,7 +3168,7 @@ PrefabInstance:
         type: 3}
       propertyPath: interactionAudioSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4291411345423193943}
     - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
         type: 3}
       propertyPath: StatesMaterials.Array.size
@@ -4363,7 +4363,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 77670882702851958}
     - target: {fileID: 8347526712223444580, guid: e9034b82d5798a049ab375b53b9bc27a,
         type: 3}
       propertyPath: screenModule
@@ -4393,7 +4393,7 @@ PrefabInstance:
         type: 3}
       propertyPath: interactionAudioSource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6454574666480617656}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

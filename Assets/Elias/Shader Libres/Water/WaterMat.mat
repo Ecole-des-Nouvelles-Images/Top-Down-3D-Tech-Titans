@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6488179246951400863
+--- !u!114 &-2766046687643832710
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,26 +20,31 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_BreachShader
-  m_Shader: {fileID: -6465566751694194690, guid: 28d7f86e23df5d6479cb30fc3843b58e,
+  m_Name: WaterMat
+  m_Shader: {fileID: -6465566751694194690, guid: b2062b1acc82c6b45b5c51b9d2691263,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ALPHAPREMULTIPLY_ON
-  - _SURFACE_TYPE_TRANSPARENT
+  m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Transparent
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainNormal:
+        m_Texture: {fileID: 2800000, guid: bc6beef92943b6647a4e9c55f41d86f5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondaryNormal:
+        m_Texture: {fileID: 2800000, guid: cb7f6f6b46f9466429803183863479e2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -54,34 +59,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
-    - _AlphaToMask: 0
-    - _Blend: 0
-    - _BlendModePreserveSpecular: 1
-    - _CastShadows: 1
-    - _Cull: 0
-    - _DstBlend: 10
-    - _Metallic: 0.01
-    - _NormalsStrenght: 0.15
+    - _Depth: 0.5
+    - _Displacement: 0.0015
+    - _NormalStrength: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _Smoothness: 0.4
-    - _SrcBlend: 1
-    - _Surface: 1
-    - _TransparancyMask: 0
-    - _Transparency: 0.25
-    - _VoronoiPower: 4
-    - _VoronoiScale: 10
-    - _VoronoidAgitation: 1
-    - _WorkflowMode: 1
-    - _ZTest: 4
-    - _ZWrite: 1
-    - _ZWriteControl: 1
+    - _Smoothness: 0.8
+    - _Strength: 1.2
     m_Colors:
-    - _BaseColor: {r: 0.10234957, g: 0.8679245, b: 0.64227915, a: 1}
-    - _NormalSpeed: {r: 0, g: 0.2, b: 0, a: 0}
-    - _VoronoiColor: {r: 0.53807074, g: 2.0012457, b: 1.6446971, a: 1}
-    - _VoronoidSpeed: {r: 0, g: 0.45, b: 0, a: 0}
-    - _VoronoidTiling: {r: 1.2, g: 0.6, b: 0, a: 0}
+    - _Deep_Water_Color: {r: 0.3352171, g: 0.59669054, b: 0.764151, a: 0.34117648}
+    - _Shallow_Water_Color: {r: 0.21440005, g: 0.35688427, b: 0.62264144, a: 0.3764706}
   m_BuildTextureStacks: []
