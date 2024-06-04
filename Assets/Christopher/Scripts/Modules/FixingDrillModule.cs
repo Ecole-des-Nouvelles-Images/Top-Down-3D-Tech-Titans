@@ -5,7 +5,6 @@ namespace Christopher.Scripts.Modules
 {
     public class FixingDrillModule : SubmarinModule
     {
-        public Animator groundTrap;
         public Animator drillHeadAnimator;
         [SerializeField] private GameObject minigameDisplay;
         [SerializeField] private GameObject drillHead;
@@ -17,7 +16,6 @@ namespace Christopher.Scripts.Modules
         private void Start() {
             _isStationStop = true;
             minigameDisplay.SetActive(false);
-            groundTrap.SetBool("isTrapOpen",false);
             drillHeadAnimator.SetBool("isDrillDamaged",false);
            // drillHeadOnSocleDisplay.SetActive(false);// cette ligne sera surement à supprimer <---------------------------------------------------------------------
         }
@@ -25,7 +23,6 @@ namespace Christopher.Scripts.Modules
             SoundManaging();
             if (IsActivated)
             {
-                groundTrap.SetBool("isTrapOpen",true);
                 drillHeadAnimator.SetBool("isDrillDamaged",true);
                 State = 1;
                 if(StatesMaterials.Length > 0 && StatesMaterials[1] != null){ 
@@ -48,7 +45,6 @@ namespace Christopher.Scripts.Modules
                 }
                 playerDetector.SetActive(false);
                 drillHeadAnimator.SetBool("isDrillDamaged",false);
-                groundTrap.SetBool("isTrapOpen",false);
                 //drillHeadOnSocleDisplay.SetActive(false);// cette ligne sera surement à supprimer <---------------------------------------------------------------------
                 if(PlayerUsingModule)PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
                 if(minigameDisplay.activeSelf)minigameDisplay.SetActive(false);

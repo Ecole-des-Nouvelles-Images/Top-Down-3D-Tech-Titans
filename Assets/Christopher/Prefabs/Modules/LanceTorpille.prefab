@@ -219,6 +219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2708121672933524092}
+  - component: {fileID: 7571920384891113526}
   m_Layer: 0
   m_Name: Skin
   m_TagString: Untagged
@@ -242,6 +243,27 @@ Transform:
   - {fileID: 260221328154692579}
   m_Father: {fileID: 9156229788735159618}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7571920384891113526
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205499119982754792}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &334689355772053599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,7 +1394,7 @@ MonoBehaviour:
   - {fileID: 6499933620026840653}
   - {fileID: 4205252865150882169}
   PartyGameDisplay: {fileID: 1941715697370187230}
-  TorpedoLauncherAnimator: {fileID: 2328172843861884464}
+  TorpedoLauncherAnimator: {fileID: 7571920384891113526}
   sounds:
   - {fileID: 8300000, guid: df6a2f10c9538f2469ed70caa040e031, type: 3}
   - {fileID: 8300000, guid: 1026810df5b8bc4488312aa1e5ecb876, type: 3}

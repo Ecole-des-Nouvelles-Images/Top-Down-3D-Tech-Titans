@@ -10,6 +10,8 @@ namespace Christopher.Scripts.Modules
         public GameManager gameManager;
 
         public GameCycleController gameCycleController;
+        [SerializeField] private GameObject greenLights;
+        [SerializeField] private GameObject redLights;
         [SerializeField] private AudioSource audioSource;
         
         // Start is called before the first frame update
@@ -23,10 +25,14 @@ namespace Christopher.Scripts.Modules
         void Update() {
             if (IsActivated) {
                 State = 1;
+                greenLights.SetActive(true);
+                redLights.SetActive(false);
                 playerDetector.SetActive(true);
             }
             else {
                 State = 0;
+                greenLights.SetActive(false);
+                redLights.SetActive(true);
                 playerDetector.SetActive(false);
             }
             Material[]mats = StateDisplayObject[0].transform.GetComponent<MeshRenderer>().materials;

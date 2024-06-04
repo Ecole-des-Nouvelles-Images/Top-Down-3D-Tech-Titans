@@ -70,6 +70,7 @@ namespace Christopher.Scripts.Modules
                     PlayerUsingModule.transform.GetComponent<PlayerController>().MyItem = myObject;
                     _playCooldown = true;
                     interactionAudioSource.Play();
+                    StorageAnimator.SetTrigger("Pick");
                     if(myObject == 3)railDown.Play();
                 }
                 PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
