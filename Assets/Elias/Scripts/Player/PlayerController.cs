@@ -26,6 +26,7 @@ namespace Elias.Scripts.Player
 
         // booleans
         public static readonly int Idle = Animator.StringToHash("Idle");
+        public static readonly int IsWalking = Animator.StringToHash("IsWalking");
         public static readonly int IsRunningWater = Animator.StringToHash("IsRunningWater");
         public static readonly int IsRepairing = Animator.StringToHash("IsRepairing");
         public static readonly int IsActivatingLauncher = Animator.StringToHash("IsActivatingLauncher");
@@ -230,6 +231,9 @@ namespace Elias.Scripts.Player
             // Update Animator parameters
             animator.SetFloat(X, x);
             animator.SetFloat(Y, y);
+
+            bool isMoving = x != 0 || y != 0;
+            animator.SetBool(IsWalking, isMoving);
 
             if (_isInteracting)
             {
