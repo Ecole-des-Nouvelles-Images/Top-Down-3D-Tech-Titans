@@ -124,7 +124,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   water: {fileID: 0}
   cameraTargetGroup: {fileID: 0}
-  playerNameText: {fileID: 0}
+  playerModels:
+  - {fileID: 1025480765810817401, guid: d275fd30663a4894aab68a87f66af928, type: 3}
+  - {fileID: 1025480765810817401, guid: 56f41b7b10c9b764fbf099a937b95009, type: 3}
+  - {fileID: 1025480765810817401, guid: ded76b0a324b4294686a485f7f5315a0, type: 3}
+  - {fileID: 1025480765810817401, guid: 5d960d18579ae024dadb286a9e5ddf39, type: 3}
   waterWalk: 0
   waterTimer: 5
   fadeImageObject: {fileID: 1897483026912330450}

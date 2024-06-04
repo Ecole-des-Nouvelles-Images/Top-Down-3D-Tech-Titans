@@ -55,6 +55,10 @@ namespace Elias.Scripts.Player
 
         private void Start()
         {
+            GameManager.Instance.playerVersion++;
+            GameManager.Instance.playerInputManager.playerPrefab =
+                GameManager.Instance.playerModels[GameManager.Instance.playerVersion];
+            
             animator = GetComponent<Animator>();
 
             //repairTool.SetActive(false);
@@ -223,6 +227,11 @@ namespace Elias.Scripts.Player
             }
         }
 
+        private void OnPlayerJoin()
+        {
+            
+        }
+        
         private void PerformMoves()
         {
             float x = _moveInputValue.x;

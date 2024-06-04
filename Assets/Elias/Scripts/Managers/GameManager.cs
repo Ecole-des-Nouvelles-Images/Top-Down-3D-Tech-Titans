@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Cinemachine;
 using Elias.Scripts.Minigames;
 using Elias.Scripts.Player;
@@ -15,8 +16,13 @@ namespace Elias.Scripts.Managers
     {
         public GameObject water;
         public CinemachineTargetGroup cameraTargetGroup;
-        public TextMeshPro playerNameText;
-        private GameObject _playerInstance;
+        
+        private GameObject _playerInstance; 
+        public List<GameObject> playerModels;
+        public int playerVersion;
+
+        public PlayerInputManager playerInputManager;
+        
         private Quaternion _playerOriginalRotation;
         private Vector3 _originalWaterPosition;
         
@@ -30,6 +36,11 @@ namespace Elias.Scripts.Managers
 
         private void Awake()
         {
+            playerInputManager = GetComponent<PlayerInputManager>();
+
+            playerVersion = 0;
+            playerInputManager.playerPrefab = playerModels[playerVersion];
+            
             _playerOriginalRotation = Quaternion.identity;
             _originalWaterPosition = water.transform.position;
 
@@ -191,5 +202,6 @@ namespace Elias.Scripts.Managers
             WaitForSeconds waitForSeconds = new WaitForSeconds(5);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        
     }
 }

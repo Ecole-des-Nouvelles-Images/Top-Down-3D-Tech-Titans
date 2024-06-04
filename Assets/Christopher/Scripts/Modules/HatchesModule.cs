@@ -57,13 +57,6 @@ namespace Christopher.Scripts.Modules
             if (IsActivated && PlayerUsingModule == null) {
                 PlayerUsingModule = playerUsingModule;
             }
-        }
-
-        public override void StopInteract() {
-            PlayerUsingModule = null;
-        }
-
-        public override void Validate() {
             GameCycleController.Instance.CountActiveBreach();
             if (GameCycleController.Instance.noActiveBreach)
             {
@@ -71,6 +64,13 @@ namespace Christopher.Scripts.Modules
             }
             audioSource.Play();
             PlayerUsingModule.GetComponent<PlayerController>().QuitInteraction();
+        }
+
+        public override void StopInteract() {
+            PlayerUsingModule = null;
+        }
+
+        public override void Validate() {
         }
         
         public override void NavigateX(float moveX) { }
