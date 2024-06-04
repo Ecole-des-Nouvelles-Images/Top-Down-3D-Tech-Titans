@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
 using Christopher.Scripts.Modules;
+using Elias.Scripts.Camera;
 using UnityEngine;
 using Elias.Scripts.Minigames;
 using Unity.VisualScripting;
@@ -13,6 +14,8 @@ namespace Elias.Scripts.Managers
     public class GameCycleController : MonoBehaviourSingleton<GameCycleController>
     {
         public int activeModules;
+
+        private CameraHandler _cameraHandler;
 
         public List<BreachModule> modules = new List<BreachModule>();
         public List<DifficultyParameters> difficulties;
@@ -37,6 +40,8 @@ namespace Elias.Scripts.Managers
 
         private void Start()
         {
+            _cameraHandler = FindObjectOfType<CameraHandler>();
+            
             // Initialize the difficulties list if it's null
             if (difficulties == null)
             {
@@ -217,6 +222,7 @@ namespace Elias.Scripts.Managers
                 yield break;
             }
 
+            _cameraHandler.StartShake();
             GameManager.Instance.Ragdoll();
             
             while (_currentState == GameState.Wave)

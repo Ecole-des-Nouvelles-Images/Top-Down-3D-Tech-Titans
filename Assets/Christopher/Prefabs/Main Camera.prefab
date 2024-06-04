@@ -159,7 +159,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 63
+    m_Bits: 191
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeDuration: 0.3
   shakeStrength: 0.5
-  targetGroup: {fileID: 0}
+  targetGroup: {fileID: 2994909987965928149}
 --- !u!114 &7062215746778459292
 MonoBehaviour:
   m_ObjectHideFlags: 0
