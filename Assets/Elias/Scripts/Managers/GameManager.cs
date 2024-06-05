@@ -188,7 +188,7 @@ namespace Elias.Scripts.Managers
             Debug.Log("GAME OVER !!! " + looseCause);
             
             fadeImageObject.SetActive(true);
-            WaitForSeconds waitForSeconds = new WaitForSeconds(5);
+            WaitForSeconds waitForSeconds = new WaitForSeconds(10);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
