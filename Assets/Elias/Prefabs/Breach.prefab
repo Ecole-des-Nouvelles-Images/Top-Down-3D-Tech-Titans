@@ -64,14 +64,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682654900525758032}
-  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 295098057354505794}
   m_Father: {fileID: 9055279960748711342}
-  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 1.5}
@@ -246,6 +246,8 @@ MonoBehaviour:
   playerInteracting: 0
   canvas: {fileID: 1682654900525758032}
   skin: {fileID: 2016992211375113300}
+  aboveWater: {fileID: 6795551423245710897}
+  underWater: {fileID: 5286518794125078121}
 --- !u!1 &4961208455773643704
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,6 +478,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoneUnderwater
       objectReference: {fileID: 0}
+    - target: {fileID: 890303101750646668, guid: 366ef0633da8e8c448810c7d3c10cb81,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1430890722644530899, guid: 366ef0633da8e8c448810c7d3c10cb81,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -531,6 +538,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 366ef0633da8e8c448810c7d3c10cb81, type: 3}
+--- !u!1 &5286518794125078121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 890303101750646668, guid: 366ef0633da8e8c448810c7d3c10cb81,
+    type: 3}
+  m_PrefabInstance: {fileID: 4974086295342479845}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6258889291555401526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1430890722644530899, guid: 366ef0633da8e8c448810c7d3c10cb81,
@@ -608,6 +621,12 @@ PrefabInstance:
 --- !u!4 &3210447440449206954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7443242052044676824, guid: 362fc70dc0b0f5c42bd2c5477aadf695,
+    type: 3}
+  m_PrefabInstance: {fileID: 5460185576035984498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6795551423245710897 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1551736198893130307, guid: 362fc70dc0b0f5c42bd2c5477aadf695,
     type: 3}
   m_PrefabInstance: {fileID: 5460185576035984498}
   m_PrefabAsset: {fileID: 0}

@@ -82,7 +82,7 @@ namespace Elias.Scripts.Managers
                 }
             }
 
-            if (water.transform.position.y >= 1)
+            if (water.transform.position.y >= 2f)
             {
                 waterWalk = true;
             }
