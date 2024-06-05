@@ -114,7 +114,6 @@ namespace Elias.Scripts.Managers
                 GeneratorModule generator = FindObjectOfType<GeneratorModule>();
                 if (generator != null)
                 {
-                    Debug.Log("hihi");
                     generator.Activate();
                     _generatorEventCount++;
                 }
