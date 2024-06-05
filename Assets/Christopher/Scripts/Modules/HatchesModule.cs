@@ -57,6 +57,13 @@ namespace Christopher.Scripts.Modules
             if (IsActivated && PlayerUsingModule == null) {
                 PlayerUsingModule = playerUsingModule;
             }
+            GameCycleController.Instance.CountActiveBreach();
+            if (GameCycleController.Instance.noActiveBreach)
+            {
+                GameManager.Instance.hatchActivated = true;
+            }
+            audioSource.Play();
+            PlayerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }
 
         public override void StopInteract() {
@@ -64,13 +71,6 @@ namespace Christopher.Scripts.Modules
         }
 
         public override void Validate() {
-            GameCycleController.Instance.CountActiveBreach();
-            if (GameCycleController.Instance.noActiveBreach)
-            {
-                GameManager.Instance.LowerWaterToInitialPosition();
-            }
-            audioSource.Play();
-            PlayerUsingModule.GetComponent<PlayerController>().QuitInteraction();
         }
         
         public override void NavigateX(float moveX) { }

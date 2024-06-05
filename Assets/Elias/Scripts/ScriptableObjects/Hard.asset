@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: Hard
   m_EditorClassIdentifier: 
   waveDurationRange:
-    x: 30
-    y: 40
+    x: 25
+    y: 35
   waveIntervalRange:
-    x: 30
-    y: 50
+    x: 40
+    y: 60
   breachIntervalRange:
-    x: 3
-    y: 8
+    x: 5
+    y: 10
   generatorRange:
-    x: 180
-    y: 240
+    x: 120
+    y: 150
   torpedoIntervalRange:
-    x: 60
-    y: 80
+    x: 90
+    y: 120
   activeModulesLimit: 6
   initialDelay: 15
   generatorCountLimit: 4
