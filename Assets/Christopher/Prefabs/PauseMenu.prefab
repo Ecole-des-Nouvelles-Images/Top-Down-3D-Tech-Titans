@@ -799,6 +799,7 @@ GameObject:
   - component: {fileID: 1282176824393613099}
   - component: {fileID: 3353183063522577575}
   - component: {fileID: 3509990411541700084}
+  - component: {fileID: 1804333222495900076}
   m_Layer: 5
   m_Name: DateNdTimeTxt
   m_TagString: Untagged
@@ -820,7 +821,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3582550608748820494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.7, y: 0}
+  m_AnchorMin: {x: 0.75, y: 0}
   m_AnchorMax: {x: 1, y: 0.09}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -853,7 +854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 07/06/2152 (hour to change)
+  m_text: 07/06/2152 HHMMSS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89924c2271792a44a3f2b3c026fbbc7, type: 2}
   m_sharedMaterial: {fileID: 2659860880305023472, guid: b89924c2271792a44a3f2b3c026fbbc7,
@@ -923,6 +924,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1804333222495900076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625425309672879971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a130653743756418257e412805a68d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 0}
+  customText: '07/06/2152 '
 --- !u!1 &1681389603887940385
 GameObject:
   m_ObjectHideFlags: 0
@@ -3026,7 +3041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.5903015, y: 0}
+  m_AnchoredPosition: {x: -4.5902863, y: 0}
   m_SizeDelta: {x: 0.8193, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &297919014110179120
@@ -3598,7 +3613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.5903015, y: 0}
+  m_AnchoredPosition: {x: -4.5902863, y: 0}
   m_SizeDelta: {x: 0.8193, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2569643914006872286
@@ -4193,7 +4208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.5903015, y: 0}
+  m_AnchoredPosition: {x: -4.5902863, y: 0}
   m_SizeDelta: {x: 0.8193, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3595939790782788283

@@ -14,6 +14,7 @@ namespace Christopher.Scripts.Modules
         public int CurrentPhase;
         public GameObject Submarine;
         [SerializeField] private TMP_Text scoreDisplay;
+        [SerializeField] private GameObject scoreCanvas;
         [SerializeField] private Material[] displayPhase;
         [SerializeField] private GameObject screen;
         [SerializeField] private GameObject selectionA;
@@ -48,9 +49,9 @@ namespace Christopher.Scripts.Modules
             _currentSelectionPhase1 = 'a';
             DisplayPhase1();
         }
-        private void Update()
-        {
-
+        private void Update() {
+            if(PauseMenu.Instance.PausePanel.activeSelf)scoreCanvas.SetActive(false);
+            else scoreCanvas.SetActive(true);
             GameCycleController.Instance.activePhase = CurrentPhase;
             
             scoreDisplay.text = Score.ToString();
