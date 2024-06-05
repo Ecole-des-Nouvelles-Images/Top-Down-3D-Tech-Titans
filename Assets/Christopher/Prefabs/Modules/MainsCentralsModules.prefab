@@ -785,6 +785,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
+      propertyPath: scoreCanvas
+      value: 
+      objectReference: {fileID: 3804562867444679654}
+    - target: {fileID: 7154525287125438322, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
       propertyPath: scoreDisplay
       value: 
       objectReference: {fileID: 9115758734977957797}

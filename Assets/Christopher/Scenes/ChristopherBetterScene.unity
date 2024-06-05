@@ -237,12 +237,6 @@ PrefabInstance:
       propertyPath: cameraTargetGroup
       value: 
       objectReference: {fileID: 961739756}
-    - target: {fileID: 8026310020573436615, guid: ab4cc5bd84f07b04bab10bb6a1308598,
-        type: 3}
-      propertyPath: m_PlayerPrefab
-      value: 
-      objectReference: {fileID: 1025480765810817401, guid: 56f41b7b10c9b764fbf099a937b95009,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -846,11 +840,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainsCentralsModules
       objectReference: {fileID: 0}
-    - target: {fileID: 4709208387020754750, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4955952079663387756, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -879,16 +868,6 @@ PrefabInstance:
     - target: {fileID: 4955952079663387756, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6885460503193169361, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6979687324757016426, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
-        type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7531377191878179322, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,

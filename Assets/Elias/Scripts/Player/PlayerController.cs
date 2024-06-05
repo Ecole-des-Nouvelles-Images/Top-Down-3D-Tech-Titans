@@ -86,8 +86,7 @@ namespace Elias.Scripts.Player
             }
         }
 
-        private void FixedUpdate()
-        {
+        private void FixedUpdate() {
             PerformMoves();
         }
 
@@ -143,8 +142,10 @@ namespace Elias.Scripts.Player
             }
         }
 
-        private void OnMoves(InputValue value)
-        {
+        private void OnPause() {
+            PauseMenu.Instance.TogglePauseMenuActivation();
+        }
+        private void OnMoves(InputValue value) {
             _moveInputValue = value.Get<Vector2>();
         }
 
