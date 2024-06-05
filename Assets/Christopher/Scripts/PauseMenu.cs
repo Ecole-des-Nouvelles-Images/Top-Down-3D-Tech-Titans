@@ -24,13 +24,13 @@ namespace Christopher.Scripts
         public void TogglePauseMenuActivation() {
             if (PausePanel.activeSelf) {
                 PausePanel.SetActive(false); 
-                AudioListener.pause = false;
+                //AudioListener.pause = false;
                 Time.timeScale = 1;
             }
             else {
                 PausePanel.SetActive(true);
                 reprendreButton.Select();
-                AudioListener.pause = true;
+                //AudioListener.pause = true;
                 Time.timeScale = 0;
             }
         }
