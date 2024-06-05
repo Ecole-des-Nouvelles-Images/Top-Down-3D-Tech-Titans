@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
@@ -34,24 +35,26 @@ namespace Elias.Scripts.Managers
         private bool _cooldownAdjusted;
         
         public int activePhase;
-        public int generatorEventCount;
+        private int _generatorEventCount = 0;
 
         private enum GameState { InitialDelay, Wave, Cooldown }
         private GameState _currentState;
 
+        private AudioSource _audioSource;
+        public AudioClip[] audioClips;
         
         private LightColorAnimation[] _lights;
         
         private void Awake()
         {
             _lights = FindObjectsOfType<LightColorAnimation>(true); // 'true' if you want inactive lights;
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Start()
         {
             _cameraHandler = FindObjectOfType<CameraHandler>();
-            
-            // Initialize the difficulties list if it's null
+
             if (difficulties == null)
             {
                 difficulties = new List<DifficultyParameters>();
@@ -73,12 +76,16 @@ namespace Elias.Scripts.Managers
             {
                 _currentState = GameState.InitialDelay;
                 _waveTimer = difficulties[_activeDifficulty].initialDelay;
+                _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
+                _torpedoTimer = difficulties[_activeDifficulty].GetRandomTorpedoInterval();
             }
             else
             {
                 Debug.LogError("No difficulties set.");
             }
         }
+
+
 
         
         private void Update()
@@ -88,66 +95,41 @@ namespace Elias.Scripts.Managers
                 return;
             }
 
-            if (_generatorTimer > 0)
+            if (_currentState == GameState.Wave)
+                StartCoroutine(AnimateColorCoroutine());
+
+            if (_generatorTimer >= 0)
             {
                 _generatorTimer -= Time.deltaTime;
             }
-            
-            if (_torpedoTimer > 0)
+
+            if (_torpedoTimer >= 0)
             {
                 _torpedoTimer -= Time.deltaTime;
             }
 
-            if (_currentState == GameState.Wave)
-                StartCoroutine(AnimateColorCoroutine());
-
             // Generator logic
-            if (difficulties != null && activePhase != 1 || _generatorTimer <= 0 && generatorEventCount != 0)
+            if (_generatorTimer <= 0 && (_generatorEventCount < difficulties[_activeDifficulty].generatorCountLimit))
             {
-                if (difficulties != null)
+                GeneratorModule generator = FindObjectOfType<GeneratorModule>();
+                if (generator != null)
                 {
-                    _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
-
-                    if (_generatorTimer <= 0 &&
-                        generatorEventCount <= difficulties[_activeDifficulty].generatorCountLimit)
-                    {
-                        generatorEventCount++;
-
-                        GeneratorModule generator = FindObjectOfType<GeneratorModule>();
-                        if (generator != null)
-                        {
-                            generator.Activate();
-                        }
-
-                        if (generatorEventCount < difficulties[_activeDifficulty].generatorCountLimit)
-                        {
-                            _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
-                        }
-                    }
+                    Debug.Log("hihi");
+                    generator.Activate();
+                    _generatorEventCount++;
                 }
             }
-            
+
             // Torpedo logic
-            if (difficulties != null && activePhase != 1 && _torpedoTimer <= 0)
+            if (_torpedoTimer <= 0)
             {
-                if (difficulties != null)
+                TorpedoLauncherModule torpedo = FindObjectOfType<TorpedoLauncherModule>();
+                if (torpedo != null)
                 {
-                    _torpedoTimer = difficulties[_activeDifficulty].GetRandomTorpedoInterval();
-                    
-                    if (_torpedoTimer <= 0)
-                    {
-                    
-                        TorpedoLauncherModule torpedo = FindObjectOfType<TorpedoLauncherModule>();
-                        if (torpedo != null)
-                        {
-                            torpedo.Deactivate();
-                        }
-                    }
+                    torpedo.Activate();
                 }
-
-                
             }
-            
+
             if (!_hasUpdatedDifficulty || !_isDifficultySet)
             {
                 return;
@@ -172,13 +154,49 @@ namespace Elias.Scripts.Managers
                     HandleCooldown(currentDifficulty);
                     break;
             }
+        
+
+            
+            if (!_hasUpdatedDifficulty || !_isDifficultySet)
+            {
+                return;
+            }
+
+            currentDifficulty = difficulties[_activeDifficulty];
+            if (currentDifficulty == null)
+            {
+                Debug.LogError("Current difficulty is null.");
+                return;
+            }
+
+            switch (_currentState)
+            {
+                case GameState.InitialDelay:
+                    HandleInitialDelay(currentDifficulty);
+                    break;
+                case GameState.Wave:
+                    HandleWave(currentDifficulty);
+                    break;
+                case GameState.Cooldown:
+                    HandleCooldown(currentDifficulty);
+                    break;
+            }
         }
 
+        public void ResetGeneratorTimer()
+        {
+            _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
+        }
         
+        public void ResetTorpedoTimer()
+        {
+            _torpedoTimer = difficulties[_activeDifficulty].GetRandomTorpedoInterval();
+        }
+
         private IEnumerator AnimateColorCoroutine()
         {
             float t = 0f;
-            float duration = 1f;
+            float duration = 0.25f;
 
             while (_currentState == GameState.Wave) // Make the lights red
             {
@@ -212,6 +230,7 @@ namespace Elias.Scripts.Managers
             _waveTimer -= Time.deltaTime;
             if (_waveTimer <= 0f)
             {
+                PlayRandomAudioClip();
                 _currentState = GameState.Wave;
                 _waveTimer = currentDifficulty.GetRandomWaveDuration();
                 StartCoroutine(ActivateModulesWave());
@@ -221,12 +240,13 @@ namespace Elias.Scripts.Managers
         private void HandleWave(DifficultyParameters currentDifficulty)
         {
             _waveTimer -= Time.deltaTime;
+
             if (_waveTimer <= 0f)
             {
                 _currentState = GameState.Cooldown;
                 _cooldownTimer = currentDifficulty.GetRandomWaveInterval();
-                AdjustCooldownTimer();
-                StopCoroutine(ActivateModulesWave());
+                StopCoroutine(ActivateModulesWave()); // Stop the wave coroutine
+                StopCoroutine(AnimateColorCoroutine()); // Stop the color animation coroutine
             }
         }
 
@@ -239,8 +259,24 @@ namespace Elias.Scripts.Managers
                 _waveTimer = currentDifficulty.GetRandomWaveDuration();
                 StartCoroutine(ActivateModulesWave());
                 ResetCooldownModifiers();
+                PlayRandomAudioClip();
             }
         }
+
+        private void PlayRandomAudioClip()
+        {
+            if (audioClips != null && audioClips.Length > 0)
+            {
+                int randomClipIndex = Random.Range(0, audioClips.Length);
+                _audioSource.clip = audioClips[randomClipIndex];
+                _audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("Audio clips array is empty or null.");
+            }
+        }
+
 
         private void AdjustCooldownTimer()
         {

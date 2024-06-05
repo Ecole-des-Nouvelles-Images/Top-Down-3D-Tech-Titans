@@ -60,7 +60,7 @@ namespace Christopher.Scripts.Modules
             GameCycleController.Instance.CountActiveBreach();
             if (GameCycleController.Instance.noActiveBreach)
             {
-                GameManager.Instance.LowerWaterToInitialPosition();
+                GameManager.Instance.hatchActivated = true;
             }
             audioSource.Play();
             PlayerUsingModule.GetComponent<PlayerController>().QuitInteraction();

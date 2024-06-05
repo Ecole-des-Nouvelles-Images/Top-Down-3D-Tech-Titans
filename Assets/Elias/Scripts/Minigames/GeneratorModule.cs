@@ -154,6 +154,7 @@ namespace Elias.Scripts.Minigames
                     return false;   // Check top
                 }
             }
+            GameCycleController.Instance.ResetGeneratorTimer();
             return true;
         }
 

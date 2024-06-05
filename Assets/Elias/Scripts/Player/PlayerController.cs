@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Christopher.Scripts;
 using Christopher.Scripts.Modules;
@@ -21,8 +22,9 @@ namespace Elias.Scripts.Player
 
         // New variables for sounds
         [SerializeField] private List<AudioClip> playerSteps;
-        private AudioSource audioSource;
+        public AudioSource audioSource;
         private int lastPlayedStepIndex = -1;
+        private bool isPlayingStepSound = false; // To prevent multiple coroutines
 
         // booleans
         public static readonly int Idle = Animator.StringToHash("Idle");
@@ -53,6 +55,8 @@ namespace Elias.Scripts.Player
         private bool _isInteracting;
         private bool _isWithinRange;
 
+        private bool _isRunning;
+
         private void Start()
         {
             GameManager.Instance.playerVersion++;
@@ -77,13 +81,6 @@ namespace Elias.Scripts.Player
             UsingModule = null;
             _playerRigidbody = GetComponent<Rigidbody>();
             _originalConstraints = _playerRigidbody.constraints;
-
-            // Initialize the audio source
-            audioSource = GetComponent<AudioSource>();
-            if (audioSource == null)
-            {
-                audioSource = gameObject.AddComponent<AudioSource>();
-            }
         }
 
         private void FixedUpdate()
@@ -259,16 +256,19 @@ namespace Elias.Scripts.Player
                     _playerRigidbody.MoveRotation(targetRotation);
 
                     float inputMagnitude = new Vector2(x, y).magnitude;
-                    bool isRunning = inputMagnitude >= 0.5f;
+                    _isRunning = inputMagnitude >= 0.5f;
 
-                    float moveSpeed = isRunning && !GameManager.Instance.waterWalk ? speed : speed / 2;
+                    float moveSpeed = _isRunning && !GameManager.Instance.waterWalk ? speed : speed / 1.25f;
 
                     Vector3 velocity = moveDirection * (moveSpeed * Time.fixedDeltaTime);
                     _playerRigidbody.velocity = new Vector3(velocity.x, _playerRigidbody.velocity.y, velocity.z);
 
                     animator.SetBool(IsRunningWater, GameManager.Instance.waterWalk);
 
-                    PlayRandomStepSound();
+                    if (!isPlayingStepSound)
+                    {
+                        StartCoroutine(PlayRandomStepSoundCoroutine());
+                    }
                 }
                 else
                 {
@@ -278,20 +278,45 @@ namespace Elias.Scripts.Player
             }
         }
 
-        private void PlayRandomStepSound()
+        private IEnumerator PlayRandomStepSoundCoroutine()
         {
-            if (playerSteps.Count == 0) return;
+            isPlayingStepSound = true;
 
-            int newStepIndex;
-            do
+            while (_playerRigidbody.velocity != Vector3.zero)
             {
-                newStepIndex = Random.Range(0, playerSteps.Count);
-            } while (newStepIndex == lastPlayedStepIndex);
+                if (playerSteps.Count == 0) yield break;
 
-            lastPlayedStepIndex = newStepIndex;
-            audioSource.clip = playerSteps[newStepIndex];
-            audioSource.Play();
+                int newStepIndex;
+                do
+                {
+                    newStepIndex = Random.Range(0, playerSteps.Count);
+                } while (newStepIndex == lastPlayedStepIndex);
+
+                lastPlayedStepIndex = newStepIndex;
+                audioSource.clip = playerSteps[newStepIndex];
+
+                if (!GameManager.Instance.waterWalk)
+                {
+                    audioSource.Play();
+
+                    if (_isRunning)
+                    {
+                        yield return new WaitForSeconds(audioSource.clip.length + 0.3f);
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(audioSource.clip.length + 0.6f);
+                    }
+                }
+                else
+                {
+                    yield return new WaitForSeconds(0.1f);
+                }
+            }
+
+            isPlayingStepSound = false;
         }
+
 
         private void Interact()
         {

@@ -21,7 +21,7 @@ namespace Christopher.Scripts.Modules
         private int[] _toDo = new int[3];
         private int[] _doing = new int[3];
         private int _currentSlot;
-        private float _activationTimer = 5f;
+        private float _activationTimer = 15f;
 
         void Start() {
             shootAudioSource.clip = sounds[2];
@@ -66,6 +66,7 @@ namespace Christopher.Scripts.Modules
                     Succes.Add(true);
                     shootAudioSource.Play();
                     Deactivate();
+                    GameCycleController.Instance.ResetTorpedoTimer();
                 }
             } else {
                 State = 0;
@@ -94,7 +95,7 @@ namespace Christopher.Scripts.Modules
 
         public override void Activate() {
                 IsActivated = true; // Set IsActivated to true only if it's currently false
-                PartyGameDisplay.SetActive(true);
+                PartyGameDisplay.SetActive(false);
         }
 
 
@@ -164,6 +165,7 @@ namespace Christopher.Scripts.Modules
 
         private void FailMiniGame() {
             Deactivate();
+            GameCycleController.Instance.ResetTorpedoTimer();
             PartyGameDisplay.SetActive(false);
             if (PlayerUsingModule) {
                 PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
