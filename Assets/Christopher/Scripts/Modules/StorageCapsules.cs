@@ -50,7 +50,8 @@ namespace Christopher.Scripts.Modules
                 itemDisplay.SetActive(false);
                 if (_currentCooldownValue > 0) {
                     _currentCooldownValue -= Time.deltaTime;
-                } else {
+                } 
+                else {
                     _currentCooldownValue = cooldown;
                     _playCooldown = false;
                     cooldownDisplay.SetActive(false);

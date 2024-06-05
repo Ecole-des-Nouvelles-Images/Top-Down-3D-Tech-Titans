@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Christopher.Scripts
@@ -5,6 +6,10 @@ namespace Christopher.Scripts
     public class PauseMenu : MonoBehaviour
     {
         [SerializeField] private GameObject PausePanel;
+
+        private void Awake() {
+            PausePanel.SetActive(false);
+        }
 
         public void TogglePauseMenuActivation() {
             if (PausePanel.activeSelf) {
