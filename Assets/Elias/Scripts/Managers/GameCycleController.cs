@@ -424,7 +424,6 @@ namespace Elias.Scripts.Managers
             CountActiveBreach();
             ActivateRandomModule();
             ActivateRandomModule();
-            ActivateRandomModule();
             difficulties[_activeDifficulty].GetRandomTorpedoInterval();
         }
 

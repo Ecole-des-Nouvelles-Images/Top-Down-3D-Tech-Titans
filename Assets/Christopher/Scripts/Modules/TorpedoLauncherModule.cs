@@ -21,7 +21,7 @@ namespace Christopher.Scripts.Modules
         private int[] _toDo = new int[3];
         private int[] _doing = new int[3];
         private int _currentSlot;
-        private float _activationTimer = 15f;
+        private float _activationTimer = 20f;
 
         void Start() {
             shootAudioSource.clip = sounds[2];
@@ -94,8 +94,7 @@ namespace Christopher.Scripts.Modules
         }
 
         public override void Activate() {
-                IsActivated = true; // Set IsActivated to true only if it's currently false
-                PartyGameDisplay.SetActive(false);
+                IsActivated = true;
         }
 
 

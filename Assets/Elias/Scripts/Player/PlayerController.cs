@@ -169,17 +169,9 @@ namespace Elias.Scripts.Player
                 {
                     case BreachModule:
                         animator.SetBool(IsRepairing, true);
-                        /*while (UsingModule)
-                        {
-                            repairTool.SetActive(true);
-                        }*/
                         break;
                     case FixingDrillModule:
                         animator.SetBool(IsRepairing, true);
-                        /*while (UsingModule)
-                        {
-                            repairTool.SetActive(true);
-                        }*/
                         break;
                     case HatchesModule:
                         animator.SetBool(IsInteractingHatches, true);

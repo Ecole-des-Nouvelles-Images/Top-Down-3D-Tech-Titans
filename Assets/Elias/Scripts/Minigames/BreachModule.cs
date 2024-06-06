@@ -5,6 +5,7 @@ using Elias.Scripts.Managers;
 using Elias.Scripts.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Elias.Scripts.Minigames
 {
@@ -19,6 +20,18 @@ namespace Elias.Scripts.Minigames
         private bool _needleStopped;
 
         public GameObject skin;
+        
+        public GameObject aboveWater;
+        public GameObject underWater;
+
+        public AudioSource breachAudioSource;
+        public AudioSource audioSource;
+        public AudioClip[] audioClips;
+        public AudioClip[] audioBreachClips;
+        
+        private bool isAudioPlaying = false;
+        private static int lastClipIndex = -1;
+        private static int lastBreachClipIndex = -1;
 
         private void Start()
         {
@@ -36,6 +49,17 @@ namespace Elias.Scripts.Minigames
             else
             {
                 canvas.SetActive(false);
+            }
+
+            if (GameManager.Instance.waterWalk)
+            {
+                aboveWater.SetActive(false);
+                underWater.SetActive(true);
+            }
+            else
+            {
+                aboveWater.SetActive(true);
+                underWater.SetActive(false);
             }
         }
 
@@ -113,6 +137,21 @@ namespace Elias.Scripts.Minigames
             playerDetector.SetActive(true);
             State = 1;
             SetRandomSuccessZoneAngle();
+
+            if (!isAudioPlaying)
+            {
+                int randomIndex;
+                do
+                {
+                    randomIndex = new System.Random(Guid.NewGuid().GetHashCode()).Next(0, audioBreachClips.Length);
+                } while (randomIndex == lastBreachClipIndex);
+                lastBreachClipIndex = randomIndex;
+                breachAudioSource.clip = audioBreachClips[randomIndex];
+                breachAudioSource.Play();
+                isAudioPlaying = true;
+                StartCoroutine(PlayRandomClip());
+                
+            }
         }
 
         public override void Deactivate()
@@ -131,6 +170,9 @@ namespace Elias.Scripts.Minigames
                     playerController.QuitInteraction();
                 }
             }
+            
+            isAudioPlaying = false;
+            audioSource.Stop();
         }
 
         public override void Interact(GameObject playerUsingModule)
@@ -152,6 +194,7 @@ namespace Elias.Scripts.Minigames
             float successStartAngle = NormalizeAngle(successZone.localEulerAngles.z - 15);
             float successEndAngle = NormalizeAngle(successZone.localEulerAngles.z + 15);
             Debug.LogFormat("Success start angle: {0}, success end angle: {1}", successStartAngle, successEndAngle);
+            
         }
 
         public override void StopInteract()
@@ -191,7 +234,7 @@ namespace Elias.Scripts.Minigames
 
         private void SetRandomSuccessZoneAngle()
         {
-            float randomAngle = UnityEngine.Random.Range(30f, 330f);
+            float randomAngle = Random.Range(30f, 330f);
             successZone.localEulerAngles = new Vector3(successZone.localEulerAngles.x, successZone.localEulerAngles.y, randomAngle);
         }
 
@@ -207,5 +250,24 @@ namespace Elias.Scripts.Minigames
             yield return new WaitForSeconds(1f); // Wait for 1 second
             Deactivate();
         }
+        
+        private IEnumerator PlayRandomClip()
+        {
+            while (isAudioPlaying)
+            {
+                int randomIndex;
+                do
+                {
+                    randomIndex = Random.Range(0, audioClips.Length);
+                } while (randomIndex == lastClipIndex);
+
+                lastClipIndex = randomIndex;
+                audioSource.clip = audioClips[randomIndex];
+                audioSource.Play();
+
+                yield return new WaitForSeconds(audioSource.clip.length);
+            }
+        }
+        
     }
 }
