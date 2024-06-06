@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Cinemachine;
 using Elias.Scripts.Minigames;
 using Elias.Scripts.Player;
@@ -15,8 +16,13 @@ namespace Elias.Scripts.Managers
     {
         public GameObject water;
         public CinemachineTargetGroup cameraTargetGroup;
-        public TextMeshPro playerNameText;
-        private GameObject _playerInstance;
+        
+        private GameObject _playerInstance; 
+        public List<GameObject> playerModels;
+        public int playerVersion;
+
+        public PlayerInputManager playerInputManager;
+        
         private Quaternion _playerOriginalRotation;
         private Vector3 _originalWaterPosition;
         
@@ -27,9 +33,18 @@ namespace Elias.Scripts.Managers
         private bool _isWaterFilled;
         
         public GameObject fadeImageObject;
+        
+        public int activeModuleCount = 0;
+
+        public bool hatchActivated;
 
         private void Awake()
         {
+            playerInputManager = GetComponent<PlayerInputManager>();
+
+            playerVersion = 0;
+            playerInputManager.playerPrefab = playerModels[playerVersion];
+            
             _playerOriginalRotation = Quaternion.identity;
             _originalWaterPosition = water.transform.position;
 
@@ -53,11 +68,11 @@ namespace Elias.Scripts.Managers
         {
             WaterControl();
 
-            if (Input.GetKeyDown(KeyCode.O))                                  
-            {                                                                 
-                LowerWaterToInitialPosition();                                
-            }                                                                 
-                                                                              
+            if (hatchActivated && activeModuleCount == 0)
+            {
+                LowerWaterToInitialPosition();
+            }
+            
             if (_isWaterFilled)                                               
             {                                                                 
                 _waterTimeCurrent -= Time.deltaTime;
@@ -102,7 +117,8 @@ namespace Elias.Scripts.Managers
             if (GameCycleController.Instance != null)
             {
                 BreachModule[] activeSkillCheckModules = FindObjectsOfType<BreachModule>();
-                int activeModuleCount = 0;
+
+                activeModuleCount = 0;
 
                 foreach (var breach in activeSkillCheckModules)
                 {
@@ -124,16 +140,16 @@ namespace Elias.Scripts.Managers
                         movementSpeed /= 20;
                         break;
                     case 2:
-                        movementSpeed /= 10;
+                        movementSpeed /= 15;
                         break;
                     case 3:
-                        movementSpeed /= 5;
+                        movementSpeed /= 10;
                         break;
                     case 4:
-                        movementSpeed /= 3;
+                        movementSpeed /= 5;
                         break;
                     case 5:
-                        movementSpeed /= 2;
+                        movementSpeed /= 3;
                         break;
                     case 6:
                         movementSpeed /= 1;
@@ -162,6 +178,26 @@ namespace Elias.Scripts.Managers
             }
         }
 
+        public void LowerWaterToInitialPosition()
+        {
+            Vector3 transformPosition = water.transform.position;
+
+            if(transformPosition.y > _originalWaterPosition.y)
+            {
+                transformPosition.y -= Time.deltaTime * 1.5f;
+
+                transformPosition.y = Mathf.Max(transformPosition.y, _originalWaterPosition.y);
+
+                water.transform.position = transformPosition;
+            }
+            else
+            {
+                hatchActivated = false;
+            }
+
+        }
+
+        
         private void OnDeviceChange(InputDevice device, InputDeviceChange change)
         {
             if (change == InputDeviceChange.Removed && device is Gamepad)
@@ -170,10 +206,7 @@ namespace Elias.Scripts.Managers
             }
         }
 
-        public void LowerWaterToInitialPosition()
-        {
-            water.transform.position = new Vector3(_originalWaterPosition.x, _originalWaterPosition.y, _originalWaterPosition.z);
-        }
+        
         
         public void RemovePlayer()
         {
@@ -191,5 +224,6 @@ namespace Elias.Scripts.Managers
             WaitForSeconds waitForSeconds = new WaitForSeconds(10);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        
     }
 }

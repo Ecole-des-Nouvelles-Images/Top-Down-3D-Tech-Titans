@@ -28,7 +28,6 @@ namespace Christopher.Scripts.Modules
         private bool _isStationStop;
         private int[] _toDo;
         private List<int> _input;
-        public GameManager gameManager;
         public float oxygenTimer = 5f;
         private float _oxygenTimeCurrent;
         private bool _isOxygenEmpty;
@@ -54,7 +53,7 @@ namespace Christopher.Scripts.Modules
             if (_isOxygenEmpty) {
                 _oxygenTimeCurrent -= Time.deltaTime;
                 if (_oxygenTimeCurrent <= 0) {
-                    gameManager.GameOver("Le Sous Marin est asphyxé");
+                    GameManager.Instance.GameOver("Le Sous Marin est asphyxé");
                 }
             }
             if (!IsActivated) {
