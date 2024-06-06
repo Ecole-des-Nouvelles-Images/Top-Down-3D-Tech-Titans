@@ -19,6 +19,9 @@ namespace Elias.Scripts.Minigames
         private bool _needleStopped;
 
         public GameObject skin;
+        
+        public GameObject aboveWater;
+        public GameObject underWater;
 
         private void Start()
         {
@@ -36,6 +39,17 @@ namespace Elias.Scripts.Minigames
             else
             {
                 canvas.SetActive(false);
+            }
+
+            if (GameManager.Instance.waterWalk)
+            {
+                aboveWater.SetActive(false);
+                underWater.SetActive(true);
+            }
+            else
+            {
+                aboveWater.SetActive(true);
+                underWater.SetActive(false);
             }
         }
 
