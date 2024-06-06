@@ -1,11 +1,16 @@
 using Elias.Scripts.Player;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Christopher.Scripts.Modules
 {
     public class FixingDrillModule : SubmarinModule
     {
         public Animator drillHeadAnimator;
+
+        public GameObject effect;
+        
         [SerializeField] private GameObject minigameDisplay;
         [SerializeField] private GameObject drillHead;
         [SerializeField] private GameObject drillHeadOnSocleDisplay;
@@ -13,18 +18,22 @@ namespace Christopher.Scripts.Modules
         [SerializeField] private AudioSource audioSource;
         private bool _isStationStarted;
         private bool _isStationStop;
+        
         private void Start() {
+            effect.SetActive(false);
             _isStationStop = true;
             minigameDisplay.SetActive(false);
             drillHeadAnimator.SetBool("isDrillDamaged",false);
-           // drillHeadOnSocleDisplay.SetActive(false);// cette ligne sera surement à supprimer <---------------------------------------------------------------------
+            drillHeadOnSocleDisplay.SetActive(false);// cette ligne sera surement à supprimer <---------------------------------------------------------------------
         }
+        
         private void Update() {
             SoundManaging();
             if (IsActivated)
             {
                 drillHeadAnimator.SetBool("isDrillDamaged",true);
                 State = 1;
+                effect.SetActive(true);
                 if(StatesMaterials.Length > 0 && StatesMaterials[1] != null){ 
                     foreach (GameObject obj in StateDisplayObject) {
                         obj.transform.GetComponent<MeshRenderer>().material = StatesMaterials[1];
@@ -38,6 +47,7 @@ namespace Christopher.Scripts.Modules
             if (!IsActivated)
             {
                 State = 0;
+                effect.SetActive(false);
                 if(StatesMaterials.Length > 0 && StatesMaterials[0] != null){ 
                     foreach (GameObject obj in StateDisplayObject) {
                         obj.transform.GetComponent<MeshRenderer>().material = StatesMaterials[0];
