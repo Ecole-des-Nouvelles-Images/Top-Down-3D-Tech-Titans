@@ -61,10 +61,12 @@ namespace Christopher.Scripts.Modules
             if (IsActivated && PlayerUsingModule == null) {
                 PlayerUsingModule = playerUsingModule;
                 minigameDisplay.SetActive(true);
+                PlayerUsingModule.transform.GetComponent<PlayerController>().inputActivatePanel.SetActive(true);
             }
         }
 
         public override void StopInteract() {
+            PlayerUsingModule.transform.GetComponent<PlayerController>().inputActivatePanel.SetActive(false);
             PlayerUsingModule = null;
             minigameDisplay.SetActive(false);
         }

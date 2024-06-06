@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8118423147917050031}
   - component: {fileID: 8375367034059433335}
   - component: {fileID: 4854365189136136535}
-  - component: {fileID: 3049467903460171846}
+  - component: {fileID: 5968671015387563436}
   m_Layer: 5
   m_Name: OptionsButton
   m_TagString: Untagged
@@ -147,7 +147,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3049467903460171846
+--- !u!114 &5968671015387563436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,13 +156,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 432837841172854346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a13840cd93bf93448cd799576a8f5d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a6683358cedc504fa4e370abdab078c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 4854365189136136535}
   buttonText: {fileID: 4148038226123646440}
-  normalTextColor: {r: 0.050780896, g: 0.4245283, b: 0, a: 1}
-  highlightedTextColor: {r: 0, g: 1, b: 0.0076596737, a: 1}
+  normalTextColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedTextColor: {r: 0, g: 0, b: 0, a: 1}
+  selectSound: {fileID: 8300000, guid: 25a8a3f996fc0de42beea141fca14640, type: 3}
 --- !u!1 &908847520848139306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1253,7 @@ GameObject:
   - component: {fileID: 3659782351195230591}
   - component: {fileID: 5383168348731503120}
   - component: {fileID: 7757596423533332347}
-  - component: {fileID: 1372340037403063165}
+  - component: {fileID: 1300458460502465120}
   m_Layer: 5
   m_Name: TutorielButton
   m_TagString: Untagged
@@ -1387,7 +1388,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &1372340037403063165
+--- !u!114 &1300458460502465120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1396,13 +1397,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1916805436365395267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a13840cd93bf93448cd799576a8f5d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a6683358cedc504fa4e370abdab078c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 7757596423533332347}
   buttonText: {fileID: 5735135759475577840}
-  normalTextColor: {r: 0.050780896, g: 0.4245283, b: 0, a: 1}
-  highlightedTextColor: {r: 0, g: 1, b: 0.0076596737, a: 1}
+  normalTextColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedTextColor: {r: 0, g: 0, b: 0, a: 1}
+  selectSound: {fileID: 8300000, guid: 25a8a3f996fc0de42beea141fca14640, type: 3}
 --- !u!1 &1958548193276868688
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,7 +2227,7 @@ GameObject:
   - component: {fileID: 2423941534023167911}
   - component: {fileID: 6074077567026289864}
   - component: {fileID: 3878769580977918056}
-  - component: {fileID: 1164725108525814401}
+  - component: {fileID: 3956211731579105469}
   m_Layer: 5
   m_Name: RecommencerButton
   m_TagString: Untagged
@@ -2336,7 +2338,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1164725108525814401
+--- !u!114 &3956211731579105469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2345,13 +2347,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2964359764654788383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a13840cd93bf93448cd799576a8f5d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a6683358cedc504fa4e370abdab078c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 3878769580977918056}
   buttonText: {fileID: 7878127697126258480}
-  normalTextColor: {r: 0.050780896, g: 0.4245283, b: 0, a: 1}
-  highlightedTextColor: {r: 0, g: 1, b: 0.0076596737, a: 1}
+  normalTextColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedTextColor: {r: 0, g: 0, b: 0, a: 1}
+  selectSound: {fileID: 8300000, guid: 25a8a3f996fc0de42beea141fca14640, type: 3}
 --- !u!1 &2994073654193706690
 GameObject:
   m_ObjectHideFlags: 0
@@ -3094,7 +3097,7 @@ GameObject:
   - component: {fileID: 3523087314723347353}
   - component: {fileID: 4656657875304210562}
   - component: {fileID: 8525838020430137345}
-  - component: {fileID: 4813838613771146269}
+  - component: {fileID: 1186073004543657306}
   m_Layer: 5
   m_Name: QuitterButton
   m_TagString: Untagged
@@ -3205,7 +3208,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4813838613771146269
+--- !u!114 &1186073004543657306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3214,13 +3217,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4844254227959067521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a13840cd93bf93448cd799576a8f5d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a6683358cedc504fa4e370abdab078c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 8525838020430137345}
   buttonText: {fileID: 2498545618534139703}
-  normalTextColor: {r: 0.050780896, g: 0.4245283, b: 0, a: 1}
-  highlightedTextColor: {r: 0, g: 1, b: 0.0076596737, a: 1}
+  normalTextColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedTextColor: {r: 0, g: 0, b: 0, a: 1}
+  selectSound: {fileID: 8300000, guid: 25a8a3f996fc0de42beea141fca14640, type: 3}
 --- !u!1 &5169252420328816635
 GameObject:
   m_ObjectHideFlags: 0
@@ -3912,7 +3916,7 @@ GameObject:
   - component: {fileID: 2593967262471261741}
   - component: {fileID: 5645518495480158490}
   - component: {fileID: 5775123085714342166}
-  - component: {fileID: 3725029788553322366}
+  - component: {fileID: 6709522652394581538}
   m_Layer: 5
   m_Name: ReprendreButton
   m_TagString: Untagged
@@ -4023,7 +4027,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3725029788553322366
+--- !u!114 &6709522652394581538
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4032,13 +4036,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7503407829682487329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a13840cd93bf93448cd799576a8f5d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a6683358cedc504fa4e370abdab078c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 5775123085714342166}
   buttonText: {fileID: 7978915375337465247}
-  normalTextColor: {r: 0.050780896, g: 0.4245283, b: 0, a: 1}
-  highlightedTextColor: {r: 0, g: 1, b: 0.0076596737, a: 1}
+  normalTextColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedTextColor: {r: 0, g: 0, b: 0, a: 1}
+  selectSound: {fileID: 8300000, guid: 25a8a3f996fc0de42beea141fca14640, type: 3}
 --- !u!1 &8144071804372758750
 GameObject:
   m_ObjectHideFlags: 0

@@ -82,7 +82,7 @@ namespace Elias.Scripts.Managers
                 }
             }
 
-            if (water.transform.position.y >= 2f)
+            if (water.transform.position.y >= 1.5f)
             {
                 waterWalk = true;
             }
@@ -146,13 +146,13 @@ namespace Elias.Scripts.Managers
                         movementSpeed /= 10;
                         break;
                     case 4:
-                        movementSpeed /= 5;
+                        movementSpeed /= 6;
                         break;
                     case 5:
-                        movementSpeed /= 3;
+                        movementSpeed /= 4;
                         break;
                     case 6:
-                        movementSpeed /= 1;
+                        movementSpeed /= 2;
                         break;
                     
                 }

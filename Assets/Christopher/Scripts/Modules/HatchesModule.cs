@@ -7,9 +7,6 @@ namespace Christopher.Scripts.Modules
 {
     public class HatchesModule : SubmarinModule
     {
-        public GameManager gameManager;
-
-        public GameCycleController gameCycleController;
         [SerializeField] private GameObject greenLights;
         [SerializeField] private GameObject redLights;
         [SerializeField] private AudioSource audioSource;
@@ -56,6 +53,7 @@ namespace Christopher.Scripts.Modules
         {
             if (IsActivated && PlayerUsingModule == null) {
                 PlayerUsingModule = playerUsingModule;
+                PlayerUsingModule.transform.GetComponent<PlayerController>().inputActivatePanel.SetActive(true);
             }
             GameCycleController.Instance.CountActiveBreach();
             if (GameCycleController.Instance.noActiveBreach)
@@ -67,6 +65,7 @@ namespace Christopher.Scripts.Modules
         }
 
         public override void StopInteract() {
+            PlayerUsingModule.transform.GetComponent<PlayerController>().inputActivatePanel.SetActive(false);
             PlayerUsingModule = null;
         }
 
