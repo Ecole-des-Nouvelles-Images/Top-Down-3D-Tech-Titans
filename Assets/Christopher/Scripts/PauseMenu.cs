@@ -38,7 +38,7 @@ namespace Christopher.Scripts
             Application.Quit();
         }
         public void RebootGame() {
-            SceneManager.LoadScene("Integration");
+            //GameManager.Instance.GameOver("L'equipe est retournee à la vie civile");
         }
         public void SetMusicVolume() {
             float musicVolume = musicSlider.value;

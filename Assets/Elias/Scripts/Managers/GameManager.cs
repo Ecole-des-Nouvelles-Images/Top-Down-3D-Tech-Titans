@@ -29,6 +29,8 @@ namespace Elias.Scripts.Managers
         public bool waterWalk;
         
         public float waterTimer = 5f;
+        private float _gameOverTimer = 5f;
+        
         private float _waterTimeCurrent;
         private bool _isWaterFilled;
         
@@ -219,9 +221,16 @@ namespace Elias.Scripts.Managers
         public void GameOver(string looseCause)
         {
             Debug.Log("GAME OVER !!! " + looseCause);
-            
+
             fadeImageObject.SetActive(true);
-            WaitForSeconds waitForSeconds = new WaitForSeconds(10);
+
+            StartCoroutine(ReloadSceneAfterDelay(_gameOverTimer));
+        }
+
+        private IEnumerator ReloadSceneAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         

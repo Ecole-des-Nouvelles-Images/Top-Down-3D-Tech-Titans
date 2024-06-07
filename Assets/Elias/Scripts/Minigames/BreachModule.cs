@@ -180,6 +180,8 @@ namespace Elias.Scripts.Minigames
             Activate();
             if (IsActivated && PlayerUsingModule == null) {
                 PlayerUsingModule = playerUsingModule;
+                PlayerUsingModule.transform.GetComponent<PlayerController>().inputActivatePanel.SetActive(true);
+                
             }
             playerInteracting = true;
             indicatorNeedle.localEulerAngles = Vector3.zero;
@@ -199,6 +201,7 @@ namespace Elias.Scripts.Minigames
 
         public override void StopInteract()
         {
+            PlayerUsingModule.transform.GetComponent<PlayerController>().inputActivatePanel.SetActive(false);
             PlayerUsingModule = null;
             playerInteracting = false;
         }
