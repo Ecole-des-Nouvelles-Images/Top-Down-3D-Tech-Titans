@@ -59,12 +59,20 @@ namespace Elias.Scripts.Player
 
         private bool _isRunning;
 
+        public Transform _playerHint;
+        
         private void Start()
         {
             GameManager.Instance.playerVersion++;
             GameManager.Instance.playerInputManager.playerPrefab =
                 GameManager.Instance.playerModels[GameManager.Instance.playerVersion];
             
+            
+            if (_playerHint != null)
+            {
+                GameManager.Instance.AddTargetToCameraGroup(_playerHint);
+            }
+                
             animator = GetComponent<Animator>();
 
             //repairTool.SetActive(false);

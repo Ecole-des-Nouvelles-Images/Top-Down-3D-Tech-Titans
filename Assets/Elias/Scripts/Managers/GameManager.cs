@@ -234,5 +234,10 @@ namespace Elias.Scripts.Managers
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         
+        public void AddTargetToCameraGroup(Transform target)
+        {
+            cameraTargetGroup.AddMember(target, 1, 0);
+        }
+        
     }
 }

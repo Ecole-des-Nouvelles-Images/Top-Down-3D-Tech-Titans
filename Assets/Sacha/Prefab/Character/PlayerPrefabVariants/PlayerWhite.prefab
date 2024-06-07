@@ -9979,6 +9979,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7c30ebb6ba605db4babed24edac9f4ac, type: 3}
   - {fileID: 8300000, guid: 803cf1cc8a07c6741a9b6d94c344c2d0, type: 3}
   audioSource: {fileID: 1019856559494120114}
+  _playerHint: {fileID: 5380656426124448031}
 --- !u!114 &8221284705475947638
 MonoBehaviour:
   m_ObjectHideFlags: 0
