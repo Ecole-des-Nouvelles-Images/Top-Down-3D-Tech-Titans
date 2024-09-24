@@ -15,6 +15,6 @@ If the stations are not in check, they can generate aditional problems, like oth
 Once you've cleared the first phase of your mission and retrieved the mineral, the second phase, the extract, will begin immediatly, still using the middle table you will need to pilot the submarine to the surface.
 In addition of this you are recommended to use the boosters, on the lower side of the submarine to increase your momentum in order to speed up the objective, be wary not to crash on the environmment, as it will cause breachs.
 During this second phase, the events are still active and will occur to slow you down, or attempt to end this dive once and for all, work as a team and you should reach the surface, this will end the mission and grant you the win !
-<h4>Reccomandations</h4>
+<h2>Reccomandations</h2>
 We reccomand to play with a full crew, as the difficulty settings are made for this number, this game will require you to have one controller for each player. If you are only 2 or 3 players choose the lower difficulties to start and get
 a good grip on the game mechanics, as the last difficulty can get very overwelhming very fast to an experienced group.
