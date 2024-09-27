@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Christopher.Scripts;
 using Christopher.Scripts.Modules;
 using Elias.Scripts.Camera;
+using Elias.Scripts.Light;
 using UnityEngine;
 using Elias.Scripts.Minigames;
-using Elias.Scripts.Scripts;
 using Unity.VisualScripting;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -45,7 +45,7 @@ namespace Elias.Scripts.Managers
         
         private LightColorAnimation[] _lights;
 
-        private bool _gameReset;
+        //private bool _gameReset;
         
         private void Awake()
         {
@@ -87,7 +87,7 @@ namespace Elias.Scripts.Managers
             }
         }
 
-        private void ResetAll()
+        /*private void ResetAll()
         {
             // Reset active modules
             foreach (BreachModule module in modules)
@@ -122,24 +122,26 @@ namespace Elias.Scripts.Managers
 
             // Optionally reset the current state
             _currentState = GameState.InitialDelay; // Reset to the initial game state
-        }
+            
+            GameManager.Instance.LowerWaterToInitialPosition();
+        }*/
 
         private void Update()
         {
-            if (activePhase == 1 && !_gameReset)
+            /*if (activePhase == 1 && !_gameReset)
             {
                 ResetAll();
                 _gameReset = true;
-            }
+            }*/
             
             if (activePhase == 1)
             {
                 return; 
             }
-            else
+            /*else
             {
                 _gameReset = false;
-            }
+            }*/
 
 
             if (_currentState == GameState.Wave)
