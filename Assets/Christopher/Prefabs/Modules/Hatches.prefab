@@ -373,7 +373,7 @@ Transform:
   m_GameObject: {fileID: 2960710120970361077}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8, y: 0, z: 0}
+  m_LocalPosition: {x: -1.9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1112,7 +1112,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.50000006, y: 0.49999997, z: 0.50000006, w: 0.49999997}
   m_LocalPosition: {x: -0.0107, y: -0.66, z: 0}
-  m_LocalScale: {x: 47.83987, y: 20.88615, z: 100}
+  m_LocalScale: {x: 47.83987, y: 20.88615, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 239514714139019218}
@@ -1547,10 +1547,8 @@ MonoBehaviour:
   StateDisplayObject:
   - {fileID: 2256331228188671795}
   Succes: 
-  playerDetector: {fileID: 2960710120970361077}
   PlayerUsingModule: {fileID: 0}
-  gameManager: {fileID: 0}
-  gameCycleController: {fileID: 0}
+  playerDetector: {fileID: 2960710120970361077}
   greenLights: {fileID: 4986868635961856023}
   redLights: {fileID: 8026155545286871265}
   audioSource: {fileID: 7527922846786633019}

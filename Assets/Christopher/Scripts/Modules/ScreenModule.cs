@@ -38,8 +38,8 @@ namespace Christopher.Scripts.Modules
         private bool _transitionPhase2;
         private bool _transitionPhase3;
         
-        private void Start()
-        {
+        private void Start() {
+            PlayerUsingModule = null;
             _currentTimerTransition = TimerTransition[0];
             _drillOriginPosition = drillHead.transform.parent.gameObject.transform.position;
             PlayerUsingModule = null;

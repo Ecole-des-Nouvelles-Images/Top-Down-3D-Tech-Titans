@@ -156,8 +156,8 @@ Transform:
   m_GameObject: {fileID: 962613977988136637}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: -2.08, z: -0.32124007}
-  m_LocalScale: {x: 47.83986, y: 43.66291, z: 100}
+  m_LocalPosition: {x: 0, y: -2.074, z: -0.32124007}
+  m_LocalScale: {x: 47.83986, y: 43.66291, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7958512722671298566}
@@ -487,8 +487,8 @@ MonoBehaviour:
   StateDisplayObject:
   - {fileID: 6532838573010291309}
   Succes: 
-  playerDetector: {fileID: 6591016912053763740}
   PlayerUsingModule: {fileID: 0}
+  playerDetector: {fileID: 6591016912053763740}
   StorageAnimator: {fileID: 2631794358534376498}
   myObject: 1
   cooldown: 10

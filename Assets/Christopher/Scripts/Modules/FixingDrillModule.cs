@@ -20,6 +20,7 @@ namespace Christopher.Scripts.Modules
         private bool _isStationStop;
         
         private void Start() {
+            PlayerUsingModule = null;
             effect.SetActive(false);
             _isStationStop = true;
             minigameDisplay.SetActive(false);
