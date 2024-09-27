@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Christopher.Scripts;
 using Christopher.Scripts.Modules;
 using Elias.Scripts.Camera;
+using Elias.Scripts.Light;
 using UnityEngine;
 using Elias.Scripts.Minigames;
-using Elias.Scripts.Scripts;
 using Unity.VisualScripting;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -44,6 +44,8 @@ namespace Elias.Scripts.Managers
         public AudioClip[] audioClips;
         
         private LightColorAnimation[] _lights;
+
+        //private bool _gameReset;
         
         private void Awake()
         {
@@ -85,15 +87,62 @@ namespace Elias.Scripts.Managers
             }
         }
 
+        /*private void ResetAll()
+        {
+            // Reset active modules
+            foreach (BreachModule module in modules)
+            {
+                module.Deactivate(); // Deactivate all breach modules
+            }
 
+            // Reset any other modules you have
+            var generator = FindObjectOfType<GeneratorModule>();
+            if (generator != null)
+            {
+                generator.Deactivate(); // Reset generator module
+            }
 
-        
+            var torpedoLauncher = FindObjectOfType<TorpedoLauncherModule>();
+            if (torpedoLauncher != null)
+            {
+                torpedoLauncher.Deactivate(); // Reset torpedo launcher module
+            }
+
+            // Reset timers
+            _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
+            _torpedoTimer = difficulties[_activeDifficulty].GetRandomTorpedoInterval();
+            _waveTimer = difficulties[_activeDifficulty].initialDelay;
+
+            // Reset cooldown states
+            ResetCooldownModifiers();
+    
+            // Reset difficulty state
+            _hasUpdatedDifficulty = false;
+            _isDifficultySet = false;
+
+            // Optionally reset the current state
+            _currentState = GameState.InitialDelay; // Reset to the initial game state
+            
+            GameManager.Instance.LowerWaterToInitialPosition();
+        }*/
+
         private void Update()
         {
+            /*if (activePhase == 1 && !_gameReset)
+            {
+                ResetAll();
+                _gameReset = true;
+            }*/
+            
             if (activePhase == 1)
             {
-                return;
+                return; 
             }
+            /*else
+            {
+                _gameReset = false;
+            }*/
+
 
             if (_currentState == GameState.Wave)
                 StartCoroutine(AnimateColorCoroutine());

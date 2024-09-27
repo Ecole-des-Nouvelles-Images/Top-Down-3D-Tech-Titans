@@ -92,6 +92,20 @@ namespace Elias.Scripts.Managers
             {
                 waterWalk = false;
             }
+            
+            if (cameraTargetGroup.m_Targets.Length > 5)
+            {
+                for (int i = 1; i < cameraTargetGroup.m_Targets.Length; i++)
+                {
+                    if (cameraTargetGroup.m_Targets[i].weight < 1f)
+                    {
+                        cameraTargetGroup.m_Targets[i].weight += 0.5f * Time.deltaTime;
+
+                        cameraTargetGroup.m_Targets[i].weight = Mathf.Clamp(cameraTargetGroup.m_Targets[i].weight, 0f, 1f);
+                    }
+                }
+            }
+
         }
 
         public IEnumerator Ragdoll(float time = 2f)
@@ -236,7 +250,7 @@ namespace Elias.Scripts.Managers
         
         public void AddTargetToCameraGroup(Transform target)
         {
-            cameraTargetGroup.AddMember(target, 1, 0);
+            cameraTargetGroup.AddMember(target, 0, 0);
         }
         
     }
