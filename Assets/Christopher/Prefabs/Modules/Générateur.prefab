@@ -697,8 +697,8 @@ MonoBehaviour:
   StateDisplayObject:
   - {fileID: 7195760297752141053}
   Succes: 00
-  playerDetector: {fileID: 4188271094977083847}
   PlayerUsingModule: {fileID: 0}
+  playerDetector: {fileID: 4188271094977083847}
   playerInteracting: 0
   canvas: {fileID: 4540818047468013887}
   squareList: {fileID: 2205441139769190438}
@@ -1335,7 +1335,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 1212571924b87a748b54bfee2cb26335, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1922,7 +1922,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0.044, y: -0.581, z: -0.0102}
-  m_LocalScale: {x: 56.330864, y: 93.42563, z: 100}
+  m_LocalScale: {x: 56.330864, y: 93.42563, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6163968232724061652}

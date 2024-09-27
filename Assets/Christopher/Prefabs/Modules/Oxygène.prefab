@@ -226,7 +226,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.50000006, y: 0.49999997, z: 0.50000006, w: 0.49999997}
   m_LocalPosition: {x: -0.0116, y: -0.7115, z: -0.036}
-  m_LocalScale: {x: 55.892895, y: 24.654787, z: 100}
+  m_LocalScale: {x: 55.892895, y: 24.654787, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6449526416061480256}
@@ -553,7 +553,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: afe7721753301be4bb6ad08c08398439, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1127,7 +1127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3088077406405907716
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2130,8 +2130,8 @@ MonoBehaviour:
   StateDisplayObject:
   - {fileID: 2712185740671648806}
   Succes: 
-  playerDetector: {fileID: 6585054237908363433}
   PlayerUsingModule: {fileID: 0}
+  playerDetector: {fileID: 6585054237908363433}
   CurrentOxygenValue: 0
   SpeedDecrease: 3
   LightStates:
@@ -2139,10 +2139,10 @@ MonoBehaviour:
   - {fileID: 3477300442246100842}
   - {fileID: 6362090165026876463}
   InputQTE:
-  - {fileID: 21300000, guid: 8a1ad7ae751f5d443bf10ff309e5dd7e, type: 3}
-  - {fileID: 21300000, guid: c3fb259e575d9f949a695fa8728bb538, type: 3}
-  - {fileID: 21300000, guid: 6e590479df658754a81c79abe7ea1859, type: 3}
-  - {fileID: 21300000, guid: a1f91c649dfe7b84bb48a3f7f370472a, type: 3}
+  - {fileID: 21300000, guid: 8f085227423671d498cdfd30ce68167f, type: 3}
+  - {fileID: 21300000, guid: 51c32515682ff7141bd49e3809ef2c65, type: 3}
+  - {fileID: 21300000, guid: 630ca6d4db7a4e9488d161047d9be670, type: 3}
+  - {fileID: 21300000, guid: 361946e2aaa18e8438323cb56041e874, type: 3}
   DisplayToDoInput:
   - {fileID: 9146675573754330511}
   - {fileID: 2716796776067693737}

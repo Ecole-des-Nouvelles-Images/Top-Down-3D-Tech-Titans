@@ -7,7 +7,12 @@ namespace Christopher.Scripts
         [SerializeField] private SubmarinModule myModule;
 
         private void OnTriggerEnter(Collider other) {
-            if (other.CompareTag("Player") && other.transform.GetComponent<PlayerController>().UsingModule == null) {
+            if (other.CompareTag("Player") && other.transform.GetComponent<PlayerController>().UsingModule == null && myModule.PlayerUsingModule == null) {
+                other.transform.GetComponent<PlayerController>().UsingModule = myModule;
+            }
+        }
+        private void OnTriggerStay(Collider other) {
+            if (other.CompareTag("Player") && other.transform.GetComponent<PlayerController>().UsingModule == null && myModule.PlayerUsingModule == null) {
                 other.transform.GetComponent<PlayerController>().UsingModule = myModule;
             }
         }

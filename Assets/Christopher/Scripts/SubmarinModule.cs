@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Christopher.Scripts
-{
-    public abstract class SubmarinModule : MonoBehaviour
-    {
+namespace Christopher.Scripts {
+    public abstract class SubmarinModule : MonoBehaviour {
         public bool IsActivated;
         public int State;
         public Material[] StatesMaterials;
         public GameObject[] StateDisplayObject;
         public List<bool> Succes;
-        [SerializeField] protected GameObject playerDetector;
         public GameObject PlayerUsingModule;
+        
+        [SerializeField] protected GameObject playerDetector;
+        
 
         public abstract void Activate();
         public abstract void Deactivate();
