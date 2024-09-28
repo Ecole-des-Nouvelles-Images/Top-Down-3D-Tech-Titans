@@ -189,6 +189,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0952d1d3a7fd26c47a73f7bc0826531a, type: 3}
   - {fileID: 8300000, guid: ef4d52470f33bfd4f9b17229346f4088, type: 3}
   audioSource: {fileID: 5059670692400748515}
+  pushForce: 10
 --- !u!1 &1386335992836437790
 GameObject:
   m_ObjectHideFlags: 0

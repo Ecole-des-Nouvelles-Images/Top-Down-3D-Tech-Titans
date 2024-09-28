@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Elias.Scripts.Scripts
+namespace Elias.Scripts.Light
 {
     public class LightColorAnimation: MonoBehaviour
     {
@@ -9,11 +8,11 @@ namespace Elias.Scripts.Scripts
 
         public Color OriginalColor { get; private set; }
         
-        public Light Light {get; private set; }
+        public UnityEngine.Light Light {get; private set; }
 
         private void Awake()
         {
-            Light = GetComponent<Light>();
+            Light = GetComponent<UnityEngine.Light>();
             OriginalColor = Light.color;
         }
     }
