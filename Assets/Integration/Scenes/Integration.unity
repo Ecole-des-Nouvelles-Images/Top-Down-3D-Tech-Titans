@@ -1324,8 +1324,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972220330407785394, guid: f7400c8bdc006584296162babcc2c641,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972220330407785394, guid: f7400c8bdc006584296162babcc2c641,
+        type: 3}
       propertyPath: m_Intensity
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5351842003803490248, guid: f7400c8bdc006584296162babcc2c641,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6815615695757250040, guid: f7400c8bdc006584296162babcc2c641,
         type: 3}

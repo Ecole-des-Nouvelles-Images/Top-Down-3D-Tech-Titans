@@ -30,8 +30,12 @@ namespace Elias.Scripts.Minigames
 
         private PatternManager _patternManager; // Reference to the PatternManager
 
+        public Collider playerDetectorCollider;
+
         private void Start()
         {
+            playerDetectorCollider.enabled = false;
+            
             isGeneratorStarted = true;
             IsActivated = true;
             _patternManager = GetComponent<PatternManager>(); // Assuming PatternManager is on the same GameObject
@@ -98,14 +102,15 @@ namespace Elias.Scripts.Minigames
 
         void Update() {
             
-            if (IsActivated) {
-                
+            if (IsActivated)
+            {
+                playerDetectorCollider.enabled = false;
                 State = 1;
                 greenLights.SetActive(true);
                 redLights.SetActive(false);
             }
             else {
-               
+                playerDetectorCollider.enabled = true;
                 State = 0;
                 greenLights.SetActive(false);
                 redLights.SetActive(true);
