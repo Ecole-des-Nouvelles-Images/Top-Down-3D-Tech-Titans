@@ -41,11 +41,14 @@ public class PressureModule : SubmarinModule {
         if (PressureValue > _maxPressure) PressureValue = _maxPressure;
         if (PressureValue < _minPressure) PressureValue = _minPressure;
         if (IsActivated) {
+            playerDetector.SetActive(true);
             PressureValue -= Time.deltaTime * SpeedIncreasePressure;
             if (PressureValue < _redZone1 || PressureValue > _redZone2) State = 3;
             else if (PressureValue < _yellowZone1 || PressureValue > _yellowZone2) State = 2;
             else State = 1;
-        } else {
+        } 
+        else {
+            playerDetector.SetActive(false);
             State = 0;
         }
 

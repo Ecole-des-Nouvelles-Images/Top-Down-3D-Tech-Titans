@@ -30,8 +30,14 @@ namespace Elias.Scripts.Minigames
 
         private PatternManager _patternManager; // Reference to the PatternManager
 
+        public GameObject playerDetectorCollider;
+
+        public SubmarinModule[] playerDetectorDeactivation;
+
         private void Start()
         {
+            playerDetectorCollider.SetActive(false);
+            
             isGeneratorStarted = true;
             IsActivated = true;
             _patternManager = GetComponent<PatternManager>(); // Assuming PatternManager is on the same GameObject
@@ -98,14 +104,24 @@ namespace Elias.Scripts.Minigames
 
         void Update() {
             
-            if (IsActivated) {
-                
+            if (IsActivated)
+            {
+                foreach (var playerDetector in playerDetectorDeactivation)
+                {
+                    playerDetector.IsActivated = true;
+                }
+                playerDetectorCollider.SetActive(false);
                 State = 1;
                 greenLights.SetActive(true);
                 redLights.SetActive(false);
             }
             else {
-               
+                
+                foreach (var playerDetector in playerDetectorDeactivation)
+                {
+                    playerDetector.IsActivated = false;
+                }
+                playerDetectorCollider.SetActive(true);
                 State = 0;
                 greenLights.SetActive(false);
                 redLights.SetActive(true);
