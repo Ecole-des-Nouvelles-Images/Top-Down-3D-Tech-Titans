@@ -1032,6 +1032,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainsCentralsModules
       objectReference: {fileID: 0}
+    - target: {fileID: 4574647012288743118, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4955952079663387756, guid: 5f3ba99cfe75f484a9ccb72d44e96fff,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1317,25 +1322,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 483486941923517975, guid: f7400c8bdc006584296162babcc2c641,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 130
+      objectReference: {fileID: 0}
     - target: {fileID: 795024743789868997, guid: f7400c8bdc006584296162babcc2c641,
         type: 3}
       propertyPath: m_Name
       value: Lighting
-      objectReference: {fileID: 0}
-    - target: {fileID: 1972220330407785394, guid: f7400c8bdc006584296162babcc2c641,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1972220330407785394, guid: f7400c8bdc006584296162babcc2c641,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5351842003803490248, guid: f7400c8bdc006584296162babcc2c641,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6815615695757250040, guid: f7400c8bdc006584296162babcc2c641,
         type: 3}
@@ -2926,6 +2921,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -56.85875
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009780495251719233, guid: ab4cc5bd84f07b04bab10bb6a1308598,
+        type: 3}
+      propertyPath: generatorTimer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059206893043423762, guid: ab4cc5bd84f07b04bab10bb6a1308598,
         type: 3}
