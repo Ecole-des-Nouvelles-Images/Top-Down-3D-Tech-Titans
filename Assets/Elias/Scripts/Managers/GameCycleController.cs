@@ -27,7 +27,7 @@ namespace Elias.Scripts.Managers
         public bool noActiveBreach;
 
         private float _torpedoTimer;
-        private float _generatorTimer;
+        public float generatorTimer;
         private float _waveTimer;
         private float _cooldownTimer;
         private bool _halfCooldown;
@@ -78,7 +78,7 @@ namespace Elias.Scripts.Managers
             {
                 _currentState = GameState.InitialDelay;
                 _waveTimer = difficulties[_activeDifficulty].initialDelay;
-                _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
+                generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
                 _torpedoTimer = difficulties[_activeDifficulty].GetRandomTorpedoInterval();
             }
             else
@@ -147,9 +147,9 @@ namespace Elias.Scripts.Managers
             if (_currentState == GameState.Wave)
                 StartCoroutine(AnimateColorCoroutine());
 
-            if (_generatorTimer >= 0)
+            if (generatorTimer >= 0)
             {
-                _generatorTimer -= Time.deltaTime;
+                generatorTimer -= Time.deltaTime;
             }
 
             if (_torpedoTimer >= 0)
@@ -158,7 +158,7 @@ namespace Elias.Scripts.Managers
             }
 
             // Generator logic
-            if (_generatorTimer <= 0 && (_generatorEventCount < difficulties[_activeDifficulty].generatorCountLimit))
+            if (generatorTimer <= 0 && (_generatorEventCount < difficulties[_activeDifficulty].generatorCountLimit))
             {
                 GeneratorModule generator = FindObjectOfType<GeneratorModule>();
                 if (generator != null)
@@ -233,7 +233,7 @@ namespace Elias.Scripts.Managers
 
         public void ResetGeneratorTimer()
         {
-            _generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
+            generatorTimer = difficulties[_activeDifficulty].GetRandomGeneratorInterval();
         }
         
         public void ResetTorpedoTimer()
