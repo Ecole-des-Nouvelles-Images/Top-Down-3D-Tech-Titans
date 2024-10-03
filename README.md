@@ -7,10 +7,10 @@ Join a four-person crew aboard a submarine and learn to cooperate as you face nu
 <h2>The Team</h2>
 This game was developed by a four-person crew as part of a project during our second year at L'École des Nouvelles Images.<br><br/>
 
-- <b>Maxime Souday</b>, game artist, this project was his original idea.
-- <b>Sacha Nino</b>, game artist.
-- <b>Christopher Barrera</b>, game developer.
-- <b>Elias Prévost</b>, game developer.
+- <b><a href="https://github.com/melkiodes" target="_blank">Maxime Souday</b>, game artist, this project was his original idea.
+- <b><a href="https://github.com/Tartacule" target="_blank">Sacha Nino</b>, game artist.
+- <b><a href="https://github.com/SCLKskellka" target="_blank">Christopher Barrera</b>, game developer.
+- <b><a href="https://github.com/Elias-Pr" target="_blank">Elias Prévost</b>, game developer.
 
 <h2>Main Game Course</h2>
 You can have up to four players in the crew. Once everyone is ready, interact with the central table to select your difficulty and start the game.<br><br/>
