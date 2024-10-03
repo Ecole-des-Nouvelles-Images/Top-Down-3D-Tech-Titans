@@ -138,6 +138,11 @@ namespace Elias.Scripts.Minigames
             State = 1;
             SetRandomSuccessZoneAngle();
 
+            // Reset the needle movement state
+            _isClockwise = true;
+            _needleStopped = false;
+            indicatorNeedle.localEulerAngles = Vector3.zero; // Reset needle position
+
             if (!isAudioPlaying)
             {
                 int randomIndex;
@@ -150,7 +155,6 @@ namespace Elias.Scripts.Minigames
                 breachAudioSource.Play();
                 isAudioPlaying = true;
                 StartCoroutine(PlayRandomClip());
-                
             }
         }
 
@@ -178,26 +182,24 @@ namespace Elias.Scripts.Minigames
         public override void Interact(GameObject playerUsingModule)
         {
             Activate();
-            if (IsActivated && PlayerUsingModule == null) {
+            if (IsActivated && PlayerUsingModule == null)
+            {
                 PlayerUsingModule = playerUsingModule;
                 PlayerUsingModule.transform.GetComponent<PlayerController>().inputActivatePanel.SetActive(true);
-                
             }
-            playerInteracting = true;
-            indicatorNeedle.localEulerAngles = Vector3.zero;
 
-            // Add these lines to check if the needle is stopped and resume its rotation
-            if (_needleStopped)
-            {
-                _isClockwise = true;
-                _needleStopped = false;
-            }
-            
+            playerInteracting = true;
+
+            // Ensure needle is reset and rotating when interaction starts
+            indicatorNeedle.localEulerAngles = Vector3.zero;
+            _isClockwise = true;
+            _needleStopped = false;
+
             float successStartAngle = NormalizeAngle(successZone.localEulerAngles.z - 15);
             float successEndAngle = NormalizeAngle(successZone.localEulerAngles.z + 15);
             Debug.LogFormat("Success start angle: {0}, success end angle: {1}", successStartAngle, successEndAngle);
-            
         }
+
 
         public override void StopInteract()
         {
