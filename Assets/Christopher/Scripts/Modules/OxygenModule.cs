@@ -17,6 +17,11 @@ namespace Christopher.Scripts.Modules
         public GameObject[] DisplayToDoInput;
         public GameObject[] DisplayDoingInput;
         public GameObject PartyGameDisplay;
+
+        [SerializeField] private Image currentJaugeDisplay;
+        [SerializeField] private Color state1JaugeColor;
+        [SerializeField] private Color state2JaugeColor;
+        [SerializeField] private Color state3JaugeColor;
         [SerializeField]private float maxOxygenValue;
         [SerializeField]private float yellowPourcentLimit;
         [SerializeField]private float redPourcentLimit;
@@ -24,6 +29,7 @@ namespace Christopher.Scripts.Modules
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private GameObject alarmAudioSource;
         [SerializeField] private AudioSource interactionAudioSource;
+        
         private bool _isStationStarted;
         private bool _isStationStop;
         private int[] _toDo;
@@ -47,6 +53,7 @@ namespace Christopher.Scripts.Modules
             ResetPartyGame();
         }
         void Update() {
+            currentJaugeDisplay.fillAmount = CurrentOxygenValue / maxOxygenValue;
             SoundManaging();
             CurrentOxygenValue -= Time.deltaTime * SpeedDecrease;
             OxygenControl();
@@ -67,7 +74,8 @@ namespace Christopher.Scripts.Modules
             }
             if (IsActivated) {
                 playerDetector.SetActive(true);
-                if (PourcentageEmpty() < yellowPourcentLimit && CurrentOxygenValue > redPourcentLimit) State = 2;
+                if (CurrentOxygenValue < Helper.PourcentageOfMaxValueToValue(yellowPourcentLimit,maxOxygenValue) && 
+                    CurrentOxygenValue > Helper.PourcentageOfMaxValueToValue(redPourcentLimit,maxOxygenValue)) State = 2;
                 else if (PourcentageEmpty() < redPourcentLimit) State = 3;
                 else {
                     State = 1;
@@ -77,21 +85,25 @@ namespace Christopher.Scripts.Modules
                         LightStates[0].SetActive(true);
                         LightStates[1].SetActive(false);
                         LightStates[2].SetActive(false);
+                        currentJaugeDisplay.color = state1JaugeColor;
                         break;
                     case 2:
                         LightStates[0].SetActive(false);
                         LightStates[1].SetActive(true);
                         LightStates[2].SetActive(false);
+                        currentJaugeDisplay.color = state2JaugeColor;
                         break;
                     case 3 :
                         LightStates[0].SetActive(false);
                         LightStates[1].SetActive(false);
                         LightStates[2].SetActive(true);
+                        currentJaugeDisplay.color = state3JaugeColor;
                         break;
                     default:
                         LightStates[0].SetActive(true);
                         LightStates[1].SetActive(false);
                         LightStates[2].SetActive(false);
+                        currentJaugeDisplay.color = state1JaugeColor;
                         break;
                 }
                 if (PlayerUsingModule != null && _input.Count == _toDo.Length) {
