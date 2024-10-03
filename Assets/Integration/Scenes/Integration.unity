@@ -2060,6 +2060,13 @@ PrefabInstance:
       propertyPath: playerDetectorDeactivation.Array.data[1]
       value: 
       objectReference: {fileID: 1626507596}
+    - target: {fileID: 1437866757284002435, guid: ca56dbdda055f6a47a82d25703f2dabb,
+        type: 3}
+      propertyPath: m_text
+      value: 'Generateur
+
+        \______________/'
+      objectReference: {fileID: 0}
     - target: {fileID: 3704973639498256404, guid: ca56dbdda055f6a47a82d25703f2dabb,
         type: 3}
       propertyPath: m_Name
@@ -2331,7 +2338,7 @@ PrefabInstance:
     - target: {fileID: 4887109551989990980, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4887109551989990980, guid: 82bdbe1d9ed803c478fd934d1a810c8a,
         type: 3}
