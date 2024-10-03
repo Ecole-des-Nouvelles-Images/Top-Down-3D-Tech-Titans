@@ -95,6 +95,7 @@ namespace Christopher.Scripts.Modules
 
         public override void Activate() {
                 IsActivated = true;
+                State = 1;
         }
 
 
@@ -170,7 +171,7 @@ namespace Christopher.Scripts.Modules
                 PlayerUsingModule.transform.GetComponent<PlayerController>().QuitInteraction();
                 PlayerUsingModule = null;
             }
-            TorpedoLauncherAnimator.SetBool("isDoorOpen", true);
+            TorpedoLauncherAnimator.SetBool("isDoorOpen", false);
             OnMiniGameFailed();
         }
 
