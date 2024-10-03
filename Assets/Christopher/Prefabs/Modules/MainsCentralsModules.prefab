@@ -620,6 +620,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2659860880305023472, guid: b89924c2271792a44a3f2b3c026fbbc7,
         type: 2}
+    - target: {fileID: 3133586732219491597, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 3416938020309653675, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_fontAsset
@@ -770,6 +775,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: df1673cf47933794faa8d3b32170c7d7,
         type: 3}
+    - target: {fileID: 5445631702321876059, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5520626659909102555, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_RenderPostProcessing
@@ -937,6 +947,11 @@ PrefabInstance:
       propertyPath: boosterModules.Array.data[1]
       value: 
       objectReference: {fileID: 8051114255423180453}
+    - target: {fileID: 7330057362298716545, guid: edeabba8ac3437146a98dee8eda16991,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 8281282807736180001, guid: edeabba8ac3437146a98dee8eda16991,
         type: 3}
       propertyPath: m_fontAsset
