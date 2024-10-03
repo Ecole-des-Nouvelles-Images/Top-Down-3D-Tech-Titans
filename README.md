@@ -14,9 +14,15 @@ This game was developed by a four-person crew as part of a project during our se
 
 <h2>Main Game Course</h2>
 You can have up to four players in the crew. Once everyone is ready, interact with the central table to select your difficulty and launch the game.
+
+![Phase1-screenshoot](https://github.com/user-attachments/assets/debb84c3-8473-4c31-8c55-a70497f1eb1a)
+
 <h4>First Phase</h4>
 In the first phase of your mission, your main objective is to mine minerals. One of the crew members will need to interact with the central table to start the mining process. Meanwhile, the rest of the crew will be tasked with managing various challenges—such as repairing breaches in the submarine or maintaining different stations.
 If breaches aren't repaired quickly, water will flood the submarine, putting your crew at risk. If stations aren't kept in check, additional problems may arise, including more breaches, power loss (which can prevent you from completing the main objective), or even suffocation due to lack of oxygen.
+
+![Phase2 1-screenshoot-](https://github.com/user-attachments/assets/e2c9be82-b456-4e7e-a132-23e8a7067d7d)
+
 <h4>Second Phase</h4>
 Once the mineral has been successfully retrieved, the second phase—extraction—begins immediately. Using the central table, you'll need to pilot the submarine back to the surface.
 To speed up your ascent, make sure to use the boosters located on the lower side of the submarine. Be cautious, though—crashing into the environment can cause breaches, putting the crew at further risk. Events from the first phase will continue to occur, aiming to slow you down or even end your mission. Work as a team to reach the surface and complete the mission to claim victory!
