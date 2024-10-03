@@ -136,6 +136,7 @@ namespace Elias.Scripts.Managers
             
             if (activePhase == 1)
             {
+                StopCoroutine(ActivateModulesWave());
                 return; 
             }
             /*else
