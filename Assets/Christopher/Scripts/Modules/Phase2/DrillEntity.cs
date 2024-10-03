@@ -66,7 +66,7 @@ public class DrillEntity : MonoBehaviour
         {
             movingSound.SetActive(true);
         }
-        Helper.PourcentStateBarre(fixingProgressBar,'x',_currentEndurance,MaxEndurance);
+        Helper.PourcentStateBarreByScale(fixingProgressBar,'x',_currentEndurance,MaxEndurance);
         if (_currentEndurance == MaxEndurance) IsDamaged = false;
         if (_currentDiggingRock != null && _currentDiggingRock.activeSelf == false) _currentDiggingRock = null;
         if (_currentDiggingRock != null && IsDamaged == false) {
